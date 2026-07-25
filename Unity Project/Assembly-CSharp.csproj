@@ -106,6 +106,7 @@
     <Compile Include="Assets\Script\Interface\Spawner\IMutableAddressableSpawnerWithPreview.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawnerWithOffSet.cs" />
     <Compile Include="Assets\Script\Coins\Saver\CoinData.cs" />
+    <Compile Include="Assets\Script\Player\PlayerDashAnimation.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler.cs" />
     <Compile Include="Assets\Script\Status\Enum\StatusType.cs" />
     <Compile Include="Assets\Script\Loading Scene\SIS_GameSession.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Assets\Script\Interface\Tier\Visual\IReadOnlyEvolutionData.cs" />
     <Compile Include="Assets\Script\Player\PlayerAnimationEventReceiver.cs" />
     <Compile Include="Assets\Script\Tier\Enum\Tier.cs" />
+    <Compile Include="Assets\Script\Player\PlayerDashInvulnerability.cs" />
     <Compile Include="Assets\Script\Abstract\Saver\SaverBase.cs" />
     <Compile Include="Assets\Script\Interface\General\INavMeshAgentStateUpdate.cs" />
     <Compile Include="Assets\Script\Interface\General\IIdentifiableItem.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Assets\Script\Combat\Data\ComboAttackData.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadScene_TryLoad.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_AnimSetBool.cs" />
+    <Compile Include="Assets\Script\Player\PlayerDash.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveState.cs" />
     <Compile Include="Assets\Script\Interface\General\ISaveableTimer.cs" />
     <Compile Include="Assets\Script\Interface\General\IPanelHandler.cs" />

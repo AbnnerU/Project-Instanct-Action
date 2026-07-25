@@ -23,13 +23,31 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Dash Right",
+                    "type": "Button",
+                    "id": "fced31ed-277c-4712-97dc-74d0f8f59dd9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash Left",
+                    "type": "Button",
+                    "id": "77194830-732d-40fc-8c57-610ad267ad96",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "ce4c0656-96b8-4c30-9eaf-d3a41ed024ac",
-                    "path": "<Keyboard>/d",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -40,11 +58,33 @@
                 {
                     "name": "",
                     "id": "7abf2d82-8c95-404b-ba1f-e3c3ca3e2a74",
-                    "path": "<Keyboard>/a",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a6c3d1b-24be-4370-ab8c-5a4785e4af18",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2afd4371-d4cf-43e6-9cc9-5b9764723e99",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-    public class PlayerComboController : MonoBehaviour
+    public class PlayerComboController : MonoBehaviour, IHasActiveState
     {
         [SerializeField] private InputActionReference _rightInput;
         [SerializeField] private InputActionReference _leftInput;
@@ -16,6 +16,7 @@ namespace Scripts.Player
         [SerializeField] private string _idleAnimationStateName = "Idle";
         [SerializeField] private float _idleTransitionDuration = 0.05f;
         [SerializeField] private DirectionSide _fallbackInputDirection = DirectionSide.RIGHT;
+        [SerializeField] private bool _active = true;
 
         private int _currentComboIndex;
         private bool _isAttacking;
@@ -59,6 +60,17 @@ namespace Scripts.Player
 
         private void AttackLeft_Performed(InputAction.CallbackContext obj) => RequestAttackLeft();
 
+        public void Enable()
+        {
+            _active = true;
+        }
+
+        public void Disable()
+        {
+            _active = false;
+            CancelAttack();
+        }
+
         public void RequestAttackRight()
         {
             RequestAttack(DirectionSide.RIGHT);
@@ -71,6 +83,7 @@ namespace Scripts.Player
 
         public void RequestAttack(DirectionSide directionSide)
         {
+            if (!_active) return;
             if (_listComboAttackData.Count == 0) return;
 
             if (!_isAttacking)
@@ -100,6 +113,7 @@ namespace Scripts.Player
 
         public void AnimationEvent_ExecuteHitbox()
         {
+            if (!_active) return;
             if (!CanUseCurrentAttack()) return;
 
             _attackHitbox.ExecuteHitbox(_listComboAttackData[_currentComboIndex]);
@@ -107,6 +121,8 @@ namespace Scripts.Player
 
         public void AnimationEvent_OpenComboWindow()
         {
+            if (!_active) return;
+
             _isComboWindowOpen = true;
         }
 
@@ -117,6 +133,8 @@ namespace Scripts.Player
 
         public void AnimationEvent_FinishAttack()
         {
+            if (!_active) return;
+
             _isComboWindowOpen = false;
 
             if (_hasQueuedNextAttack && _currentComboIndex < _listComboAttackData.Count - 1)
@@ -131,6 +149,7 @@ namespace Scripts.Player
 
         private void PlayCurrentAttack(DirectionSide directionSide)
         {
+            if (!_active) return;
             if (!CanUseCurrentAttack()) return;
 
             ComboAttackData attackData = _listComboAttackData[_currentComboIndex];

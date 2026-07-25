@@ -211,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 253428317}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1500001, z: -10}
+  m_LocalPosition: {x: 0, y: 0.07000017, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -316,8 +316,8 @@ Camera:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.93710685, g: 0.93710685, b: 0.93710685, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -367,7 +367,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.3200002, z: -10}
+  m_LocalPosition: {x: 0, y: 2.2400002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -477,7 +477,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
@@ -522,7 +522,7 @@ Light:
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 5000
-  m_UseColorTemperature: 1
+  m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
@@ -878,6 +878,9 @@ GameObject:
   - component: {fileID: 711513676}
   - component: {fileID: 711513681}
   - component: {fileID: 711513680}
+  - component: {fileID: 711513684}
+  - component: {fileID: 711513683}
+  - component: {fileID: 711513682}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -894,7 +897,7 @@ Transform:
   m_GameObject: {fileID: 711513674}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -3.5, z: 0}
+  m_LocalPosition: {x: 0, y: -3.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1070,6 +1073,92 @@ MonoBehaviour:
   _playerDirection: {fileID: 711513679}
   _playerStatus: {fileID: 1151873708}
   _drawGizmos: 1
+--- !u!114 &711513682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a95f8adaae7c3d4e95204b4247c48bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDashAnimation
+  _playerDash: {fileID: 711513684}
+  _animator: {fileID: 1484080727}
+  _dashAnimationStateName: Dash
+  _transitionDuration: 0.05
+--- !u!114 &711513683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5cd443794c9c334791d3f0d57b1218c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDashInvulnerability
+  _playerDash: {fileID: 711513684}
+  _list_CollidersToDisable:
+  - {fileID: 711513677}
+  _duration: 0.465
+--- !u!114 &711513684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfaf57392b31ee4c8e951fc034fc4cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDash
+  _rightInput: {fileID: 7162467061146757405, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  _leftInput: {fileID: 5594487404767259243, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  _targetTransform: {fileID: 711513675}
+  _playerDirection: {fileID: 711513679}
+  _comboController: {fileID: 711513680}
+  _dashDistance: 2
+  _dashDuration: 0.465
+  _movementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.32311106
+      value: 0.06224054
+      inSlope: 0.29435307
+      outSlope: 0.29435307
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.20604405
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _rightCooldown: 1
+  _leftCooldown: 1
 --- !u!1 &718721438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,10 +1367,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7813590141776298306, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2da21af81e5ec0742b282c3e85c49505, type: 2}
     - target: {fileID: 919132149155446097, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
       propertyPath: m_Name
       value: Y Bot@Punching
       objectReference: {fileID: 0}
+    - target: {fileID: 5822821947120931875, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2da21af81e5ec0742b282c3e85c49505, type: 2}
     - target: {fileID: 5866666021909216657, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
       propertyPath: m_Controller
       value: 
@@ -1383,7 +1480,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 2da21af81e5ec0742b282c3e85c49505, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1741,7 +1838,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 057b4f4ab2684e346b9f283f321a8329, type: 2}
+  - {fileID: 2100000, guid: 2da21af81e5ec0742b282c3e85c49505, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
