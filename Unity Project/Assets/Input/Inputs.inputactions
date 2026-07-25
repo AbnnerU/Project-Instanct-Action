@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "Inputs",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "3be318ac-8ee5-42a8-a8d9-a1d86c050e06",
+            "actions": [
+                {
+                    "name": "Attack Right",
+                    "type": "Button",
+                    "id": "fcab6a7e-9e93-4f84-8fc2-cfa40005ed11",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack Left",
+                    "type": "Button",
+                    "id": "5410ea85-5c18-4586-b9f1-973e28db2570",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ce4c0656-96b8-4c30-9eaf-d3a41ed024ac",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7abf2d82-8c95-404b-ba1f-e3c3ca3e2a74",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

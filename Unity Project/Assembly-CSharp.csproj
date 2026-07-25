@@ -74,6 +74,7 @@
     <Compile Include="Assets\Script\Coins\MN_Coins.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasNavMeshAgentSpeedUpdate.cs" />
     <Compile Include="Assets\Script\Singleton\SceneSingleton.cs" />
+    <Compile Include="Assets\Script\Health\HealthStatusReference.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActiveState.cs" />
     <Compile Include="Assets\Script\Interface\General\IIgnorable.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler_CleanSession.cs" />
@@ -85,11 +86,14 @@
     <Compile Include="Assets\Script\Interface\Nameable\INameable.cs" />
     <Compile Include="Assets\Script\Interface\Camera\ICameraFollow.cs" />
     <Compile Include="Assets\Script\Tier\Scriptable Base\Visual\TextureVariantSO.cs" />
+    <Compile Include="Assets\Script\Combat\DamageResolver.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveStateOfCanvas.cs" />
     <Compile Include="Assets\Script\Health\OnDeath_UnityEvent.cs" />
     <Compile Include="Assets\Script\Health\KillAfterTime_OnEnable.cs" />
     <Compile Include="Assets\Script\Interface\General\IMovementHandler.cs" />
     <Compile Include="Assets\Script\Requeriments\Scriptable Base\RequirementSO.cs" />
+    <Compile Include="Assets\Script\Player\PlayerComboController.cs" />
+    <Compile Include="Assets\Script\Player\PlayerAttackHitbox.cs" />
     <Compile Include="Assets\Script\Interface\General\ICursorVisibilyHandler.cs" />
     <Compile Include="Assets\Script\Abstract\Do Action\DoActionBase.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingTaskSOBase.cs" />
@@ -103,6 +107,7 @@
     <Compile Include="Assets\Script\Interface\Spawner\ISpawnerWithOffSet.cs" />
     <Compile Include="Assets\Script\Coins\Saver\CoinData.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler.cs" />
+    <Compile Include="Assets\Script\Status\Enum\StatusType.cs" />
     <Compile Include="Assets\Script\Loading Scene\SIS_GameSession.cs" />
     <Compile Include="Assets\Script\Singleton\Singleton.cs" />
     <Compile Include="Assets\Script\Interface\Tier\Visual\IHasEvolutionVisualInitialization.cs" />
@@ -115,6 +120,8 @@
     <Compile Include="Assets\Script\Health\HealthBar.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IPlacementItemData.cs" />
+    <Compile Include="Assets\Script\Combat\Data\DamageData.cs" />
+    <Compile Include="Assets\Script\Combat\Enum\DamageType.cs" />
     <Compile Include="Assets\Script\Loading Scene\GameSessionCleaner.cs" />
     <Compile Include="Assets\Script\Scripts Pool\PoolManager.cs" />
     <Compile Include="Assets\Script\Interface\Interactable\IInteractable.cs" />
@@ -122,13 +129,15 @@
     <Compile Include="Assets\Script\Loading Scene\SIS_LoadingSceneChannel.cs" />
     <Compile Include="Assets\Script\Interface\Selectable\ISelectableObject.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler_LoadingBar.cs" />
+    <Compile Include="Assets\Script\Player\PlayerDirection.cs" />
     <Compile Include="Assets\Script\Health\LifeCycle_HandleCanvasActiveState.cs" />
     <Compile Include="Assets\Script\Interface\Animation\IHasAnimationReferenceTransform.cs" />
     <Compile Include="Assets\Script\Requeriments\Saver\RequirementsSaveData.cs" />
+    <Compile Include="Assets\Script\Status\MN_PlayerStatus.cs" />
     <Compile Include="Assets\Script\Interface\Tier\Visual\IReadOnlyEvolutionData.cs" />
+    <Compile Include="Assets\Script\Player\PlayerAnimationEventReceiver.cs" />
     <Compile Include="Assets\Script\Tier\Enum\Tier.cs" />
     <Compile Include="Assets\Script\Abstract\Saver\SaverBase.cs" />
-    <Compile Include="Assets\Script\Health\StatusType.cs" />
     <Compile Include="Assets\Script\Interface\General\INavMeshAgentStateUpdate.cs" />
     <Compile Include="Assets\Script\Interface\General\IIdentifiableItem.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasViewport.cs" />
@@ -136,6 +145,7 @@
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_RandomAnimation.cs" />
     <Compile Include="Assets\Script\Requeriments\MN_Requirements.cs" />
     <Compile Include="Assets\Script\Interactable\Interactable.cs" />
+    <Compile Include="Assets\Script\Combat\Data\ComboAttackData.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadScene_TryLoad.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_AnimSetBool.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveState.cs" />
@@ -1308,6 +1318,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Splines.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Splines.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.2D.Editor.Overrides">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Editor.Overrides.dll</HintPath>
       <Private>False</Private>
@@ -1372,8 +1386,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Cinemachine.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Cinemachine.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.UnifiedRayTracing.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.UnifiedRayTracing.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Unity.Cinemachine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
@@ -1514,6 +1536,14 @@
     </Reference>
     <Reference Include="Unity.InputSystem">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Settings.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Settings.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Splines">
+      <HintPath>Library\ScriptAssemblies\Unity.Splines.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Addressables.Editor">

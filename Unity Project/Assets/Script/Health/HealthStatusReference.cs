@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public class StatusType
+public class HealthStatusReference
 {
     public string StatusName;
     public HealthManager Status;
