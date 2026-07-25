@@ -7,20 +7,29 @@ namespace Scripts.Player
 {
     public class PlayerComboController : MonoBehaviour
     {
-        [SerializeField] private InputActionReference _input;
+        [SerializeField] private InputActionReference _rightInput;
+        [SerializeField] private InputActionReference _leftInput;
         [SerializeField] private Animator _animator;
+        [SerializeField] private PlayerDirection _playerDirection;
         [SerializeField] private PlayerAttackHitbox _attackHitbox;
         [SerializeField] private List<ComboAttackData> _listComboAttackData = new List<ComboAttackData>();
+        [SerializeField] private string _idleAnimationStateName = "Idle";
+        [SerializeField] private float _idleTransitionDuration = 0.05f;
+        [SerializeField] private DirectionSide _fallbackInputDirection = DirectionSide.RIGHT;
 
         private int _currentComboIndex;
         private bool _isAttacking;
         private bool _isComboWindowOpen;
         private bool _hasQueuedNextAttack;
+        private DirectionSide _queuedAttackDirection;
 
         private void Awake()
         {
             if (_animator == null)
                 _animator = GetComponentInChildren<Animator>();
+
+            if (_playerDirection == null)
+                TryGetComponent(out _playerDirection);
 
             if (_attackHitbox == null)
                 TryGetComponent(out _attackHitbox);
@@ -28,23 +37,54 @@ namespace Scripts.Player
 
         private void OnEnable()
         {
-            _input.action.Enable();
-            _input.action.performed += Action_performed;
+            if (_rightInput == null) return;
+
+            _rightInput.action.Enable();
+            _rightInput.action.performed += AttackRight_Performed;
+
+            _leftInput.action.Enable();
+            _leftInput.action.performed += AttackLeft_Performed;
+
         }
 
-        private void Action_performed(InputAction.CallbackContext obj)
+        private void OnDisable()
+        {
+            if (_rightInput == null) return;
+
+            _rightInput.action.performed -= AttackRight_Performed;
+            _leftInput.action.performed -= AttackLeft_Performed;
+        }
+
+        private void AttackRight_Performed(InputAction.CallbackContext obj) => RequestAttackRight();
+
+        private void AttackLeft_Performed(InputAction.CallbackContext obj) => RequestAttackLeft();
+
+        public void RequestAttackRight()
+        {
+            RequestAttack(DirectionSide.RIGHT);
+        }
+
+        public void RequestAttackLeft()
+        {
+            RequestAttack(DirectionSide.LEFT);
+        }
+
+        public void RequestAttack(DirectionSide directionSide)
         {
             if (_listComboAttackData.Count == 0) return;
 
             if (!_isAttacking)
             {
                 _currentComboIndex = 0;
-                PlayCurrentAttack();
+                PlayCurrentAttack(directionSide);
                 return;
             }
 
-            if (_isComboWindowOpen)
+            if (_isComboWindowOpen || _hasQueuedNextAttack)
+            {
                 _hasQueuedNextAttack = true;
+                _queuedAttackDirection = directionSide;
+            }
         }
 
         public void CancelAttack()
@@ -52,7 +92,10 @@ namespace Scripts.Player
             _isAttacking = false;
             _isComboWindowOpen = false;
             _hasQueuedNextAttack = false;
+            _queuedAttackDirection = _fallbackInputDirection;
             _currentComboIndex = 0;
+
+            PlayIdle();
         }
 
         public void AnimationEvent_ExecuteHitbox()
@@ -79,14 +122,14 @@ namespace Scripts.Player
             if (_hasQueuedNextAttack && _currentComboIndex < _listComboAttackData.Count - 1)
             {
                 _currentComboIndex++;
-                PlayCurrentAttack();
+                PlayCurrentAttack(_queuedAttackDirection);
                 return;
             }
 
             CancelAttack();
         }
 
-        private void PlayCurrentAttack()
+        private void PlayCurrentAttack(DirectionSide directionSide)
         {
             if (!CanUseCurrentAttack()) return;
 
@@ -98,11 +141,21 @@ namespace Scripts.Player
                 return;
             }
 
+            _playerDirection?.SetDirection(directionSide);
+
             _isAttacking = true;
             _isComboWindowOpen = false;
             _hasQueuedNextAttack = false;
+            _queuedAttackDirection = directionSide;
 
             _animator.CrossFade(attackData.AnimationStateName, attackData.TransitionDuration, 0, 0f);
+        }
+
+        private void PlayIdle()
+        {
+            if (_animator == null || string.IsNullOrEmpty(_idleAnimationStateName)) return;
+
+            _animator.CrossFade(_idleAnimationStateName, _idleTransitionDuration, 0, 0f);
         }
 
         private bool CanUseCurrentAttack()

@@ -984,7 +984,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDirection
   _currentDirection: 1
   _visualTransform: {fileID: 711513675}
-  _flipVisualByScale: 1
+  _useLocalEulerAngles: 1
+  _leftRotation:
+    DirectionSide: 0
+    EulerAngles: {x: 0, y: -90, z: 0}
+  _rightRotation:
+    DirectionSide: 1
+    EulerAngles: {x: 0, y: 90, z: 0}
 --- !u!114 &711513680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,8 +1003,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be13fcd1bd317a48bbb4530aa106a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerComboController
-  _input: {fileID: 2202181311478303124, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  _rightInput: {fileID: 2202181311478303124, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  _leftInput: {fileID: 7655917323739324251, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
   _animator: {fileID: 1484080727}
+  _playerDirection: {fileID: 711513679}
   _attackHitbox: {fileID: 711513681}
   _listComboAttackData:
   - _animationStateName: Punching
@@ -1029,7 +1037,7 @@ MonoBehaviour:
       m_Bits: 128
     _queryTriggerInteraction: 0
     _maxTargets: 5
-  - _animationStateName: Punching (2)
+  - _animationStateName: Kick
     _transitionDuration: 0.2
     _damageData:
       _damageType: 0
@@ -1043,6 +1051,9 @@ MonoBehaviour:
       m_Bits: 128
     _queryTriggerInteraction: 0
     _maxTargets: 5
+  _idleAnimationStateName: Idle
+  _idleTransitionDuration: 0.1
+  _fallbackInputDirection: 1
 --- !u!114 &711513681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,6 +1286,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b26a099458b458547a5761d4a1738b74, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1802,7 +1817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
   _isBlocked: 0
-  maxHealth: 100
+  maxHealth: 1000
   isHittable: 1
   isKillable: 0
   releaseOnDeath: 0

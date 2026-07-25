@@ -9,10 +9,17 @@ namespace Scripts.Player
 
         [SerializeField] private DirectionSide _currentDirection = DirectionSide.RIGHT;
         [SerializeField] private Transform _visualTransform;
-        [SerializeField] private bool _flipVisualByScale = true;
+        [SerializeField] private bool _useLocalEulerAngles = true;
+        [SerializeField] private DirectionRotationData _leftRotation = new DirectionRotationData(DirectionSide.LEFT, new Vector3(0f, -90f, 0f));
+        [SerializeField] private DirectionRotationData _rightRotation = new DirectionRotationData(DirectionSide.RIGHT, new Vector3(0f, 90f, 0f));
 
         public DirectionSide CurrentDirection => _currentDirection;
         public Vector3 DirectionVector => _currentDirection == DirectionSide.RIGHT ? Vector3.right : Vector3.left;
+
+        private void Awake()
+        {
+            UpdateVisualDirection();
+        }
 
         public void LookRight()
         {
@@ -26,7 +33,11 @@ namespace Scripts.Player
 
         public void SetDirection(DirectionSide directionSide)
         {
-            if (_currentDirection == directionSide) return;
+            if (_currentDirection == directionSide)
+            {
+                UpdateVisualDirection();
+                return;
+            }
 
             _currentDirection = directionSide;
             UpdateVisualDirection();
@@ -35,11 +46,19 @@ namespace Scripts.Player
 
         private void UpdateVisualDirection()
         {
-            if (!_flipVisualByScale || _visualTransform == null) return;
+            if (_visualTransform == null) return;
 
-            Vector3 scale = _visualTransform.localScale;
-            scale.x = Mathf.Abs(scale.x) * (_currentDirection == DirectionSide.RIGHT ? 1f : -1f);
-            _visualTransform.localScale = scale;
+            DirectionRotationData rotationData = GetDirectionRotationData();
+
+            if (_useLocalEulerAngles)
+                _visualTransform.localEulerAngles = rotationData.EulerAngles;
+            else
+                _visualTransform.eulerAngles = rotationData.EulerAngles;
+        }
+
+        private DirectionRotationData GetDirectionRotationData()
+        {
+            return _currentDirection == DirectionSide.RIGHT ? _rightRotation : _leftRotation;
         }
     }
 
@@ -47,5 +66,18 @@ namespace Scripts.Player
     {
         LEFT,
         RIGHT
+    }
+
+    [Serializable]
+    public class DirectionRotationData
+    {
+        public DirectionSide DirectionSide;
+        public Vector3 EulerAngles;
+
+        public DirectionRotationData(DirectionSide directionSide, Vector3 eulerAngles)
+        {
+            DirectionSide = directionSide;
+            EulerAngles = eulerAngles;
+        }
     }
 }
