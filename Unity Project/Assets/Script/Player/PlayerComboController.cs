@@ -12,7 +12,7 @@ namespace Scripts.Player
         [SerializeField] private Animator _animator;
         [SerializeField] private PlayerDirection _playerDirection;
         [SerializeField] private PlayerAttackHitbox _attackHitbox;
-        [SerializeField] private List<ComboAttackData> _listComboAttackData = new List<ComboAttackData>();
+        [SerializeField] private List<ComboAttackData> _list_ComboAttackData = new List<ComboAttackData>();
         [SerializeField] private string _idleAnimationStateName = "Idle";
         [SerializeField] private float _idleTransitionDuration = 0.05f;
         [SerializeField] private DirectionSide _fallbackInputDirection = DirectionSide.RIGHT;
@@ -84,7 +84,7 @@ namespace Scripts.Player
         public void RequestAttack(DirectionSide directionSide)
         {
             if (!_active) return;
-            if (_listComboAttackData.Count == 0) return;
+            if (_list_ComboAttackData.Count == 0) return;
 
             if (!_isAttacking)
             {
@@ -116,7 +116,7 @@ namespace Scripts.Player
             if (!_active) return;
             if (!CanUseCurrentAttack()) return;
 
-            _attackHitbox.ExecuteHitbox(_listComboAttackData[_currentComboIndex]);
+            _attackHitbox.ExecuteHitbox(_list_ComboAttackData[_currentComboIndex]);
         }
 
         public void AnimationEvent_OpenComboWindow()
@@ -137,7 +137,7 @@ namespace Scripts.Player
 
             _isComboWindowOpen = false;
 
-            if (_hasQueuedNextAttack && _currentComboIndex < _listComboAttackData.Count - 1)
+            if (_hasQueuedNextAttack && _currentComboIndex < _list_ComboAttackData.Count - 1)
             {
                 _currentComboIndex++;
                 PlayCurrentAttack(_queuedAttackDirection);
@@ -152,7 +152,7 @@ namespace Scripts.Player
             if (!_active) return;
             if (!CanUseCurrentAttack()) return;
 
-            ComboAttackData attackData = _listComboAttackData[_currentComboIndex];
+            ComboAttackData attackData = _list_ComboAttackData[_currentComboIndex];
 
             if (_animator == null || string.IsNullOrEmpty(attackData.AnimationStateName))
             {
@@ -181,7 +181,7 @@ namespace Scripts.Player
         {
             return _attackHitbox != null &&
                    _currentComboIndex >= 0 &&
-                   _currentComboIndex < _listComboAttackData.Count;
+                   _currentComboIndex < _list_ComboAttackData.Count;
         }
     }
 }
