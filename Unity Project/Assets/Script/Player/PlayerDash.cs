@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Scripts.Combat;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,7 +20,7 @@ namespace Scripts.Player
         [Header("References")]
         [SerializeField] private Transform _targetTransform;
         [SerializeField] private PlayerDirection _playerDirection;
-        [SerializeField] private PlayerComboController _comboController;
+        [SerializeField] private ComboControllerBase _comboController;
 
         [Header("Dash")]
         [SerializeField] private float _dashDistance = 2f;

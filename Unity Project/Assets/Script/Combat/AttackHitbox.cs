@@ -1,19 +1,19 @@
 using System.Collections.Generic;
-using Scripts.Combat;
 using Scripts.Managers;
+using Scripts.Player;
 using UnityEngine;
 
-namespace Scripts.Player
+namespace Scripts.Combat
 {
-    public class PlayerAttackHitbox : MonoBehaviour
+    public class AttackHitbox : MonoBehaviour
     {
         [SerializeField] private Transform _hitboxOrigin;
-        [SerializeField] private PlayerDirection _playerDirection;
         [SerializeField] private MN_PlayerStatus _playerStatus;
+        [SerializeField] private bool _useHitboxOriginRotation;
         [SerializeField] private bool _drawGizmos = true;
 
         private Collider[] _hitResults = new Collider[8];
-        private readonly HashSet<global::IHittable> _hashset_HitTargets = new HashSet<global::IHittable>();
+        private readonly HashSet<global::IHittable> _hashSet_HitTargets = new HashSet<global::IHittable>();
 
         private ComboAttackData _lastAttackData;
         private Vector3 _lastCenter;
@@ -22,12 +22,6 @@ namespace Scripts.Player
         {
             if (_hitboxOrigin == null)
                 _hitboxOrigin = transform;
-
-            if (_playerDirection == null)
-                TryGetComponent(out _playerDirection);
-
-            if (_playerStatus == null)
-                _playerStatus = MN_PlayerStatus.Instance;
         }
 
         public void ExecuteHitbox(ComboAttackData attackData)
@@ -39,9 +33,9 @@ namespace Scripts.Player
             }
 
             EnsureHitResultsCapacity(attackData.MaxTargets);
-            _hashset_HitTargets.Clear();
+            _hashSet_HitTargets.Clear();
 
-            Vector3 center = GetHitboxCenter(attackData);
+            Vector3 center = _hitboxOrigin.position + attackData.HitboxCenterOffset;
             _lastAttackData = attackData;
             _lastCenter = center;
 
@@ -49,7 +43,7 @@ namespace Scripts.Player
                 center,
                 attackData.HitboxHalfExtents,
                 _hitResults,
-                Quaternion.identity,
+                GetHitboxRotation(),
                 attackData.TargetLayerMask,
                 attackData.QueryTriggerInteraction
             );
@@ -57,21 +51,16 @@ namespace Scripts.Player
             for (int i = 0; i < hits; i++)
             {
                 if (!TryGetHittable(_hitResults[i], out global::IHittable hittable)) continue;
-                if (!_hashset_HitTargets.Add(hittable)) continue;
+                if (!_hashSet_HitTargets.Add(hittable)) continue;
 
                 ResolvedDamageData resolvedDamage = DamageResolver.Resolve(attackData.DamageData, _playerStatus);
                 hittable.Hit(resolvedDamage.FinalDamage);
             }
         }
 
-        private Vector3 GetHitboxCenter(ComboAttackData attackData)
+        private Quaternion GetHitboxRotation()
         {
-            Vector3 offset = attackData.HitboxCenterOffset;
-
-            if (_playerDirection != null && _playerDirection.CurrentDirection == DirectionSide.LEFT)
-                offset.x *= -1f;
-
-            return _hitboxOrigin.position + offset;
+            return _useHitboxOriginRotation && _hitboxOrigin != null ? _hitboxOrigin.rotation : Quaternion.identity;
         }
 
         private bool TryGetHittable(Collider targetCollider, out global::IHittable hittable)
@@ -97,7 +86,9 @@ namespace Scripts.Player
             if (!_drawGizmos || _lastAttackData == null) return;
 
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(_lastCenter, _lastAttackData.HitboxHalfExtents * 2f);
+            Gizmos.matrix = Matrix4x4.TRS(_lastCenter, GetHitboxRotation(), Vector3.one);
+            Gizmos.DrawWireCube(Vector3.zero, _lastAttackData.HitboxHalfExtents * 2f);
+            Gizmos.matrix = Matrix4x4.identity;
         }
     }
 }

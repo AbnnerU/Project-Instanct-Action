@@ -1,15 +1,15 @@
 using UnityEngine;
 
-namespace Scripts.Player
+namespace Scripts.Combat
 {
-    public class PlayerAnimationEventReceiver : MonoBehaviour
+    public class ComboAnimationEventReceiver : MonoBehaviour
     {
-        [SerializeField] private PlayerComboController _comboController;
+        [SerializeField] private ComboControllerBase _comboController;
 
         private void Awake()
         {
             if (_comboController == null)
-                _comboController = GetComponentInParent<PlayerComboController>();
+                _comboController = GetComponentInParent<ComboControllerBase>();
         }
 
         public void Attack_ExecuteHitbox()

@@ -1,6 +1,7 @@
 using Scripts.AI;
 using Scripts.Animation;
 using Scripts.BT;
+using Scripts.Combat;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Scripts.BehaviourTree.Agents
 {
     [RequireComponent(typeof(BehaviorTree))]
     [RequireComponent(typeof(NavMeshAgent))]
-    public class GenericBTAgent : MonoBehaviour, IHasBehaviourTree, IHasAIState, INavMeshAgentStateUpdate, IHasCurrentVelocity
+    public class EnemyBrain : MonoBehaviour, IHasBehaviourTree, IHasAIState, INavMeshAgentStateUpdate, IHasCurrentVelocity
     {
         public event Action<AIState> OnAINewState;
         public event Action<AgentMovementOrder> OnOrderChanged;
@@ -23,15 +24,21 @@ namespace Scripts.BehaviourTree.Agents
         [Header("References")]
         [SerializeField] private BehaviorTree _behaviorTree;
         [SerializeField] private NavMeshAgent _navMeshAgent;
+        [SerializeField] private ComboControllerBase _comboController;
         [SerializeField] private string _targetTag;
         [SerializeField] private Transform _currentTarget;
         [SerializeField] private Vector3 _currentTargetPosition;
 
         [Header("Movement")]
         [SerializeField] private float _movementSpeed = 3.5f;
-        [SerializeField] private float _stoppingDistance = 0.25f;
+        //[SerializeField] private float _stoppingDistance = 0.25f;
         [SerializeField] private float _targetUpdateInterval = 0.1f;
         [SerializeField] private bool _standWhenTargetIsReached = true;
+
+        [Header("Combat")]
+        [SerializeField] private float _attackDistance = 1.5f;
+        [SerializeField] private float _maxAttackDuration = 2f;
+        [SerializeField] private bool _useXZDistanceForAttack = true;
 
         [Header("Behaviour Tree")]
         [SerializeField] private float _btExecutionInterval = 0.1f;
@@ -110,7 +117,7 @@ namespace Scripts.BehaviourTree.Agents
 
         public void Stand()
         {
-            SetOrder(AgentMovementOrder.STAND);
+            //SetOrder(AgentMovementOrder.STAND);
             StopAgent();
         }
 
@@ -253,40 +260,40 @@ namespace Scripts.BehaviourTree.Agents
             if (_navMeshAgent == null)
                 TryGetComponent(out _navMeshAgent);
 
-            if (_targetTag != string.Empty)
-                _currentTarget = GameObject.FindGameObjectWithTag(_targetTag).transform;
+            if (_comboController == null)
+                TryGetComponent(out _comboController);
+
+            if (!string.IsNullOrEmpty(_targetTag))
+            {
+                GameObject targetObject = GameObject.FindGameObjectWithTag(_targetTag);
+                if (targetObject != null)
+                    _currentTarget = targetObject.transform;
+            }
         }
 
         private void BuildBehaviourTree()
         {
             BTBoolFunc btIsGoToTargetOrder = new BTBoolFunc(() => _eCurrentOrder == AgentMovementOrder.GO_TO_TARGET);
             BTBoolFunc btHasTarget = new BTBoolFunc(() => GetMovementTarget() != null);
-            BTBoolFunc btIsPatrolOrder = new BTBoolFunc(() => _eCurrentOrder == AgentMovementOrder.PATROL);
-            BTBoolFunc btIsGoToPositionOrder = new BTBoolFunc(() => _eCurrentOrder == AgentMovementOrder.GO_TO_POSITION);
 
             BTSetAIState btSetStandingState = new BTSetAIState(this, AIState.STANDING);
             BTSetAIState btSetMoveToTargetState = new BTSetAIState(this, AIState.MOVE_TO_TARGET);
             BTSetAIState btSetPatrolState = new BTSetAIState(this, AIState.PATROLLING);
+            BTSetAIState btSetAttackState = new BTSetAIState(this, AIState.ATTACKING);
 
             BTDoAction btStopAgent = new BTDoAction(StopAgent);
             BTDoAction btHandleTargetReached = new BTDoAction(HandleTargetReached);
+            BTLookAtTarget btLookAtTarget = new BTLookAtTarget(GetConfiguredTarget, transform, true);
+            BTIsTargetInRange btIsTargetInAttackRange = new BTIsTargetInRange(GetConfiguredTarget, transform, _attackDistance, _useXZDistanceForAttack);
+            BTComboAttack btComboAttack = new BTComboAttack(_comboController, _maxAttackDuration);
 
             BTGoToTarget btGoToTarget = new BTGoToTarget(
                 GetMovementTarget,
                 _navMeshAgent,
                 this,
-                _stoppingDistance,
+                _attackDistance,
                 _targetUpdateInterval,
                 _movementSpeed);
-
-            BTGoToPosition btGoToPosition = new BTGoToPosition(
-                GetMovementPosition,
-                _navMeshAgent,
-                this,
-                _stoppingDistance,
-                _targetUpdateInterval,
-                _movementSpeed);
-
 
             BTSequence btGoToTargetSequence = new BTSequence(new List<BTnode>
             {
@@ -297,18 +304,15 @@ namespace Scripts.BehaviourTree.Agents
                 btHandleTargetReached
             });
 
-            BTSequence btGoToPositionSequence = new BTSequence(new List<BTnode>
+            BTSequence btAttackSequence = new BTSequence(new List<BTnode>
             {
-                btIsGoToPositionOrder,
-                btSetMoveToTargetState,
-                btGoToPosition,
-                btHandleTargetReached
-            });
-
-            BTSequence btPatrolSequence = new BTSequence(new List<BTnode>
-            {
-                btIsPatrolOrder,
-                btSetPatrolState
+                btIsGoToTargetOrder,
+                btHasTarget,
+                btIsTargetInAttackRange,
+                btSetAttackState,
+                btStopAgent,
+                btLookAtTarget,
+                btComboAttack
             });
 
             BTSequence btStandSequence = new BTSequence(new List<BTnode>
@@ -319,9 +323,8 @@ namespace Scripts.BehaviourTree.Agents
 
             _rootSelector = new BTSelector(new List<BTnode>
             {
+                btAttackSequence,
                 btGoToTargetSequence,
-                btGoToPositionSequence,
-                btPatrolSequence,
                 btStandSequence
             });
         }
@@ -337,11 +340,6 @@ namespace Scripts.BehaviourTree.Agents
                 return null;
 
             return GetConfiguredTarget();
-        }
-
-        private Vector3 GetMovementPosition()
-        {
-            return _currentTargetPosition;
         }
 
         private void HandleTargetReached()
