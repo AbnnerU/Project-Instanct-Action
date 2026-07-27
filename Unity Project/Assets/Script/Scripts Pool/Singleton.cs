@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.PoolManager
+namespace Scripts.ObjectPooling
 {
     public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {

@@ -8,6 +8,7 @@ namespace Scripts.AI
         PATROLLING = 3,
         CHASING = 4,
         SEARCHING = 5,
-        ATTACKING = 6
+        ATTACKING = 6,
+        DEAD = 7
     }
 }

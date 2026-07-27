@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using Scripts.PoolManager;
+using Scripts.ObjectPooling;
 
 public class HealthManager : HealthBasicsEvents, IHittable, IHealable
 {

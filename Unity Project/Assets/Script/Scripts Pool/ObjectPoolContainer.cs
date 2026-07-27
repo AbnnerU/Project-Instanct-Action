@@ -1,5 +1,5 @@
 ﻿
-namespace Scripts.PoolManager
+namespace Scripts.ObjectPooling
 {
 	public class ObjectPoolContainer<T>
 	{

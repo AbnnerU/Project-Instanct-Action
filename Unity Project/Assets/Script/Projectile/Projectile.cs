@@ -1,4 +1,4 @@
-using Scripts.PoolManager;
+using Scripts.ObjectPooling;
 using System;
 using UnityEngine;
 

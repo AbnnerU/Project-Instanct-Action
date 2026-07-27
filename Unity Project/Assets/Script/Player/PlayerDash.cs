@@ -6,13 +6,14 @@ using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-    public class PlayerDash : MonoBehaviour
+    public class PlayerDash : MonoBehaviour, IMovementHandler
     {
         public event Action<DirectionSide> OnDashStarted;
         public event Action<DirectionSide> OnDashFinished;
         public event Action<DirectionSide, float> OnDashCooldownStarted;
         public event Action<DirectionSide> OnDashCooldownFinished;
 
+        [SerializeField] private bool _active = true;
         [Header("Input")]
         [SerializeField] private InputActionReference _rightInput;
         [SerializeField] private InputActionReference _leftInput;
@@ -40,6 +41,8 @@ namespace Scripts.Player
         public float RightCooldownTimer => _rightCooldownTimer;
         public float LeftCooldownTimer => _leftCooldownTimer;
 
+        public bool LastActiveState { get ; set; }
+
         private void Awake()
         {
             if (_targetTransform == null)
@@ -50,6 +53,8 @@ namespace Scripts.Player
 
             if (_comboController == null)
                 TryGetComponent(out _comboController);
+
+            LastActiveState = _active;
         }
 
         private void OnEnable()
@@ -84,11 +89,13 @@ namespace Scripts.Player
 
         private void RightInput_Performed(InputAction.CallbackContext context)
         {
+            if(_active)
             TryDash(DirectionSide.RIGHT);
         }
 
         private void LeftInput_Performed(InputAction.CallbackContext context)
         {
+            if(_active)
             TryDash(DirectionSide.LEFT);
         }
 
@@ -98,6 +105,7 @@ namespace Scripts.Player
 
             _playerDirection?.SetDirection(directionSide);
             _comboController?.Disable();
+            _comboController?.CancelAttack(false);
 
             _dashRoutine = StartCoroutine(DashRoutine(directionSide));
             return true;
@@ -169,6 +177,28 @@ namespace Scripts.Player
         private Vector3 GetDirectionVector(DirectionSide directionSide)
         {
             return directionSide == DirectionSide.RIGHT ? Vector3.right : Vector3.left;
+        }
+
+        public void BlockMovement()
+        {
+            _active = false;
+        }
+
+        public void ResetLastState()
+        {
+            _active = LastActiveState;
+        }
+
+        public void Disable()
+        {
+            _active = false;
+            LastActiveState = _active;
+        }
+
+        public void Enable()
+        {
+            _active = true;
+            LastActiveState = _active;
         }
     }
 }

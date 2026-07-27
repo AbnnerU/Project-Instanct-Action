@@ -67,9 +67,11 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Interface\Spawner\IHasSpawnValidation.cs" />
     <Compile Include="Assets\Script\Interface\Tier\IHasTier.cs" />
+    <Compile Include="Assets\Script\AI\OnDeath_StopBrainAndReleaseObject.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTStopAgent.cs" />
     <Compile Include="Assets\Script\AI\Enum\AIState.cs" />
     <Compile Include="Assets\Script\Health\HealthManager.cs" />
+    <Compile Include="Assets\Script\Animation\HitReaction_TriggerParameter.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasPositionProvider.cs" />
     <Compile Include="Assets\Script\Projectile\Projectile.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IAddressableButtonSpawner.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Assets\Script\Combat\EnemyComboController.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasNavMeshAgentSpeedUpdate.cs" />
     <Compile Include="Assets\Script\Singleton\SceneSingleton.cs" />
+    <Compile Include="Assets\Script\Health\LifeCycle_HandleCollider.cs" />
     <Compile Include="Assets\Script\Health\HealthStatusReference.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActiveState.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTForceFailure.cs" />
@@ -87,10 +90,13 @@
     <Compile Include="Assets\Script\AI\Agents\EnemyBrain.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTConditionalSequence.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasTargetProvider.cs" />
+    <Compile Include="Assets\Script\Combat\HitReaction_CancelAndBlockComboController.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawner.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnode.cs" />
     <Compile Include="Assets\Script\Health\OnHit_VisualEffect.cs" />
+    <Compile Include="Assets\Script\Player\HitReaction_DisableCollider.cs" />
     <Compile Include="Assets\Script\Tier\Scriptable Base\Visual\EvolutionPathSO.cs" />
+    <Compile Include="Assets\Script\AI\HitReaction_BlockNavMeshAgent.cs" />
     <Compile Include="Assets\Script\Animation\CharacterAnimationController.cs" />
     <Compile Include="Assets\Script\Interface\Nameable\INameable.cs" />
     <Compile Include="Assets\Script\Interface\Camera\ICameraFollow.cs" />
@@ -99,6 +105,7 @@
     <Compile Include="Assets\Script\Combat\DamageResolver.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveStateOfCanvas.cs" />
     <Compile Include="Assets\Script\Health\OnDeath_UnityEvent.cs" />
+    <Compile Include="Assets\Script\Animation\OnDeath_TriggerParameter.cs" />
     <Compile Include="Assets\Script\Health\KillAfterTime_OnEnable.cs" />
     <Compile Include="Assets\Script\Interface\General\IMovementHandler.cs" />
     <Compile Include="Assets\Script\Requeriments\Scriptable Base\RequirementSO.cs" />
@@ -169,18 +176,18 @@
     <Compile Include="Assets\Script\Interface\General\IIdentifiableItem.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTDoAction.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasViewport.cs" />
-    <Compile Include="Assets\Script\Scripts Pool\Singleton.cs" />
     <Compile Include="Assets\Script\AI\Interface\IHasBehaviourTree.cs" />
+    <Compile Include="Assets\Script\Scripts Pool\Singleton.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_RandomAnimation.cs" />
     <Compile Include="Assets\Script\Requeriments\MN_Requirements.cs" />
     <Compile Include="Assets\Script\Interactable\Interactable.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTSelector.cs" />
     <Compile Include="Assets\Script\Combat\Data\ComboAttackData.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTIsTargetInRange.cs" />
+    <Compile Include="Assets\Script\Player\HitReaction_BlockPlayerDash.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadScene_TryLoad.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_AnimSetBool.cs" />
     <Compile Include="Assets\Script\Player\PlayerDash.cs" />
-    <Compile Include="Assets\Script\Combat\ComboCancelOnHit.cs" />
     <Compile Include="Assets\Script\Animation\AnimationDirectionalVelocityModule.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveState.cs" />
     <Compile Include="Assets\Script\Interface\General\ISaveableTimer.cs" />

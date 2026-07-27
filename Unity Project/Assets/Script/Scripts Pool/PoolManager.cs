@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.PoolManager
+namespace Scripts.ObjectPooling
 {
 	public class PoolManager : ClassInstance<PoolManager>
 	{

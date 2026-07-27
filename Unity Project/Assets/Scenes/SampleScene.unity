@@ -536,6 +536,12 @@ GameObject:
   - component: {fileID: 352661058}
   - component: {fileID: 352661060}
   - component: {fileID: 352661059}
+  - component: {fileID: 352661065}
+  - component: {fileID: 352661064}
+  - component: {fileID: 352661066}
+  - component: {fileID: 352661068}
+  - component: {fileID: 352661067}
+  - component: {fileID: 352661069}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -576,6 +582,7 @@ MonoBehaviour:
   _autoSetup: 1
   _eCurrentOrder: 1
   _eCurrentAiState: 2
+  _healthManagerComponent: {fileID: 352661056}
   _behaviorTree: {fileID: 352661055}
   _navMeshAgent: {fileID: 352661054}
   _comboController: {fileID: 352661063}
@@ -765,6 +772,106 @@ MonoBehaviour:
     _maxTargets: 5
   _triggerIdle: 1
   _backToIdleTriggerParameter: Idle
+--- !u!114 &352661064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352661051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58552489c7ecaa9458c4fa5a1710d4fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HitReaction_CancelAndBlockComboController
+  _hittableReference: {fileID: 352661051}
+  _comboControllerComponent: {fileID: 352661063}
+  _hittedParameter: Hitted
+  _blockAttacks: 1
+  _blockTime: 1
+--- !u!114 &352661065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352661051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525c2e3860785ea4b87ff93fe31a8534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Animation.HitReaction_TriggerParameter
+  _active: 1
+  _animationControllerComponent: {fileID: 352661060}
+  _hittableReference: {fileID: 352661051}
+  _hittedParameter: Hitted
+--- !u!114 &352661066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352661051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c444558d1d57d44b6a70ddcf2eaeca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.AI.HitReaction_BlockNavMeshAgent
+  _hittableReference: {fileID: 352661051}
+  _navMeshAgentComponent: {fileID: 352661054}
+  _enemyBrainComponent: {fileID: 352661053}
+  _blockTime: 1
+  _resetPath: 0
+--- !u!114 &352661067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352661051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3274652e1da3d674990a9f7748fa6182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.AI.OnDeath_StopBrainAndReleaseObject
+  _healthEventsComponent: {fileID: 352661056}
+  _verifyStateOnStart: 1
+  _enemyBrainComponent: {fileID: 352661053}
+  _navMeshAgentComponent: {fileID: 352661054}
+  _objectToRelease: {fileID: 352661051}
+  _releaseDelay: 10
+  _releaseObject: 1
+--- !u!114 &352661068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352661051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66520b0137f5b1a4dabbc8aedb03c0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OnDeath_TriggerParameter
+  _healthEventsComponent: {fileID: 352661056}
+  _verifyStateOnStart: 1
+  _animationControllerComponent: {fileID: 352661060}
+  _deathParameter: Death
+--- !u!114 &352661069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352661051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2383b57d2dbf6d34392748a45b9c8dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LifeCycle_HandleCollider
+  _healthEventsComponent: {fileID: 352661056}
+  _verifyStateOnStart: 1
+  _colliderComponent: {fileID: 352661057}
 --- !u!1 &404701170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,14 +1373,18 @@ GameObject:
   - component: {fileID: 711513678}
   - component: {fileID: 711513677}
   - component: {fileID: 711513679}
+  - component: {fileID: 711513685}
   - component: {fileID: 711513676}
   - component: {fileID: 711513681}
-  - component: {fileID: 711513686}
   - component: {fileID: 711513680}
   - component: {fileID: 711513684}
   - component: {fileID: 711513683}
   - component: {fileID: 711513682}
-  - component: {fileID: 711513685}
+  - component: {fileID: 711513686}
+  - component: {fileID: 711513689}
+  - component: {fileID: 711513688}
+  - component: {fileID: 711513687}
+  - component: {fileID: 711513690}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1513,6 +1624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcfaf57392b31ee4c8e951fc034fc4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDash
+  _active: 1
   _rightInput: {fileID: 7162467061146757405, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
   _leftInput: {fileID: 5594487404767259243, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
   _targetTransform: {fileID: 711513675}
@@ -1584,6 +1696,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Animation.CharacterAnimationController
   _animatorComponent: {fileID: 1484080727}
   _logMissingParameters: 0
+--- !u!114 &711513687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58552489c7ecaa9458c4fa5a1710d4fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HitReaction_CancelAndBlockComboController
+  _hittableReference: {fileID: 711513674}
+  _comboControllerComponent: {fileID: 711513680}
+  _hittedParameter: Hitted
+  _blockAttacks: 1
+  _blockTime: 0.1
+--- !u!114 &711513688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7f68b13daea83c4ab2ea94f4b98a08e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.HitReaction_BlockPlayerDash
+  _hittableReference: {fileID: 711513674}
+  _playerDashComponent: {fileID: 711513684}
+  _blockTime: 0.1
+--- !u!114 &711513689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525c2e3860785ea4b87ff93fe31a8534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Animation.HitReaction_TriggerParameter
+  _active: 1
+  _animationControllerComponent: {fileID: 711513686}
+  _hittableReference: {fileID: 711513674}
+  _hittedParameter: Hitted
+--- !u!114 &711513690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedeb99bef9f51f46a4363a516b0b165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.HitReaction_DisableCollider
+  _hittableReference: {fileID: 711513674}
+  _colliderComponent: {fileID: 711513677}
+  _disableTime: 0.1
 --- !u!1 &717130072
 GameObject:
   m_ObjectHideFlags: 0

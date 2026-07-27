@@ -18,7 +18,7 @@ namespace Scripts.Combat
         [SerializeField] protected Animator _animator;
         [SerializeField] protected CharacterAnimationController _characterAnimationController;
         [SerializeField] protected List<ComboAttackData> _list_ComboAttackData = new List<ComboAttackData>();
-        [SerializeField] protected bool _triggerIdle=true;
+        [SerializeField] protected bool _triggerIdle = true;
         [SerializeField] protected string _backToIdleTriggerParameter = "Idle";
 
 
@@ -32,21 +32,12 @@ namespace Scripts.Combat
         public bool IsComboWindowOpen => _isComboWindowOpen;
         public bool HasQueuedNextAttack => _hasQueuedNextAttack;
 
-        protected virtual void Awake()
-        {
-            GetReferences();
-        }
+        protected virtual void Awake() => GetReferences();
 
-        public virtual void Enable()
-        {
-            _active = true;
-        }
 
-        public virtual void Disable()
-        {
-            _active = false;
-            CancelAttack();
-        }
+        public virtual void Enable() => _active = true;
+
+        public virtual void Disable() => _active = false;
 
         public virtual void RequestAttack()
         {
@@ -75,6 +66,22 @@ namespace Scripts.Combat
             _currentComboIndex = 0;
 
             PlayIdle();
+
+            if (wasAttacking)
+                OnAttackCanceled?.Invoke();
+        }
+
+        public virtual void CancelAttack(bool playIdle)
+        {
+            bool wasAttacking = _isAttacking;
+
+            _isAttacking = false;
+            _isComboWindowOpen = false;
+            _hasQueuedNextAttack = false;
+            _currentComboIndex = 0;
+
+            if (playIdle)
+                PlayIdle();
 
             if (wasAttacking)
                 OnAttackCanceled?.Invoke();

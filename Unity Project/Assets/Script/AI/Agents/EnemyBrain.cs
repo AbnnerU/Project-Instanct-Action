@@ -22,6 +22,7 @@ namespace Scripts.BehaviourTree.Agents
         [SerializeField] private AIState _eCurrentAiState = AIState.STANDING;
 
         [Header("References")]
+        [SerializeField] private HealthManager _healthManagerComponent;
         [SerializeField] private BehaviorTree _behaviorTree;
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private ComboControllerBase _comboController;
@@ -80,6 +81,8 @@ namespace Scripts.BehaviourTree.Agents
 
         private void OnEnable()
         {
+            PrepareForReuse();
+
             if (_autoSetup && _isSetup && !_isBehaviourTreeStarted)
                 StartBehaviourTree();
         }
@@ -113,6 +116,21 @@ namespace Scripts.BehaviourTree.Agents
 
             _behaviorTree.Stop();
             _isBehaviourTreeStarted = false;
+        }
+
+        public void PrepareForReuse()
+        {
+            _currentVelocity = Vector3.zero;
+            _isOnNavMeshLink = false;
+            _currentAreaMask = 0;
+            _eCurrentAiState = AIState.STANDING;
+
+            if (_navMeshAgent == null || !_navMeshAgent.enabled || !_navMeshAgent.isOnNavMesh)
+                return;
+
+            _navMeshAgent.isStopped = true;
+            _navMeshAgent.velocity = Vector3.zero;
+            _navMeshAgent.ResetPath();
         }
 
         public void Stand()
@@ -275,17 +293,21 @@ namespace Scripts.BehaviourTree.Agents
         {
             BTBoolFunc btIsGoToTargetOrder = new BTBoolFunc(() => _eCurrentOrder == AgentMovementOrder.GO_TO_TARGET);
             BTBoolFunc btHasTarget = new BTBoolFunc(() => GetMovementTarget() != null);
+            BTBoolFunc btIsAlive = new BTBoolFunc(() => _healthManagerComponent.IsAlive());
+            BTInverter btIsDead = new BTInverter(btIsAlive);
 
             BTSetAIState btSetStandingState = new BTSetAIState(this, AIState.STANDING);
             BTSetAIState btSetMoveToTargetState = new BTSetAIState(this, AIState.MOVE_TO_TARGET);
             BTSetAIState btSetPatrolState = new BTSetAIState(this, AIState.PATROLLING);
             BTSetAIState btSetAttackState = new BTSetAIState(this, AIState.ATTACKING);
+            BTSetAIState btSetDeadState = new BTSetAIState(this, AIState.DEAD);
 
             BTDoAction btStopAgent = new BTDoAction(StopAgent);
             BTDoAction btHandleTargetReached = new BTDoAction(HandleTargetReached);
             BTLookAtTarget btLookAtTarget = new BTLookAtTarget(GetConfiguredTarget, transform, true);
             BTIsTargetInRange btIsTargetInAttackRange = new BTIsTargetInRange(GetConfiguredTarget, transform, _attackDistance, _useXZDistanceForAttack);
             BTComboAttack btComboAttack = new BTComboAttack(_comboController, _maxAttackDuration);
+            BTConditionalSequence btComboAttackConditional = new BTConditionalSequence(new List<BTnode> { btIsAlive }, btComboAttack);
 
             BTGoToTarget btGoToTarget = new BTGoToTarget(
                 GetMovementTarget,
@@ -295,29 +317,41 @@ namespace Scripts.BehaviourTree.Agents
                 _targetUpdateInterval,
                 _movementSpeed);
 
+            BTConditionalSequence btGoToTargetCondicional = new BTConditionalSequence(new List<BTnode> { btIsAlive}, btGoToTarget);
+
             BTSequence btGoToTargetSequence = new BTSequence(new List<BTnode>
             {
+                btIsAlive,
                 btIsGoToTargetOrder,
                 btHasTarget,
                 btSetMoveToTargetState,
-                btGoToTarget,
+                btGoToTargetCondicional,
                 btHandleTargetReached
             });
 
             BTSequence btAttackSequence = new BTSequence(new List<BTnode>
             {
+                btIsAlive,
                 btIsGoToTargetOrder,
                 btHasTarget,
                 btIsTargetInAttackRange,
                 btSetAttackState,
                 btStopAgent,
                 btLookAtTarget,
-                btComboAttack
+                btComboAttackConditional
             });
 
             BTSequence btStandSequence = new BTSequence(new List<BTnode>
             {
+                btIsAlive,
                 btSetStandingState,
+                btStopAgent
+            });
+
+            BTSequence btDeadSequence = new BTSequence(new List<BTnode>
+            {
+                btIsDead,
+                btSetDeadState,
                 btStopAgent
             });
 

@@ -29,6 +29,7 @@ namespace Scripts.BT
         {
             active = false;
             StopCoroutine(Begin());
+            StopAllCoroutines();
         }
 
         public void SetBehaviorRoot(BTnode rootnode)
