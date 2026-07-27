@@ -10,6 +10,8 @@ namespace Scripts.Status
         CRITICAL_CHANCE,
         CRITICAL_DAMAGE,
         STAMINA,
-        LIFE_STEAL
+        LIFE_STEAL,
+        MAGIC_RESISTANCE,
+        PHYSICAL_RESISTANCE
     }
 }

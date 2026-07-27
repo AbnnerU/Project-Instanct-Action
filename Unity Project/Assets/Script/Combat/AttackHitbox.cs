@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using Scripts.Managers;
-using Scripts.Player;
+using Scripts.Status;
 using UnityEngine;
 
 namespace Scripts.Combat
@@ -8,12 +7,13 @@ namespace Scripts.Combat
     public class AttackHitbox : MonoBehaviour
     {
         [SerializeField] private Transform _hitboxOrigin;
-        [SerializeField] private MN_PlayerStatus _playerStatus;
+        [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private bool _useHitboxOriginRotation;
         [SerializeField] private bool _drawGizmos = true;
 
         private Collider[] _hitResults = new Collider[8];
-        private readonly HashSet<global::IHittable> _hashSet_HitTargets = new HashSet<global::IHittable>();
+        private readonly HashSet<IDamageReceiver> _hashSet_DamageReceivers = new HashSet<IDamageReceiver>();
+        private readonly HashSet<global::IHittable> _hashSet_HittableTargets = new HashSet<global::IHittable>();
 
         private ComboAttackData _lastAttackData;
         private Vector3 _lastCenter;
@@ -33,7 +33,8 @@ namespace Scripts.Combat
             }
 
             EnsureHitResultsCapacity(attackData.MaxTargets);
-            _hashSet_HitTargets.Clear();
+            _hashSet_DamageReceivers.Clear();
+            _hashSet_HittableTargets.Clear();
 
             Vector3 center = _hitboxOrigin.position + attackData.HitboxCenterOffset;
             _lastAttackData = attackData;
@@ -50,10 +51,28 @@ namespace Scripts.Combat
 
             for (int i = 0; i < hits; i++)
             {
-                if (!TryGetHittable(_hitResults[i], out global::IHittable hittable)) continue;
-                if (!_hashSet_HitTargets.Add(hittable)) continue;
+                Collider hitCollider = _hitResults[i];
 
-                ResolvedDamageData resolvedDamage = DamageResolver.Resolve(attackData.DamageData, _playerStatus);
+                if (TryGetDamageReceiver(hitCollider, out IDamageReceiver damageReceiver))
+                {
+                    if (!_hashSet_DamageReceivers.Add(damageReceiver)) continue;
+
+                    DamageRequest damageRequest = new DamageRequest(
+                        attackData.DamageData,
+                        _statusSource?.GetStatusInfo(),
+                        gameObject,
+                        GetDamageReceiverGameObject(damageReceiver),
+                        hitCollider,
+                        hitCollider.ClosestPoint(_hitboxOrigin.position));
+
+                    damageReceiver.ReceiveDamage(damageRequest);
+                    continue;
+                }
+
+                if (!TryGetHittable(hitCollider, out IHittable hittable)) continue;
+                if (!_hashSet_HittableTargets.Add(hittable)) continue;
+
+                ResolvedDamageData resolvedDamage = DamageResolver.Resolve(attackData.DamageData, _statusSource?.GetStatusInfo());
                 hittable.Hit(resolvedDamage.FinalDamage);
             }
         }
@@ -63,13 +82,27 @@ namespace Scripts.Combat
             return _useHitboxOriginRotation && _hitboxOrigin != null ? _hitboxOrigin.rotation : Quaternion.identity;
         }
 
-        private bool TryGetHittable(Collider targetCollider, out global::IHittable hittable)
+        private bool TryGetDamageReceiver(Collider targetCollider, out IDamageReceiver damageReceiver)
         {
-            hittable = targetCollider.GetComponentInParent<global::IHittable>();
+            damageReceiver = targetCollider.GetComponentInParent<IDamageReceiver>();
+            if (damageReceiver != null) return true;
+
+            damageReceiver = targetCollider.GetComponentInChildren<IDamageReceiver>();
+            return damageReceiver != null;
+        }
+
+        private bool TryGetHittable(Collider targetCollider, out IHittable hittable)
+        {
+            hittable = targetCollider.GetComponentInParent<IHittable>();
             if (hittable != null) return true;
 
-            hittable = targetCollider.GetComponentInChildren<global::IHittable>();
+            hittable = targetCollider.GetComponentInChildren<IHittable>();
             return hittable != null;
+        }
+
+        private GameObject GetDamageReceiverGameObject(IDamageReceiver damageReceiver)
+        {
+            return damageReceiver is Component component ? component.gameObject : null;
         }
 
         private void EnsureHitResultsCapacity(int maxTargets)

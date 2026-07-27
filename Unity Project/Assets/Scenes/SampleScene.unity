@@ -531,7 +531,10 @@ GameObject:
   - component: {fileID: 352661055}
   - component: {fileID: 352661053}
   - component: {fileID: 352661056}
+  - component: {fileID: 352661071}
+  - component: {fileID: 352661072}
   - component: {fileID: 352661063}
+  - component: {fileID: 352661070}
   - component: {fileID: 352661062}
   - component: {fileID: 352661058}
   - component: {fileID: 352661060}
@@ -646,7 +649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
   _isBlocked: 0
-  maxHealth: 100
+  maxHealth: 1000
   isHittable: 1
   isKillable: 1
   releaseOnDeath: 0
@@ -736,7 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.AttackHitbox
   _hitboxOrigin: {fileID: 1234331881}
-  _playerStatus: {fileID: 0}
+  _statusSource: {fileID: 0}
   _useHitboxOriginRotation: 0
   _drawGizmos: 1
 --- !u!114 &352661063
@@ -872,6 +875,81 @@ MonoBehaviour:
   _healthEventsComponent: {fileID: 352661056}
   _verifyStateOnStart: 1
   _colliderComponent: {fileID: 352661057}
+--- !u!114 &352661070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352661051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8394fce931e9f534cbbf115da0e3c447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.StatusInfoSource
+  _statusInfo:
+    List_StatusData:
+    - StatusType: 10
+      BaseValue: 50
+      CurrentValue: 50
+    - StatusType: 9
+      BaseValue: 80
+      CurrentValue: 80
+--- !u!114 &352661071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352661051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b38a30124c75240afa0cff028fdc42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.DamageReceiver
+  _hittableReference: {fileID: 352661051}
+  _statusSource: {fileID: 352661070}
+--- !u!114 &352661072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352661051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299cdd76fa12de4899c07de39f326e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.DamagePopupSpawner
+  _damageReceiverReference: {fileID: 352661051}
+  _spawnPositionReference: {fileID: 352661052}
+  _minOffSet: {x: -0.25, y: 2.5, z: -0}
+  _maxOffSet: {x: 0.25, y: 3, z: 0}
+  _containerTag: PopUpContainer
+  _container: {fileID: 0}
+  _list_DamagePopupAssetData:
+  - DamageType: 0
+    PopupPrefabReference:
+      m_AssetGUID: 1eabb483376c9f445a97a9daa4bac6da
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - DamageType: 1
+    PopupPrefabReference:
+      m_AssetGUID: 7f531f2e8127d3843a5aa17361279213
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - DamageType: 2
+    PopupPrefabReference:
+      m_AssetGUID: a79fc95f352bbd94aadf165bb8439a4f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  _drawGizmos: 1
 --- !u!1 &404701170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,9 +1450,12 @@ GameObject:
   - component: {fileID: 711513675}
   - component: {fileID: 711513678}
   - component: {fileID: 711513677}
+  - component: {fileID: 711513691}
   - component: {fileID: 711513679}
   - component: {fileID: 711513685}
   - component: {fileID: 711513676}
+  - component: {fileID: 711513692}
+  - component: {fileID: 711513693}
   - component: {fileID: 711513681}
   - component: {fileID: 711513680}
   - component: {fileID: 711513684}
@@ -1521,7 +1602,7 @@ MonoBehaviour:
     _damageData:
       _damageType: 0
       _baseDamage: 10
-      _physicForceScaling: 0
+      _physicForceScaling: 1.2
       _magicForceScaling: 0
     _hitboxCenterOffset: {x: 0, y: 0, z: 0}
     _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
@@ -1533,9 +1614,9 @@ MonoBehaviour:
   - _animationStateName: Punching (1)
     _transitionDuration: 0.05
     _damageData:
-      _damageType: 0
+      _damageType: 1
       _baseDamage: 20
-      _physicForceScaling: 0
+      _physicForceScaling: 0.5
       _magicForceScaling: 0
     _hitboxCenterOffset: {x: 0, y: 0, z: 0}
     _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
@@ -1547,10 +1628,10 @@ MonoBehaviour:
   - _animationStateName: Kick
     _transitionDuration: 0.05
     _damageData:
-      _damageType: 0
+      _damageType: 2
       _baseDamage: 50
-      _physicForceScaling: 0
-      _magicForceScaling: 0
+      _physicForceScaling: 0.5
+      _magicForceScaling: 0.5
     _hitboxCenterOffset: {x: 0, y: 0, z: 0}
     _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
     _targetLayerMask:
@@ -1577,7 +1658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerAttackHitbox
   _hitboxOrigin: {fileID: 205012465}
-  _playerStatus: {fileID: 1151873708}
+  _statusSource: {fileID: 711513691}
   _useHitboxOriginRotation: 0
   _drawGizmos: 1
 --- !u!114 &711513682
@@ -1759,6 +1840,73 @@ MonoBehaviour:
   _hittableReference: {fileID: 711513674}
   _colliderComponent: {fileID: 711513677}
   _disableTime: 0.1
+--- !u!114 &711513691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65d6153af76b6f841af2ee5390c8bb1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.StatusInfoByMN_PlayerStatus
+--- !u!114 &711513692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b38a30124c75240afa0cff028fdc42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.DamageReceiver
+  _hittableReference: {fileID: 711513674}
+  _statusSource: {fileID: 0}
+--- !u!114 &711513693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299cdd76fa12de4899c07de39f326e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.DamagePopupSpawner
+  _damageReceiverReference: {fileID: 711513674}
+  _spawnPositionReference: {fileID: 711513675}
+  _minOffSet: {x: -0.25, y: 2.5, z: -0}
+  _maxOffSet: {x: 0.25, y: 3, z: 0}
+  _containerTag: PopUpContainer
+  _container: {fileID: 0}
+  _list_DamagePopupAssetData:
+  - DamageType: 0
+    PopupPrefabReference:
+      m_AssetGUID: 1eabb483376c9f445a97a9daa4bac6da
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - DamageType: 1
+    PopupPrefabReference:
+      m_AssetGUID: 7f531f2e8127d3843a5aa17361279213
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - DamageType: 2
+    PopupPrefabReference:
+      m_AssetGUID: a79fc95f352bbd94aadf165bb8439a4f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  _drawGizmos: 1
 --- !u!1 &717130072
 GameObject:
   m_ObjectHideFlags: 0
@@ -3248,22 +3396,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3394292f1835fc74c9d4d8b1f5ad1d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Managers.MN_PlayerStatus
-  _list_StatusData:
-  - StatusType: 0
-    BaseValue: 100
-    CurrentValue: 100
-  - StatusType: 3
-    BaseValue: 10
-    CurrentValue: 10
-  - StatusType: 4
-    BaseValue: 10
-    CurrentValue: 10
-  - StatusType: 8
-    BaseValue: 0
-    CurrentValue: 0
-  - StatusType: 1
-    BaseValue: 1
-    CurrentValue: 1
+  _statusInfo:
+    List_StatusData:
+    - StatusType: 0
+      BaseValue: 100
+      CurrentValue: 100
+    - StatusType: 3
+      BaseValue: 100
+      CurrentValue: 100
+    - StatusType: 4
+      BaseValue: 100
+      CurrentValue: 100
 --- !u!1 &1206952758
 GameObject:
   m_ObjectHideFlags: 0
@@ -4092,6 +4235,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1979048653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979048654}
+  m_Layer: 0
+  m_Name: _Pop Ups Container
+  m_TagString: PopUpContainer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1979048654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979048653}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1986794570
 GameObject:
   m_ObjectHideFlags: 0
@@ -4427,3 +4601,4 @@ SceneRoots:
   - {fileID: 1335843069}
   - {fileID: 711513675}
   - {fileID: 352661052}
+  - {fileID: 1979048654}
