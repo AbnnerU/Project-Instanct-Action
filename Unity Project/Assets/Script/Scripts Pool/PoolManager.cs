@@ -86,6 +86,7 @@ namespace Scripts.ObjectPooling
 		{
 			var go = Instantiate(prefab) as GameObject;
 			if (root != null) go.transform.parent = root;
+			go.SetActive(false);
 			return go;
 		}
 

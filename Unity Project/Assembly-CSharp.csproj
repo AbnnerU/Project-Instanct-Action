@@ -117,6 +117,7 @@
     <Compile Include="Assets\Script\Combat\Data\DamageRequest.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTInverter.cs" />
     <Compile Include="Assets\Script\Interface\General\ICursorVisibilyHandler.cs" />
+    <Compile Include="Assets\Script\Progression\MN_Xp.cs" />
     <Compile Include="Assets\Script\Abstract\Do Action\DoActionBase.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingTaskSOBase.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ObjectPoolContainer.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Assets\Script\Interface\Spawner\IPreDestroyHandler.cs" />
     <Compile Include="Assets\Script\Abstract\Health\HealthBasics.cs" />
     <Compile Include="Assets\Script\Status\StatusInfoSource.cs" />
+    <Compile Include="Assets\Script\Progression\XpBar.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ObjectPool.cs" />
     <Compile Include="Assets\Script\Combat\ComboControllerBase.cs" />
     <Compile Include="Assets\Script\Health\DynamicHealthRepairUI.cs" />
@@ -178,6 +180,7 @@
     <Compile Include="Assets\Script\Animation\AnimationVelocityModule.cs" />
     <Compile Include="Assets\Script\Player\PlayerDashInvulnerability.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\Boolean\BTBoolFunc.cs" />
+    <Compile Include="Assets\Script\Spawner\EnemySpawner.cs" />
     <Compile Include="Assets\Script\Abstract\Animation\AnimationModuleBase.cs" />
     <Compile Include="Assets\Script\Abstract\Saver\SaverBase.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTSequence.cs" />
@@ -194,6 +197,7 @@
     <Compile Include="Assets\Script\Combat\Data\ComboAttackData.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTIsTargetInRange.cs" />
     <Compile Include="Assets\Script\Player\HitReaction_BlockPlayerDash.cs" />
+    <Compile Include="Assets\Script\Progression\OnDeath_AddXp.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadScene_TryLoad.cs" />
     <Compile Include="Assets\Script\Combat\Pop Up\DamagePopupSpawner.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_AnimSetBool.cs" />
