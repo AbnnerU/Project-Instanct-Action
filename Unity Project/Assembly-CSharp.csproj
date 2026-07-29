@@ -70,6 +70,7 @@
     <Compile Include="Assets\Script\Interface\Tier\IHasTier.cs" />
     <Compile Include="Assets\Script\AI\OnDeath_StopBrainAndReleaseObject.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTStopAgent.cs" />
+    <Compile Include="Assets\Script\Enchantment\MN_Enchantments.cs" />
     <Compile Include="Assets\Script\AI\Enum\AIState.cs" />
     <Compile Include="Assets\Script\Health\HealthManager.cs" />
     <Compile Include="Assets\Script\Animation\HitReaction_TriggerParameter.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Script\Interface\Spawner\IAddressableButtonSpawner.cs" />
     <Compile Include="Assets\Script\Coins\MN_Coins.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTGoToTarget.cs" />
+    <Compile Include="Assets\Script\Enchantment\EnchantmentCardUI.cs" />
     <Compile Include="Assets\Script\Combat\EnemyComboController.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasNavMeshAgentSpeedUpdate.cs" />
     <Compile Include="Assets\Script\Status\Appliers\PlayerHealthByStatus.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="Assets\Script\Loading Scene\LoadingTaskSOBase.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ObjectPoolContainer.cs" />
     <Compile Include="Assets\Script\Loading Scene\AssetReferenceLoadingTaskSOBase.cs" />
+    <Compile Include="Assets\Script\Enchantment\EnchantmentSelectionUI.cs" />
     <Compile Include="Assets\Script\Health\OnHit_Particles.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnodeNavMeshAjust.cs" />
     <Compile Include="Assets\Script\Interface\General\IUniqueId.cs" />
@@ -133,6 +136,7 @@
     <Compile Include="Assets\Script\Interface\General\IHasActionValidation.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTSetAIState.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IMutableAddressableSpawnerWithPreview.cs" />
+    <Compile Include="Assets\Script\Scriptable Base\Enchantment\StatusUpgradeSO.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageResult.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawnerWithOffSet.cs" />
     <Compile Include="Assets\Script\Coins\Saver\CoinData.cs" />
@@ -184,6 +188,7 @@
     <Compile Include="Assets\Script\Animation\AnimationVelocityModule.cs" />
     <Compile Include="Assets\Script\Player\PlayerDashInvulnerability.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\Boolean\BTBoolFunc.cs" />
+    <Compile Include="Assets\Script\Abstract\Enchantment\EnchantmentSOBase.cs" />
     <Compile Include="Assets\Script\Spawner\EnemySpawner.cs" />
     <Compile Include="Assets\Script\Abstract\Animation\AnimationModuleBase.cs" />
     <Compile Include="Assets\Script\Abstract\Saver\SaverBase.cs" />
@@ -1645,6 +1650,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="CustomInspector.csproj">
+      <Project>{7FE1E0C7-412E-1548-B0C9-071DE485F99B}</Project>
+      <Name>CustomInspector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

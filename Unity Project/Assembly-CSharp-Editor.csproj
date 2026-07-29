@@ -1570,6 +1570,10 @@
       <Project>{BDBCE7D3-139D-3EDB-816D-FB1D73476D25}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="CustomInspector.csproj">
+      <Project>{7FE1E0C7-412E-1548-B0C9-071DE485F99B}</Project>
+      <Name>CustomInspector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
