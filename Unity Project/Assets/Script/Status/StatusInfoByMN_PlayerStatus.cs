@@ -16,5 +16,18 @@ namespace Scripts.Status
             else
                 return null;
         }
+
+        public override bool TryGetStatusData(StatusType statusType, out StatusData statusData)
+        {
+            statusData = null;
+
+            if (_playerStatusManager == null)
+                _playerStatusManager = MN_PlayerStatus.Instance;
+
+            if (_playerStatusManager == null)
+                return false;
+
+            return _playerStatusManager.TryGetStatusData(statusType, out statusData);
+        }
     }
 }

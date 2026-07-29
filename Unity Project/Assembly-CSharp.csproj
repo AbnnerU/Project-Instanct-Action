@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Interface\Spawner\IHasSpawnValidation.cs" />
+    <Compile Include="Assets\Script\Combat\Damage Effects\IDamageDealer.cs" />
     <Compile Include="Assets\Script\Interface\Tier\IHasTier.cs" />
     <Compile Include="Assets\Script\AI\OnDeath_StopBrainAndReleaseObject.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTStopAgent.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTGoToTarget.cs" />
     <Compile Include="Assets\Script\Combat\EnemyComboController.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasNavMeshAgentSpeedUpdate.cs" />
+    <Compile Include="Assets\Script\Status\Appliers\PlayerHealthByStatus.cs" />
     <Compile Include="Assets\Script\Singleton\SceneSingleton.cs" />
     <Compile Include="Assets\Script\Health\LifeCycle_HandleCollider.cs" />
     <Compile Include="Assets\Script\Health\HealthStatusReference.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Assets\Script\AI\Agents\EnemyBrain.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTConditionalSequence.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasTargetProvider.cs" />
+    <Compile Include="Assets\Script\Status\Appliers\AttackSpeedByStatus.cs" />
     <Compile Include="Assets\Script\Combat\HitReaction_CancelAndBlockComboController.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawner.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnode.cs" />
@@ -125,6 +128,7 @@
     <Compile Include="Assets\Script\Health\OnHit_Particles.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnodeNavMeshAjust.cs" />
     <Compile Include="Assets\Script\Interface\General\IUniqueId.cs" />
+    <Compile Include="Assets\Script\Combat\Damage Effects\HealOnDamageDealt.cs" />
     <Compile Include="Assets\Script\Health\OnRespawn_UnityEvent.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActionValidation.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTSetAIState.cs" />

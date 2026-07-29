@@ -56,6 +56,8 @@ namespace Scripts.Managers
             if (!TryGetStatusData(statusType, out StatusData statusData)) return;
 
             statusData.CurrentValue = value;
+            statusData.OnCurrentValueUpdated?.Invoke(statusData.CurrentValue);
+
             OnCurrentValueUpdated?.Invoke(statusType, statusData.CurrentValue);
         }
 
@@ -81,6 +83,8 @@ namespace Scripts.Managers
 
         private void BuildStatusDataDictionary()
         {
+            _statusInfo.Initialize();
+
             _dc_StatusData.Clear();
 
             for (int i = 0; i < _statusInfo.List_StatusData.Count; i++)

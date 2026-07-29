@@ -6,6 +6,6 @@ namespace Scripts.Combat
     {
         event Action<DamageResult> OnDamageReceived;
 
-        void ReceiveDamage(DamageRequest damageRequest);
+        DamageResult ReceiveDamage(DamageRequest damageRequest);
     }
 }

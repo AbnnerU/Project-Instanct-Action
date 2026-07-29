@@ -1289,6 +1289,9 @@ GameObject:
   - component: {fileID: 711513688}
   - component: {fileID: 711513687}
   - component: {fileID: 711513690}
+  - component: {fileID: 711513695}
+  - component: {fileID: 711513694}
+  - component: {fileID: 711513696}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1423,7 +1426,7 @@ MonoBehaviour:
   _characterAnimationController: {fileID: 711513686}
   _list_ComboAttackData:
   - _animationStateName: Punching
-    _transitionDuration: 0.05
+    _transitionDuration: 0.02
     _damageData:
       _damageType: 0
       _baseDamage: 10
@@ -1437,7 +1440,7 @@ MonoBehaviour:
     _queryTriggerInteraction: 0
     _maxTargets: 5
   - _animationStateName: Punching (1)
-    _transitionDuration: 0.05
+    _transitionDuration: 0.02
     _damageData:
       _damageType: 1
       _baseDamage: 20
@@ -1451,7 +1454,7 @@ MonoBehaviour:
     _queryTriggerInteraction: 0
     _maxTargets: 5
   - _animationStateName: Kick
-    _transitionDuration: 0.05
+    _transitionDuration: 0.02
     _damageData:
       _damageType: 2
       _baseDamage: 50
@@ -1498,10 +1501,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a95f8adaae7c3d4e95204b4247c48bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDashAnimation
+  _active: 1
+  _animationControllerComponent: {fileID: 711513686}
   _playerDash: {fileID: 711513684}
-  _animator: {fileID: 1484080727}
-  _dashAnimationStateName: Dash
-  _transitionDuration: 0.05
+  _dashTriggerParameter: Dash
 --- !u!114 &711513683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1732,6 +1735,54 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
   _drawGizmos: 1
+--- !u!114 &711513694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c1af6ebf47ef941bec46a40107aa20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HealOnDamageDealt
+  _statusSource: {fileID: 711513691}
+  _healingStatusType: 2
+  _list_ValidDamageTypes: 0100000002000000
+--- !u!114 &711513695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c1af6ebf47ef941bec46a40107aa20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HealOnDamageDealt
+  _statusSource: {fileID: 711513691}
+  _healingStatusType: 8
+  _list_ValidDamageTypes: 00000000
+--- !u!114 &711513696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92d74e7e1aa4f94da20876af636511c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.AttackSpeedByStatus
+  _active: 1
+  _animationControllerComponent: {fileID: 711513686}
+  _statusSource: {fileID: 711513691}
+  _attackSpeedParameter: AttackSpeed
+  _defaultAttackSpeed: 1
+  _minimumAttackSpeed: 0.01
 --- !u!1 &717130072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2708,6 +2759,21 @@ MonoBehaviour:
     - StatusType: 4
       BaseValue: 100
       CurrentValue: 200
+    - StatusType: 5
+      BaseValue: 50
+      CurrentValue: 0
+    - StatusType: 6
+      BaseValue: 3
+      CurrentValue: 0
+    - StatusType: 8
+      BaseValue: 10
+      CurrentValue: 0
+    - StatusType: 2
+      BaseValue: 10
+      CurrentValue: 0
+    - StatusType: 1
+      BaseValue: 1
+      CurrentValue: 0
 --- !u!1 &1236249376
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,13 +17,13 @@ namespace Scripts.Combat
             CacheHittable();
         }
 
-        public void ReceiveDamage(DamageRequest damageRequest)
+        public DamageResult ReceiveDamage(DamageRequest damageRequest)
         {
             if (_hittableHandler == null)
                 CacheHittable();
 
             if (_hittableHandler == null || !_hittableHandler.IsAlive())
-                return;
+                return DamageResult.Failed(damageRequest);
 
             ResolvedDamageData resolvedDamage = DamageResolver.Resolve(
                 damageRequest.DamageData,
@@ -34,11 +34,15 @@ namespace Scripts.Combat
 
             DamageResult damageResult = new DamageResult(
                 resolvedDamage.DamageType,
+                resolvedDamage.RawDamage,
                 resolvedDamage.FinalDamage,
                 killed,
+                resolvedDamage.IsCritical,
+                true,
                 damageRequest);
 
             OnDamageReceived?.Invoke(damageResult);
+            return damageResult;
         }
 
         private void CacheHittable()

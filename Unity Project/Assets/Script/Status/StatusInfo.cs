@@ -27,11 +27,20 @@ namespace Scripts.Status
             else
                 return 0;
         }
+
+
+        public void Initialize()
+        {
+            foreach(StatusData statusData in List_StatusData) 
+                statusData.CurrentValue = statusData.BaseValue;
+        }
     }
 
     [Serializable]
     public class StatusData
     {
+        public Action<float> OnCurrentValueUpdated;
+
         public StatusType StatusType;
         public float BaseValue;
         public float CurrentValue;

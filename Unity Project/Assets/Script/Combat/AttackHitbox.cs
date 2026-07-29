@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
 using Scripts.Status;
 using UnityEngine;
 
 namespace Scripts.Combat
 {
-    public class AttackHitbox : MonoBehaviour
+    public class AttackHitbox : MonoBehaviour, IDamageDealer
     {
+        public event Action<DamageResult> OnDamageDealt;
+
         [SerializeField] private Transform _hitboxOrigin;
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private bool _useHitboxOriginRotation;
@@ -13,7 +16,7 @@ namespace Scripts.Combat
 
         private Collider[] _hitResults = new Collider[8];
         private readonly HashSet<IDamageReceiver> _hashSet_DamageReceivers = new HashSet<IDamageReceiver>();
-        private readonly HashSet<global::IHittable> _hashSet_HittableTargets = new HashSet<global::IHittable>();
+        private readonly HashSet<IHittable> _hashSet_HittableTargets = new HashSet<IHittable>();
 
         private ComboAttackData _lastAttackData;
         private Vector3 _lastCenter;
@@ -57,15 +60,10 @@ namespace Scripts.Combat
                 {
                     if (!_hashSet_DamageReceivers.Add(damageReceiver)) continue;
 
-                    DamageRequest damageRequest = new DamageRequest(
-                        attackData.DamageData,
-                        _statusSource?.GetStatusInfo(),
-                        gameObject,
-                        GetDamageReceiverGameObject(damageReceiver),
-                        hitCollider,
-                        hitCollider.ClosestPoint(_hitboxOrigin.position));
+                    DamageRequest damageRequest = CreateDamageRequest(attackData, hitCollider, GetDamageReceiverGameObject(damageReceiver));
 
-                    damageReceiver.ReceiveDamage(damageRequest);
+                    DamageResult damageResult = damageReceiver.ReceiveDamage(damageRequest);
+                    OnDamageDealt?.Invoke(damageResult);
                     continue;
                 }
 
@@ -73,7 +71,19 @@ namespace Scripts.Combat
                 if (!_hashSet_HittableTargets.Add(hittable)) continue;
 
                 ResolvedDamageData resolvedDamage = DamageResolver.Resolve(attackData.DamageData, _statusSource?.GetStatusInfo());
-                hittable.Hit(resolvedDamage.FinalDamage);
+                hittable.Hit(resolvedDamage.FinalDamage, out bool killed);
+
+                DamageRequest damageRequestFallback = CreateDamageRequest(attackData, hitCollider, GetHittableGameObject(hittable));
+                DamageResult damageResultFallback = new DamageResult(
+                    resolvedDamage.DamageType,
+                    resolvedDamage.RawDamage,
+                    resolvedDamage.FinalDamage,
+                    killed,
+                    resolvedDamage.IsCritical,
+                    true,
+                    damageRequestFallback);
+
+                OnDamageDealt?.Invoke(damageResultFallback);
             }
         }
 
@@ -103,6 +113,22 @@ namespace Scripts.Combat
         private GameObject GetDamageReceiverGameObject(IDamageReceiver damageReceiver)
         {
             return damageReceiver is Component component ? component.gameObject : null;
+        }
+
+        private GameObject GetHittableGameObject(IHittable hittable)
+        {
+            return hittable is Component component ? component.gameObject : null;
+        }
+
+        private DamageRequest CreateDamageRequest(ComboAttackData attackData, Collider hitCollider, GameObject receiver)
+        {
+            return new DamageRequest(
+                attackData.DamageData,
+                _statusSource?.GetStatusInfo(),
+                gameObject,
+                receiver,
+                hitCollider,
+                hitCollider.ClosestPoint(_hitboxOrigin.position));
         }
 
         private void EnsureHitResultsCapacity(int maxTargets)

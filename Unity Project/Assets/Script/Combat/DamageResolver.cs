@@ -25,10 +25,31 @@ namespace Scripts.Combat
                               (physicForce * damageData.PhysicForceScaling) +
                               (magicForce * damageData.MagicForceScaling);
 
+            bool isCritical = RollCritical(attackerStatus);
+
+            if (isCritical)
+                rawDamage *= GetCriticalDamageMultiplier(attackerStatus);
+
             float resistancePercentage = GetResistancePercentage(damageData.DamageType, receiverStatus);
             float finalDamage = ApplyResistance(rawDamage, damageData.DamageType, resistancePercentage);
 
-            return new ResolvedDamageData(damageData.DamageType, finalDamage);
+            return new ResolvedDamageData(damageData.DamageType, rawDamage, finalDamage, isCritical);
+        }
+
+        private static bool RollCritical(StatusInfo attackerStatus)
+        {
+            if (attackerStatus == null) return false;
+
+            float criticalChance = Mathf.Clamp(attackerStatus.GetCurrentValueOf(StatusType.CRITICAL_CHANCE), 0f, 100f) / 100f;
+            return criticalChance > 0f && Random.value <= criticalChance;
+        }
+
+        private static float GetCriticalDamageMultiplier(StatusInfo attackerStatus)
+        {
+            if (attackerStatus == null) return 2f;
+
+            float criticalDamage = attackerStatus.GetCurrentValueOf(StatusType.CRITICAL_DAMAGE);
+            return criticalDamage > 0f ? Mathf.Max(1f, criticalDamage) : 2f;
         }
 
         private static float GetResistancePercentage(DamageType damageType, StatusInfo receiverStatus)
@@ -57,12 +78,21 @@ namespace Scripts.Combat
     public readonly struct ResolvedDamageData
     {
         public readonly DamageType DamageType;
+        public readonly float RawDamage;
         public readonly float FinalDamage;
+        public readonly bool IsCritical;
 
         public ResolvedDamageData(DamageType damageType, float finalDamage)
+            : this(damageType, finalDamage, finalDamage, false)
+        {
+        }
+
+        public ResolvedDamageData(DamageType damageType, float rawDamage, float finalDamage, bool isCritical)
         {
             DamageType = damageType;
+            RawDamage = rawDamage;
             FinalDamage = finalDamage;
+            IsCritical = isCritical;
         }
     }
 }

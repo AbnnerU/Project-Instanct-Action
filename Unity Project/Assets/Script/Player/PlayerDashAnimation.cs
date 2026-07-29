@@ -1,21 +1,19 @@
+using Scripts.Animation;
 using UnityEngine;
 
 namespace Scripts.Player
 {
-    public class PlayerDashAnimation : MonoBehaviour
+    public class PlayerDashAnimation : AnimationModuleBase
     {
         [SerializeField] private PlayerDash _playerDash;
-        [SerializeField] private Animator _animator;
-        [SerializeField] private string _dashAnimationStateName = "Dash";
-        [SerializeField] private float _transitionDuration = 0.05f;
+        [SerializeField] private string _dashTriggerParameter = "Dash";
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             if (_playerDash == null)
                 TryGetComponent(out _playerDash);
-
-            if (_animator == null)
-                _animator = GetComponentInChildren<Animator>();
         }
 
         private void OnEnable()
@@ -32,9 +30,9 @@ namespace Scripts.Player
 
         private void PlayerDash_OnDashStarted(DirectionSide directionSide)
         {
-            if (_animator == null || string.IsNullOrEmpty(_dashAnimationStateName)) return;
+            if (_animationControllerComponent == null) return;
 
-            _animator.CrossFade(_dashAnimationStateName, _transitionDuration, 0, 0f);
+            _animationControllerComponent.SetTrigger(_dashTriggerParameter);
         }
     }
 }
