@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c99c0a0be992944b10b4cc1fb7d47c, type: 3}
+  m_Name: TwoSwords_WeaponEnchantmentSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.WeaponEnchantmentSO
+  ID: 5690ea52-7996-4e77-954f-2c0a60c6176f
+  DisplayName: Two Swords
+  Description: 
+  IconReference:
+    m_AssetGUID: 55012f4fbdc969342b89c380463140f7
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _canRepeat: 0
+  _weaponLoadout: {fileID: 11400000, guid: a8a03c1019cede64797d0af38bea0849, type: 2}

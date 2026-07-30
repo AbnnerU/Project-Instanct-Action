@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fabc2f4b11ea33438dcdf23fa8d7447, type: 3}
+  m_Name: Hand_WeaponLoadoutSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Weapon.WeaponLoadoutSO
+  ID: Handed
+  DisplayName: Hands
+  ComboAttackSet: {fileID: 11400000, guid: 857cbb28a04eea04bba8de91619771a2, type: 2}
+  AnimatorController: {fileID: 22100000, guid: 21dd0775597558f45801f323edbb5e0c, type: 2}
+  List_WeaponModels: []

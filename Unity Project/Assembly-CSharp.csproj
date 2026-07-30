@@ -70,6 +70,7 @@
     <Compile Include="Assets\Script\Interface\Tier\IHasTier.cs" />
     <Compile Include="Assets\Script\AI\OnDeath_StopBrainAndReleaseObject.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTStopAgent.cs" />
+    <Compile Include="Assets\Script\Scriptable Base\Combat\ComboAttackSetSO.cs" />
     <Compile Include="Assets\Script\Enchantment\MN_Enchantments.cs" />
     <Compile Include="Assets\Script\AI\Enum\AIState.cs" />
     <Compile Include="Assets\Script\Health\HealthManager.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Assets\Script\Interface\General\IUniqueId.cs" />
     <Compile Include="Assets\Script\Combat\Damage Effects\HealOnDamageDealt.cs" />
     <Compile Include="Assets\Script\Health\OnRespawn_UnityEvent.cs" />
+    <Compile Include="Assets\Script\Scriptable Base\Weapon\WeaponLoadoutSO.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActionValidation.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTSetAIState.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IMutableAddressableSpawnerWithPreview.cs" />
@@ -182,6 +184,7 @@
     <Compile Include="Assets\Script\Requeriments\Saver\RequirementsSaveData.cs" />
     <Compile Include="Assets\Script\Status\MN_PlayerStatus.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\Boolean\BTIsValueGreater.cs" />
+    <Compile Include="Assets\Script\Scriptable Base\Enchantment\WeaponEnchantmentSO.cs" />
     <Compile Include="Assets\Script\Interface\Tier\Visual\IReadOnlyEvolutionData.cs" />
     <Compile Include="Assets\Script\Tier\Enum\Tier.cs" />
     <Compile Include="Assets\Script\Interface\Combat\IDamageReceiver.cs" />
@@ -197,6 +200,7 @@
     <Compile Include="Assets\Script\Interface\General\IIdentifiableItem.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTDoAction.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasViewport.cs" />
+    <Compile Include="Assets\Script\Weapon\WeaponSocketRegistry.cs" />
     <Compile Include="Assets\Script\AI\Interface\IHasBehaviourTree.cs" />
     <Compile Include="Assets\Script\Scripts Pool\Singleton.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_RandomAnimation.cs" />
@@ -211,6 +215,7 @@
     <Compile Include="Assets\Script\Combat\Pop Up\DamagePopupSpawner.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_AnimSetBool.cs" />
     <Compile Include="Assets\Script\Player\PlayerDash.cs" />
+    <Compile Include="Assets\Script\Weapon\MN_PlayerWeapon.cs" />
     <Compile Include="Assets\Script\Animation\AnimationDirectionalVelocityModule.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveState.cs" />
     <Compile Include="Assets\Script\Interface\General\ISaveableTimer.cs" />

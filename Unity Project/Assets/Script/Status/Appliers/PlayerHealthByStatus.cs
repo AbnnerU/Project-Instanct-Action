@@ -5,6 +5,7 @@ namespace Scripts.Status
 {
     public class PlayerHealthByStatus : MonoBehaviour
     {
+        [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private HealthManager _healthManager;
         [SerializeField] private bool _healDifferenceWhenMaxHealthIncreases;
         [SerializeField] private bool _clampCurrentHealthWhenMaxHealthDecreases = true;
@@ -59,10 +60,10 @@ namespace Scripts.Status
 
         private void CacheHealthStatus()
         {
-            if (MN_PlayerStatus.Instance == null)
+            if (_statusSource == null)
                 return;
 
-            if (!MN_PlayerStatus.Instance.TryGetStatusData(StatusType.HEALTH, out _healthStatusData))
+            if (!_statusSource.TryGetStatusData(StatusType.ATTACK_SPEED, out _healthStatusData))
                 return;
 
             _healthStatusData.OnCurrentValueUpdated += HealthStatusData_OnCurrentValueUpdated;

@@ -39,7 +39,7 @@ namespace Scripts.Combat
             _hashSet_DamageReceivers.Clear();
             _hashSet_HittableTargets.Clear();
 
-            Vector3 center = _hitboxOrigin.position + attackData.HitboxCenterOffset;
+            Vector3 center = GetHitboxCenter(attackData);
             _lastAttackData = attackData;
             _lastCenter = center;
 
@@ -87,9 +87,25 @@ namespace Scripts.Combat
             }
         }
 
-        private Quaternion GetHitboxRotation()
+        public Vector3 GetHitboxCenter(ComboAttackData attackData)
+        {
+            if (_hitboxOrigin == null)
+                _hitboxOrigin = transform;
+
+            return _hitboxOrigin.position + GetHitboxCenterOffset(attackData);
+        }
+
+        public Quaternion GetHitboxRotation()
         {
             return _useHitboxOriginRotation && _hitboxOrigin != null ? _hitboxOrigin.rotation : Quaternion.identity;
+        }
+
+        private Vector3 GetHitboxCenterOffset(ComboAttackData attackData)
+        {
+            if (!_useHitboxOriginRotation || _hitboxOrigin == null)
+                return attackData.HitboxCenterOffset;
+
+            return _hitboxOrigin.rotation * attackData.HitboxCenterOffset;
         }
 
         private bool TryGetDamageReceiver(Collider targetCollider, out IDamageReceiver damageReceiver)

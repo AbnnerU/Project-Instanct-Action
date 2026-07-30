@@ -41,6 +41,9 @@ namespace Scripts.Enchantment
             if (enchantment == null)
                 return;
 
+            if (!enchantment.CanRepeat && HasEnchantment(enchantment))
+                return;
+
             EnchantmentContext context = CreateContext();
             enchantment.Apply(context);
 
@@ -73,6 +76,28 @@ namespace Scripts.Enchantment
             return false;
         }
 
+        public bool HasEnchantment(EnchantmentSOBase enchantment)
+        {
+            if (enchantment == null)
+                return false;
+
+            for (int i = 0; i < _list_AppliedEnchantments.Count; i++)
+            {
+                EnchantmentSOBase appliedEnchantment = _list_AppliedEnchantments[i];
+
+                if (appliedEnchantment == null)
+                    continue;
+
+                if (appliedEnchantment == enchantment)
+                    return true;
+
+                if (!string.IsNullOrEmpty(enchantment.ID) && appliedEnchantment.ID == enchantment.ID)
+                    return true;
+            }
+
+            return false;
+        }
+
         private void Xp_OnLevelUp(int currentLevel)
         {
             OfferEnchantments();
@@ -89,9 +114,19 @@ namespace Scripts.Enchantment
 
             for (int i = 0; i < _list_AvailableEnchantments.Count; i++)
             {
-                if (_list_AvailableEnchantments[i] != null)
-                    list_OptionsPool.Add(_list_AvailableEnchantments[i]);
+                EnchantmentSOBase enchantment = _list_AvailableEnchantments[i];
+
+                if (enchantment == null)
+                    continue;
+
+                if (!enchantment.CanRepeat && HasEnchantment(enchantment))
+                    continue;
+
+                list_OptionsPool.Add(enchantment);
             }
+
+            if (list_OptionsPool.Count == 0)
+                return;
 
             int optionsCount = Mathf.Min(Mathf.Max(1, _optionsPerLevelUp), list_OptionsPool.Count);
 

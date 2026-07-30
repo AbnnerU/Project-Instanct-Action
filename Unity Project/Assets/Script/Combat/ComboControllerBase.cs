@@ -17,9 +17,14 @@ namespace Scripts.Combat
         [SerializeField] protected AttackHitbox _attackHitbox;
         [SerializeField] protected Animator _animator;
         [SerializeField] protected CharacterAnimationController _characterAnimationController;
+        [SerializeField] protected ComboAttackSetSO _comboAttackSet;
         [SerializeField] protected List<ComboAttackData> _list_ComboAttackData = new List<ComboAttackData>();
         [SerializeField] protected bool _triggerIdle = true;
         [SerializeField] protected string _backToIdleTriggerParameter = "Idle";
+        [Header("Gizmos")]
+        [SerializeField] protected bool _drawGizmos = true;
+        [SerializeField] protected int _debugAttackIndex;
+        [SerializeField] protected Color _debugHitboxColor = Color.yellow;
 
 
         protected int _currentComboIndex;
@@ -31,13 +36,39 @@ namespace Scripts.Combat
         public bool IsAttacking => _isAttacking;
         public bool IsComboWindowOpen => _isComboWindowOpen;
         public bool HasQueuedNextAttack => _hasQueuedNextAttack;
+        public IReadOnlyList<ComboAttackData> List_ComboAttackData => _list_ComboAttackData;
 
-        protected virtual void Awake() => GetReferences();
+        protected virtual void Awake()
+        {
+            GetReferences();
+            ApplyInitialComboAttackSet();
+        }
 
 
         public virtual void Enable() => _active = true;
 
         public virtual void Disable() => _active = false;
+
+        public virtual void SetComboAttackSet(ComboAttackSetSO comboAttackSet)
+        {
+            _comboAttackSet = comboAttackSet;
+
+            if (_isAttacking)
+                CancelAttack(false);
+
+            _list_ComboAttackData.Clear();
+
+            if (_comboAttackSet == null)
+                return;
+
+            IReadOnlyList<ComboAttackData> list_ComboAttackData = _comboAttackSet.List_ComboAttackData;
+
+            for (int i = 0; i < list_ComboAttackData.Count; i++)
+            {
+                if (list_ComboAttackData[i] != null)
+                    _list_ComboAttackData.Add(list_ComboAttackData[i]);
+            }
+        }
 
         public virtual void RequestAttack()
         {
@@ -133,6 +164,14 @@ namespace Scripts.Combat
                 TryGetComponent(out _attackHitbox);
         }
 
+        protected virtual void ApplyInitialComboAttackSet()
+        {
+            if (_comboAttackSet == null)
+                return;
+
+            SetComboAttackSet(_comboAttackSet);
+        }
+
         protected virtual void QueueNextAttack()
         {
             _hasQueuedNextAttack = true;
@@ -182,6 +221,47 @@ namespace Scripts.Combat
             return _attackHitbox != null &&
                    _currentComboIndex >= 0 &&
                    _currentComboIndex < _list_ComboAttackData.Count;
+        }
+
+        protected virtual void OnDrawGizmos()
+        {
+            if (!_drawGizmos)
+                return;
+
+            if (_attackHitbox == null)
+                TryGetComponent(out _attackHitbox);
+
+            IReadOnlyList<ComboAttackData> list_ComboAttackData = GetGizmoComboAttackData();
+
+            if (_attackHitbox == null || list_ComboAttackData == null || list_ComboAttackData.Count == 0)
+                return;
+
+            int attackIndex = GetDebugAttackIndex(list_ComboAttackData.Count);
+            ComboAttackData attackData = list_ComboAttackData[attackIndex];
+
+            if (attackData == null)
+                return;
+
+            Gizmos.color = _debugHitboxColor;
+            Gizmos.matrix = Matrix4x4.TRS(_attackHitbox.GetHitboxCenter(attackData), _attackHitbox.GetHitboxRotation(), Vector3.one);
+            Gizmos.DrawWireCube(Vector3.zero, attackData.HitboxHalfExtents * 2f);
+            Gizmos.matrix = Matrix4x4.identity;
+        }
+
+        private IReadOnlyList<ComboAttackData> GetGizmoComboAttackData()
+        {
+            if (_list_ComboAttackData != null && _list_ComboAttackData.Count > 0)
+                return _list_ComboAttackData;
+
+            return _comboAttackSet != null ? _comboAttackSet.List_ComboAttackData : null;
+        }
+
+        private int GetDebugAttackIndex(int attackCount)
+        {
+            if (_isAttacking && _currentComboIndex >= 0 && _currentComboIndex < attackCount)
+                return _currentComboIndex;
+
+            return Mathf.Clamp(_debugAttackIndex, 0, attackCount - 1);
         }
     }
 }
