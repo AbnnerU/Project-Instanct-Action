@@ -20,8 +20,8 @@ MonoBehaviour:
       _baseDamage: 50
       _physicForceScaling: 1.2
       _magicForceScaling: 0
-    _hitboxCenterOffset: {x: 0.93, y: 0, z: 0}
-    _hitboxHalfExtents: {x: 0.93, y: 0.5, z: 0.75}
+    _hitboxCenterOffset: {x: 0, y: 0, z: 0.93}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.93}
     _targetLayerMask:
       serializedVersion: 2
       m_Bits: 128
@@ -34,8 +34,8 @@ MonoBehaviour:
       _baseDamage: 50
       _physicForceScaling: 1.2
       _magicForceScaling: 0
-    _hitboxCenterOffset: {x: 0.93, y: 0, z: 0}
-    _hitboxHalfExtents: {x: 0.93, y: 0.5, z: 0.75}
+    _hitboxCenterOffset: {x: 0, y: 0, z: 0.93}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.93}
     _targetLayerMask:
       serializedVersion: 2
       m_Bits: 128

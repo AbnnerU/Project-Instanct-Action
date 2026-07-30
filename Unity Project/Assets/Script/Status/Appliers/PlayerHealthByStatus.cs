@@ -63,7 +63,7 @@ namespace Scripts.Status
             if (_statusSource == null)
                 return;
 
-            if (!_statusSource.TryGetStatusData(StatusType.ATTACK_SPEED, out _healthStatusData))
+            if (!_statusSource.TryGetStatusData(StatusType.HEALTH, out _healthStatusData))
                 return;
 
             _healthStatusData.OnCurrentValueUpdated += HealthStatusData_OnCurrentValueUpdated;

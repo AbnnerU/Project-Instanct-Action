@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Scripts.Player;
 using Scripts.Status;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ namespace Scripts.Combat
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private bool _useHitboxOriginRotation;
         [SerializeField] private bool _drawGizmos = true;
+        [SerializeField] private bool _drawExecutedHitboxGizmos = true;
+        [SerializeField] private Color _executedHitboxColor = Color.red;
+        [SerializeField] private float _executedHitboxGizmosDuration = 0.15f;
 
         private Collider[] _hitResults = new Collider[8];
         private readonly HashSet<IDamageReceiver> _hashSet_DamageReceivers = new HashSet<IDamageReceiver>();
@@ -20,11 +24,12 @@ namespace Scripts.Combat
 
         private ComboAttackData _lastAttackData;
         private Vector3 _lastCenter;
+        private Quaternion _lastRotation;
+        private float _lastExecutedHitboxExpireTime;
 
         private void Awake()
         {
-            if (_hitboxOrigin == null)
-                _hitboxOrigin = transform;
+            GetReferences();
         }
 
         public void ExecuteHitbox(ComboAttackData attackData)
@@ -42,12 +47,14 @@ namespace Scripts.Combat
             Vector3 center = GetHitboxCenter(attackData);
             _lastAttackData = attackData;
             _lastCenter = center;
+            _lastRotation = GetHitboxRotation();
+            _lastExecutedHitboxExpireTime = Time.time + _executedHitboxGizmosDuration;
 
             int hits = Physics.OverlapBoxNonAlloc(
                 center,
                 attackData.HitboxHalfExtents,
                 _hitResults,
-                GetHitboxRotation(),
+                _lastRotation,
                 attackData.TargetLayerMask,
                 attackData.QueryTriggerInteraction
             );
@@ -89,10 +96,15 @@ namespace Scripts.Combat
 
         public Vector3 GetHitboxCenter(ComboAttackData attackData)
         {
-            if (_hitboxOrigin == null)
-                _hitboxOrigin = transform;
+            GetReferences();
 
             return _hitboxOrigin.position + GetHitboxCenterOffset(attackData);
+        }
+
+        private void GetReferences()
+        {
+            if (_hitboxOrigin == null)
+                _hitboxOrigin = transform;
         }
 
         public Quaternion GetHitboxRotation()
@@ -102,11 +114,14 @@ namespace Scripts.Combat
 
         private Vector3 GetHitboxCenterOffset(ComboAttackData attackData)
         {
-            if (!_useHitboxOriginRotation || _hitboxOrigin == null)
-                return attackData.HitboxCenterOffset;
+            Vector3 offset = attackData.HitboxCenterOffset;
 
-            return _hitboxOrigin.rotation * attackData.HitboxCenterOffset;
+            if (!_useHitboxOriginRotation || _hitboxOrigin == null)
+                return offset;
+
+            return _hitboxOrigin.rotation * offset;
         }
+
 
         private bool TryGetDamageReceiver(Collider targetCollider, out IDamageReceiver damageReceiver)
         {
@@ -160,8 +175,19 @@ namespace Scripts.Combat
         {
             if (!_drawGizmos || _lastAttackData == null) return;
 
-            Gizmos.color = Color.red;
-            Gizmos.matrix = Matrix4x4.TRS(_lastCenter, GetHitboxRotation(), Vector3.one);
+            Gizmos.color = _executedHitboxColor;
+            Gizmos.matrix = Matrix4x4.TRS(_lastCenter, _lastRotation, Vector3.one);
+            Gizmos.DrawWireCube(Vector3.zero, _lastAttackData.HitboxHalfExtents * 2f);
+            Gizmos.matrix = Matrix4x4.identity;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (!_drawExecutedHitboxGizmos || _lastAttackData == null || Time.time > _lastExecutedHitboxExpireTime)
+                return;
+
+            Gizmos.color = _executedHitboxColor;
+            Gizmos.matrix = Matrix4x4.TRS(_lastCenter, _lastRotation, Vector3.one);
             Gizmos.DrawWireCube(Vector3.zero, _lastAttackData.HitboxHalfExtents * 2f);
             Gizmos.matrix = Matrix4x4.identity;
         }

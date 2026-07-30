@@ -232,6 +232,7 @@ MonoBehaviour:
   _attackHitbox: {fileID: 8733042703824664223}
   _animator: {fileID: 1651896244028188169}
   _characterAnimationController: {fileID: 301626572502348817}
+  _comboAttackSet: {fileID: 0}
   _list_ComboAttackData:
   - _animationStateName: Attack
     _transitionDuration: 0.1
@@ -240,8 +241,8 @@ MonoBehaviour:
       _baseDamage: 10
       _physicForceScaling: 0
       _magicForceScaling: 0
-    _hitboxCenterOffset: {x: 0, y: 0, z: 0}
-    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
+    _hitboxCenterOffset: {x: 0, y: 0, z: 1}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 1}
     _targetLayerMask:
       serializedVersion: 2
       m_Bits: 64
@@ -249,6 +250,9 @@ MonoBehaviour:
     _maxTargets: 5
   _triggerIdle: 1
   _backToIdleTriggerParameter: Idle
+  _drawGizmos: 1
+  _debugAttackIndex: 0
+  _debugHitboxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &199503535975834629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,8 +284,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.AttackHitbox
   _hitboxOrigin: {fileID: 1954381815328986970}
   _statusSource: {fileID: 0}
-  _useHitboxOriginRotation: 0
+  _useHitboxOriginRotation: 1
   _drawGizmos: 1
+  _drawExecutedHitboxGizmos: 1
+  _executedHitboxColor: {r: 1, g: 0, b: 0, a: 1}
+  _executedHitboxGizmosDuration: 0.15
 --- !u!114 &7895469071761944818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,7 +865,7 @@ Transform:
   m_GameObject: {fileID: 7787497947643835559}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -949,6 +956,68 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
+--- !u!1001 &350704455768168906
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8458051517957376115}
+    m_Modifications:
+    - target: {fileID: 2350366144217043346, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_Name
+      value: Spear1H_Basic
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.033
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.629282
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.44604254
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.35759488
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.52647525
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -69.702
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -3.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 82.09
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+--- !u!4 &3388975189179781858 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3158709039170915112, guid: 8f2b838937bf3ce499fe912cc972a648, type: 3}
+  m_PrefabInstance: {fileID: 350704455768168906}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5153845616871906200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1291,7 +1360,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3667946887678727147, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3388975189179781858}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
       insertIndex: -1
@@ -1325,3 +1397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerAnimationEventReceiver
   _comboController: {fileID: 2651949697427157578}
+--- !u!4 &8458051517957376115 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3667946887678727147, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
+  m_PrefabInstance: {fileID: 5153845616871906200}
+  m_PrefabAsset: {fileID: 0}

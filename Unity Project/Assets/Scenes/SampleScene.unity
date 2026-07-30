@@ -1568,8 +1568,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerAttackHitbox
   _hitboxOrigin: {fileID: 205012465}
   _statusSource: {fileID: 711513691}
-  _useHitboxOriginRotation: 0
+  _useHitboxOriginRotation: 1
   _drawGizmos: 1
+  _drawExecutedHitboxGizmos: 1
+  _executedHitboxColor: {r: 1, g: 0, b: 0, a: 1}
+  _executedHitboxGizmosDuration: 0.15
 --- !u!114 &711513682
 MonoBehaviour:
   m_ObjectHideFlags: 0
