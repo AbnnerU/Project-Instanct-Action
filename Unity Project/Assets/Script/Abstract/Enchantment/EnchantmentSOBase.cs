@@ -14,7 +14,7 @@ namespace Scripts.Enchantment
         [TextArea]
         public string Description;
         public AssetReferenceSprite IconReference ;
-        [SerializeField] private bool _canRepeat = true;
+        [SerializeField] protected bool _canRepeat = true;
 
         public bool CanRepeat => _canRepeat;
 

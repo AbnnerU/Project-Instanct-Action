@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b3d32bcaa8ba048bfbc202bfd0b3f9, type: 3}
+  m_Name: MagicAttack_AbilityEnchantmentSO (Passive)
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
+  ID: 1d77a565-d432-4a5b-a1e4-04fad9ef52f6
+  DisplayName: Magic Attack (Passive)
+  Description: A cada 3 ataques, causa X de dano adicional
+  IconReference:
+    m_AssetGUID: 8e5a3df2309599d42a812baca6503547
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _canRepeat: 0
+  AbilityKind: 0
+  AbilityPrefabReference:
+    m_AssetGUID: 00f0fb77825dba4419d3905d8160ac62
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0

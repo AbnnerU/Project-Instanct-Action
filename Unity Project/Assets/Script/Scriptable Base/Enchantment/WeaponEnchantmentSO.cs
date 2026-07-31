@@ -10,6 +10,11 @@ namespace Scripts.Enchantment
 
         public WeaponLoadoutSO WeaponLoadout => _weaponLoadout;
 
+        private void OnValidate()
+        {
+            _canRepeat = false;
+        }
+
         public override void Apply(EnchantmentContext context)
         {
             if (_weaponLoadout == null || MN_PlayerWeapon.Instance == null)

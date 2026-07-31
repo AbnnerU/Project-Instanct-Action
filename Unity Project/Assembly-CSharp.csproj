@@ -68,6 +68,8 @@
     <Compile Include="Assets\Script\Interface\Spawner\IHasSpawnValidation.cs" />
     <Compile Include="Assets\Script\Combat\Damage Effects\IDamageDealer.cs" />
     <Compile Include="Assets\Script\Interface\Tier\IHasTier.cs" />
+    <Compile Include="Assets\Script\Abilities\Enum\AbilityKind.cs" />
+    <Compile Include="Assets\Script\Abilities\Passive\AttackBonusDamageAbility.cs" />
     <Compile Include="Assets\Script\AI\OnDeath_StopBrainAndReleaseObject.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTStopAgent.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Combat\ComboAttackSetSO.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Assets\Script\Coins\MN_Coins.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTGoToTarget.cs" />
     <Compile Include="Assets\Script\Enchantment\EnchantmentCardUI.cs" />
+    <Compile Include="Assets\Script\Abilities\Passive\TemporaryStatusBuffOnDashAbility.cs" />
     <Compile Include="Assets\Script\Combat\EnemyComboController.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasNavMeshAgentSpeedUpdate.cs" />
     <Compile Include="Assets\Script\Status\Appliers\PlayerHealthByStatus.cs" />
@@ -89,7 +92,10 @@
     <Compile Include="Assets\Script\Health\HealthStatusReference.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActiveState.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTForceFailure.cs" />
+    <Compile Include="Assets\Script\Abilities\Data\AbilityContext.cs" />
     <Compile Include="Assets\Script\Status\StatusInfoByMN_PlayerStatus.cs" />
+    <Compile Include="Assets\Script\Abstract\Abilities\AbilityBase.cs" />
+    <Compile Include="Assets\Script\Abilities\Enum\AbilityRefreshMode.cs" />
     <Compile Include="Assets\Script\Interface\General\IIgnorable.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler_CleanSession.cs" />
     <Compile Include="Assets\Script\Tier\Scriptable Base\Visual\CreatureEvolutionDataSO.cs" />
@@ -102,12 +108,15 @@
     <Compile Include="Assets\Script\AI\Abstract\BTnode.cs" />
     <Compile Include="Assets\Script\Health\OnHit_VisualEffect.cs" />
     <Compile Include="Assets\Script\Player\HitReaction_DisableCollider.cs" />
+    <Compile Include="Assets\Script\Combat\Events\AttackExecutionData.cs" />
+    <Compile Include="Assets\Script\Abilities\Auto Setup\DashStatusBuffAutoSetup.cs" />
     <Compile Include="Assets\Script\Tier\Scriptable Base\Visual\EvolutionPathSO.cs" />
     <Compile Include="Assets\Script\AI\HitReaction_BlockNavMeshAgent.cs" />
     <Compile Include="Assets\Script\Animation\CharacterAnimationController.cs" />
     <Compile Include="Assets\Script\Interface\Nameable\INameable.cs" />
     <Compile Include="Assets\Script\Combat\DamageReceiver.cs" />
     <Compile Include="Assets\Script\Interface\Camera\ICameraFollow.cs" />
+    <Compile Include="Assets\Script\Scriptable Base\Ability\AbilityEnchantmentSO.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BehaviorTree.cs" />
     <Compile Include="Assets\Script\Tier\Scriptable Base\Visual\TextureVariantSO.cs" />
     <Compile Include="Assets\Script\Combat\DamageResolver.cs" />
@@ -116,6 +125,7 @@
     <Compile Include="Assets\Script\Animation\OnDeath_TriggerParameter.cs" />
     <Compile Include="Assets\Script\Abstract\Status\StatusInfoSourceBase.cs" />
     <Compile Include="Assets\Script\Health\KillAfterTime_OnEnable.cs" />
+    <Compile Include="Assets\Script\Abilities\Enum\AttackBonusDamageApplyMode.cs" />
     <Compile Include="Assets\Script\Interface\General\IMovementHandler.cs" />
     <Compile Include="Assets\Script\Requeriments\Scriptable Base\RequirementSO.cs" />
     <Compile Include="Assets\Script\Player\PlayerComboController.cs" />
@@ -150,6 +160,7 @@
     <Compile Include="Assets\Script\Interface\Tier\Visual\IHasEvolutionVisualInitialization.cs" />
     <Compile Include="Assets\Script\Interface\Animation\IHasCurrentVelocity.cs" />
     <Compile Include="Assets\Script\Interface\Effects\IHasEffectsPlayer.cs" />
+    <Compile Include="Assets\Script\Abilities\MN_PlayerAbilities.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IPreDestroyHandler.cs" />
     <Compile Include="Assets\Script\Abstract\Health\HealthBasics.cs" />
     <Compile Include="Assets\Script\Status\StatusInfoSource.cs" />
@@ -158,6 +169,8 @@
     <Compile Include="Assets\Script\Combat\ComboControllerBase.cs" />
     <Compile Include="Assets\Script\Health\DynamicHealthRepairUI.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTTryFindObjectInArea.cs" />
+    <Compile Include="Assets\Script\Abilities\Enum\AbilityTriggerType.cs" />
+    <Compile Include="Assets\Script\Abilities\Enum\AbilityValueType.cs" />
     <Compile Include="Assets\Script\Health\HealthBar.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IPlacementItemData.cs" />
@@ -169,6 +182,7 @@
     <Compile Include="Assets\Script\Combat\Pop Up\DamagePopupView.cs" />
     <Compile Include="Assets\Script\Scripts Pool\PoolManager.cs" />
     <Compile Include="Assets\Script\AI\Interface\IHasAIState.cs" />
+    <Compile Include="Assets\Script\Abilities\Auto Setup\AttackBonusDamageAutoSetup.cs" />
     <Compile Include="Assets\Script\Interface\Interactable\IInteractable.cs" />
     <Compile Include="Assets\Script\Interface\General\IIsGameObjectPanel.cs" />
     <Compile Include="Assets\Script\Loading Scene\SIS_LoadingSceneChannel.cs" />
@@ -203,7 +217,9 @@
     <Compile Include="Assets\Script\Weapon\WeaponSocketRegistry.cs" />
     <Compile Include="Assets\Script\AI\Interface\IHasBehaviourTree.cs" />
     <Compile Include="Assets\Script\Scripts Pool\Singleton.cs" />
+    <Compile Include="Assets\Script\Abstract\Abilities\AbilityAutoSetupBase.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_RandomAnimation.cs" />
+    <Compile Include="Assets\Script\Abilities\Enum\AttackBonusDamageTriggerMode.cs" />
     <Compile Include="Assets\Script\Requeriments\MN_Requirements.cs" />
     <Compile Include="Assets\Script\Interactable\Interactable.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTSelector.cs" />

@@ -1436,6 +1436,8 @@ Transform:
   - {fileID: 2144883906}
   - {fileID: 743371857}
   - {fileID: 171649273}
+  - {fileID: 876544946}
+  - {fileID: 946897046}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &711513676
@@ -2053,6 +2055,7 @@ Transform:
   - {fileID: 415616841}
   - {fileID: 1879613185}
   - {fileID: 1955501766}
+  - {fileID: 1872385690}
   m_Father: {fileID: 965605310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &743371856
@@ -2556,6 +2559,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
   m_PrefabInstance: {fileID: 864061894}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &876544945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 876544946}
+  m_Layer: 6
+  m_Name: _Passives Abilities Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &876544946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876544945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 711513675}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &891849640
 GameObject:
   m_ObjectHideFlags: 0
@@ -2781,6 +2815,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935a8da615dc43d4f82192bc8925c942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.EnchantmentCardUI
+--- !u!1 &946897045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 946897046}
+  m_Layer: 6
+  m_Name: _Active Abilities Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &946897046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946897045}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 711513675}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &965605309
 GameObject:
   m_ObjectHideFlags: 0
@@ -3759,6 +3824,58 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1872385689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1872385690}
+  - component: {fileID: 1872385691}
+  m_Layer: 0
+  m_Name: MN Player Abilities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1872385690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872385689}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 740254889}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1872385691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872385689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc5c9a1a18d3af439538da323546d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.MN_PlayerAbilities
+  _ownerObject: {fileID: 711513674}
+  _passiveAbilitiesContainer: {fileID: 876544946}
+  _activeAbilitiesContainer: {fileID: 946897046}
+  _playerStatus: {fileID: 1151873708}
+  _comboController: {fileID: 711513680}
+  _attackHitbox: {fileID: 711513681}
+  _playerDash: {fileID: 711513684}
+  _statusSource: {fileID: 711513691}
 --- !u!1 &1879613184
 GameObject:
   m_ObjectHideFlags: 0
@@ -3814,6 +3931,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c97b1cee46764d744ad26c299a38323e, type: 2}
   - {fileID: 11400000, guid: bb641e477f506254c9bd0b3e893da344, type: 2}
   - {fileID: 11400000, guid: eef4c754210dcd44fba6e14aef84541d, type: 2}
+  - {fileID: 11400000, guid: 9a19e6847f9102f4f9393618bb807569, type: 2}
+  - {fileID: 11400000, guid: b0fa00c498b8df449a1324eb314598a4, type: 2}
   _list_AppliedEnchantments: []
 --- !u!114 &1879613187
 MonoBehaviour:

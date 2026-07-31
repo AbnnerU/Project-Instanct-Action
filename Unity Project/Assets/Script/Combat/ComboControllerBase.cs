@@ -12,6 +12,8 @@ namespace Scripts.Combat
         public event Action OnAttackStarted;
         public event Action OnAttackFinished;
         public event Action OnAttackCanceled;
+        public event Action<AttackExecutionData> OnAttackHitboxExecuted;
+        public event Action<AttackExecutionData> OnAttackHitboxFinished;
 
         [SerializeField] protected bool _active = true;
         [SerializeField] protected AttackHitbox _attackHitbox;
@@ -28,6 +30,7 @@ namespace Scripts.Combat
 
 
         protected int _currentComboIndex;
+        protected int _attackExecutionId;
         protected bool _isAttacking;
         protected bool _isComboWindowOpen;
         protected bool _hasQueuedNextAttack;
@@ -123,7 +126,12 @@ namespace Scripts.Combat
             if (!_active) return;
             if (!CanUseCurrentAttack()) return;
 
-            _attackHitbox.ExecuteHitbox(_list_ComboAttackData[_currentComboIndex]);
+            ComboAttackData attackData = _list_ComboAttackData[_currentComboIndex];
+            AttackExecutionData executionData = new AttackExecutionData(++_attackExecutionId, _currentComboIndex, attackData, gameObject);
+
+            OnAttackHitboxExecuted?.Invoke(executionData);
+            _attackHitbox.ExecuteHitbox(attackData, executionData);
+            OnAttackHitboxFinished?.Invoke(executionData);
         }
 
         public virtual void AnimationEvent_OpenComboWindow()

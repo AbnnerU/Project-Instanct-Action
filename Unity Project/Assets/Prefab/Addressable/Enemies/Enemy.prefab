@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
   _isBlocked: 0
-  maxHealth: 100
+  maxHealth: 250
   isHittable: 1
   isKillable: 1
   releaseOnDeath: 0

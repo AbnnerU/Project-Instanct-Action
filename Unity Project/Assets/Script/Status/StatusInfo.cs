@@ -4,15 +4,15 @@ using System.Collections.Generic;
 namespace Scripts.Status
 {
     [Serializable]
-    public class StatusInfo 
+    public class StatusInfo
     {
         public List<StatusData> List_StatusData = new List<StatusData>();
 
         public float GetCurrentValueOf(StatusType statusType)
         {
-            StatusData statusData = List_StatusData.Find(x=> x.StatusType == statusType);
+            StatusData statusData = List_StatusData.Find(x => x.StatusType == statusType);
 
-            if(statusData!=null)
+            if (statusData != null)
                 return statusData.CurrentValue;
             else
                 return 0;
@@ -31,7 +31,7 @@ namespace Scripts.Status
 
         public void Initialize()
         {
-            foreach(StatusData statusData in List_StatusData) 
+            foreach (StatusData statusData in List_StatusData)
                 statusData.CurrentValue = statusData.BaseValue;
         }
     }
@@ -44,5 +44,11 @@ namespace Scripts.Status
         public StatusType StatusType;
         public float BaseValue;
         public float CurrentValue;
+
+        public void AddCurrentValue(float valueToAdd) => CurrentValue += valueToAdd;
+
+        public void RemoveCurrentValue(float valueToRemove) => CurrentValue -= valueToRemove;
+
+        public void ResetCurrentValue() => CurrentValue = BaseValue;
     }
 }

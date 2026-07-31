@@ -9,6 +9,7 @@ namespace Scripts.Combat
     public class AttackHitbox : MonoBehaviour, IDamageDealer
     {
         public event Action<DamageResult> OnDamageDealt;
+        public event Action<AttackExecutionData, DamageResult> OnDamageDealtWithExecution;
 
         [SerializeField] private Transform _hitboxOrigin;
         [SerializeField] private StatusInfoSourceBase _statusSource;
@@ -23,6 +24,7 @@ namespace Scripts.Combat
         private readonly HashSet<IHittable> _hashSet_HittableTargets = new HashSet<IHittable>();
 
         private ComboAttackData _lastAttackData;
+        private AttackExecutionData _lastAttackExecutionData;
         private Vector3 _lastCenter;
         private Quaternion _lastRotation;
         private float _lastExecutedHitboxExpireTime;
@@ -33,6 +35,11 @@ namespace Scripts.Combat
         }
 
         public void ExecuteHitbox(ComboAttackData attackData)
+        {
+            ExecuteHitbox(attackData, default);
+        }
+
+        public void ExecuteHitbox(ComboAttackData attackData, AttackExecutionData executionData)
         {
             if (attackData == null)
             {
@@ -46,6 +53,7 @@ namespace Scripts.Combat
 
             Vector3 center = GetHitboxCenter(attackData);
             _lastAttackData = attackData;
+            _lastAttackExecutionData = executionData;
             _lastCenter = center;
             _lastRotation = GetHitboxRotation();
             _lastExecutedHitboxExpireTime = Time.time + _executedHitboxGizmosDuration;
@@ -71,6 +79,7 @@ namespace Scripts.Combat
 
                     DamageResult damageResult = damageReceiver.ReceiveDamage(damageRequest);
                     OnDamageDealt?.Invoke(damageResult);
+                    OnDamageDealtWithExecution?.Invoke(executionData, damageResult);
                     continue;
                 }
 
@@ -91,7 +100,13 @@ namespace Scripts.Combat
                     damageRequestFallback);
 
                 OnDamageDealt?.Invoke(damageResultFallback);
+                OnDamageDealtWithExecution?.Invoke(executionData, damageResultFallback);
             }
+        }
+
+        public void NotifyDamageDealt(DamageResult damageResult)
+        {
+            OnDamageDealt?.Invoke(damageResult);
         }
 
         public Vector3 GetHitboxCenter(ComboAttackData attackData)
