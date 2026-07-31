@@ -868,8 +868,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 1
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_Intensity: 2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 35.92
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1543,13 +1543,13 @@ MonoBehaviour:
   _attackHitbox: {fileID: 711513681}
   _animator: {fileID: 1484080727}
   _characterAnimationController: {fileID: 711513686}
-  _comboAttackSet: {fileID: 11400000, guid: 857cbb28a04eea04bba8de91619771a2, type: 2}
+  _comboAttackSet: {fileID: 11400000, guid: 99245aad33389444e83aaa49757b9a15, type: 2}
   _list_ComboAttackData: []
   _triggerIdle: 1
   _backToIdleTriggerParameter: Idle
   _drawGizmos: 1
-  _debugAttackIndex: 3
-  _debugHitboxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _debugAttackIndex: 0
+  _debugHitboxColor: {r: 0, g: 0, b: 0, a: 1}
   _rightInput: {fileID: 2202181311478303124, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
   _leftInput: {fileID: 7655917323739324251, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
   _playerDirection: {fileID: 711513679}
@@ -3813,6 +3813,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c97b1cee46764d744ad26c299a38323e, type: 2}
   - {fileID: 11400000, guid: c97b1cee46764d744ad26c299a38323e, type: 2}
   - {fileID: 11400000, guid: bb641e477f506254c9bd0b3e893da344, type: 2}
+  - {fileID: 11400000, guid: eef4c754210dcd44fba6e14aef84541d, type: 2}
   _list_AppliedEnchantments: []
 --- !u!114 &1879613187
 MonoBehaviour:

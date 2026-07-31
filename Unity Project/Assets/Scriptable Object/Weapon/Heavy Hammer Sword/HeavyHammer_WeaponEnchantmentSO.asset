@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c99c0a0be992944b10b4cc1fb7d47c, type: 3}
+  m_Name: HeavyHammer_WeaponEnchantmentSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.WeaponEnchantmentSO
+  ID: d2abbf6a-cb97-43ec-a938-c45455e3f391
+  DisplayName: HeavyHammer
+  Description: 
+  IconReference:
+    m_AssetGUID: cb9e700fd405ed1409bdc040a3e35254
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _canRepeat: 0
+  _weaponLoadout: {fileID: 11400000, guid: 4a7d1ad47d94c6746b94ecba3f91ca26, type: 2}

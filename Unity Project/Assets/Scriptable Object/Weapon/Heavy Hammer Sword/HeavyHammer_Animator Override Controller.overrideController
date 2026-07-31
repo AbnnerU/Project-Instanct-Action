@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: HeavyHammer_Animator Override Controller
+  m_Controller: {fileID: 9100000, guid: b26a099458b458547a5761d4a1738b74, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 32f74638abb59db4aa4f18af8e29c6cc, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3a2b13942d4cd5c41a52f6abd2eb2c0c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3c1b6e5f4dcaf41458002229ade5f00e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a8ffc88e537a6b84e9366fce4c62613a, type: 2}
