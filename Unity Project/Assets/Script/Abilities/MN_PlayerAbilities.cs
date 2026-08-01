@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Scripts.Combat;
 using Scripts.Managers;
@@ -5,12 +6,15 @@ using Scripts.Player;
 using Scripts.Status;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.InputSystem;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Scripts.Abilities
 {
     public class MN_PlayerAbilities : SceneSingleton<MN_PlayerAbilities>
     {
+       
+
         #region Fields
 
         [SerializeField] private GameObject _ownerObject;
@@ -21,6 +25,7 @@ namespace Scripts.Abilities
         [SerializeField] private AttackHitbox _attackHitbox;
         [SerializeField] private PlayerDash _playerDash;
         [SerializeField] private StatusInfoSourceBase _statusSource;
+        [SerializeField] private List<ActiveAbilitySlot> _list_ActiveAbilitySlots = new List<ActiveAbilitySlot>();
 
         private readonly List<AbilityBase> _list_PassiveAbilities = new List<AbilityBase>();
         private readonly List<AbilityBase> _list_ActiveAbilities = new List<AbilityBase>();
@@ -43,6 +48,16 @@ namespace Scripts.Abilities
             GetReferences();
         }
 
+        private void OnEnable()
+        {
+            EnableSlotInputs();
+        }
+
+        private void OnDisable()
+        {
+            DisableSlotInputs();
+        }
+
         private void OnDestroy()
         {
             ReleaseAbilities();
@@ -62,6 +77,26 @@ namespace Scripts.Abilities
 
             _list_AbilityHandles.Add(loadHandle);
             loadHandle.Completed += handle => AbilityLoadHandle_Completed(handle, abilityKind);
+        }
+
+        public bool TryExecuteActiveAbility(int activeAbilityIndex)
+        {
+            if (activeAbilityIndex < 0 || activeAbilityIndex >= _list_ActiveAbilities.Count)
+                return false;
+
+            AbilityBase ability = _list_ActiveAbilities[activeAbilityIndex];
+
+            if (ability == null || !ability.Initialized)
+                return false;
+
+            ability.Execute();
+            return true;
+        }
+
+        public void CancelActiveAbilities()
+        {
+            for (int i = 0; i < _list_ActiveAbilities.Count; i++)
+                _list_ActiveAbilities[i]?.Cancel();
         }
 
         #endregion
@@ -145,9 +180,14 @@ namespace Scripts.Abilities
                 return;
 
             if (abilityKind == AbilityKind.ACTIVE)
+            {
                 _list_ActiveAbilities.Add(ability);
+                AssignAbilityToSlot(ability);
+            }
             else
+            {
                 _list_PassiveAbilities.Add(ability);
+            }
         }
 
         private void ReleaseAbilities()
@@ -161,6 +201,108 @@ namespace Scripts.Abilities
             _list_AbilityHandles.Clear();
             _list_PassiveAbilities.Clear();
             _list_ActiveAbilities.Clear();
+        }
+
+        #endregion
+
+        #region Active Slots
+
+        private void AssignAbilityToSlot(AbilityBase ability)
+        {
+            if (ability == null || _list_ActiveAbilitySlots == null || _list_ActiveAbilitySlots.Count == 0)
+                return;
+
+            ActiveAbilitySlot slot = GetFirstEmptySlot();
+
+            if (slot == null)
+                slot = _list_ActiveAbilitySlots[0];
+
+            slot?.SetAbility(ability);
+        }
+
+        private ActiveAbilitySlot GetFirstEmptySlot()
+        {
+            for (int i = 0; i < _list_ActiveAbilitySlots.Count; i++)
+            {
+                if (_list_ActiveAbilitySlots[i] != null && _list_ActiveAbilitySlots[i].IsEmpty)
+                    return _list_ActiveAbilitySlots[i];
+            }
+
+            return null;
+        }
+
+        private void EnableSlotInputs()
+        {
+            if (_list_ActiveAbilitySlots == null)
+                return;
+
+            for (int i = 0; i < _list_ActiveAbilitySlots.Count; i++)
+                _list_ActiveAbilitySlots[i]?.EnableInput(SlotInput_Performed);
+        }
+
+        private void DisableSlotInputs()
+        {
+            if (_list_ActiveAbilitySlots == null)
+                return;
+
+            for (int i = 0; i < _list_ActiveAbilitySlots.Count; i++)
+                _list_ActiveAbilitySlots[i]?.DisableInput();
+        }
+
+        private void SlotInput_Performed(ActiveAbilitySlot slot)
+        {
+            slot?.TryExecuteAbility();
+        }
+
+        #endregion
+
+        #region Classes
+
+        [Serializable]
+        public class ActiveAbilitySlot
+        {
+            [SerializeField] private InputActionReference _inputAction;
+            [SerializeField] private AbilityBase _ability;
+
+            private Action<InputAction.CallbackContext> _performedCallback;
+
+            public AbilityBase Ability => _ability;
+            public bool IsEmpty => _ability == null;
+
+            public void SetAbility(AbilityBase ability)
+            {
+                _ability = ability;
+            }
+
+            public bool TryExecuteAbility()
+            {
+                if (_ability == null || !_ability.Initialized)
+                    return false;
+
+                _ability.Execute();
+                return true;
+            }
+
+            public void EnableInput(Action<ActiveAbilitySlot> onPerformed)
+            {
+                if (_inputAction == null || _inputAction.action == null)
+                    return;
+
+                DisableInput();
+
+                _performedCallback = _ => onPerformed?.Invoke(this);
+                _inputAction.action.Enable();
+                _inputAction.action.performed += _performedCallback;
+            }
+
+            public void DisableInput()
+            {
+                if (_inputAction == null || _inputAction.action == null || _performedCallback == null)
+                    return;
+
+                _inputAction.action.performed -= _performedCallback;
+                _performedCallback = null;
+            }
         }
 
         #endregion

@@ -3876,6 +3876,9 @@ MonoBehaviour:
   _attackHitbox: {fileID: 711513681}
   _playerDash: {fileID: 711513684}
   _statusSource: {fileID: 711513691}
+  _list_ActiveAbilitySlots:
+  - _inputAction: {fileID: -7274670403200970637, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+    _ability: {fileID: 0}
 --- !u!1 &1879613184
 GameObject:
   m_ObjectHideFlags: 0
@@ -3927,12 +3930,11 @@ MonoBehaviour:
   _list_AvailableEnchantments:
   - {fileID: 11400000, guid: 85af905638c0f844a885f8ce7ad5ed1f, type: 2}
   - {fileID: 11400000, guid: 023f96fa29dfc054b816cec72e07565f, type: 2}
-  - {fileID: 11400000, guid: c97b1cee46764d744ad26c299a38323e, type: 2}
-  - {fileID: 11400000, guid: c97b1cee46764d744ad26c299a38323e, type: 2}
   - {fileID: 11400000, guid: bb641e477f506254c9bd0b3e893da344, type: 2}
   - {fileID: 11400000, guid: eef4c754210dcd44fba6e14aef84541d, type: 2}
   - {fileID: 11400000, guid: 9a19e6847f9102f4f9393618bb807569, type: 2}
   - {fileID: 11400000, guid: b0fa00c498b8df449a1324eb314598a4, type: 2}
+  - {fileID: 11400000, guid: 0ec3c7e91e569144e99110421680656e, type: 2}
   _list_AppliedEnchantments: []
 --- !u!114 &1879613187
 MonoBehaviour:

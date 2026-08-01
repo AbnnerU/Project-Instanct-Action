@@ -103,6 +103,7 @@
     <Compile Include="Assets\Script\AI\Main nodes\BTConditionalSequence.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasTargetProvider.cs" />
     <Compile Include="Assets\Script\Status\Appliers\AttackSpeedByStatus.cs" />
+    <Compile Include="Assets\Script\Projectile\AbilityProjectile.cs" />
     <Compile Include="Assets\Script\Combat\HitReaction_CancelAndBlockComboController.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawner.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnode.cs" />
@@ -142,13 +143,16 @@
     <Compile Include="Assets\Script\Health\OnHit_Particles.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnodeNavMeshAjust.cs" />
     <Compile Include="Assets\Script\Interface\General\IUniqueId.cs" />
+    <Compile Include="Assets\Script\Abilities\Auto Setup\FireBallAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Combat\Damage Effects\HealOnDamageDealt.cs" />
     <Compile Include="Assets\Script\Health\OnRespawn_UnityEvent.cs" />
+    <Compile Include="Assets\Script\Abilities\Auto Setup\PiercingThrustAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Weapon\WeaponLoadoutSO.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActionValidation.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTSetAIState.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IMutableAddressableSpawnerWithPreview.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Enchantment\StatusUpgradeSO.cs" />
+    <Compile Include="Assets\Script\Abilities\Active\FireBallAbility.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageResult.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawnerWithOffSet.cs" />
     <Compile Include="Assets\Script\Coins\Saver\CoinData.cs" />
@@ -156,6 +160,7 @@
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler.cs" />
     <Compile Include="Assets\Script\Status\Enum\StatusType.cs" />
     <Compile Include="Assets\Script\Loading Scene\SIS_GameSession.cs" />
+    <Compile Include="Assets\Script\Abilities\Active\PiercingThrustAbility.cs" />
     <Compile Include="Assets\Script\Singleton\Singleton.cs" />
     <Compile Include="Assets\Script\Interface\Tier\Visual\IHasEvolutionVisualInitialization.cs" />
     <Compile Include="Assets\Script\Interface\Animation\IHasCurrentVelocity.cs" />
@@ -186,6 +191,7 @@
     <Compile Include="Assets\Script\Interface\Interactable\IInteractable.cs" />
     <Compile Include="Assets\Script\Interface\General\IIsGameObjectPanel.cs" />
     <Compile Include="Assets\Script\Loading Scene\SIS_LoadingSceneChannel.cs" />
+    <Compile Include="Assets\Script\Abstract\Projectile\Projectile3DBase.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTFleeFromTarget.cs" />
     <Compile Include="Assets\Script\Combat\ComboAnimationEventReceiver.cs" />
     <Compile Include="Assets\Script\Interface\Selectable\ISelectableObject.cs" />

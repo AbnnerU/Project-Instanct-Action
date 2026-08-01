@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - PopUpContainer
+  - Enemy
   layers:
   - Default
   - TransparentFX

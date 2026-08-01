@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b3d32bcaa8ba048bfbc202bfd0b3f9, type: 3}
+  m_Name: FireBall_AbilityEnchantmentSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
+  ID: 04b71738-27d3-4a1f-bdfc-c0e298144373
+  DisplayName: Fire Ball
+  Description: 
+  IconReference:
+    m_AssetGUID: 162e298589930b74898da9e368bc46b3
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _canRepeat: 0
+  AbilityKind: 1
+  AbilityPrefabReference:
+    m_AssetGUID: beb56681aa2d2fa4a9d9c14875cfaa45
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0

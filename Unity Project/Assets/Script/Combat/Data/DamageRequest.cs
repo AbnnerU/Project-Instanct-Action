@@ -1,4 +1,4 @@
-using Scripts.Status;
+﻿using Scripts.Status;
 using UnityEngine;
 
 namespace Scripts.Combat
@@ -26,6 +26,17 @@ namespace Scripts.Combat
             Receiver = receiver;
             HitCollider = hitCollider;
             HitPoint = hitPoint;
+        }
+
+        public DamageRequest WithHit(GameObject receiver, Collider hitCollider, Vector3 hitPoint)
+        {
+            return new DamageRequest(
+                DamageData,
+                AttackerStatus,
+                Attacker,
+                receiver,
+                hitCollider,
+                hitPoint);
         }
     }
 }
