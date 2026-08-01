@@ -15,16 +15,12 @@ namespace Scripts.Abilities
             if (_ability == null || context == null)
                 return;
 
-            PlayerDirection playerDirection = context.OwnerObject != null
-                ? context.OwnerObject.GetComponentInChildren<PlayerDirection>()
-                : null;
-
             _ability.Setup(
                 context.OwnerTransform,
-                playerDirection,
                 context.StatusSource,
                 context.ComboController,
-                context.OwnerObject);
+                context.OwnerObject,
+                context.PlayerDash);
         }
     }
 }

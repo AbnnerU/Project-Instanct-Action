@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6675238787033431261}
   - component: {fileID: 5645427343706915014}
-  - component: {fileID: 7438217718224501812}
+  - component: {fileID: 6073132624754701025}
+  - component: {fileID: 2909493556951120429}
   m_Layer: 6
   m_Name: Fire Ball Ability
   m_TagString: Untagged
@@ -46,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70477dcdc9191b7469313b4ca581aaab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.FireBallAbilityAutoSetup
-  _ability: {fileID: 7438217718224501812}
---- !u!114 &7438217718224501812
+  _ability: {fileID: 6073132624754701025}
+--- !u!114 &6073132624754701025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,41 +57,59 @@ MonoBehaviour:
   m_GameObject: {fileID: 1068060327992204825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba8bb47968005849898e70d64c199fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fca077031953914b8c339ec1a38cf8c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.FireBallAbility
-  _active: 0
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.LauchProjectileAbility
+  _active: 1
   _projectilePrefab: {fileID: 4551271130602059453, guid: fb5cd0bbc070ef345b7adb37708fcdea, type: 3}
   _spawnPoint: {fileID: 1531351253997409626}
-  _playerDirection: {fileID: 0}
   _statusSource: {fileID: 0}
-  _comboController: {fileID: 0}
   _attackerObject: {fileID: 0}
   _animator: {fileID: 0}
   _damageData:
     _damageType: 1
     _baseDamage: 100
     _physicForceScaling: 0
-    _magicForceScaling: 3
+    _magicForceScaling: 0.5
   _animationStateName: Ability 1
   _animationTransitionDuration: 0.05
   _animationLayerIndex: 0
-  _cooldownDuration: 2
+  _castTime: 0.15
   _projectileSpeed: 15
-  _spawnDelay: 0
   _gravityValue: {x: 0, y: -3, z: 0}
-  _projectileRadius: 0.6
+  _projectileRadius: 0.1
   _layerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   _useGroundLayer: 1
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256
   _targetTag: Enemy
+  _projectileContainer: {fileID: 0}
+  _containerTag: ProjectilesContainer
+  _comboController: {fileID: 0}
   _cancelAttackOnExecute: 1
   _disableComboOnExecute: 1
-  _comboDisableDuration: 0.1
+  _comboDisableDuration: 0.18
+  _dashComponent: {fileID: 0}
+  _disableDashOnExecute: 1
+  _disableDashDuration: 0.18
+--- !u!114 &2909493556951120429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068060327992204825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285d7597ad0be804598ad735bfd3bcd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.AbilityCooldown
+  _abilityComponent: {fileID: 6073132624754701025}
+  _cooldown: 2
+  _cooldownType: 0
 --- !u!1 &8226334797166578394
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,10 +134,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8226334797166578394}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.27648616, y: -0, z: -0, w: 0.9610179}
-  m_LocalPosition: {x: 0, y: 1.119, z: 0.575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.151, z: 0.898}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6675238787033431261}
-  m_LocalEulerAnglesHint: {x: -32.101, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

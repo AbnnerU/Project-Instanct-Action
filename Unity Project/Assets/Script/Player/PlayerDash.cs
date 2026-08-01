@@ -37,6 +37,7 @@ namespace Scripts.Player
         private float _leftCooldownTimer;
         private Coroutine _dashRoutine;
 
+        public bool Active => _active;
         public bool IsDashing => _isDashing;
         public float RightCooldownTimer => _rightCooldownTimer;
         public float LeftCooldownTimer => _leftCooldownTimer;

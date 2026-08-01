@@ -17,8 +17,8 @@ MonoBehaviour:
     _transitionDuration: 0.02
     _damageData:
       _damageType: 0
-      _baseDamage: 10
-      _physicForceScaling: 1.2
+      _baseDamage: 20
+      _physicForceScaling: 1
       _magicForceScaling: 0
     _hitboxCenterOffset: {x: 0, y: 0, z: 0.45}
     _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.45}
@@ -30,9 +30,9 @@ MonoBehaviour:
   - _animationStateName: Attack 2
     _transitionDuration: 0.02
     _damageData:
-      _damageType: 1
+      _damageType: 0
       _baseDamage: 20
-      _physicForceScaling: 0.5
+      _physicForceScaling: 1
       _magicForceScaling: 0
     _hitboxCenterOffset: {x: 0, y: 0, z: 0.45}
     _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.45}
@@ -44,10 +44,10 @@ MonoBehaviour:
   - _animationStateName: Attack 3
     _transitionDuration: 0.02
     _damageData:
-      _damageType: 2
-      _baseDamage: 50
-      _physicForceScaling: 0.5
-      _magicForceScaling: 0.5
+      _damageType: 0
+      _baseDamage: 40
+      _physicForceScaling: 1.5
+      _magicForceScaling: 0
     _hitboxCenterOffset: {x: 0, y: 0, z: 0.55}
     _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.55}
     _targetLayerMask:

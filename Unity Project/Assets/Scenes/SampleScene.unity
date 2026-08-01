@@ -2089,6 +2089,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 711513675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &770956959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770956960}
+  m_Layer: 0
+  m_Name: _Projectiles Container
+  m_TagString: ProjectilesContainer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770956960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770956959}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &821911182
 GameObject:
   m_ObjectHideFlags: 0
@@ -3879,6 +3910,8 @@ MonoBehaviour:
   _list_ActiveAbilitySlots:
   - _inputAction: {fileID: -7274670403200970637, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
     _ability: {fileID: 0}
+  - _inputAction: {fileID: -3975930655926514494, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+    _ability: {fileID: 0}
 --- !u!1 &1879613184
 GameObject:
   m_ObjectHideFlags: 0
@@ -3935,6 +3968,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a19e6847f9102f4f9393618bb807569, type: 2}
   - {fileID: 11400000, guid: b0fa00c498b8df449a1324eb314598a4, type: 2}
   - {fileID: 11400000, guid: 0ec3c7e91e569144e99110421680656e, type: 2}
+  - {fileID: 11400000, guid: beb72307bb35e464b90a43ea3d887043, type: 2}
   _list_AppliedEnchantments: []
 --- !u!114 &1879613187
 MonoBehaviour:
@@ -4228,3 +4262,4 @@ SceneRoots:
   - {fileID: 711513675}
   - {fileID: 1979048654}
   - {fileID: 660241839}
+  - {fileID: 770956960}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Scripts.Combat;
@@ -7,45 +8,44 @@ using UnityEngine;
 
 namespace Scripts.Abilities
 {
-    public class PiercingThrustAbility : AbilityBase
+    public class PiercingThrustAbility : AbilityBase, IHasCastTime
     {
         #region Fields
 
         [Header("References")]
         [SerializeField] private Transform _targetTransform;
-        [SerializeField] private PlayerDirection _playerDirection;
         [SerializeField] private StatusInfoSourceBase _statusSource;
-        [SerializeField] private ComboControllerBase _comboController;
         [SerializeField] private GameObject _attackerObject;
         [SerializeField] private Animator _animator;
-
+       
+        [SerializeField] private float _castTime;
         [Header("Damage")]
         [SerializeField] private DamageData _damageData = new DamageData();
-
         [Header("Animation")]
         [SerializeField] private string _animationStateName;
         [SerializeField] private float _animationTransitionDuration = 0.05f;
         [SerializeField] private int _animationLayerIndex;
-
-        [Header("Cooldown")]
-        [SerializeField] private float _cooldownDuration = 1f;
-
         [Header("Movement")]
         [SerializeField] private float _distance = 2f;
         [SerializeField] private float _duration = 0.15f;
         [SerializeField] private AnimationCurve _movementCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
-
+        [SerializeField] private bool _setEndPosition;
         [Header("Hitbox")]
         [SerializeField] private Vector3 _hitboxCenterOffset = new Vector3(0.75f, 0.75f, 0f);
         [SerializeField] private Vector3 _hitboxHalfExtents = new Vector3(0.75f, 0.75f, 0.75f);
         [SerializeField] private LayerMask _targetLayerMask;
         [SerializeField] private QueryTriggerInteraction _queryTriggerInteraction = QueryTriggerInteraction.UseGlobal;
         [SerializeField] private int _maxTargets = 8;
-
+        [Header("Collider")]
+        [SerializeField] private Collider _colliderComponent;
+        [SerializeField] private bool _disableColliderDuringExecution = true;
         [Header("Combat Lock")]
+        [SerializeField] private ComboControllerBase _comboController;
         [SerializeField] private bool _cancelAttackOnExecute = true;
         [SerializeField] private bool _disableComboDuringExecution = true;
-
+        [Header("Dash Lock")]
+        [SerializeField] private PlayerDash _dashComponent;
+        [SerializeField] private bool _disableDashDuringExecution = true;
         [Header("Gizmos")]
         [SerializeField] private bool _drawGizmos = true;
         [SerializeField] private Color _gizmosColor = Color.cyan;
@@ -53,25 +53,25 @@ namespace Scripts.Abilities
         private Collider[] _hitResults;
         private Coroutine _executionRoutine;
         private readonly HashSet<IDamageReceiver> _hashSet_DamageReceivers = new HashSet<IDamageReceiver>();
-        private bool _wasComboActiveBeforeExecution;
-        private float _cooldownEndTime;
+        public float CastTime { get => _castTime; set => _castTime = value; }
+
+        public event Action<float> OnCastTimeStarted;
+        public event Action<float> OnCastTimeFinished;
 
         #endregion
 
         #region Public
 
-        public void Setup(
-            Transform targetTransform,
-            PlayerDirection playerDirection,
-            StatusInfoSourceBase statusSource,
-            ComboControllerBase comboController,
-            GameObject attackerObject)
+        public void Setup(Transform targetTransform, StatusInfoSourceBase statusSource, ComboControllerBase comboController, GameObject attackerObject, PlayerDash dash)
         {
             _targetTransform = targetTransform;
-            _playerDirection = playerDirection;
             _statusSource = statusSource;
             _comboController = comboController;
             _attackerObject = attackerObject;
+            _dashComponent = dash;
+
+            if(_disableColliderDuringExecution)
+                _colliderComponent = targetTransform.GetComponent<Collider>();
 
             if (_animator == null && _attackerObject != null)
                 _animator = _attackerObject.GetComponentInChildren<Animator>();
@@ -85,31 +85,46 @@ namespace Scripts.Abilities
             if (_targetTransform == null)
                 _targetTransform = transform;
 
-            StartCooldown();
             PlayAnimation();
 
             if (_cancelAttackOnExecute)
                 _comboController?.CancelAttack(false);
 
             if (_disableComboDuringExecution && _comboController != null)
-            {
-                _wasComboActiveBeforeExecution = _comboController.Active;
                 _comboController.Disable();
-            }
 
+            if (_disableDashDuringExecution && _dashComponent != null)        
+                _dashComponent.Disable();
+
+            if(_disableColliderDuringExecution && _colliderComponent != null)
+                _colliderComponent.enabled = false;
+          
             _executionRoutine = StartCoroutine(ExecutionRoutine());
         }
 
         public override void Cancel()
         {
+            bool wasExecuting = _executionRoutine != null;
+
             if (_executionRoutine != null)
             {
                 StopCoroutine(_executionRoutine);
                 _executionRoutine = null;
             }
 
-            RestoreComboState();
+            if (_disableComboDuringExecution && _comboController != null)
+                _comboController.Enable();
+
+            if (_disableDashDuringExecution && _dashComponent != null)
+                _dashComponent.Enable();
+
+            if (_disableColliderDuringExecution && _colliderComponent != null)
+                _colliderComponent.enabled = true;
+
             _hashSet_DamageReceivers.Clear();
+
+            if (wasExecuting)
+                OnAbilityFinished?.Invoke(this);
         }
 
         public override void Deactivate()
@@ -122,14 +137,9 @@ namespace Scripts.Abilities
 
         #region Execution
 
-        private bool CanExecute()
+        protected override bool CanExecute()
         {
-            return _executionRoutine == null && Time.time >= _cooldownEndTime;
-        }
-
-        private void StartCooldown()
-        {
-            _cooldownEndTime = Time.time + Mathf.Max(0f, _cooldownDuration);
+            return _executionRoutine == null && _active;
         }
 
         private void PlayAnimation()
@@ -142,10 +152,19 @@ namespace Scripts.Abilities
 
         private IEnumerator ExecutionRoutine()
         {
+            OnAbilityStarted?.Invoke(this);
+
+            if (_castTime > 0)
+            {
+                OnCastTimeStarted?.Invoke(_castTime);
+                yield return new WaitForSeconds(_castTime);
+                OnCastTimeFinished?.Invoke(_castTime);
+            }
+
             EnsureHitResultsCapacity();
             _hashSet_DamageReceivers.Clear();
 
-            Vector3 direction = GetDirection();
+            Vector3 direction = _targetTransform.forward;
             Vector3 startPosition = _targetTransform.position;
             Vector3 endPosition = startPosition + direction * _distance;
             float elapsedTime = 0f;
@@ -163,12 +182,24 @@ namespace Scripts.Abilities
                 yield return null;
             }
 
-            _targetTransform.position = endPosition;
+            if(_setEndPosition)
+                _targetTransform.position = endPosition;
+
             ExecuteHitbox(direction);
 
-            RestoreComboState();
+            if (_disableComboDuringExecution)
+                _comboController.Enable();
+
+            if(_disableDashDuringExecution)
+                _dashComponent.Enable();
+
+            if (_disableColliderDuringExecution)
+                _colliderComponent.enabled = true;
+
             _hashSet_DamageReceivers.Clear();
             _executionRoutine = null;
+
+            OnAbilityFinished?.Invoke(this);
         }
 
         private void ExecuteHitbox(Vector3 direction)
@@ -206,28 +237,9 @@ namespace Scripts.Abilities
             }
         }
 
-        private void RestoreComboState()
-        {
-            if (!_disableComboDuringExecution || _comboController == null)
-                return;
-
-            if (_wasComboActiveBeforeExecution)
-                _comboController.Enable();
-        }
-
         #endregion
 
         #region Helpers
-
-        private Vector3 GetDirection()
-        {
-            Vector3 direction = _playerDirection != null ? _playerDirection.DirectionVector : transform.right;
-            direction.y = 0f;
-            direction.z = 0f;
-
-            return direction.sqrMagnitude > 0.001f ? direction.normalized : Vector3.right;
-        }
-
         private Vector3 GetHitboxCenter(Vector3 direction)
         {
             Vector3 offset = _hitboxCenterOffset;
@@ -266,11 +278,15 @@ namespace Scripts.Abilities
             if (!_drawGizmos)
                 return;
 
-            Vector3 direction = Application.isPlaying ? GetDirection() : Vector3.right;
-            Vector3 center = GetHitboxCenter(direction);
+            if (_targetTransform)
+            {
 
-            Gizmos.color = _gizmosColor;
-            Gizmos.DrawWireCube(center, _hitboxHalfExtents * 2f);
+                Vector3 direction = _targetTransform.forward;
+                Vector3 center = GetHitboxCenter(direction);
+
+                Gizmos.color = _gizmosColor;
+                Gizmos.DrawWireCube(center, _hitboxHalfExtents * 2f);
+            }
         }
 
         #endregion

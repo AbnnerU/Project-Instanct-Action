@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Scripts.Combat;
 using Scripts.ObjectPooling;
@@ -7,67 +8,68 @@ using UnityEngine;
 
 namespace Scripts.Abilities
 {
-    public class FireBallAbility : AbilityBase
+    public class LauchProjectileAbility : AbilityBase, IHasCastTime
     {
+        public event Action<float> OnCastTimeStarted;
+        public event Action<float> OnCastTimeFinished;
+
         #region Fields
 
         [Header("References")]
         [SerializeField] private GameObject _projectilePrefab;
         [SerializeField] private Transform _spawnPoint;
-        [SerializeField] private PlayerDirection _playerDirection;
         [SerializeField] private StatusInfoSourceBase _statusSource;
-        [SerializeField] private ComboControllerBase _comboController;
         [SerializeField] private GameObject _attackerObject;
         [SerializeField] private Animator _animator;
-
         [Header("Damage")]
         [SerializeField] private DamageData _damageData = new DamageData();
-
         [Header("Animation")]
         [SerializeField] private string _animationStateName;
         [SerializeField] private float _animationTransitionDuration = 0.05f;
         [SerializeField] private int _animationLayerIndex;
-
-        [Header("Cooldown")]
-        [SerializeField] private float _cooldownDuration = 1f;
-
         [Header("Projectile")]
+        [SerializeField] private float _castTime;
         [SerializeField] private float _projectileSpeed = 8f;
-        [SerializeField] private float _spawnDelay;
         [SerializeField] private Vector3 _gravityValue = Vector3.zero;
         [SerializeField] private float _projectileRadius = 0.25f;
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private bool _useGroundLayer;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private string _targetTag;
-
+        [Header("Container")]
+        [SerializeField] private Transform _projectileContainer;
+        [SerializeField] private string _containerTag;
         [Header("Combat Lock")]
+        [SerializeField] private ComboControllerBase _comboController;
         [SerializeField] private bool _cancelAttackOnExecute = true;
         [SerializeField] private bool _disableComboOnExecute = true;
         [SerializeField] private float _comboDisableDuration = 0.1f;
+        [Header("Dash Lock")]
+        [SerializeField] private PlayerDash _dashComponent;
+        [SerializeField] private bool _disableDashOnExecute = true;
+        [SerializeField] private float _disableDashDuration = 0.1f;
 
+        private Coroutine _dashDisableRoutine;
         private Coroutine _comboDisableRoutine;
         private Coroutine _castRoutine;
-        private bool _wasComboActiveBeforeDisable;
-        private float _cooldownEndTime;
+        public float CastTime { get => _castTime; set => _castTime = value; }
 
         #endregion
 
         #region Public
 
-        public void Setup(
-            PlayerDirection playerDirection,
-            StatusInfoSourceBase statusSource,
-            ComboControllerBase comboController,
-            GameObject attackerObject)
+        public void Setup(StatusInfoSourceBase statusSource, ComboControllerBase comboController, GameObject attackerObject, PlayerDash dash)
         {
-            _playerDirection = playerDirection;
             _statusSource = statusSource;
             _comboController = comboController;
             _attackerObject = attackerObject;
+            _dashComponent = dash;
 
             if (_animator == null && _attackerObject != null)
                 _animator = _attackerObject.GetComponentInChildren<Animator>();
+
+            if (_containerTag != string.Empty)
+                _projectileContainer = GameObject.FindGameObjectWithTag(_containerTag).transform;
         }
 
         public override void Execute()
@@ -81,16 +83,22 @@ namespace Scripts.Abilities
                 return;
             }
 
-            StartCooldown();
             HandleComboOnExecute();
+            HandleDashOnExecute();
             PlayAnimation();
             StartCastRoutine();
         }
 
         public override void Cancel()
         {
+            bool wasExecuting = _castRoutine != null;
+
             StopCastRoutine();
             StopComboDisableRoutine(true);
+            StopDashDisableRoutine(true);
+
+            if (wasExecuting)
+                OnAbilityFinished?.Invoke(this);
         }
 
         public override void Deactivate()
@@ -102,15 +110,9 @@ namespace Scripts.Abilities
         #endregion
 
         #region Execute
-
-        private bool CanExecute()
+        protected override bool CanExecute()
         {
-            return _castRoutine == null && Time.time >= _cooldownEndTime;
-        }
-
-        private void StartCooldown()
-        {
-            _cooldownEndTime = Time.time + Mathf.Max(0f, _cooldownDuration);
+            return _castRoutine == null && _active;
         }
 
         private void PlayAnimation()
@@ -129,11 +131,51 @@ namespace Scripts.Abilities
 
         private IEnumerator CastRoutine()
         {
-            if (_spawnDelay > 0f)
-                yield return new WaitForSeconds(_spawnDelay);
+            OnAbilityStarted?.Invoke(this);
+
+            if (_castTime > 0f)
+            {
+                OnCastTimeStarted?.Invoke(_castTime);
+                yield return new WaitForSeconds(_castTime);
+                OnCastTimeFinished?.Invoke(_castTime);
+            }
 
             SpawnProjectile();
             _castRoutine = null;
+
+            OnAbilityFinished?.Invoke(this);
+        }
+
+        private void HandleDashOnExecute()
+        {
+            if(_dashComponent == null) return;
+
+            if (!_disableDashOnExecute) return;
+
+            StopDashDisableRoutine(false);
+
+            bool wasDashActiveBeforeDisable = _dashComponent.Active;
+            _dashComponent.Disable();
+
+            if(_disableDashDuration <= 0)
+            {
+                if (wasDashActiveBeforeDisable)
+                    _dashComponent.Enable();
+
+                return;
+            }
+
+            _dashDisableRoutine = StartCoroutine(DashDisableRoutine());
+        }
+
+        private IEnumerator DashDisableRoutine()
+        {
+            yield return new WaitForSeconds(_disableDashDuration);
+
+            if (_dashComponent != null)
+                _dashComponent.Enable();
+
+            _dashDisableRoutine = null;
         }
 
         private void HandleComboOnExecute()
@@ -149,25 +191,25 @@ namespace Scripts.Abilities
 
             StopComboDisableRoutine(false);
 
-            _wasComboActiveBeforeDisable = _comboController.Active;
+            bool wasComboActiveBeforeDisable = _comboController.Active;
             _comboController.Disable();
 
             if (_comboDisableDuration <= 0f)
             {
-                if (_wasComboActiveBeforeDisable)
+                if (wasComboActiveBeforeDisable)
                     _comboController.Enable();
 
                 return;
             }
 
-            _comboDisableRoutine = StartCoroutine(ComboDisableRoutine(_wasComboActiveBeforeDisable));
+            _comboDisableRoutine = StartCoroutine(ComboDisableRoutine());
         }
 
-        private IEnumerator ComboDisableRoutine(bool wasComboActive)
+        private IEnumerator ComboDisableRoutine()
         {
             yield return new WaitForSeconds(_comboDisableDuration);
 
-            if (wasComboActive && _comboController != null)
+            if (_comboController != null)
                 _comboController.Enable();
 
             _comboDisableRoutine = null;
@@ -175,11 +217,13 @@ namespace Scripts.Abilities
 
         private void SpawnProjectile()
         {
-            Vector3 direction = GetDirection();
+            Vector3 direction = _spawnPoint.forward;
             Vector3 spawnPosition = _spawnPoint != null ? _spawnPoint.position : transform.position;
             Quaternion rotation = _spawnPoint != null ? _spawnPoint.rotation : Quaternion.LookRotation(direction, Vector3.up);
 
             GameObject projectileObject = PoolManager.SpawnObject(_projectilePrefab, spawnPosition, rotation);
+
+            projectileObject.transform.SetParent(_projectileContainer);
 
             if (!projectileObject.TryGetComponent(out AbilityProjectile abilityProjectile))
             {
@@ -207,15 +251,6 @@ namespace Scripts.Abilities
                 _targetTag);
         }
 
-        private Vector3 GetDirection()
-        {
-            Vector3 direction = _playerDirection != null ? _playerDirection.DirectionVector : transform.right;
-            direction.y = 0f;
-            direction.z = 0f;
-
-            return direction.sqrMagnitude > 0.001f ? direction.normalized : Vector3.right;
-        }
-
         private void StopCastRoutine()
         {
             if (_castRoutine == null)
@@ -225,7 +260,7 @@ namespace Scripts.Abilities
             _castRoutine = null;
         }
 
-        private void StopComboDisableRoutine(bool restoreComboState)
+        private void StopComboDisableRoutine(bool activeState)
         {
             if (_comboDisableRoutine == null)
                 return;
@@ -233,8 +268,20 @@ namespace Scripts.Abilities
             StopCoroutine(_comboDisableRoutine);
             _comboDisableRoutine = null;
 
-            if (restoreComboState && _wasComboActiveBeforeDisable && _comboController != null)
+            if (activeState && _comboController != null)
                 _comboController.Enable();
+        }
+
+        private void StopDashDisableRoutine(bool activeState)
+        {
+            if (_dashDisableRoutine == null)
+                return;
+
+            StopCoroutine(_dashDisableRoutine);
+            _dashDisableRoutine = null;
+
+            if (activeState && _dashComponent != null)
+                _dashComponent.Enable();
         }
 
         #endregion

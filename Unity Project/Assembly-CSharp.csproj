@@ -101,6 +101,7 @@
     <Compile Include="Assets\Script\Tier\Scriptable Base\Visual\CreatureEvolutionDataSO.cs" />
     <Compile Include="Assets\Script\AI\Agents\EnemyBrain.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTConditionalSequence.cs" />
+    <Compile Include="Assets\Script\Interface\Abilities\IHasCastTime.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasTargetProvider.cs" />
     <Compile Include="Assets\Script\Status\Appliers\AttackSpeedByStatus.cs" />
     <Compile Include="Assets\Script\Projectile\AbilityProjectile.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Assets\Script\Combat\DamageResolver.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveStateOfCanvas.cs" />
     <Compile Include="Assets\Script\Health\OnDeath_UnityEvent.cs" />
+    <Compile Include="Assets\Script\Abilities\Extras\AbilityCooldown.cs" />
     <Compile Include="Assets\Script\Animation\OnDeath_TriggerParameter.cs" />
     <Compile Include="Assets\Script\Abstract\Status\StatusInfoSourceBase.cs" />
     <Compile Include="Assets\Script\Health\KillAfterTime_OnEnable.cs" />
@@ -143,7 +145,6 @@
     <Compile Include="Assets\Script\Health\OnHit_Particles.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnodeNavMeshAjust.cs" />
     <Compile Include="Assets\Script\Interface\General\IUniqueId.cs" />
-    <Compile Include="Assets\Script\Abilities\Auto Setup\FireBallAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Combat\Damage Effects\HealOnDamageDealt.cs" />
     <Compile Include="Assets\Script\Health\OnRespawn_UnityEvent.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\PiercingThrustAbilityAutoSetup.cs" />
@@ -152,7 +153,6 @@
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTSetAIState.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IMutableAddressableSpawnerWithPreview.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Enchantment\StatusUpgradeSO.cs" />
-    <Compile Include="Assets\Script\Abilities\Active\FireBallAbility.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageResult.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawnerWithOffSet.cs" />
     <Compile Include="Assets\Script\Coins\Saver\CoinData.cs" />
@@ -195,6 +195,7 @@
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTFleeFromTarget.cs" />
     <Compile Include="Assets\Script\Combat\ComboAnimationEventReceiver.cs" />
     <Compile Include="Assets\Script\Interface\Selectable\ISelectableObject.cs" />
+    <Compile Include="Assets\Script\Abilities\Active\LauchProjectileAbility.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTWaitForSeconds.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler_LoadingBar.cs" />
     <Compile Include="Assets\Script\Player\PlayerDirection.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\Boolean\BTBoolFunc.cs" />
     <Compile Include="Assets\Script\Abstract\Enchantment\EnchantmentSOBase.cs" />
     <Compile Include="Assets\Script\Spawner\EnemySpawner.cs" />
+    <Compile Include="Assets\Script\Abilities\Auto Setup\LauchProjectileAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Abstract\Animation\AnimationModuleBase.cs" />
     <Compile Include="Assets\Script\Abstract\Saver\SaverBase.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTSequence.cs" />
@@ -221,6 +223,7 @@
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTDoAction.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasViewport.cs" />
     <Compile Include="Assets\Script\Weapon\WeaponSocketRegistry.cs" />
+    <Compile Include="Assets\Script\Interface\Timer\IHasCooldown.cs" />
     <Compile Include="Assets\Script\AI\Interface\IHasBehaviourTree.cs" />
     <Compile Include="Assets\Script\Scripts Pool\Singleton.cs" />
     <Compile Include="Assets\Script\Abstract\Abilities\AbilityAutoSetupBase.cs" />

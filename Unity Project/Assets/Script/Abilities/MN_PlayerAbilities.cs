@@ -4,6 +4,7 @@ using Scripts.Combat;
 using Scripts.Managers;
 using Scripts.Player;
 using Scripts.Status;
+using Scripts.Timer;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem;
@@ -12,8 +13,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace Scripts.Abilities
 {
     public class MN_PlayerAbilities : SceneSingleton<MN_PlayerAbilities>
-    {
-       
+    {     
 
         #region Fields
 
@@ -61,6 +61,7 @@ namespace Scripts.Abilities
         private void OnDestroy()
         {
             ReleaseAbilities();
+            DisableSlotInputs();
         }
 
         #endregion
@@ -88,6 +89,11 @@ namespace Scripts.Abilities
 
             if (ability == null || !ability.Initialized)
                 return false;
+
+            ActiveAbilitySlot slot = GetSlotByAbility(ability);
+
+            if (slot != null)
+                return slot.TryExecuteAbility();
 
             ability.Execute();
             return true;
@@ -182,6 +188,7 @@ namespace Scripts.Abilities
             if (abilityKind == AbilityKind.ACTIVE)
             {
                 _list_ActiveAbilities.Add(ability);
+                SubscribeAbilityEvents(ability);
                 AssignAbilityToSlot(ability);
             }
             else
@@ -192,6 +199,9 @@ namespace Scripts.Abilities
 
         private void ReleaseAbilities()
         {
+            for (int i = 0; i < _list_ActiveAbilities.Count; i++)
+                UnsubscribeAbilityEvents(_list_ActiveAbilities[i]);
+
             for (int i = 0; i < _list_AbilityHandles.Count; i++)
             {
                 if (_list_AbilityHandles[i].IsValid())
@@ -254,6 +264,77 @@ namespace Scripts.Abilities
             slot?.TryExecuteAbility();
         }
 
+        private void SubscribeAbilityEvents(AbilityBase ability)
+        {
+            if (ability == null)
+                return;
+
+            ability.OnAbilityStarted -= Ability_OnAbilityStarted;
+            ability.OnAbilityFinished -= Ability_OnAbilityFinished;
+
+            ability.OnAbilityStarted += Ability_OnAbilityStarted;
+            ability.OnAbilityFinished += Ability_OnAbilityFinished;
+        }
+
+        private void UnsubscribeAbilityEvents(AbilityBase ability)
+        {
+            if (ability == null)
+                return;
+
+            ability.OnAbilityStarted -= Ability_OnAbilityStarted;
+            ability.OnAbilityFinished -= Ability_OnAbilityFinished;
+        }
+
+        private void Ability_OnAbilityStarted(AbilityBase ability)
+        {
+            ActiveAbilitySlot sourceSlot = GetSlotByAbility(ability);
+
+            if (sourceSlot == null)
+                return;
+
+            SetSlotsBlockedExcept(sourceSlot, true);
+        }
+
+        private void Ability_OnAbilityFinished(AbilityBase ability)
+        {
+            ActiveAbilitySlot sourceSlot = GetSlotByAbility(ability);
+
+            if (sourceSlot == null)
+                return;
+
+            SetSlotsBlockedExcept(sourceSlot, false);
+        }
+
+        private ActiveAbilitySlot GetSlotByAbility(AbilityBase ability)
+        {
+            if (ability == null || _list_ActiveAbilitySlots == null)
+                return null;
+
+            for (int i = 0; i < _list_ActiveAbilitySlots.Count; i++)
+            {
+                if (_list_ActiveAbilitySlots[i] != null && _list_ActiveAbilitySlots[i].Ability == ability)
+                    return _list_ActiveAbilitySlots[i];
+            }
+
+            return null;
+        }
+
+        private void SetSlotsBlockedExcept(ActiveAbilitySlot sourceSlot, bool blocked)
+        {
+            if (_list_ActiveAbilitySlots == null)
+                return;
+
+            for (int i = 0; i < _list_ActiveAbilitySlots.Count; i++)
+            {
+                ActiveAbilitySlot slot = _list_ActiveAbilitySlots[i];
+
+                if (slot == null || slot == sourceSlot)
+                    continue;
+
+                slot.SetBlocked(blocked);
+            }
+        }
+
         #endregion
 
         #region Classes
@@ -261,21 +342,69 @@ namespace Scripts.Abilities
         [Serializable]
         public class ActiveAbilitySlot
         {
+            public Action<float> OnAbilityCooldownStarted;
+            public Action<float> OnAbilityCooldownCompleted;
+            public Action<AbilitySlotState> OnAbilitySlotStateUpdated;
+
+            [SerializeField] private AbilitySlotState _slotState;
             [SerializeField] private InputActionReference _inputAction;
             [SerializeField] private AbilityBase _ability;
 
-            private Action<InputAction.CallbackContext> _performedCallback;
+            private Action<InputAction.CallbackContext> _onPerformedCallback;
+            private bool _isBlocked;
+            private bool _isInCooldown;
 
             public AbilityBase Ability => _ability;
             public bool IsEmpty => _ability == null;
+            public AbilitySlotState SlotState => _slotState;
+
+            public IHasCooldown _cooldownHandler;
+
+            public enum AbilitySlotState
+            {
+                NONE,
+                ABILITY_IN_COOLDOWN,
+                BLOCKED
+            }
 
             public void SetAbility(AbilityBase ability)
             {
+                if (_cooldownHandler!=null)
+                {
+                    _cooldownHandler.OnCooldownStarted -= StartedCooldown;
+                    _cooldownHandler.OnCooldownCompleted -= CompletedCooldown;
+                }
+
                 _ability = ability;
+                _cooldownHandler = null;
+                _isBlocked = false;
+                _isInCooldown = false;
+                UpdateSlotState();
+
+                if (_ability == null)
+                    return;
+
+                if(_ability.gameObject.TryGetComponent<IHasCooldown>(out _cooldownHandler))
+                {
+                    _cooldownHandler.OnCooldownStarted += StartedCooldown;
+                    _cooldownHandler.OnCooldownCompleted += CompletedCooldown;
+                }
+            }
+
+            public void SetBlocked(bool blocked)
+            {
+                if (_isBlocked == blocked)
+                    return;
+
+                _isBlocked = blocked;
+                UpdateSlotState();
             }
 
             public bool TryExecuteAbility()
             {
+                if (_isBlocked)
+                    return false;
+
                 if (_ability == null || !_ability.Initialized)
                     return false;
 
@@ -290,18 +419,54 @@ namespace Scripts.Abilities
 
                 DisableInput();
 
-                _performedCallback = _ => onPerformed?.Invoke(this);
+                _onPerformedCallback = _ => onPerformed?.Invoke(this);
                 _inputAction.action.Enable();
-                _inputAction.action.performed += _performedCallback;
+                _inputAction.action.performed += _onPerformedCallback;
             }
 
             public void DisableInput()
             {
-                if (_inputAction == null || _inputAction.action == null || _performedCallback == null)
+                if (_inputAction == null || _inputAction.action == null || _onPerformedCallback == null)
                     return;
 
-                _inputAction.action.performed -= _performedCallback;
-                _performedCallback = null;
+                _inputAction.action.performed -= _onPerformedCallback;
+                _onPerformedCallback = null;
+            }
+
+            public void StartedCooldown(float cooldownValue)
+            {
+                _isInCooldown = true;
+                UpdateSlotState();
+                OnAbilityCooldownStarted?.Invoke(cooldownValue);
+            }
+
+            public void CompletedCooldown(float cooldownValue)
+            {
+                _isInCooldown = false;
+                UpdateSlotState();
+                OnAbilityCooldownCompleted?.Invoke(cooldownValue);
+            }
+
+            private void UpdateSlotState()
+            {
+                AbilitySlotState newSlotState = GetSlotState();
+
+                if (_slotState == newSlotState)
+                    return;
+
+                _slotState = newSlotState;
+                OnAbilitySlotStateUpdated?.Invoke(_slotState);
+            }
+
+            private AbilitySlotState GetSlotState()
+            {
+                if (_isBlocked)
+                    return AbilitySlotState.BLOCKED;
+
+                if (_isInCooldown)
+                    return AbilitySlotState.ABILITY_IN_COOLDOWN;
+
+                return AbilitySlotState.NONE;
             }
         }
 

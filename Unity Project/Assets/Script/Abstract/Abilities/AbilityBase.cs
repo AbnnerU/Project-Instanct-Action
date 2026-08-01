@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
 
 namespace Scripts.Abilities
 {
     public abstract class AbilityBase : MonoBehaviour, IHasActiveState
     {
+        public Action<AbilityBase> OnAbilityStarted;
+        public Action<AbilityBase> OnAbilityFinished;
+
         private bool _initialized;
         [SerializeField] protected bool _active;
 
@@ -25,6 +29,12 @@ namespace Scripts.Abilities
         protected virtual void OnDestroy()
         {
             Deactivate();
+        }
+
+
+        protected virtual bool CanExecute()
+        {
+            return _active;
         }
 
         public virtual void Disable() => _active = false;
