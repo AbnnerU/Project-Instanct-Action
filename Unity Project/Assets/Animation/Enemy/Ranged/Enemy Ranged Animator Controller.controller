@@ -45,7 +45,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 006fccecd7175134dae6f80fbc6d116c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6f9869e481fd761419db99995bb39186, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -65,7 +65,7 @@ AnimatorStateMachine:
     m_Position: {x: 280, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8267726082116693565}
-    m_Position: {x: 700, y: -60, z: 0}
+    m_Position: {x: 600, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 286537352923292511}
     m_Position: {x: 490, y: 20, z: 0}
@@ -116,7 +116,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy Animator Controller
+  m_Name: Enemy Ranged Animator Controller
   serializedVersion: 6
   m_AnimatorParameters:
   - m_Name: MoveSpeed
@@ -244,7 +244,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 4216d208996410a42bd5a66e6e25ecb0, type: 2}
+    m_Motion: {fileID: 7400000, guid: 426d98a2b4b34e843949b3695cf542f6, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -252,7 +252,7 @@ BlendTree:
     m_DirectBlendParameter: Move Speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: cbd770b38bee3ad40b2c86247d265486, type: 2}
+    m_Motion: {fileID: 7400000, guid: 4b5aaea78263940458642676cd54d767, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -286,7 +286,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8928a91e5a69b164f8b72db3ac6dd58d, type: 2}
+  m_Motion: {fileID: 7400000, guid: f287e67cba35f754dbf32dc7315999cc, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

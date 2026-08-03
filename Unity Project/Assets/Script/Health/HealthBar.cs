@@ -7,6 +7,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private HealthBasicsEvents healthObject;
     [SerializeField] private Slider slider;
     [SerializeField] private bool disableGameObjectSliderOnBlock;
+    [SerializeField] private bool disableGameObjectSliderOnDeath;
+    [SerializeField] private bool enableGameObjectSliderOnRespawn;
 
     private void Awake()
     {
@@ -16,7 +18,15 @@ public class HealthBar : MonoBehaviour
         healthObject.OnHealthUpdate += HealthEvents_OnNewValue;
         healthObject.OnRespawn += HealthEvents_OnNewValue;
         healthObject.OnMaxHealthValueUpdated += MaxHealthUpdated;
-        healthObject.OnBlockUpdate += BlockedUpdate;
+
+        if (disableGameObjectSliderOnBlock)
+            healthObject.OnBlockUpdate += BlockedUpdate;
+
+        if (disableGameObjectSliderOnDeath)
+            healthObject.OnDeath += OnDeath;
+
+        if (enableGameObjectSliderOnRespawn)
+            healthObject.OnRespawn += OnRespawn;
 
         slider.maxValue = healthObject.GetMaxHealth();
         slider.value = healthObject.GetMaxHealth();
@@ -27,11 +37,11 @@ public class HealthBar : MonoBehaviour
         BlockedUpdate(healthObject.IsBlocked());
     }
 
-    private void BlockedUpdate(bool isBlocked)
-    {
-        if (disableGameObjectSliderOnBlock)
-            slider.gameObject.SetActive(!isBlocked);
-    }
+    private void BlockedUpdate(bool isBlocked)=> slider.gameObject.SetActive(!isBlocked);
+
+    private void OnDeath()=> slider.gameObject.SetActive(false);
+
+    private void OnRespawn() => slider.gameObject.SetActive(true);
 
     private void MaxHealthUpdated(float newValue)
     {

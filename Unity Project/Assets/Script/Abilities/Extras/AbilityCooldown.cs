@@ -14,7 +14,6 @@ namespace Scripts.Abilities.Extras
         [SerializeField] private float _cooldown;
         [SerializeField] private CooldownType _cooldownType;
 
-        private WaitForSeconds _delay;
         private float _currentTime;
 
         public float Cooldown { get => _cooldown; set => _cooldown = value; }

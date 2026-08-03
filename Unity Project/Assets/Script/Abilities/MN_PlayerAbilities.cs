@@ -30,6 +30,8 @@ namespace Scripts.Abilities
         private readonly List<AbilityBase> _list_PassiveAbilities = new List<AbilityBase>();
         private readonly List<AbilityBase> _list_ActiveAbilities = new List<AbilityBase>();
         private readonly List<AsyncOperationHandle<GameObject>> _list_AbilityHandles = new List<AsyncOperationHandle<GameObject>>();
+        private bool _subscribedToDashEvents;
+        private bool _isDashBlockingAbilitySlots;
 
         #endregion
 
@@ -50,11 +52,13 @@ namespace Scripts.Abilities
 
         private void OnEnable()
         {
+            SubscribeDashEvents();
             EnableSlotInputs();
         }
 
         private void OnDisable()
         {
+            UnsubscribeDashEvents();
             DisableSlotInputs();
         }
 
@@ -227,7 +231,13 @@ namespace Scripts.Abilities
             if (slot == null)
                 slot = _list_ActiveAbilitySlots[0];
 
-            slot?.SetAbility(ability);
+            if (slot == null)
+                return;
+
+            slot.SetAbility(ability);
+
+            if (_isDashBlockingAbilitySlots)
+                slot.SetBlocked(true);
         }
 
         private ActiveAbilitySlot GetFirstEmptySlot()
@@ -262,6 +272,40 @@ namespace Scripts.Abilities
         private void SlotInput_Performed(ActiveAbilitySlot slot)
         {
             slot?.TryExecuteAbility();
+        }
+
+        private void SubscribeDashEvents()
+        {
+            GetReferences();
+
+            if (_subscribedToDashEvents || _playerDash == null)
+                return;
+
+            _playerDash.OnDashStarted += PlayerDash_OnDashStarted;
+            _playerDash.OnDashFinished += PlayerDash_OnDashFinished;
+            _subscribedToDashEvents = true;
+        }
+
+        private void UnsubscribeDashEvents()
+        {
+            if (!_subscribedToDashEvents || _playerDash == null)
+                return;
+
+            _playerDash.OnDashStarted -= PlayerDash_OnDashStarted;
+            _playerDash.OnDashFinished -= PlayerDash_OnDashFinished;
+            _subscribedToDashEvents = false;
+        }
+
+        private void PlayerDash_OnDashStarted(DirectionSide directionSide)
+        {
+            _isDashBlockingAbilitySlots = true;
+            SetAllSlotsBlocked(true);
+        }
+
+        private void PlayerDash_OnDashFinished(DirectionSide directionSide)
+        {
+            _isDashBlockingAbilitySlots = false;
+            SetAllSlotsBlocked(false);
         }
 
         private void SubscribeAbilityEvents(AbilityBase ability)
@@ -335,6 +379,15 @@ namespace Scripts.Abilities
             }
         }
 
+        private void SetAllSlotsBlocked(bool blocked)
+        {
+            if (_list_ActiveAbilitySlots == null)
+                return;
+
+            for (int i = 0; i < _list_ActiveAbilitySlots.Count; i++)
+                _list_ActiveAbilitySlots[i]?.SetBlocked(blocked);
+        }
+
         #endregion
 
         #region Classes
@@ -351,7 +404,7 @@ namespace Scripts.Abilities
             [SerializeField] private AbilityBase _ability;
 
             private Action<InputAction.CallbackContext> _onPerformedCallback;
-            private bool _isBlocked;
+            private int _blockCount;
             private bool _isInCooldown;
 
             public AbilityBase Ability => _ability;
@@ -377,7 +430,7 @@ namespace Scripts.Abilities
 
                 _ability = ability;
                 _cooldownHandler = null;
-                _isBlocked = false;
+                _blockCount = 0;
                 _isInCooldown = false;
                 UpdateSlotState();
 
@@ -393,16 +446,22 @@ namespace Scripts.Abilities
 
             public void SetBlocked(bool blocked)
             {
-                if (_isBlocked == blocked)
+                int previousBlockCount = _blockCount;
+
+                if (blocked)
+                    _blockCount++;
+                else
+                    _blockCount = Mathf.Max(0, _blockCount - 1);
+
+                if (previousBlockCount == _blockCount)
                     return;
 
-                _isBlocked = blocked;
                 UpdateSlotState();
             }
 
             public bool TryExecuteAbility()
             {
-                if (_isBlocked)
+                if (_blockCount > 0)
                     return false;
 
                 if (_ability == null || !_ability.Initialized)
@@ -460,7 +519,7 @@ namespace Scripts.Abilities
 
             private AbilitySlotState GetSlotState()
             {
-                if (_isBlocked)
+                if (_blockCount > 0)
                     return AbilitySlotState.BLOCKED;
 
                 if (_isInCooldown)

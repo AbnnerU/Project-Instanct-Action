@@ -5,6 +5,7 @@ using Scripts.ObjectPooling;
 using Scripts.Player;
 using Scripts.Status;
 using UnityEngine;
+using Scripts.Projectile;
 
 namespace Scripts.Abilities
 {
@@ -225,7 +226,7 @@ namespace Scripts.Abilities
 
             projectileObject.transform.SetParent(_projectileContainer);
 
-            if (!projectileObject.TryGetComponent(out AbilityProjectile abilityProjectile))
+            if (!projectileObject.TryGetComponent(out DamageRequestProjectile abilityProjectile))
             {
                 Debug.LogWarning("Projectile prefab needs an AbilityProjectile component.", projectileObject);
                 return;

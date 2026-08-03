@@ -250,13 +250,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171649272}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 711513675}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &205012464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,8 +1164,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1548058492}
+  m_Children: []
   m_Father: {fileID: 965605310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &621175284
@@ -1677,6 +1676,8 @@ MonoBehaviour:
   healthObject: {fileID: 711513676}
   slider: {fileID: 717130073}
   disableGameObjectSliderOnBlock: 0
+  disableGameObjectSliderOnDeath: 0
+  enableGameObjectSliderOnRespawn: 0
 --- !u!114 &711513686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2056,6 +2057,7 @@ Transform:
   - {fileID: 1879613185}
   - {fileID: 1955501766}
   - {fileID: 1872385690}
+  - {fileID: 1891571130}
   m_Father: {fileID: 965605310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &743371856
@@ -2083,7 +2085,7 @@ Transform:
   m_GameObject: {fileID: 743371856}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3584,73 +3586,6 @@ Transform:
   - {fileID: 2016135195}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1548058491
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1548058492}
-  - component: {fileID: 1548058493}
-  m_Layer: 0
-  m_Name: Enemy Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1548058492
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548058491}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 596566037}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1548058493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548058491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c35b1845edac834f8f0722e8d53f592, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Spawner.EnemySpawner
-  _spawnerName: Enemy Spawner
-  _active: 1
-  _enemyPrefabReference:
-    m_AssetGUID: 147056b547ebb574da78d6f420842fa6
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _warmPoolOnStart: 0
-  _warmPoolSize: 0
-  _resetHealthOnSpawn: 1
-  _list_SpawnPoints:
-  - {fileID: 743371857}
-  - {fileID: 171649273}
-  _spawnParent: {fileID: 660241839}
-  _maxAliveEnemies: 5
-  _spawnOnStart: 1
-  _autoSpawn: 1
-  _spawnInterval: 2
-  _sampleNavMeshPosition: 1
-  _navMeshSampleRadius: 0.53
-  _drawGizmos: 1
-  _gizmoRadius: 0.3
 --- !u!1001 &1601791030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3908,9 +3843,11 @@ MonoBehaviour:
   _playerDash: {fileID: 711513684}
   _statusSource: {fileID: 711513691}
   _list_ActiveAbilitySlots:
-  - _inputAction: {fileID: -7274670403200970637, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  - _slotState: 0
+    _inputAction: {fileID: -7274670403200970637, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
     _ability: {fileID: 0}
-  - _inputAction: {fileID: -3975930655926514494, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  - _slotState: 0
+    _inputAction: {fileID: -3975930655926514494, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
     _ability: {fileID: 0}
 --- !u!1 &1879613184
 GameObject:
@@ -3988,6 +3925,78 @@ MonoBehaviour:
   - {fileID: 659611618}
   - {fileID: 943687868}
   _pauseGameWhileSelecting: 1
+--- !u!1 &1891571129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1891571130}
+  - component: {fileID: 1891571131}
+  m_Layer: 0
+  m_Name: MN Waves
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1891571130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891571129}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 740254889}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1891571131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891571129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4635a1f046be2c94b909fd3b3ef1a35e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Waves.MN_Waves
+  _active: 1
+  _array_EnemyPrefabReferences:
+  - m_AssetGUID: 147056b547ebb574da78d6f420842fa6
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 63e5d04e7f0f1bc4aa2ed820bded04e2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _warmPoolOnStart: 0
+  _warmPoolSizeByPrefab: 0
+  _resetHealthOnSpawn: 1
+  _array_SpawnPoints:
+  - {fileID: 743371857}
+  - {fileID: 171649273}
+  _spawnParent: {fileID: 660241839}
+  _maxAliveEnemies: 10
+  _spawnOnStart: 3
+  _autoSpawn: 1
+  _spawnInterval: 2
+  _useSpawnPointLocalEulerAngles: 1
+  _sampleNavMeshPosition: 1
+  _navMeshSampleRadius: 1
+  _drawGizmos: 1
+  _gizmoRadius: 0.3
 --- !u!1 &1955501765
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,53 +1,56 @@
 ﻿using System;
 using UnityEngine;
 
-public class Projectile : Projectile3DBase
+namespace Scripts.Projectile
 {
-    [SerializeField] private int _damage;
-
-    public Action<IHittable> OnHitDamageableTarget;
-
-    public void EnableProjectile(
-        Vector3 startPoint,
-        Vector3 speedOrietation,
-        Vector3 gravityValue,
-        LayerMask layerMask,
-        bool useGroundLayer,
-        LayerMask groundLayer,
-        float radius,
-        int damage,
-        string targetTag)
+    public class Projectile : Projectile3DBase
     {
-        _damage = damage;
+        [SerializeField] private int _damage;
 
-        EnableProjectile(
-            startPoint,
-            speedOrietation,
-            gravityValue,
-            layerMask,
-            useGroundLayer,
-            groundLayer,
-            radius,
-            targetTag);
-    }
+        public Action<IHittable> OnHitDamageableTarget;
 
-    protected override void OnHit(Collider hitCollider, RaycastHit hit)
-    {
-        GameObject hitObject = hitCollider.gameObject;
-        IHittable damageable = hitObject.GetComponent<IHittable>();
-        IHittable damageableChild = hitObject.GetComponentInChildren<IHittable>();
-
-        if (damageable != null)
+        public void EnableProjectile(
+            Vector3 startPoint,
+            Vector3 speedOrietation,
+            Vector3 gravityValue,
+            LayerMask layerMask,
+            bool useGroundLayer,
+            LayerMask groundLayer,
+            float radius,
+            int damage,
+            string targetTag)
         {
-            damageable.Hit(_damage);
-            OnHitDamageableTarget?.Invoke(damageable);
-            return;
+            _damage = damage;
+
+            EnableProjectile(
+                startPoint,
+                speedOrietation,
+                gravityValue,
+                layerMask,
+                useGroundLayer,
+                groundLayer,
+                radius,
+                targetTag);
         }
 
-        if (damageableChild == null)
-            return;
+        protected override void OnHit(Collider hitCollider, RaycastHit hit)
+        {
+            GameObject hitObject = hitCollider.gameObject;
+            IHittable damageable = hitObject.GetComponent<IHittable>();
+            IHittable damageableChild = hitObject.GetComponentInChildren<IHittable>();
 
-        damageableChild.Hit(_damage);
-        OnHitDamageableTarget?.Invoke(damageableChild);
+            if (damageable != null)
+            {
+                damageable.Hit(_damage);
+                OnHitDamageableTarget?.Invoke(damageable);
+                return;
+            }
+
+            if (damageableChild == null)
+                return;
+
+            damageableChild.Hit(_damage);
+            OnHitDamageableTarget?.Invoke(damageableChild);
+        }
     }
 }

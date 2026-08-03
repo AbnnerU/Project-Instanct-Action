@@ -30,7 +30,7 @@ GameObject:
   - component: {fileID: 1826758174271530299}
   - component: {fileID: 6232966678816958479}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: Enemy (Melee)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,6 +304,8 @@ MonoBehaviour:
   healthObject: {fileID: 7231527614648297650}
   slider: {fileID: 3039512652699835991}
   disableGameObjectSliderOnBlock: 0
+  disableGameObjectSliderOnDeath: 1
+  enableGameObjectSliderOnRespawn: 1
 --- !u!114 &301626572502348817
 MonoBehaviour:
   m_ObjectHideFlags: 0

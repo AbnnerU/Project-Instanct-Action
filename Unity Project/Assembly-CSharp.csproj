@@ -104,11 +104,11 @@
     <Compile Include="Assets\Script\Interface\Abilities\IHasCastTime.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasTargetProvider.cs" />
     <Compile Include="Assets\Script\Status\Appliers\AttackSpeedByStatus.cs" />
-    <Compile Include="Assets\Script\Projectile\AbilityProjectile.cs" />
     <Compile Include="Assets\Script\Combat\HitReaction_CancelAndBlockComboController.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawner.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnode.cs" />
     <Compile Include="Assets\Script\Health\OnHit_VisualEffect.cs" />
+    <Compile Include="Assets\Script\Interface\Projectile\ICanShootProjectile.cs" />
     <Compile Include="Assets\Script\Player\HitReaction_DisableCollider.cs" />
     <Compile Include="Assets\Script\Combat\Events\AttackExecutionData.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\DashStatusBuffAutoSetup.cs" />
@@ -145,6 +145,7 @@
     <Compile Include="Assets\Script\Health\OnHit_Particles.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnodeNavMeshAjust.cs" />
     <Compile Include="Assets\Script\Interface\General\IUniqueId.cs" />
+    <Compile Include="Assets\Script\Scripts Pool\ReleaseAfterTime.cs" />
     <Compile Include="Assets\Script\Combat\Damage Effects\HealOnDamageDealt.cs" />
     <Compile Include="Assets\Script\Health\OnRespawn_UnityEvent.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\PiercingThrustAbilityAutoSetup.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Assets\Script\Scriptable Base\Enchantment\StatusUpgradeSO.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageResult.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawnerWithOffSet.cs" />
+    <Compile Include="Assets\Script\Projectile\DamageRequestProjectileShooter.cs" />
     <Compile Include="Assets\Script\Coins\Saver\CoinData.cs" />
     <Compile Include="Assets\Script\Player\PlayerDashAnimation.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler.cs" />
@@ -180,6 +182,7 @@
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IPlacementItemData.cs" />
     <Compile Include="Assets\Script\Combat\AttackHitbox.cs" />
+    <Compile Include="Assets\Script\Projectile\DamageRequestProjectile.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageData.cs" />
     <Compile Include="Assets\Script\Combat\Enum\DamageType.cs" />
     <Compile Include="Assets\Script\Status\StatusInfo.cs" />
@@ -197,6 +200,7 @@
     <Compile Include="Assets\Script\Interface\Selectable\ISelectableObject.cs" />
     <Compile Include="Assets\Script\Abilities\Active\LauchProjectileAbility.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTWaitForSeconds.cs" />
+    <Compile Include="Assets\Script\Waves\MN_Waves.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler_LoadingBar.cs" />
     <Compile Include="Assets\Script\Player\PlayerDirection.cs" />
     <Compile Include="Assets\Script\Health\LifeCycle_HandleCanvasActiveState.cs" />
