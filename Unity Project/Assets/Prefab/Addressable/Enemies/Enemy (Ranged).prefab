@@ -514,6 +514,7 @@ GameObject:
   - component: {fileID: 2153284052778431660}
   - component: {fileID: 5058952256331780876}
   - component: {fileID: 269525282480989534}
+  - component: {fileID: 3286850368120043239}
   - component: {fileID: 7930047445353007004}
   - component: {fileID: 526492648152875300}
   - component: {fileID: 2416860590309405740}
@@ -690,6 +691,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.DamageReceiver
   _hittableReference: {fileID: 7668894675120357355}
   _statusSource: {fileID: 3979419082900569362}
+--- !u!114 &3286850368120043239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668894675120357355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6ae09d3d95d6d4eb1e1615d5212376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.DamageKnockbackReceiver
+  _damageReceiverReference: {fileID: 7668894675120357355}
+  _targetTransform: {fileID: 2962371085109248886}
+  _navMeshAgent: {fileID: 1361017501748393965}
+  _active: 1
+  _ignoreIfKilled: 1
+  _useNavMeshAgentMove: 1
+  _stopNavMeshAgentDuringKnockback: 1
 --- !u!114 &7930047445353007004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +767,8 @@ MonoBehaviour:
   _attackHitbox: {fileID: 2416860590309405740}
   _animator: {fileID: 7345589929129320918}
   _characterAnimationController: {fileID: 8320340935477062313}
+  _movementTransform: {fileID: 2962371085109248886}
+  _movementDirectionReference: {fileID: 2962371085109248886}
   _comboAttackSet: {fileID: 0}
   _list_ComboAttackData:
   - _animationStateName: Attack
@@ -756,6 +778,61 @@ MonoBehaviour:
       _baseDamage: 0
       _physicForceScaling: 0
       _magicForceScaling: 0
+    _attackAdvance:
+      AdvanceDistance: 0
+      AvanceDuration: 0
+      AdvanceDelay: 0
+      AdvanceCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _attackKnockback:
+      KnockbackDistance: 0
+      KnockbackDuration: 0
+      KnockbackCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     _hitboxCenterOffset: {x: 0, y: 0, z: 0}
     _hitboxHalfExtents: {x: 0, y: 0, z: 0}
     _targetLayerMask:

@@ -174,7 +174,8 @@ namespace Scripts.Combat
                 gameObject,
                 receiver,
                 hitCollider,
-                hitCollider.ClosestPoint(_hitboxOrigin.position));
+                hitCollider.ClosestPoint(_hitboxOrigin.position),
+                attackData);
         }
 
         private void EnsureHitResultsCapacity(int maxTargets)

@@ -11,6 +11,7 @@ namespace Scripts.Combat
         public readonly GameObject Receiver;
         public readonly Collider HitCollider;
         public readonly Vector3 HitPoint;
+        public readonly ComboAttackData ComboAttackData;
 
         public DamageRequest(
             DamageData damageData,
@@ -18,7 +19,8 @@ namespace Scripts.Combat
             GameObject attacker,
             GameObject receiver,
             Collider hitCollider,
-            Vector3 hitPoint)
+            Vector3 hitPoint,
+            ComboAttackData comboAttackData = null)
         {
             DamageData = damageData;
             AttackerStatus = attackerStatus;
@@ -26,6 +28,7 @@ namespace Scripts.Combat
             Receiver = receiver;
             HitCollider = hitCollider;
             HitPoint = hitPoint;
+            ComboAttackData = comboAttackData;
         }
 
         public DamageRequest WithHit(GameObject receiver, Collider hitCollider, Vector3 hitPoint)
@@ -36,7 +39,8 @@ namespace Scripts.Combat
                 Attacker,
                 receiver,
                 hitCollider,
-                hitPoint);
+                hitPoint,
+                ComboAttackData);
         }
     }
 }
