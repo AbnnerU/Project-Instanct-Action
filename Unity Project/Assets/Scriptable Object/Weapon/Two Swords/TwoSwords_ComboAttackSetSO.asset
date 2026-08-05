@@ -94,7 +94,7 @@ MonoBehaviour:
   - _animationStateName: Attack 2
     _transitionDuration: 0.02
     _damageData:
-      _damageType: 0
+      _damageType: 1
       _baseDamage: 50
       _physicForceScaling: 1.2
       _magicForceScaling: 0

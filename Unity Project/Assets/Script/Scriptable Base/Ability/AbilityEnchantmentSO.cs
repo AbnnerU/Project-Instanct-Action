@@ -27,5 +27,10 @@ namespace Scripts.Enchantment
 
             MN_PlayerAbilities.Instance.AddAbility(AbilityPrefabReference, AbilityKind, List_DamageDatas, List_BuffDatas);
         }
+
+        public override string GetResolvedDescription()
+        {
+            return EnchantmentDescriptionFormatter.ResolveAbilityDescription(this, Description);
+        }
     }
 }

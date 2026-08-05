@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.WeaponEnchantmentSO
   ID: d2abbf6a-cb97-43ec-a938-c45455e3f391
   DisplayName: HeavyHammer
-  Description: 
+  Description: 'Ganha o martelo pessado.
+
+    - <attackdamage index=0>'
   IconReference:
     m_AssetGUID: cb9e700fd405ed1409bdc040a3e35254
     m_SubObjectName: 

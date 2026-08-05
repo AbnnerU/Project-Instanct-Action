@@ -51,7 +51,7 @@ namespace Scripts.Enchantment
                 _displayNameText.text = enchantment.DisplayName;
 
             if (_descriptionText != null)
-                _descriptionText.text = enchantment.Description;
+                _descriptionText.text = enchantment.GetResolvedDescription();
 
             if (_iconImage != null)
             {

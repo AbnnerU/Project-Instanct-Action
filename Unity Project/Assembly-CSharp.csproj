@@ -241,6 +241,7 @@
     <Compile Include="Assets\Script\AI\Main nodes\BTSelector.cs" />
     <Compile Include="Assets\Script\Combat\Data\ComboAttackData.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTIsTargetInRange.cs" />
+    <Compile Include="Assets\Script\Enchantment\Description\EnchantmentDescriptionFormatter.cs" />
     <Compile Include="Assets\Script\Player\HitReaction_BlockPlayerDash.cs" />
     <Compile Include="Assets\Script\Combat\DamageKnockbackReceiver.cs" />
     <Compile Include="Assets\Script\Progression\OnDeath_AddXp.cs" />

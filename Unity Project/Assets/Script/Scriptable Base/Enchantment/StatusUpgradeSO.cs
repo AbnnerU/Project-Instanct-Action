@@ -21,6 +21,11 @@ namespace Scripts.Enchantment
             for (int i = 0; i < _list_StatusModifiers.Count; i++)
                 _list_StatusModifiers[i].Apply(context.PlayerStatus);
         }
+
+        public override string GetResolvedDescription()
+        {
+            return EnchantmentDescriptionFormatter.ResolveStatusUpgradeDescription(this, Description);
+        }
     }
 
     [Serializable]

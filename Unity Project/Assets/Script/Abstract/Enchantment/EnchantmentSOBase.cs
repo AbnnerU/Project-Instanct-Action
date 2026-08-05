@@ -20,6 +20,11 @@ namespace Scripts.Enchantment
 
         public abstract void Apply(EnchantmentContext context);
 
+        public virtual string GetResolvedDescription()
+        {
+            return EnchantmentDescriptionFormatter.Resolve(this, Description);
+        }
+
 #if UNITY_EDITOR
         public void CreateId()
         {

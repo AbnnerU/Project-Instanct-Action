@@ -22,5 +22,10 @@ namespace Scripts.Enchantment
 
             MN_PlayerWeapon.Instance.EquipWeaponLoadout(_weaponLoadout);
         }
+
+        public override string GetResolvedDescription()
+        {
+            return EnchantmentDescriptionFormatter.ResolveWeaponDescription(this, Description);
+        }
     }
 }
