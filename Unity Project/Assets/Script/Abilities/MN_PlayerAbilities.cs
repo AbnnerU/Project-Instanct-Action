@@ -72,7 +72,7 @@ namespace Scripts.Abilities
 
         #region Public
 
-        public void AddAbility(AssetReferenceGameObject abilityPrefabReference, AbilityKind abilityKind)
+        public void AddAbility(AssetReferenceGameObject abilityPrefabReference,AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas)
         {
             if (abilityPrefabReference == null || !abilityPrefabReference.RuntimeKeyIsValid())
                 return;
@@ -81,7 +81,7 @@ namespace Scripts.Abilities
             AsyncOperationHandle<GameObject> loadHandle = abilityPrefabReference.InstantiateAsync(parent);
 
             _list_AbilityHandles.Add(loadHandle);
-            loadHandle.Completed += handle => AbilityLoadHandle_Completed(handle, abilityKind);
+            loadHandle.Completed += handle => AbilityLoadHandle_Completed(handle, abilityKind, list_DamageDatas, list_BuffDatas);
         }
 
         public bool TryExecuteActiveAbility(int activeAbilityIndex)
@@ -134,7 +134,7 @@ namespace Scripts.Abilities
                 _statusSource = _ownerObject.GetComponentInChildren<StatusInfoSourceBase>();
         }
 
-        private AbilityContext CreateContext()
+        private AbilityContext CreateContext(IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas)
         {
             GetReferences();
 
@@ -144,7 +144,9 @@ namespace Scripts.Abilities
                 _comboController,
                 _attackHitbox,
                 _playerDash,
-                _statusSource);
+                _statusSource,
+                list_DamageDatas,
+                list_BuffDatas);
         }
 
         private Transform GetAbilityContainer(AbilityKind abilityKind)
@@ -159,17 +161,17 @@ namespace Scripts.Abilities
 
         #region Spawn
 
-        private void AbilityLoadHandle_Completed(AsyncOperationHandle<GameObject> loadHandle, AbilityKind abilityKind)
+        private void AbilityLoadHandle_Completed(AsyncOperationHandle<GameObject> loadHandle, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas)
         {
             if (loadHandle.Status != AsyncOperationStatus.Succeeded || loadHandle.Result == null)
                 return;
 
-            SetupAbilityInstance(loadHandle.Result, abilityKind);
+            SetupAbilityInstance(loadHandle.Result, abilityKind, list_DamageDatas, list_BuffDatas);
         }
 
-        private void SetupAbilityInstance(GameObject abilityInstance, AbilityKind abilityKind)
+        private void SetupAbilityInstance(GameObject abilityInstance, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas)
         {
-            AbilityContext context = CreateContext();
+            AbilityContext context = CreateContext(list_DamageDatas,list_BuffDatas);
             AbilityAutoSetupBase[] autoSetups = abilityInstance.GetComponentsInChildren<AbilityAutoSetupBase>(true);
 
             for (int i = 0; i < autoSetups.Length; i++)

@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace Scripts.Abilities
 {
-    public class AttackBonusDamageAbility : AbilityBase
+    public class AttackBonusDamageAbility : AbilityBase, IDamageDataAbility
     {
-        #region Fields
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private ComboControllerBase _comboController;
         [SerializeField] private AttackHitbox _attackHitbox;
@@ -25,6 +24,12 @@ namespace Scripts.Abilities
         private readonly HashSet<int> _hashSet_BonusExecutionIds = new HashSet<int>();
         private readonly HashSet<int> _hashSet_ConsumedExecutionIds = new HashSet<int>();
 
+        #region IDamageDataAbility
+        public void SetDamageData(IReadOnlyList<DamageData> list_Damage)
+        {
+            if (list_Damage != null && list_Damage.Count > 0 && list_Damage[0] != null)
+                _bonusDamageData = list_Damage[0];
+        }
         #endregion
 
         #region Setup

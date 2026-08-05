@@ -73,10 +73,12 @@
     <Compile Include="Assets\Script\AI\OnDeath_StopBrainAndReleaseObject.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTStopAgent.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Combat\ComboAttackSetSO.cs" />
+    <Compile Include="Assets\Script\Interface\Abilities\IDamageDataAbility.cs" />
     <Compile Include="Assets\Script\Enchantment\MN_Enchantments.cs" />
     <Compile Include="Assets\Script\AI\Enum\AIState.cs" />
     <Compile Include="Assets\Script\Health\HealthManager.cs" />
     <Compile Include="Assets\Script\Animation\HitReaction_TriggerParameter.cs" />
+    <Compile Include="Assets\Script\Interface\Abilities\IBuffDataAbility.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasPositionProvider.cs" />
     <Compile Include="Assets\Script\Projectile\Projectile.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IAddressableButtonSpawner.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Assets\Script\Health\OnHit_VisualEffect.cs" />
     <Compile Include="Assets\Script\Interface\Projectile\ICanShootProjectile.cs" />
     <Compile Include="Assets\Script\Player\HitReaction_DisableCollider.cs" />
+    <Compile Include="Assets\Script\Combat\Data\BuffData.cs" />
     <Compile Include="Assets\Script\Combat\Events\AttackExecutionData.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\DashStatusBuffAutoSetup.cs" />
     <Compile Include="Assets\Script\Tier\Scriptable Base\Visual\EvolutionPathSO.cs" />

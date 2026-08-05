@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using Scripts.Combat;
 using Scripts.Managers;
 using Scripts.Player;
 using Scripts.Status;
@@ -6,29 +8,23 @@ using UnityEngine;
 
 namespace Scripts.Abilities
 {
-    public class TemporaryStatusBuffOnDashAbility : AbilityBase
+    public class TemporaryStatusBuffOnDashAbility : AbilityBase, IBuffDataAbility
     {
-        #region Fields
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private PlayerDash _dashComponent;
         [Header("Trigger")]
         [SerializeField] private AbilityTriggerType _triggerType = AbilityTriggerType.ON_DASH_FINISHED;
 
         [Header("Buff")]
-        [SerializeField] private StatusType _statusType = StatusType.PHYSIC_FORCE;
-        [SerializeField] private AbilityValueType _valueType = AbilityValueType.PERCENT_OF_CURRENT;
-        [SerializeField] private float _value = 25f;
-        [SerializeField] private float _duration = 3f;
+        [SerializeField] private BuffData _buffData;
         [SerializeField] private AbilityRefreshMode _refreshMode = AbilityRefreshMode.REFRESH_DURATION;
 
         private StatusData _statusToAffect;
-       
+
         private Coroutine _buffRoutine;
         private float _appliedValue;
         private bool _subscribed;
         private bool _buffActive;
-
-        #endregion
 
         #region Setup
 
@@ -53,6 +49,14 @@ namespace Scripts.Abilities
 
         #endregion
 
+        #region IBuffDataAbility
+        public void SetBuffData(IReadOnlyList<BuffData> list_BuffData)
+        {
+            if (list_BuffData != null && list_BuffData.Count > 0 && list_BuffData[0] != null)
+                _buffData = list_BuffData[0];
+        }
+        #endregion
+
         #region Public
 
         public override void Execute()
@@ -68,7 +72,7 @@ namespace Scripts.Abilities
             if (_subscribed || _dashComponent == null)
                 return;
 
-            _statusSource.TryGetStatusData(_statusType, out _statusToAffect);
+            _statusSource.TryGetStatusData(_buffData.StatusType, out _statusToAffect);
 
             _dashComponent.OnDashStarted += PlayerDash_OnDashStarted;
             _dashComponent.OnDashFinished += PlayerDash_OnDashFinished;
@@ -125,19 +129,19 @@ namespace Scripts.Abilities
             if (_buffRoutine != null)
                 StopCoroutine(_buffRoutine);
 
-            if (_duration > 0f)
+            if (_buffData.Duration > 0f)
                 _buffRoutine = StartCoroutine(BuffRoutine());
         }
 
         private IEnumerator BuffRoutine()
         {
-            yield return new WaitForSeconds(_duration);
+            yield return new WaitForSeconds(_buffData.Duration);
             RemoveBuff();
         }
 
         private void RemoveBuff()
         {
-            if (!_buffActive || _statusSource == null || _statusToAffect==null)
+            if (!_buffActive || _statusSource == null || _statusToAffect == null)
                 return;
 
             if (_buffRoutine != null)
@@ -153,10 +157,10 @@ namespace Scripts.Abilities
 
         private float GetValueToAdd()
         {
-            if (_valueType == AbilityValueType.FLAT)
-                return _value;
+            if (_buffData.ValueType == AbilityValueType.FLAT)
+                return _buffData.Value;
 
-            return _statusToAffect.CurrentValue * (_value / 100f);
+            return _statusToAffect.CurrentValue * (_buffData.Value / 100f);
         }
         #endregion
     }

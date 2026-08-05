@@ -29,3 +29,9 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  List_DamageDatas:
+  - _damageType: 1
+    _baseDamage: 50
+    _physicForceScaling: 0
+    _magicForceScaling: 0.5
+  List_BuffDatas: []

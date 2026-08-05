@@ -16,6 +16,7 @@ namespace Scripts.Abilities
                 return;
 
             _ability.Setup(context.ComboController, context.AttackHitbox, context.StatusSource);
+            _ability.SetDamageData(context.Lits_DamageData);
         }
     }
 }

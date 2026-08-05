@@ -15,6 +15,7 @@ namespace Scripts.Abilities
                 return;
 
             _ability.Setup(context.StatusSource, context.PlayerDash);
+            _ability.SetBuffData(context.Lits_BuffData);
         }
     }
 }

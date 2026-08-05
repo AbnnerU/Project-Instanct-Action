@@ -6,15 +6,14 @@ using Scripts.Player;
 using Scripts.Status;
 using UnityEngine;
 using Scripts.Projectile;
+using System.Collections.Generic;
 
 namespace Scripts.Abilities
 {
-    public class LauchProjectileAbility : AbilityBase, IHasCastTime
+    public class LauchProjectileAbility : AbilityBase, IHasCastTime, IDamageDataAbility
     {
         public event Action<float> OnCastTimeStarted;
         public event Action<float> OnCastTimeFinished;
-
-        #region Fields
 
         [Header("References")]
         [SerializeField] private GameObject _projectilePrefab;
@@ -55,6 +54,12 @@ namespace Scripts.Abilities
         private Coroutine _castRoutine;
         public float CastTime { get => _castTime; set => _castTime = value; }
 
+        #region IDamageDataAbility
+        public void SetDamageData(IReadOnlyList<DamageData> list_Damage)
+        {
+            if (list_Damage != null && list_Damage.Count > 0 && list_Damage[0] != null)
+                _damageData = list_Damage[0];
+        }
         #endregion
 
         #region Public
@@ -284,7 +289,6 @@ namespace Scripts.Abilities
             if (activeState && _dashComponent != null)
                 _dashComponent.Enable();
         }
-
         #endregion
     }
 }

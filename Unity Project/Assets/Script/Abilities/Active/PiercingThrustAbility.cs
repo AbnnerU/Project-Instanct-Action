@@ -8,9 +8,10 @@ using UnityEngine;
 
 namespace Scripts.Abilities
 {
-    public class PiercingThrustAbility : AbilityBase, IHasCastTime
+    public class PiercingThrustAbility : AbilityBase, IHasCastTime, IDamageDataAbility
     {
-        #region Fields
+        public event Action<float> OnCastTimeStarted;
+        public event Action<float> OnCastTimeFinished;
 
         [Header("References")]
         [SerializeField] private Transform _targetTransform;
@@ -55,10 +56,15 @@ namespace Scripts.Abilities
         private readonly HashSet<IDamageReceiver> _hashSet_DamageReceivers = new HashSet<IDamageReceiver>();
         public float CastTime { get => _castTime; set => _castTime = value; }
 
-        public event Action<float> OnCastTimeStarted;
-        public event Action<float> OnCastTimeFinished;
 
+        #region IDamageDataAbility
+        public void SetDamageData(IReadOnlyList<DamageData> list_Damage)
+        {
+            if (list_Damage != null && list_Damage.Count > 0 && list_Damage[0] != null)
+                _damageData = list_Damage[0];
+        }
         #endregion
+
 
         #region Public
 

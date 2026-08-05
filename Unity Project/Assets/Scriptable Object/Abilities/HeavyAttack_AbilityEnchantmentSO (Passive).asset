@@ -29,3 +29,9 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  List_DamageDatas: []
+  List_BuffDatas:
+  - _statusType: 3
+    _valueType: 0
+    _value: 60
+    _duration: 3

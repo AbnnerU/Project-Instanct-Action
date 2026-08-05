@@ -2,6 +2,7 @@ using Scripts.Combat;
 using Scripts.Managers;
 using Scripts.Player;
 using Scripts.Status;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Abilities
@@ -15,6 +16,8 @@ namespace Scripts.Abilities
         public AttackHitbox AttackHitbox { get; }
         public PlayerDash PlayerDash { get; }
         public StatusInfoSourceBase StatusSource { get; }
+        public IReadOnlyList<DamageData> Lits_DamageData { get; }
+        public IReadOnlyList<BuffData> Lits_BuffData { get; }
 
         public AbilityContext(
             GameObject ownerObject,
@@ -22,7 +25,9 @@ namespace Scripts.Abilities
             ComboControllerBase comboController,
             AttackHitbox attackHitbox,
             PlayerDash playerDash,
-            StatusInfoSourceBase statusSource)
+            StatusInfoSourceBase statusSource,
+            IReadOnlyList<DamageData> list_damageData,
+            IReadOnlyList<BuffData> lits_buffData)
         {
             OwnerObject = ownerObject;
             OwnerTransform = ownerObject != null ? ownerObject.transform : null;
@@ -31,6 +36,8 @@ namespace Scripts.Abilities
             AttackHitbox = attackHitbox;
             PlayerDash = playerDash;
             StatusSource = statusSource;
+            Lits_DamageData = list_damageData;
+            Lits_BuffData = lits_buffData;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Scripts.Abilities
                 return;
 
             _ability.Setup( context.StatusSource, context.ComboController, context.OwnerObject, context.PlayerDash);
+            _ability.SetDamageData(context.Lits_DamageData);
         }
     }
 }

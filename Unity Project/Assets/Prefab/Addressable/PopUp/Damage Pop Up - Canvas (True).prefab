@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 730746803522714258, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_Name
-      value: Damage Pop Up - Canvas (True) Variant
+      value: Damage Pop Up - Canvas (True)
+      objectReference: {fileID: 0}
+    - target: {fileID: 785264846029073395, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5408708720220424681, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_fontColor.b
