@@ -109,6 +109,7 @@
     <Compile Include="Assets\Script\Combat\HitReaction_CancelAndBlockComboController.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawner.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnode.cs" />
+    <Compile Include="Assets\Script\Status\UI\StatusInfoTextView.cs" />
     <Compile Include="Assets\Script\Health\OnHit_VisualEffect.cs" />
     <Compile Include="Assets\Script\Interface\Projectile\ICanShootProjectile.cs" />
     <Compile Include="Assets\Script\Player\HitReaction_DisableCollider.cs" />
@@ -140,6 +141,8 @@
     <Compile Include="Assets\Script\AI\Main nodes\BTInverter.cs" />
     <Compile Include="Assets\Script\Interface\General\ICursorVisibilyHandler.cs" />
     <Compile Include="Assets\Script\Progression\MN_Xp.cs" />
+    <Compile Include="Assets\Script\Abilities\UI\AbilitySlotView.cs" />
+    <Compile Include="Assets\Script\Panel\PanelAnimation.cs" />
     <Compile Include="Assets\Script\Abstract\Do Action\DoActionBase.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingTaskSOBase.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ObjectPoolContainer.cs" />
@@ -167,12 +170,14 @@
     <Compile Include="Assets\Script\Loading Scene\SIS_GameSession.cs" />
     <Compile Include="Assets\Script\Abilities\Active\PiercingThrustAbility.cs" />
     <Compile Include="Assets\Script\Singleton\Singleton.cs" />
+    <Compile Include="Assets\Script\Player\UI\PlayerDashCooldownView.cs" />
     <Compile Include="Assets\Script\Interface\Tier\Visual\IHasEvolutionVisualInitialization.cs" />
     <Compile Include="Assets\Script\Interface\Animation\IHasCurrentVelocity.cs" />
     <Compile Include="Assets\Script\Interface\Effects\IHasEffectsPlayer.cs" />
     <Compile Include="Assets\Script\Abilities\MN_PlayerAbilities.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IPreDestroyHandler.cs" />
     <Compile Include="Assets\Script\Abstract\Health\HealthBasics.cs" />
+    <Compile Include="Assets\Script\Abilities\UI\PlayerAbilitySlotsView.cs" />
     <Compile Include="Assets\Script\Status\StatusInfoSource.cs" />
     <Compile Include="Assets\Script\Progression\XpBar.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ObjectPool.cs" />
@@ -1417,6 +1422,10 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI.Analytics">

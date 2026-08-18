@@ -1,35 +1,27 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Enchantment
 {
-    public class EnchantmentSelectionUI : MonoBehaviour
+    public class EnchantmentSelectionUI : MonoBehaviour, IPanelHandler
     {
+        public event Action<bool> OnPanelOpen;
+
         [SerializeField] private GameObject _panelObject;
         [SerializeField] private List<EnchantmentCardUI> _list_Cards = new List<EnchantmentCardUI>();
         [SerializeField] private bool _pauseGameWhileSelecting = true;
 
         private float _previousTimeScale = 1f;
-        private bool _isOpen;
+        private int _expectedIconsAmount = 0;
+        private int _iconsLoaded = 0;
         private bool _isSubscribed;
-        private CanvasGroup _selfCanvasGroup;
 
-        private void Awake()
-        {
-            if (_panelObject == null)
-                _panelObject = gameObject;
+        public bool IsPanelOpen { get; set; }
 
-            if (_panelObject == gameObject)
-                _selfCanvasGroup = GetComponent<CanvasGroup>() ?? gameObject.AddComponent<CanvasGroup>();
+        private void Awake() => Close();
 
-            TrySubscribe();
-            Close();
-        }
-
-        private void Start()
-        {
-            TrySubscribe();
-        }
+        private void Start() => TrySubscribe();
 
         private void OnDestroy()
         {
@@ -42,52 +34,44 @@ namespace Scripts.Enchantment
             Open(enchantments);
         }
 
-        public void Open(IReadOnlyList<EnchantmentSOBase> enchantments)
+        public void Open(IReadOnlyList<EnchantmentSOBase> list_Enchantments)
         {
-            if (enchantments == null || enchantments.Count == 0)
+            if (list_Enchantments == null || list_Enchantments.Count == 0)
                 return;
 
-            if (_selfCanvasGroup != null)
-                SetCanvasGroupVisible(true);
-            else if (_panelObject != null)
-                _panelObject.SetActive(true);
+            _expectedIconsAmount=list_Enchantments.Count;
 
-            if (!_isOpen && _pauseGameWhileSelecting)
+            if (!IsPanelOpen && _pauseGameWhileSelecting)
             {
                 _previousTimeScale = Time.timeScale;
                 Time.timeScale = 0f;
             }
 
-            _isOpen = true;
+            _iconsLoaded = 0;
 
             for (int i = 0; i < _list_Cards.Count; i++)
             {
                 if (_list_Cards[i] == null) continue;
 
-                if (i < enchantments.Count)
-                    _list_Cards[i].Setup(enchantments[i], SelectEnchantment);
+                if (i < list_Enchantments.Count)
+                    _list_Cards[i].Setup(list_Enchantments[i], SelectEnchantment);
                 else
-                    _list_Cards[i].Clear();
+                    _list_Cards[i].SetAsEmpty(true);
             }
         }
 
         public void Close()
         {
-            if (_selfCanvasGroup != null)
-                SetCanvasGroupVisible(false);
-            else if (_panelObject != null)
-                _panelObject.SetActive(false);
-
             for (int i = 0; i < _list_Cards.Count; i++)
             {
                 if (_list_Cards[i] != null)
                     _list_Cards[i].Clear();
             }
 
-            if (_isOpen && _pauseGameWhileSelecting)
+            if (_pauseGameWhileSelecting)
                 Time.timeScale = _previousTimeScale;
 
-            _isOpen = false;
+            ClosePanel();
         }
 
         private void SelectEnchantment(EnchantmentSOBase enchantment)
@@ -105,13 +89,36 @@ namespace Scripts.Enchantment
 
             MN_Enchantments.Instance.OnEnchantmentsOffered += Enchantments_OnEnchantmentsOffered;
             _isSubscribed = true;
+
+            for (int i = 0; i < _list_Cards.Count; i++)
+            {
+                _list_Cards[i].OnLoadIconCompleted += AllIconsLoaded;
+                _list_Cards[i].OnSelected += SelectEnchantment;
+            }
         }
 
-        private void SetCanvasGroupVisible(bool visible)
+        private void AllIconsLoaded()
         {
-            _selfCanvasGroup.alpha = visible ? 1f : 0f;
-            _selfCanvasGroup.interactable = visible;
-            _selfCanvasGroup.blocksRaycasts = visible;
+            if (IsPanelOpen) return;
+
+            _iconsLoaded++;
+
+            if (_iconsLoaded == _expectedIconsAmount)
+                OpenPanel();
+        }
+
+        public void OpenPanel()
+        {
+            _panelObject.SetActive(true);
+            IsPanelOpen = true;
+            OnPanelOpen?.Invoke(IsPanelOpen);
+        }
+
+        public void ClosePanel()
+        {
+            _panelObject.SetActive(false);
+            IsPanelOpen = false;
+            OnPanelOpen?.Invoke(IsPanelOpen);
         }
     }
 }

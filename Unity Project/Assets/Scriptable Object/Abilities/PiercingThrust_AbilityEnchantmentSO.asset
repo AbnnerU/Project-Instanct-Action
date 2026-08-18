@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
   ID: 6419a4a2-faa7-4f00-aa1c-36f17553ba74
   DisplayName: Piercing Thrust
-  Description: 
+  Description: "Avan\xE7a em uma dire\xE7\xE3o, dando <damage index=0> a todos os
+    inimigos no caminho."
   IconReference:
     m_AssetGUID: bb286fbbb93a8b74e8d35ca31b23b7e6
     m_SubObjectName: 

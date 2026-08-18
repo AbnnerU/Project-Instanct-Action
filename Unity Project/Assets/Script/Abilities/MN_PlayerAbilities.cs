@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Scripts.Combat;
+using Scripts.Enchantment;
 using Scripts.Managers;
 using Scripts.Player;
 using Scripts.Status;
@@ -39,6 +40,8 @@ namespace Scripts.Abilities
 
         public IReadOnlyList<AbilityBase> List_PassiveAbilities => _list_PassiveAbilities;
         public IReadOnlyList<AbilityBase> List_ActiveAbilities => _list_ActiveAbilities;
+        public IReadOnlyList<ActiveAbilitySlot> List_ActiveAbilitySlots => _list_ActiveAbilitySlots;
+        public event Action<int, ActiveAbilitySlot> OnActiveAbilitySlotUpdated;
 
         #endregion
 
@@ -72,7 +75,12 @@ namespace Scripts.Abilities
 
         #region Public
 
-        public void AddAbility(AssetReferenceGameObject abilityPrefabReference,AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas)
+        public void AddAbility(AssetReferenceGameObject abilityPrefabReference, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas)
+        {
+            AddAbility(abilityPrefabReference, abilityKind, list_DamageDatas, list_BuffDatas, null);
+        }
+
+        public void AddAbility(AssetReferenceGameObject abilityPrefabReference, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas, AssetReferenceSprite iconReference)
         {
             if (abilityPrefabReference == null || !abilityPrefabReference.RuntimeKeyIsValid())
                 return;
@@ -81,7 +89,7 @@ namespace Scripts.Abilities
             AsyncOperationHandle<GameObject> loadHandle = abilityPrefabReference.InstantiateAsync(parent);
 
             _list_AbilityHandles.Add(loadHandle);
-            loadHandle.Completed += handle => AbilityLoadHandle_Completed(handle, abilityKind, list_DamageDatas, list_BuffDatas);
+            loadHandle.Completed += handle => AbilityLoadHandle_Completed(handle, abilityKind, list_DamageDatas, list_BuffDatas, iconReference);
         }
 
         public bool TryExecuteActiveAbility(int activeAbilityIndex)
@@ -161,15 +169,15 @@ namespace Scripts.Abilities
 
         #region Spawn
 
-        private void AbilityLoadHandle_Completed(AsyncOperationHandle<GameObject> loadHandle, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas)
+        private void AbilityLoadHandle_Completed(AsyncOperationHandle<GameObject> loadHandle, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas, AssetReferenceSprite iconReference)
         {
             if (loadHandle.Status != AsyncOperationStatus.Succeeded || loadHandle.Result == null)
                 return;
 
-            SetupAbilityInstance(loadHandle.Result, abilityKind, list_DamageDatas, list_BuffDatas);
+            SetupAbilityInstance(loadHandle.Result, abilityKind, list_DamageDatas, list_BuffDatas, iconReference);
         }
 
-        private void SetupAbilityInstance(GameObject abilityInstance, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas)
+        private void SetupAbilityInstance(GameObject abilityInstance, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas, AssetReferenceSprite iconReference)
         {
             AbilityContext context = CreateContext(list_DamageDatas,list_BuffDatas);
             AbilityAutoSetupBase[] autoSetups = abilityInstance.GetComponentsInChildren<AbilityAutoSetupBase>(true);
@@ -182,11 +190,11 @@ namespace Scripts.Abilities
             for (int i = 0; i < abilities.Length; i++)
             {
                 abilities[i].Initialize();
-                AddToList(abilities[i], abilityKind);
+                AddToList(abilities[i], abilityKind, iconReference);
             }
         }
 
-        private void AddToList(AbilityBase ability, AbilityKind abilityKind)
+        private void AddToList(AbilityBase ability, AbilityKind abilityKind, AssetReferenceSprite iconReference)
         {
             if (ability == null)
                 return;
@@ -195,7 +203,7 @@ namespace Scripts.Abilities
             {
                 _list_ActiveAbilities.Add(ability);
                 SubscribeAbilityEvents(ability);
-                AssignAbilityToSlot(ability);
+                AssignAbilityToSlot(ability, iconReference);
             }
             else
             {
@@ -223,23 +231,29 @@ namespace Scripts.Abilities
 
         #region Active Slots
 
-        private void AssignAbilityToSlot(AbilityBase ability)
+        private void AssignAbilityToSlot(AbilityBase ability, AssetReferenceSprite iconReference)
         {
             if (ability == null || _list_ActiveAbilitySlots == null || _list_ActiveAbilitySlots.Count == 0)
                 return;
 
             ActiveAbilitySlot slot = GetFirstEmptySlot();
+            int slotIndex = GetSlotIndex(slot);
 
             if (slot == null)
+            {
                 slot = _list_ActiveAbilitySlots[0];
+                slotIndex = 0;
+            }
 
             if (slot == null)
                 return;
 
-            slot.SetAbility(ability);
+            slot.SetAbility(ability, iconReference);
 
             if (_isDashBlockingAbilitySlots)
                 slot.SetBlocked(true);
+
+            OnActiveAbilitySlotUpdated?.Invoke(slotIndex, slot);
         }
 
         private ActiveAbilitySlot GetFirstEmptySlot()
@@ -251,6 +265,20 @@ namespace Scripts.Abilities
             }
 
             return null;
+        }
+
+        private int GetSlotIndex(ActiveAbilitySlot slot)
+        {
+            if (slot == null || _list_ActiveAbilitySlots == null)
+                return -1;
+
+            for (int i = 0; i < _list_ActiveAbilitySlots.Count; i++)
+            {
+                if (_list_ActiveAbilitySlots[i] == slot)
+                    return i;
+            }
+
+            return -1;
         }
 
         private void EnableSlotInputs()
@@ -400,6 +428,7 @@ namespace Scripts.Abilities
             public Action<float> OnAbilityCooldownStarted;
             public Action<float> OnAbilityCooldownCompleted;
             public Action<AbilitySlotState> OnAbilitySlotStateUpdated;
+            public Action<ActiveAbilitySlot> OnAbilityUpdated;
 
             [SerializeField] private AbilitySlotState _slotState;
             [SerializeField] private InputActionReference _inputAction;
@@ -410,8 +439,10 @@ namespace Scripts.Abilities
             private bool _isInCooldown;
 
             public AbilityBase Ability => _ability;
+            public AssetReferenceSprite IconReference { get; private set; }
             public bool IsEmpty => _ability == null;
             public AbilitySlotState SlotState => _slotState;
+            public IHasCooldown CooldownHandler => _cooldownHandler;
 
             public IHasCooldown _cooldownHandler;
 
@@ -424,6 +455,11 @@ namespace Scripts.Abilities
 
             public void SetAbility(AbilityBase ability)
             {
+                SetAbility(ability, null);
+            }
+
+            public void SetAbility(AbilityBase ability, AssetReferenceSprite iconReference)
+            {
                 if (_cooldownHandler!=null)
                 {
                     _cooldownHandler.OnCooldownStarted -= StartedCooldown;
@@ -431,6 +467,7 @@ namespace Scripts.Abilities
                 }
 
                 _ability = ability;
+                IconReference = iconReference;
                 _cooldownHandler = null;
                 _blockCount = 0;
                 _isInCooldown = false;
@@ -444,6 +481,8 @@ namespace Scripts.Abilities
                     _cooldownHandler.OnCooldownStarted += StartedCooldown;
                     _cooldownHandler.OnCooldownCompleted += CompletedCooldown;
                 }
+
+                OnAbilityUpdated?.Invoke(this);
             }
 
             public void SetBlocked(bool blocked)

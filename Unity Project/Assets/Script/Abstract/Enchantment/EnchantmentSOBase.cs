@@ -8,7 +8,9 @@ namespace Scripts.Enchantment
 {
     public abstract class EnchantmentSOBase : ScriptableObject
     {
+#if UNITY_EDITOR
         [Button(nameof(CreateId))]
+#endif
         public string ID;
         public string DisplayName;
         [TextArea]

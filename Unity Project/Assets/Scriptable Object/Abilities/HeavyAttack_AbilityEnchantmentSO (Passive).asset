@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
   ID: d8659eb5-1904-45cd-bb27-bece9d69bf5b
   DisplayName: Heavy Attack (Passive)
-  Description: Depois de atacar ganha X de Poder Fisico por 3 segundos
+  Description: "Depois de usar o dash, ganha <buff index=0> por <buffduration index=0>.
+    Usar o dash novamente reseta a dura\xE7\xE3o."
   IconReference:
     m_AssetGUID: 2b908f5f20beff14fa10bdef4506d4d1
     m_SubObjectName: 

@@ -117,6 +117,16 @@ namespace Scripts.Player
             return directionSide == DirectionSide.RIGHT ? _rightCooldownTimer > 0f : _leftCooldownTimer > 0f;
         }
 
+        public float GetCooldownFillAmount(DirectionSide directionSide)
+        {
+            float cooldown = GetCooldown(directionSide);
+
+            if (cooldown <= 0f)
+                return 0f;
+
+            return Mathf.Clamp01(GetCooldownTimer(directionSide) / cooldown);
+        }
+
         private IEnumerator DashRoutine(DirectionSide directionSide)
         {
             _isDashing = true;
@@ -173,6 +183,11 @@ namespace Scripts.Player
         private float GetCooldown(DirectionSide directionSide)
         {
             return directionSide == DirectionSide.RIGHT ? _rightCooldown : _leftCooldown;
+        }
+
+        private float GetCooldownTimer(DirectionSide directionSide)
+        {
+            return directionSide == DirectionSide.RIGHT ? _rightCooldownTimer : _leftCooldownTimer;
         }
 
         private Vector3 GetDirectionVector(DirectionSide directionSide)

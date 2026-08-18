@@ -25,7 +25,7 @@ namespace Scripts.Enchantment
             if (MN_PlayerAbilities.Instance == null)
                 return;
 
-            MN_PlayerAbilities.Instance.AddAbility(AbilityPrefabReference, AbilityKind, List_DamageDatas, List_BuffDatas);
+            MN_PlayerAbilities.Instance.AddAbility(AbilityPrefabReference, AbilityKind, List_DamageDatas, List_BuffDatas, IconReference);
         }
 
         public override string GetResolvedDescription()

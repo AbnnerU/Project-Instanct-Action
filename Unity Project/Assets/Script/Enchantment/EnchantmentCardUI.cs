@@ -9,14 +9,18 @@ namespace Scripts.Enchantment
 {
     public class EnchantmentCardUI : MonoBehaviour
     {
+        public Action OnLoadIconCompleted;
+        public Action<EnchantmentSOBase> OnSelected;
+
         [SerializeField] private Button _buttonComponent;
         [SerializeField] private Image _iconImage;
         [SerializeField] private TMP_Text _displayNameText;
         [SerializeField] private TMP_Text _descriptionText;
 
         private EnchantmentSOBase _enchantment;
-        private Action<EnchantmentSOBase> _onSelected;
         private AsyncOperationHandle<Sprite> _iconLoadHandle;
+
+        private GameObject _thisObject;
 
         private void Awake()
         {
@@ -25,6 +29,8 @@ namespace Scripts.Enchantment
 
             if (_buttonComponent != null)
                 _buttonComponent.onClick.AddListener(Select);
+
+            _thisObject = gameObject;
         }
 
         private void OnDestroy()
@@ -37,10 +43,11 @@ namespace Scripts.Enchantment
 
         public void Setup(EnchantmentSOBase enchantment, Action<EnchantmentSOBase> onSelected)
         {
+            SetAsEmpty(false);
+
             ReleaseIconHandle();
 
             _enchantment = enchantment;
-            _onSelected = onSelected;
 
             gameObject.SetActive(enchantment != null);
 
@@ -54,10 +61,7 @@ namespace Scripts.Enchantment
                 _descriptionText.text = enchantment.GetResolvedDescription();
 
             if (_iconImage != null)
-            {
-                _iconImage.enabled = false;
                 LoadIcon(enchantment.IconReference);
-            }
         }
 
         public void Clear()
@@ -65,7 +69,6 @@ namespace Scripts.Enchantment
             ReleaseIconHandle();
 
             _enchantment = null;
-            _onSelected = null;
 
             if (_displayNameText != null)
                 _displayNameText.text = string.Empty;
@@ -78,8 +81,15 @@ namespace Scripts.Enchantment
                 _iconImage.sprite = null;
                 _iconImage.enabled = false;
             }
+        }
 
-            gameObject.SetActive(false);
+
+        public void SetAsEmpty(bool isEmpty)
+        {
+            if(_thisObject == null)
+                _thisObject = gameObject;
+
+            _thisObject.SetActive(!isEmpty);
         }
 
         private void Select()
@@ -87,7 +97,7 @@ namespace Scripts.Enchantment
             if (_enchantment == null)
                 return;
 
-            _onSelected?.Invoke(_enchantment);
+            OnSelected?.Invoke(_enchantment);
         }
 
         private void LoadIcon(AssetReferenceSprite iconReference)
@@ -95,7 +105,7 @@ namespace Scripts.Enchantment
             if (iconReference == null || !iconReference.RuntimeKeyIsValid())
                 return;
 
-            _iconLoadHandle = iconReference.LoadAssetAsync();
+            _iconLoadHandle = Addressables.LoadAssetAsync<Sprite>(iconReference.RuntimeKey);
             _iconLoadHandle.Completed += IconLoadHandle_Completed;
         }
 
@@ -105,7 +115,9 @@ namespace Scripts.Enchantment
                 return;
 
             _iconImage.sprite = handle.Result;
-            _iconImage.enabled = handle.Result != null;
+            _iconImage.enabled = true;
+
+            OnLoadIconCompleted?.Invoke();
         }
 
         private void ReleaseIconHandle()

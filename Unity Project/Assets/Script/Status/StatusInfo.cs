@@ -8,6 +8,11 @@ namespace Scripts.Status
     {
         public List<StatusData> List_StatusData = new List<StatusData>();
 
+        public StatusData GetStatusData(StatusType statusType)
+        {
+            return List_StatusData.Find(x => x.StatusType == statusType);
+        }
+
         public float GetCurrentValueOf(StatusType statusType)
         {
             StatusData statusData = List_StatusData.Find(x => x.StatusType == statusType);
@@ -28,6 +33,10 @@ namespace Scripts.Status
                 return 0;
         }
 
+        public bool HasStatusType(StatusType statusType)
+        {
+            return List_StatusData.Find(x => x.StatusType == statusType) != null ? true : false;
+        }
 
         public void Initialize()
         {
@@ -45,10 +54,22 @@ namespace Scripts.Status
         public float BaseValue;
         public float CurrentValue;
 
-        public void AddCurrentValue(float valueToAdd) => CurrentValue += valueToAdd;
+        public void AddCurrentValue(float valueToAdd)
+        {
+            CurrentValue += valueToAdd;
+            OnCurrentValueUpdated?.Invoke(CurrentValue);
+        }
 
-        public void RemoveCurrentValue(float valueToRemove) => CurrentValue -= valueToRemove;
+        public void RemoveCurrentValue(float valueToRemove)
+        {
+            CurrentValue -= valueToRemove;
+            OnCurrentValueUpdated?.Invoke(CurrentValue);
+        }
 
-        public void ResetCurrentValue() => CurrentValue = BaseValue;
+        public void ResetCurrentValue()
+        {
+            CurrentValue = BaseValue;
+            OnCurrentValueUpdated?.Invoke(CurrentValue);
+        }
     }
 }

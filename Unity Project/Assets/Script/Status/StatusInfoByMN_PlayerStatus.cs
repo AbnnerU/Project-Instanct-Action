@@ -11,7 +11,10 @@ namespace Scripts.Status
 
         public override StatusInfo GetStatusInfo()
         {
-            if(_playerStatusManager)
+            if(_playerStatusManager == null)
+                _playerStatusManager = MN_PlayerStatus.Instance;
+
+            if (_playerStatusManager)
                 return _playerStatusManager.GetStatusInfo();
             else
                 return null;

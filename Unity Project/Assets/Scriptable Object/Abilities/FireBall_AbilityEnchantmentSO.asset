@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
   ID: 04b71738-27d3-4a1f-bdfc-c0e298144373
   DisplayName: Fire Ball
-  Description: 
+  Description: 'Atira uma bola de fogo que da <damage index = 0>. '
   IconReference:
     m_AssetGUID: 162e298589930b74898da9e368bc46b3
     m_SubObjectName: 

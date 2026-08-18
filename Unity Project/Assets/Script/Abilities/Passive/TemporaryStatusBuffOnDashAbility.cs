@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Scripts.Combat;
-using Scripts.Managers;
 using Scripts.Player;
 using Scripts.Status;
 using UnityEngine;
