@@ -15,6 +15,8 @@ namespace Scripts.Enchantment
         private float _previousTimeScale = 1f;
         private int _expectedIconsAmount = 0;
         private int _iconsLoaded = 0;
+        private bool _isSelectionActive;
+        private bool _hasPausedGame;
         private bool _isSubscribed;
 
         public bool IsPanelOpen { get; set; }
@@ -39,12 +41,23 @@ namespace Scripts.Enchantment
             if (list_Enchantments == null || list_Enchantments.Count == 0)
                 return;
 
-            _expectedIconsAmount=list_Enchantments.Count;
+            if (_isSelectionActive)
+                return;
 
-            if (!IsPanelOpen && _pauseGameWhileSelecting)
+            _isSelectionActive = true;
+            _expectedIconsAmount = GetExpectedIconsAmount(list_Enchantments);
+
+            if (_expectedIconsAmount <= 0)
+            {
+                _isSelectionActive = false;
+                return;
+            }
+
+            if (_pauseGameWhileSelecting)
             {
                 _previousTimeScale = Time.timeScale;
                 Time.timeScale = 0f;
+                _hasPausedGame = true;
             }
 
             _iconsLoaded = 0;
@@ -68,18 +81,27 @@ namespace Scripts.Enchantment
                     _list_Cards[i].Clear();
             }
 
-            if (_pauseGameWhileSelecting)
+            if (_pauseGameWhileSelecting && _hasPausedGame)
+            {
                 Time.timeScale = _previousTimeScale;
+                _hasPausedGame = false;
+            }
 
+            _isSelectionActive = false;
             ClosePanel();
         }
 
         private void SelectEnchantment(EnchantmentSOBase enchantment)
         {
-            if (MN_Enchantments.Instance != null)
-                MN_Enchantments.Instance.ApplyEnchantment(enchantment);
-
-            Close();
+            try
+            {
+                if (MN_Enchantments.Instance != null)
+                    MN_Enchantments.Instance.ApplyEnchantment(enchantment);
+            }
+            finally
+            {
+                Close();
+            }
         }
 
         private void TrySubscribe()
@@ -103,8 +125,21 @@ namespace Scripts.Enchantment
 
             _iconsLoaded++;
 
-            if (_iconsLoaded == _expectedIconsAmount)
+            if (_iconsLoaded >= _expectedIconsAmount)
                 OpenPanel();
+        }
+
+        private int GetExpectedIconsAmount(IReadOnlyList<EnchantmentSOBase> list_Enchantments)
+        {
+            int expectedIconsAmount = 0;
+
+            for (int i = 0; i < _list_Cards.Count; i++)
+            {
+                if (_list_Cards[i] != null && i < list_Enchantments.Count)
+                    expectedIconsAmount++;
+            }
+
+            return expectedIconsAmount;
         }
 
         public void OpenPanel()

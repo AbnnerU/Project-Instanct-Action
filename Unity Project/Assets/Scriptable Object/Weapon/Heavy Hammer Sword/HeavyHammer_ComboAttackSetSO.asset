@@ -84,8 +84,164 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    _hitboxCenterOffset: {x: 0, y: 0, z: 1.1}
-    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 1.1}
+    _hitboxCenterOffset: {x: 0, y: 0, z: 1.02}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 1.02}
+    _targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _queryTriggerInteraction: 0
+    _maxTargets: 5
+  - _animationStateName: Attack 2
+    _transitionDuration: 0.02
+    _damageData:
+      _damageType: 0
+      _baseDamage: 85
+      _physicForceScaling: 2
+      _magicForceScaling: 0
+    _attackAdvance:
+      AdvanceDistance: 0.2
+      AvanceDuration: 0.5
+      AdvanceDelay: 0.1
+      AdvanceCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.037581705
+        - serializedVersion: 3
+          time: 0.6083195
+          value: 0.065752454
+          inSlope: 0.13469714
+          outSlope: 0.13469714
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.1330376
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _attackKnockback:
+      KnockbackDistance: 0.2
+      KnockbackDuration: 0.25
+      KnockbackCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _hitboxCenterOffset: {x: 0, y: 0, z: 1.02}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 1.02}
+    _targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _queryTriggerInteraction: 0
+    _maxTargets: 5
+  - _animationStateName: Attack 3
+    _transitionDuration: 0.02
+    _damageData:
+      _damageType: 0
+      _baseDamage: 100
+      _physicForceScaling: 2
+      _magicForceScaling: 0
+    _attackAdvance:
+      AdvanceDistance: 0.2
+      AvanceDuration: 0.5
+      AdvanceDelay: 0.1
+      AdvanceCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.037581705
+        - serializedVersion: 3
+          time: 0.6083195
+          value: 0.065752454
+          inSlope: 0.13469714
+          outSlope: 0.13469714
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.1330376
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _attackKnockback:
+      KnockbackDistance: 0.2
+      KnockbackDuration: 0.25
+      KnockbackCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _hitboxCenterOffset: {x: 0, y: 0, z: 0.85}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.85}
     _targetLayerMask:
       serializedVersion: 2
       m_Bits: 128

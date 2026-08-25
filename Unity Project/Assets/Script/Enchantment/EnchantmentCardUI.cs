@@ -103,7 +103,10 @@ namespace Scripts.Enchantment
         private void LoadIcon(AssetReferenceSprite iconReference)
         {
             if (iconReference == null || !iconReference.RuntimeKeyIsValid())
+            {
+                OnLoadIconCompleted?.Invoke();
                 return;
+            }
 
             _iconLoadHandle = Addressables.LoadAssetAsync<Sprite>(iconReference.RuntimeKey);
             _iconLoadHandle.Completed += IconLoadHandle_Completed;
@@ -112,7 +115,10 @@ namespace Scripts.Enchantment
         private void IconLoadHandle_Completed(AsyncOperationHandle<Sprite> handle)
         {
             if (_iconImage == null || handle.Status != AsyncOperationStatus.Succeeded)
+            {
+                OnLoadIconCompleted?.Invoke();
                 return;
+            }
 
             _iconImage.sprite = handle.Result;
             _iconImage.enabled = true;

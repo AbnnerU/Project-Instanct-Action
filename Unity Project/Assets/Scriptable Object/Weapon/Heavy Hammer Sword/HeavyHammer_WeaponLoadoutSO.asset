@@ -24,6 +24,6 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
     SocketID: Hand_Right_1
-    LocalPositionOffset: {x: 0.004, y: 0.018, z: 0.048}
-    LocalEulerAngles: {x: -88.203, y: -4.328, z: 74.638}
+    LocalPositionOffset: {x: -0.03, y: -0.012, z: 0.065}
+    LocalEulerAngles: {x: 54.363, y: -95.612, z: 100.293}
     LocalScale: {x: 1, y: 1, z: 1}
