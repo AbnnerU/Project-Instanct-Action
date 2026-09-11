@@ -18,7 +18,7 @@ MonoBehaviour:
     _damageData:
       _damageType: 0
       _baseDamage: 50
-      _physicForceScaling: 1.2
+      _physicForceScaling: 120.00001
       _magicForceScaling: 0
     _attackAdvance:
       AdvanceDistance: 0.15
@@ -96,7 +96,7 @@ MonoBehaviour:
     _damageData:
       _damageType: 1
       _baseDamage: 50
-      _physicForceScaling: 1.2
+      _physicForceScaling: 120.00001
       _magicForceScaling: 0
     _attackAdvance:
       AdvanceDistance: 0.15

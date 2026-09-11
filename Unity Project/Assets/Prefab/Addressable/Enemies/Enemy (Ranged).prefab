@@ -931,6 +931,8 @@ MonoBehaviour:
   _animationControllerComponent: {fileID: 8320340935477062313}
   _hittableReference: {fileID: 7668894675120357355}
   _hittedParameter: Hitted
+  _hittedStateName: Base Layer.HumanM@CombatDamage01
+  _transitionDuration: 0.05
 --- !u!114 &2842286385702380382
 MonoBehaviour:
   m_ObjectHideFlags: 0

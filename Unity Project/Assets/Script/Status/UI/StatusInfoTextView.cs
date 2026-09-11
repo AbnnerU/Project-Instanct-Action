@@ -140,7 +140,8 @@ namespace Scripts.Status
         {
             public StatusType StatusType;
             public TMP_Text TextComponent;
-            public string _numberFormat = "0.##";
+            [Tooltip("Use 0 for whole numbers or 0'%' for a literal percent suffix. Do not use 0%: it multiplies the value by 100.")]
+            public string _numberFormat = "0";
 
             public void UpdateText( float value)
             {

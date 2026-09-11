@@ -62,15 +62,14 @@ MonoBehaviour:
   _active: 1
   _targetTransform: {fileID: 0}
   _statusSource: {fileID: 0}
-  _comboController: {fileID: 0}
   _attackerObject: {fileID: 0}
   _animator: {fileID: 0}
   _castTime: 0.03
   _damageData:
     _damageType: 0
     _baseDamage: 100
-    _physicForceScaling: 1
-    _magicForceScaling: 0.5
+    _physicForceScaling: 100
+    _magicForceScaling: 50
   _animationStateName: Ability 2
   _animationTransitionDuration: 0.05
   _animationLayerIndex: 0
@@ -100,6 +99,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _setEndPosition: 0
   _hitboxCenterOffset: {x: 0.4, y: 0.75, z: 0}
   _hitboxHalfExtents: {x: 0.75, y: 0.75, z: 0.75}
   _targetLayerMask:
@@ -107,8 +107,13 @@ MonoBehaviour:
     m_Bits: 128
   _queryTriggerInteraction: 0
   _maxTargets: 8
+  _colliderComponent: {fileID: 0}
+  _disableColliderDuringExecution: 1
+  _comboController: {fileID: 0}
   _cancelAttackOnExecute: 1
   _disableComboDuringExecution: 1
+  _dashComponent: {fileID: 0}
+  _disableDashDuringExecution: 1
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &4231570087894386406

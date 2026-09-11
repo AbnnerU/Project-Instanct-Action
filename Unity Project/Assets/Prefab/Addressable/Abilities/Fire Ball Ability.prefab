@@ -70,7 +70,7 @@ MonoBehaviour:
     _damageType: 1
     _baseDamage: 100
     _physicForceScaling: 0
-    _magicForceScaling: 0.5
+    _magicForceScaling: 50
   _animationStateName: Ability 1
   _animationTransitionDuration: 0.05
   _animationLayerIndex: 0

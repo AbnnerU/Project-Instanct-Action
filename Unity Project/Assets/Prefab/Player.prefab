@@ -687,8 +687,8 @@ MonoBehaviour:
   _animationControllerComponent: {fileID: 8709150000114935703}
   _statusSource: {fileID: 8957741815748552983}
   _attackSpeedParameter: AttackSpeed
-  _defaultAttackSpeed: 1
-  _minimumAttackSpeed: 0.01
+  _defaultAttackSpeed: 100
+  _minimumAttackSpeed: 1
 --- !u!114 &8093511883819088631
 MonoBehaviour:
   m_ObjectHideFlags: 0

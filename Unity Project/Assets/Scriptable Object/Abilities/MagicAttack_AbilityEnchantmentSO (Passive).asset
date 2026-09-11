@@ -33,5 +33,5 @@ MonoBehaviour:
   - _damageType: 1
     _baseDamage: 50
     _physicForceScaling: 0
-    _magicForceScaling: 0.5
+    _magicForceScaling: 50
   List_BuffDatas: []

@@ -8,8 +8,10 @@ namespace Scripts.Status
     {
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private string _attackSpeedParameter = "AttackSpeed";
-        [SerializeField] private float _defaultAttackSpeed = 1f;
-        [SerializeField] private float _minimumAttackSpeed = 0.01f;
+        [Tooltip("Attack speed percentage. 100 = normal speed, 150 = 1.5x.")]
+        [SerializeField] private float _defaultAttackSpeed = 100f;
+        [Tooltip("Minimum attack speed percentage. 1 = 1% of normal speed.")]
+        [SerializeField] private float _minimumAttackSpeed = 1f;
 
         private StatusData _attackSpeedStatusData;
 
@@ -42,7 +44,7 @@ namespace Scripts.Status
                 return;
 
             float attackSpeed = value > 0f ? value : _defaultAttackSpeed;
-            _animationControllerComponent.SetFloat(_attackSpeedParameter, Mathf.Max(_minimumAttackSpeed, attackSpeed));
+            _animationControllerComponent.SetFloat(_attackSpeedParameter, Mathf.Max(_minimumAttackSpeed, attackSpeed) / 100f);
         }
 
         private void CacheAttackSpeedStatus()

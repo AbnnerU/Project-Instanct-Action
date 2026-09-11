@@ -22,8 +22,8 @@ namespace Scripts.Combat
             float magicForce = attackerStatus != null ? attackerStatus.GetCurrentValueOf(StatusType.MAGIC_FORCE) : 0f;
 
             float rawDamage = damageData.BaseDamage +
-                              (physicForce * damageData.PhysicForceScaling) +
-                              (magicForce * damageData.MagicForceScaling);
+                              (physicForce * damageData.PhysicForceScaling / 100f) +
+                              (magicForce * damageData.MagicForceScaling / 100f);
 
             bool isCritical = RollCritical(attackerStatus);
 
@@ -46,10 +46,9 @@ namespace Scripts.Combat
 
         private static float GetCriticalDamageMultiplier(StatusInfo attackerStatus)
         {
-            if (attackerStatus == null) return 2f;
-
-            float criticalDamage = attackerStatus.GetCurrentValueOf(StatusType.CRITICAL_DAMAGE);
-            return criticalDamage > 0f ? Mathf.Max(1f, criticalDamage) : 2f;
+            StatusData criticalStatus = attackerStatus?.GetStatusData(StatusType.CRITICAL_DAMAGE);
+            float criticalDamagePercent = criticalStatus != null ? criticalStatus.CurrentValue : 200f;
+            return Mathf.Max(100f, criticalDamagePercent) / 100f;
         }
 
         private static float GetResistancePercentage(DamageType damageType, StatusInfo receiverStatus)

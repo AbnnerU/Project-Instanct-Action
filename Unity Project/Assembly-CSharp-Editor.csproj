@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\Editor\Tests\PercentageConventionChecks.cs" />
+    <Compile Include="Assets\Editor\PercentageConventionMigration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -734,6 +736,10 @@
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1574,9 +1580,21 @@
       <Project>{BDBCE7D3-139D-3EDB-816D-FB1D73476D25}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="KitWright.Editor.InputSystem.csproj">
+      <Project>{F2C18BB3-2A5A-AEEB-5E1E-C843AF75C95A}</Project>
+      <Name>KitWright.Editor.InputSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="CustomInspector.csproj">
       <Project>{7FE1E0C7-412E-1548-B0C9-071DE485F99B}</Project>
       <Name>CustomInspector</Name>
+    </ProjectReference>
+    <ProjectReference Include="KitWright.Editor.csproj">
+      <Project>{49F53FA5-AC3B-0939-C219-CF5B1E971362}</Project>
+      <Name>KitWright.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="KitWright.Editor.Bootstrap.csproj">
+      <Project>{9B15CAF1-144C-D5F8-DFCD-2E1F3FEB8F2E}</Project>
+      <Name>KitWright.Editor.Bootstrap</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

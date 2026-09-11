@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320080d34d7476c48ae71c58c2787646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.AttackBonusDamageAbility
+  _active: 0
   _statusSource: {fileID: 0}
   _comboController: {fileID: 0}
   _attackHitbox: {fileID: 0}
@@ -68,4 +69,4 @@ MonoBehaviour:
     _damageType: 1
     _baseDamage: 10
     _physicForceScaling: 0
-    _magicForceScaling: 0.1
+    _magicForceScaling: 10

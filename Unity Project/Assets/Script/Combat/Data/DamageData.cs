@@ -8,7 +8,9 @@ namespace Scripts.Combat
     {
         [SerializeField] private DamageType _damageType;
         [SerializeField] private float _baseDamage;
+        [Tooltip("Percentage of physical force added to damage. 100 = 100%, 200 = 200%.")]
         [SerializeField] private float _physicForceScaling;
+        [Tooltip("Percentage of magic force added to damage. 100 = 100%, 200 = 200%.")]
         [SerializeField] private float _magicForceScaling;
 
         public DamageType DamageType => _damageType;

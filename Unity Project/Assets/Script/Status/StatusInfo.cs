@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Scripts.Status
 {
@@ -51,7 +52,9 @@ namespace Scripts.Status
         public Action<float> OnCurrentValueUpdated;
 
         public StatusType StatusType;
+        [Tooltip("Percentage stats use 100 = 100%. Attack speed 100 = normal; critical damage 125 = 1.25x total damage. Health and force use absolute units.")]
         public float BaseValue;
+        [Tooltip("Uses the same units as BaseValue, including percentage points for percentage stats.")]
         public float CurrentValue;
 
         public void AddCurrentValue(float valueToAdd)

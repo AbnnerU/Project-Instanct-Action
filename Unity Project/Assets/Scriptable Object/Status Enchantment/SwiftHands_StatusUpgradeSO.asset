@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01379abac9c046944944bbdc4503090c, type: 3}
+  m_Name: SwiftHands_StatusUpgradeSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
+  ID: 93249e64-3ab4-40c0-bf38-95486d465dfa
+  DisplayName: Swift Hands
+  Description: <statusmodifier index=0>
+  IconReference:
+    m_AssetGUID: b00564e353aca3e4a853c66d5568c6ca
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _canRepeat: 1
+  _list_StatusModifiers:
+  - StatusType: 1
+    ValueType: 0
+    Value: 6

@@ -33,6 +33,7 @@ namespace Scripts.Enchantment
     {
         public StatusType StatusType;
         public EnchantmentValueType ValueType;
+        [Tooltip("FLAT adds status units (percentage points for percentage stats). PERCENT_OF_CURRENT: 10 adds 10% of the current value.")]
         public float Value;
 
         public void Apply(MN_PlayerStatus playerStatus)

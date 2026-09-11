@@ -212,6 +212,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
+      propertyPath: m_text
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_fontSize
       value: 18
       objectReference: {fileID: 0}
@@ -1353,6 +1357,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
+      propertyPath: m_text
+      value: 0%
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_fontSize
       value: 18
       objectReference: {fileID: 0}
@@ -1579,6 +1587,10 @@ PrefabInstance:
     - target: {fileID: 5541947572422979603, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
+      propertyPath: m_text
+      value: 0%
       objectReference: {fileID: 0}
     - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_fontSize
@@ -2578,6 +2590,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
+      propertyPath: m_text
+      value: 125%
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_fontSize
       value: 18
       objectReference: {fileID: 0}
@@ -3024,7 +3040,7 @@ MonoBehaviour:
       BaseValue: 0
       CurrentValue: 0
     - StatusType: 6
-      BaseValue: 1.25
+      BaseValue: 125
       CurrentValue: 0
     - StatusType: 8
       BaseValue: 0
@@ -3033,7 +3049,7 @@ MonoBehaviour:
       BaseValue: 0
       CurrentValue: 0
     - StatusType: 1
-      BaseValue: 1
+      BaseValue: 100
       CurrentValue: 0
 --- !u!114 &1151873709
 MonoBehaviour:
@@ -3053,28 +3069,28 @@ MonoBehaviour:
   _list_StatusTextBindings:
   - StatusType: 0
     TextComponent: {fileID: 777604283}
-    _numberFormat: 0.##
+    _numberFormat: 0
   - StatusType: 3
     TextComponent: {fileID: 42982322}
-    _numberFormat: 0.##
+    _numberFormat: 0
   - StatusType: 4
     TextComponent: {fileID: 1995979860}
-    _numberFormat: 0.##
+    _numberFormat: 0
   - StatusType: 5
     TextComponent: {fileID: 437027196}
-    _numberFormat: 0.##
+    _numberFormat: 0'%'
   - StatusType: 6
     TextComponent: {fileID: 927931252}
-    _numberFormat: 0.##
+    _numberFormat: 0'%'
   - StatusType: 8
     TextComponent: {fileID: 1586844377}
-    _numberFormat: 0.##
+    _numberFormat: 0'%'
   - StatusType: 2
     TextComponent: {fileID: 510545633}
-    _numberFormat: 0.##
+    _numberFormat: 0'%'
   - StatusType: 1
     TextComponent: {fileID: 1522465285}
-    _numberFormat: 0.##
+    _numberFormat: 0'%'
 --- !u!1 &1159544364
 GameObject:
   m_ObjectHideFlags: 0
@@ -3580,6 +3596,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
+      propertyPath: m_text
+      value: 100%
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_fontSize
       value: 18
       objectReference: {fileID: 0}
@@ -3732,6 +3752,10 @@ PrefabInstance:
     - target: {fileID: 5541947572422979603, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
+      propertyPath: m_text
+      value: 0%
       objectReference: {fileID: 0}
     - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_fontSize
@@ -4340,6 +4364,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b0fa00c498b8df449a1324eb314598a4, type: 2}
   - {fileID: 11400000, guid: 0ec3c7e91e569144e99110421680656e, type: 2}
   - {fileID: 11400000, guid: beb72307bb35e464b90a43ea3d887043, type: 2}
+  - {fileID: 11400000, guid: 051f0be7f14d4ea297516dfc1d70c29c, type: 2}
+  - {fileID: 11400000, guid: af36371220314533b1d015ed86490d06, type: 2}
+  - {fileID: 11400000, guid: 7103dde1d54841b9b260bb29e4cc1170, type: 2}
+  - {fileID: 11400000, guid: 10bad6a68f6b416d930e1659579ad5d1, type: 2}
+  - {fileID: 11400000, guid: be671c6546404534a68e4bd58aec5799, type: 2}
+  - {fileID: 11400000, guid: 642408b45786462eb687ea50ad65ecfb, type: 2}
+  - {fileID: 11400000, guid: 365d06c3c8864ef2a653b6d42fad1b51, type: 2}
+  - {fileID: 11400000, guid: fe32cd08dc314b2e9df51877db23064c, type: 2}
+  - {fileID: 11400000, guid: 9b599abf189440fbbe6c3a21b37b48b7, type: 2}
   _list_AppliedEnchantments: []
 --- !u!114 &1879613187
 MonoBehaviour:
@@ -4440,7 +4473,7 @@ MonoBehaviour:
   _maxAliveEnemies: 10
   _spawnOnStart: 3
   _autoSpawn: 1
-  _spawnInterval: 5
+  _spawnInterval: 3.5
   _useSpawnPointLocalEulerAngles: 1
   _sampleNavMeshPosition: 1
   _navMeshSampleRadius: 1
@@ -4512,7 +4545,7 @@ MonoBehaviour:
   _comboController: {fileID: 711513680}
   _animator: {fileID: 1484080727}
   _characterAnimationController: {fileID: 711513686}
-  _initialLoadout: {fileID: 11400000, guid: 4a7d1ad47d94c6746b94ecba3f91ca26, type: 2}
+  _initialLoadout: {fileID: 11400000, guid: 35ef158b7b7d4b9438645d881495ff94, type: 2}
   _equipInitialLoadoutOnStart: 1
 --- !u!1 &1979048653
 GameObject:
@@ -4636,6 +4669,10 @@ PrefabInstance:
     - target: {fileID: 5541947572422979603, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
+      propertyPath: m_text
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_fontSize
@@ -4913,6 +4950,10 @@ PrefabInstance:
     - target: {fileID: 5541947572422979603, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
+      propertyPath: m_text
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8142841785149479223, guid: 069b6fbe435f18845b4c996b1f6ea62c, type: 3}
       propertyPath: m_fontSize

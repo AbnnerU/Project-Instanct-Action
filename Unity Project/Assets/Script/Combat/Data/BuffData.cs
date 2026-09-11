@@ -10,6 +10,7 @@ namespace Scripts.Combat
     {
         [SerializeField] private StatusType _statusType = StatusType.PHYSIC_FORCE;
         [SerializeField] private AbilityValueType _valueType = AbilityValueType.PERCENT_OF_CURRENT;
+        [Tooltip("FLAT adds status units (percentage points for percentage stats). PERCENT_OF_CURRENT: 25 adds 25% of the current value.")]
         [SerializeField] private float _value = 25f;
         [SerializeField] private float _duration = 3f;
 

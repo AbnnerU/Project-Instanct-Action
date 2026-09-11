@@ -1,0 +1,6 @@
+
+[mcp_servers.kitwright]
+url = "http://127.0.0.1:8885/p/f3417200/"
+
+[features]
+rmcp_client = true

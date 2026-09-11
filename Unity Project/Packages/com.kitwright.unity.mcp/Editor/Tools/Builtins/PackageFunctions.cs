@@ -1,0 +1,49 @@
+// Copyright (C) KitWright. Licensed under MIT.
+using System;
+using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
+using KitWright.Editor.Tools;
+using KitWright.Editor.Tools.Helpers;
+using UnityEditor;
+using UnityEditor.PackageManager;
+
+namespace KitWright.Editor.Tools.Builtins
+{
+    [ToolProvider("Package")]
+    internal static class PackageFunctions
+    {
+        [Description("Install a Unity package by name")]
+        public static string InstallPackage(
+            [ToolParam("Package identifier (e.g. 'com.unity.textmeshpro', 'com.unity.cinemachine')")] string package_id)
+        {
+            // Resolve + import + domain reload stall while the editor is unfocused; keep it unthrottled.
+            NoThrottleLease.Acquire(TimeSpan.FromMinutes(10));
+            var request = Client.Add(package_id);
+            // Note: Package installation is async in Unity, we just kick it off
+            return $"Package installation initiated for '{package_id}'. Check Package Manager for status.";
+        }
+
+        [Description("Remove a Unity package")]
+        public static string RemovePackage(
+            [ToolParam("Package name to remove")] string package_name)
+        {
+            NoThrottleLease.Acquire(TimeSpan.FromMinutes(10));
+            var request = Client.Remove(package_name);
+            return $"Package removal initiated for '{package_name}'. Check Package Manager for status.";
+        }
+
+        [Description("List all installed packages")]
+        [ReadOnlyTool]
+        public static string ListPackages()
+        {
+            var manifestPath = "Packages/manifest.json";
+            if (System.IO.File.Exists(manifestPath))
+            {
+                var content = System.IO.File.ReadAllText(manifestPath);
+                if (content.Length > 5000)
+                    content = content.Substring(0, 5000) + "\n... (truncated)";
+                return $"Package manifest:\n{content}";
+            }
+            return "Package listing initiated. Check Package Manager window.";
+        }
+    }
+}

@@ -1,0 +1,173 @@
+{
+    "Status": "COMPLETE",
+    "Changes": [
+        {
+            "Asset": "Assets/Scenes/SampleScene.unity",
+            "ObjectName": "MN Player Status",
+            "Property": "_statusInfo.List_StatusData.Array.data[4].BaseValue",
+            "Before": 1.25,
+            "After": 125.0
+        },
+        {
+            "Asset": "Assets/Scenes/SampleScene.unity",
+            "ObjectName": "MN Player Status",
+            "Property": "_statusInfo.List_StatusData.Array.data[7].BaseValue",
+            "Before": 1.0,
+            "After": 100.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Abilities/FireBall_AbilityEnchantmentSO.asset",
+            "ObjectName": "FireBall_AbilityEnchantmentSO",
+            "Property": "List_DamageDatas.Array.data[0]._magicForceScaling",
+            "Before": 1.0,
+            "After": 100.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Abilities/MagicAttack_AbilityEnchantmentSO (Passive).asset",
+            "ObjectName": "MagicAttack_AbilityEnchantmentSO (Passive)",
+            "Property": "List_DamageDatas.Array.data[0]._magicForceScaling",
+            "Before": 0.5,
+            "After": 50.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Abilities/PiercingThrust_AbilityEnchantmentSO.asset",
+            "ObjectName": "PiercingThrust_AbilityEnchantmentSO",
+            "Property": "List_DamageDatas.Array.data[0]._physicForceScaling",
+            "Before": 2.0,
+            "After": 200.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Abilities/PiercingThrust_AbilityEnchantmentSO.asset",
+            "ObjectName": "PiercingThrust_AbilityEnchantmentSO",
+            "Property": "List_DamageDatas.Array.data[0]._magicForceScaling",
+            "Before": 1.0,
+            "After": 100.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Status Enchantment/BattleTempo_StatusUpgradeSO.asset",
+            "ObjectName": "BattleTempo_StatusUpgradeSO",
+            "Property": "_list_StatusModifiers.Array.data[0].Value",
+            "Before": 0.029999999329447748,
+            "After": 3.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Status Enchantment/PredatorRhythm_StatusUpgradeSO.asset",
+            "ObjectName": "PredatorRhythm_StatusUpgradeSO",
+            "Property": "_list_StatusModifiers.Array.data[0].Value",
+            "Before": 0.029999999329447748,
+            "After": 3.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Status Enchantment/QuickHands_StatusUpgradeSO.asset",
+            "ObjectName": "QuickHands_StatusUpgradeSO",
+            "Property": "_list_StatusModifiers.Array.data[0].Value",
+            "Before": 0.03999999910593033,
+            "After": 4.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Status Enchantment/SwiftHands_StatusUpgradeSO.asset",
+            "ObjectName": "SwiftHands_StatusUpgradeSO",
+            "Property": "_list_StatusModifiers.Array.data[0].Value",
+            "Before": 0.05999999865889549,
+            "After": 6.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Weapon/Hands/Hand_ComboAttackSetSO.asset",
+            "ObjectName": "Hand_ComboAttackSetSO",
+            "Property": "_list_ComboAttackData.Array.data[0]._damageData._physicForceScaling",
+            "Before": 1.0,
+            "After": 100.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Weapon/Hands/Hand_ComboAttackSetSO.asset",
+            "ObjectName": "Hand_ComboAttackSetSO",
+            "Property": "_list_ComboAttackData.Array.data[1]._damageData._physicForceScaling",
+            "Before": 1.0,
+            "After": 100.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Weapon/Hands/Hand_ComboAttackSetSO.asset",
+            "ObjectName": "Hand_ComboAttackSetSO",
+            "Property": "_list_ComboAttackData.Array.data[2]._damageData._physicForceScaling",
+            "Before": 1.5,
+            "After": 150.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Weapon/Heavy Hammer Sword/HeavyHammer_ComboAttackSetSO.asset",
+            "ObjectName": "HeavyHammer_ComboAttackSetSO",
+            "Property": "_list_ComboAttackData.Array.data[0]._damageData._physicForceScaling",
+            "Before": 2.0,
+            "After": 200.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Weapon/Heavy Hammer Sword/HeavyHammer_ComboAttackSetSO.asset",
+            "ObjectName": "HeavyHammer_ComboAttackSetSO",
+            "Property": "_list_ComboAttackData.Array.data[1]._damageData._physicForceScaling",
+            "Before": 2.0,
+            "After": 200.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Weapon/Heavy Hammer Sword/HeavyHammer_ComboAttackSetSO.asset",
+            "ObjectName": "HeavyHammer_ComboAttackSetSO",
+            "Property": "_list_ComboAttackData.Array.data[2]._damageData._physicForceScaling",
+            "Before": 2.0,
+            "After": 200.0
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Weapon/Two Swords/TwoSwords_ComboAttackSetSO.asset",
+            "ObjectName": "TwoSwords_ComboAttackSetSO",
+            "Property": "_list_ComboAttackData.Array.data[0]._damageData._physicForceScaling",
+            "Before": 1.2000000476837159,
+            "After": 120.00000762939453
+        },
+        {
+            "Asset": "Assets/Scriptable Object/Weapon/Two Swords/TwoSwords_ComboAttackSetSO.asset",
+            "ObjectName": "TwoSwords_ComboAttackSetSO",
+            "Property": "_list_ComboAttackData.Array.data[1]._damageData._physicForceScaling",
+            "Before": 1.2000000476837159,
+            "After": 120.00000762939453
+        },
+        {
+            "Asset": "Assets/Prefab/Addressable/Abilities/Fire Ball Ability.prefab",
+            "ObjectName": "Fire Ball Ability",
+            "Property": "_damageData._magicForceScaling",
+            "Before": 0.5,
+            "After": 50.0
+        },
+        {
+            "Asset": "Assets/Prefab/Addressable/Abilities/Magic Attack Ability (Passive).prefab",
+            "ObjectName": "Magic Attack Ability (Passive)",
+            "Property": "_bonusDamageData._magicForceScaling",
+            "Before": 0.10000000149011612,
+            "After": 10.0
+        },
+        {
+            "Asset": "Assets/Prefab/Addressable/Abilities/Piercing Thrust Ability.prefab",
+            "ObjectName": "Piercing Thrust Ability",
+            "Property": "_damageData._physicForceScaling",
+            "Before": 1.0,
+            "After": 100.0
+        },
+        {
+            "Asset": "Assets/Prefab/Addressable/Abilities/Piercing Thrust Ability.prefab",
+            "ObjectName": "Piercing Thrust Ability",
+            "Property": "_damageData._magicForceScaling",
+            "Before": 0.5,
+            "After": 50.0
+        },
+        {
+            "Asset": "Assets/Prefab/Player.prefab",
+            "ObjectName": "Player",
+            "Property": "_defaultAttackSpeed",
+            "Before": 1.0,
+            "After": 100.0
+        },
+        {
+            "Asset": "Assets/Prefab/Player.prefab",
+            "ObjectName": "Player",
+            "Property": "_minimumAttackSpeed",
+            "Before": 0.009999999776482582,
+            "After": 1.0
+        }
+    ]
+}

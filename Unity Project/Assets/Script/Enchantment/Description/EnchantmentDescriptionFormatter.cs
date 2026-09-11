@@ -184,10 +184,10 @@ namespace Scripts.Enchantment
             System.Collections.Generic.List<string> list_ScalingTexts = new System.Collections.Generic.List<string>();
 
             if (!Mathf.Approximately(damageData.PhysicForceScaling, 0f))
-                list_ScalingTexts.Add($"{GetStatusSpriteTag(StatusType.PHYSIC_FORCE)} {FormatPercent(damageData.PhysicForceScaling * 100f)}");
+                list_ScalingTexts.Add($"{GetStatusSpriteTag(StatusType.PHYSIC_FORCE)} {FormatPercent(damageData.PhysicForceScaling)}");
 
             if (!Mathf.Approximately(damageData.MagicForceScaling, 0f))
-                list_ScalingTexts.Add($"{GetStatusSpriteTag(StatusType.MAGIC_FORCE)} {FormatPercent(damageData.MagicForceScaling * 100f)}");
+                list_ScalingTexts.Add($"{GetStatusSpriteTag(StatusType.MAGIC_FORCE)} {FormatPercent(damageData.MagicForceScaling)}");
 
             return string.Join(" + ", list_ScalingTexts);
         }

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01379abac9c046944944bbdc4503090c, type: 3}
+  m_Name: PredatorRhythm_StatusUpgradeSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
+  ID: 8c8dbea1-e804-458c-8ce1-65aff5418af5
+  DisplayName: Predator Rhythm
+  Description: '<statusmodifier index=0>
+
+    <statusmodifier index=1>'
+  IconReference:
+    m_AssetGUID: 8124fde2ebe01954895333c53b755f61
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _canRepeat: 1
+  _list_StatusModifiers:
+  - StatusType: 1
+    ValueType: 0
+    Value: 3
+  - StatusType: 8
+    ValueType: 0
+    Value: 1

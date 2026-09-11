@@ -81,6 +81,19 @@ namespace Scripts.Animation
             return true;
         }
 
+        public bool CrossFadeInFixedTime(string stateName, float duration, int layer = 0)
+        {
+            if (_animatorComponent == null || string.IsNullOrWhiteSpace(stateName))
+                return false;
+
+            int stateHash = Animator.StringToHash(stateName);
+            if (layer < 0 || layer >= _animatorComponent.layerCount || !_animatorComponent.HasState(layer, stateHash))
+                return false;
+
+            _animatorComponent.CrossFadeInFixedTime(stateHash, Mathf.Max(0f, duration), layer, 0f);
+            return true;
+        }
+
         public bool HasParameter(string parameterName)
         {
             if (string.IsNullOrWhiteSpace(parameterName))

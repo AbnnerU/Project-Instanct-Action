@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01379abac9c046944944bbdc4503090c, type: 3}
+  m_Name: LifeSteal_StatusUpgradeSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
+  ID: c8f8ddc5-46ed-4801-8497-bcab8b1de07b
+  DisplayName: Life Steal
+  Description: <statusmodifier index=0>
+  IconReference:
+    m_AssetGUID: 3d374cd3dfe286347a286e36190046e0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _canRepeat: 1
+  _list_StatusModifiers:
+  - StatusType: 8
+    ValueType: 0
+    Value: 3
+
