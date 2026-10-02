@@ -135,7 +135,7 @@
     <Compile Include="Assets\Script\Abilities\Enum\AttackBonusDamageApplyMode.cs" />
     <Compile Include="Assets\Script\Interface\General\IMovementHandler.cs" />
     <Compile Include="Assets\Script\Requeriments\Scriptable Base\RequirementSO.cs" />
-    <Compile Include="Assets\Script\Player\PlayerComboController.cs" />
+    <Compile Include="Assets\Script\Dash Handler\Dash2D.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTComboAttack.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageRequest.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTInverter.cs" />
@@ -155,6 +155,7 @@
     <Compile Include="Assets\Script\Combat\Damage Effects\HealOnDamageDealt.cs" />
     <Compile Include="Assets\Script\Health\OnRespawn_UnityEvent.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\PiercingThrustAbilityAutoSetup.cs" />
+    <Compile Include="Assets\Script\Dash Handler\Dash_ComboControllerHandler.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Weapon\WeaponLoadoutSO.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActionValidation.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTSetAIState.cs" />
@@ -164,7 +165,6 @@
     <Compile Include="Assets\Script\Interface\Spawner\ISpawnerWithOffSet.cs" />
     <Compile Include="Assets\Script\Projectile\DamageRequestProjectileShooter.cs" />
     <Compile Include="Assets\Script\Coins\Saver\CoinData.cs" />
-    <Compile Include="Assets\Script\Player\PlayerDashAnimation.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler.cs" />
     <Compile Include="Assets\Script\Status\Enum\StatusType.cs" />
     <Compile Include="Assets\Script\Loading Scene\SIS_GameSession.cs" />
@@ -205,12 +205,14 @@
     <Compile Include="Assets\Script\Abstract\Projectile\Projectile3DBase.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTFleeFromTarget.cs" />
     <Compile Include="Assets\Script\Combat\ComboAnimationEventReceiver.cs" />
+    <Compile Include="Assets\Script\Dash Handler\DashAnimation.cs" />
     <Compile Include="Assets\Script\Interface\Selectable\ISelectableObject.cs" />
+    <Compile Include="Assets\Script\Player\ComboController.cs" />
     <Compile Include="Assets\Script\Abilities\Active\LauchProjectileAbility.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTWaitForSeconds.cs" />
     <Compile Include="Assets\Script\Waves\MN_Waves.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler_LoadingBar.cs" />
-    <Compile Include="Assets\Script\Player\PlayerDirection.cs" />
+    <Compile Include="Assets\Script\Player\DirectionHandler.cs" />
     <Compile Include="Assets\Script\Health\LifeCycle_HandleCanvasActiveState.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTGoToPosition.cs" />
     <Compile Include="Assets\Script\Interface\Animation\IHasAnimationReferenceTransform.cs" />
@@ -222,11 +224,12 @@
     <Compile Include="Assets\Script\Tier\Enum\Tier.cs" />
     <Compile Include="Assets\Script\Interface\Combat\IDamageReceiver.cs" />
     <Compile Include="Assets\Script\Animation\AnimationVelocityModule.cs" />
-    <Compile Include="Assets\Script\Player\PlayerDashInvulnerability.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\Boolean\BTBoolFunc.cs" />
     <Compile Include="Assets\Script\Abstract\Enchantment\EnchantmentSOBase.cs" />
+    <Compile Include="Assets\Script\Dash Handler\Dash_DirectionHandler.cs" />
     <Compile Include="Assets\Script\Spawner\EnemySpawner.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\LauchProjectileAbilityAutoSetup.cs" />
+    <Compile Include="Assets\Script\Dash Handler\DashInvulnerability.cs" />
     <Compile Include="Assets\Script\Abstract\Animation\AnimationModuleBase.cs" />
     <Compile Include="Assets\Script\Abstract\Saver\SaverBase.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTSequence.cs" />
@@ -253,11 +256,11 @@
     <Compile Include="Assets\Script\Loading Scene\LoadScene_TryLoad.cs" />
     <Compile Include="Assets\Script\Combat\Pop Up\DamagePopupSpawner.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_AnimSetBool.cs" />
-    <Compile Include="Assets\Script\Player\PlayerDash.cs" />
     <Compile Include="Assets\Script\Weapon\MN_PlayerWeapon.cs" />
     <Compile Include="Assets\Script\Animation\AnimationDirectionalVelocityModule.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveState.cs" />
     <Compile Include="Assets\Script\Interface\General\ISaveableTimer.cs" />
+    <Compile Include="Assets\Script\Abstract\Dash Handle\DashBase.cs" />
     <Compile Include="Assets\Script\Interface\General\IPanelHandler.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTGoToRandomPosition.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasBounds.cs" />
@@ -878,6 +881,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@8bed5ad90189\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
@@ -1698,9 +1705,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="KitWright.Editor.InputSystem.csproj">
+      <Project>{F2C18BB3-2A5A-AEEB-5E1E-C843AF75C95A}</Project>
+      <Name>KitWright.Editor.InputSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="CustomInspector.csproj">
       <Project>{7FE1E0C7-412E-1548-B0C9-071DE485F99B}</Project>
       <Name>CustomInspector</Name>
+    </ProjectReference>
+    <ProjectReference Include="KitWright.Editor.csproj">
+      <Project>{49F53FA5-AC3B-0939-C219-CF5B1E971362}</Project>
+      <Name>KitWright.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="KitWright.Editor.Bootstrap.csproj">
+      <Project>{9B15CAF1-144C-D5F8-DFCD-2E1F3FEB8F2E}</Project>
+      <Name>KitWright.Editor.Bootstrap</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

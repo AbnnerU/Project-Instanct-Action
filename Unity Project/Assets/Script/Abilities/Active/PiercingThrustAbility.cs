@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Scripts.Combat;
-using Scripts.Player;
+using Scripts.DashHandler;
 using Scripts.Status;
 using UnityEngine;
 
@@ -45,7 +45,7 @@ namespace Scripts.Abilities
         [SerializeField] private bool _cancelAttackOnExecute = true;
         [SerializeField] private bool _disableComboDuringExecution = true;
         [Header("Dash Lock")]
-        [SerializeField] private PlayerDash _dashComponent;
+        [SerializeField] private DashHandler.DashBase _dashComponent;
         [SerializeField] private bool _disableDashDuringExecution = true;
         [Header("Gizmos")]
         [SerializeField] private bool _drawGizmos = true;
@@ -68,7 +68,7 @@ namespace Scripts.Abilities
 
         #region Public
 
-        public void Setup(Transform targetTransform, StatusInfoSourceBase statusSource, ComboControllerBase comboController, GameObject attackerObject, PlayerDash dash)
+        public void Setup(Transform targetTransform, StatusInfoSourceBase statusSource, ComboControllerBase comboController, GameObject attackerObject, DashHandler.DashBase dash)
         {
             _targetTransform = targetTransform;
             _statusSource = statusSource;

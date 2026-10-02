@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Scripts.Animation;
@@ -20,8 +20,8 @@ namespace Scripts.Combat
         [SerializeField] protected AttackHitbox _attackHitbox;
         [SerializeField] protected Animator _animator;
         [SerializeField] protected CharacterAnimationController _characterAnimationController;
-        [SerializeField] protected Transform _movementTransform;
-        [SerializeField] protected Transform _movementDirectionReference;
+        //[SerializeField] protected Transform _movementTransform;
+        //[SerializeField] protected Transform _movementDirectionReference;
         [SerializeField] protected ComboAttackSetSO _comboAttackSet;
         [SerializeField] protected List<ComboAttackData> _list_ComboAttackData = new List<ComboAttackData>();
         [SerializeField] protected bool _triggerIdle = true;
@@ -37,7 +37,7 @@ namespace Scripts.Combat
         protected bool _isAttacking;
         protected bool _isComboWindowOpen;
         protected bool _hasQueuedNextAttack;
-        protected Coroutine _attackMovementRoutine;
+        //protected Coroutine _attackMovementRoutine;
 
         public bool Active => _active;
         public bool IsAttacking => _isAttacking;
@@ -103,7 +103,7 @@ namespace Scripts.Combat
             _hasQueuedNextAttack = false;
             _currentComboIndex = 0;
 
-            StopAttackMovement();
+            //StopAttackMovement();
             PlayIdle();
 
             if (wasAttacking)
@@ -119,7 +119,7 @@ namespace Scripts.Combat
             _hasQueuedNextAttack = false;
             _currentComboIndex = 0;
 
-            StopAttackMovement();
+            //StopAttackMovement();
 
             if (playIdle)
                 PlayIdle();
@@ -178,11 +178,11 @@ namespace Scripts.Combat
             if (_attackHitbox == null)
                 TryGetComponent(out _attackHitbox);
 
-            if (_movementTransform == null)
-                _movementTransform = transform;
+            //if (_movementTransform == null)
+            //    _movementTransform = transform;
 
-            if (_movementDirectionReference == null)
-                _movementDirectionReference = _movementTransform;
+            //if (_movementDirectionReference == null)
+            //    _movementDirectionReference = _movementTransform;
         }
 
         protected virtual void ApplyInitialComboAttackSet()
@@ -215,14 +215,14 @@ namespace Scripts.Combat
             _isComboWindowOpen = false;
             _hasQueuedNextAttack = false;
 
-            StartAttackMovement(attackData);
+            //StartAttackMovement(attackData);
             _animator.CrossFade(attackData.AnimationStateName, attackData.TransitionDuration, 0, 0f);
             OnAttackStarted?.Invoke();
         }
 
         protected virtual void FinishCombo()
         {
-            StopAttackMovement();
+            //StopAttackMovement();
 
             _isAttacking = false;
             _isComboWindowOpen = false;
@@ -247,15 +247,17 @@ namespace Scripts.Combat
                    _currentComboIndex < _list_ComboAttackData.Count;
         }
 
+        // Legacy attack advance, disabled pending replacement.
+        /*
         protected virtual void StartAttackMovement(ComboAttackData attackData)
         {
             StopAttackMovement();
 
             if (attackData == null) return;
             if (_movementTransform == null) return;
-            if (Mathf.Approximately(attackData.AdvanceDistance, 0f)) return;
+            //if (Mathf.Approximately(attackData.AdvanceDistance, 0f)) return;
 
-            _attackMovementRoutine = StartCoroutine(AttackMovementRoutine(attackData));
+            //_attackMovementRoutine = StartCoroutine(AttackMovementRoutine(attackData));
         }
 
         protected virtual void StopAttackMovement()
@@ -267,54 +269,54 @@ namespace Scripts.Combat
             _attackMovementRoutine = null;
         }
 
-        protected virtual IEnumerator AttackMovementRoutine(ComboAttackData attackData)
-        {
-            float delayTimer = 0f;
+        //protected virtual IEnumerator AttackMovementRoutine(ComboAttackData attackData)
+        //{
+        //    float delayTimer = 0f;
 
-            while (delayTimer < attackData.AdvanceDelay)
-            {
-                if (!CanContinueAttackMovement(attackData))
-                    yield break;
+        //    while (delayTimer < attackData.AdvanceDelay)
+        //    {
+        //        if (!CanContinueAttackMovement(attackData))
+        //            yield break;
 
-                delayTimer += Time.deltaTime;
-                yield return null;
-            }
+        //        delayTimer += Time.deltaTime;
+        //        yield return null;
+        //    }
 
-            Vector3 direction = GetAttackMovementDirection();
+        //    Vector3 direction = GetAttackMovementDirection();
 
-            if (direction.sqrMagnitude <= 0.0001f)
-                yield break;
+        //    if (direction.sqrMagnitude <= 0.0001f)
+        //        yield break;
 
-            if (attackData.AdvanceDuration <= 0f)
-            {
-                _movementTransform.position += direction * attackData.AdvanceDistance;
-                _attackMovementRoutine = null;
-                yield break;
-            }
+        //    if (attackData.AdvanceDuration <= 0f)
+        //    {
+        //        _movementTransform.position += direction * attackData.AdvanceDistance;
+        //        _attackMovementRoutine = null;
+        //        yield break;
+        //    }
 
-            Vector3 startPosition = _movementTransform.position;
-            Vector3 endPosition = startPosition + direction * attackData.AdvanceDistance;
-            float elapsedTime = 0f;
+        //    Vector3 startPosition = _movementTransform.position;
+        //    Vector3 endPosition = startPosition + direction * attackData.AdvanceDistance;
+        //    float elapsedTime = 0f;
 
-            while (elapsedTime < attackData.AdvanceDuration)
-            {
-                if (!CanContinueAttackMovement(attackData))
-                    yield break;
+        //    while (elapsedTime < attackData.AdvanceDuration)
+        //    {
+        //        if (!CanContinueAttackMovement(attackData))
+        //            yield break;
 
-                elapsedTime += Time.deltaTime;
+        //        elapsedTime += Time.deltaTime;
 
-                float percentage = Mathf.Clamp01(elapsedTime / attackData.AdvanceDuration);
-                float curveValue = attackData.AdvanceCurve != null ? attackData.AdvanceCurve.Evaluate(percentage) : percentage;
+        //        float percentage = Mathf.Clamp01(elapsedTime / attackData.AdvanceDuration);
+        //        float curveValue = attackData.AdvanceCurve != null ? attackData.AdvanceCurve.Evaluate(percentage) : percentage;
 
-                _movementTransform.position = Vector3.LerpUnclamped(startPosition, endPosition, curveValue);
-                yield return null;
-            }
+        //        _movementTransform.position = Vector3.LerpUnclamped(startPosition, endPosition, curveValue);
+        //        yield return null;
+        //    }
 
-            if (CanContinueAttackMovement(attackData))
-                _movementTransform.position = endPosition;
+        //    if (CanContinueAttackMovement(attackData))
+        //        _movementTransform.position = endPosition;
 
-            _attackMovementRoutine = null;
-        }
+        //    _attackMovementRoutine = null;
+        //}
 
         protected virtual Vector3 GetAttackMovementDirection()
         {
@@ -332,6 +334,8 @@ namespace Scripts.Combat
                    _list_ComboAttackData[_currentComboIndex] == attackData &&
                    _movementTransform != null;
         }
+
+        */
 
         protected virtual void OnDrawGizmos()
         {

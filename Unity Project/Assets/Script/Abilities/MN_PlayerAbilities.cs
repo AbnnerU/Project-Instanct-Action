@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Scripts.Combat;
 using Scripts.Enchantment;
 using Scripts.Managers;
-using Scripts.Player;
+using Scripts.DashHandler;
 using Scripts.Status;
 using Scripts.Timer;
 using UnityEngine;
@@ -24,7 +24,7 @@ namespace Scripts.Abilities
         [SerializeField] private MN_PlayerStatus _playerStatus;
         [SerializeField] private ComboControllerBase _comboController;
         [SerializeField] private AttackHitbox _attackHitbox;
-        [SerializeField] private PlayerDash _playerDash;
+        [SerializeField] private DashHandler.DashBase _playerDash;
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private List<ActiveAbilitySlot> _list_ActiveAbilitySlots = new List<ActiveAbilitySlot>();
 
@@ -136,7 +136,7 @@ namespace Scripts.Abilities
                 _attackHitbox = _ownerObject.GetComponentInChildren<AttackHitbox>();
 
             if (_playerDash == null)
-                _playerDash = _ownerObject.GetComponentInChildren<PlayerDash>();
+                _playerDash = _ownerObject.GetComponentInChildren<Scripts.DashHandler.DashBase>();
 
             if (_statusSource == null)
                 _statusSource = _ownerObject.GetComponentInChildren<StatusInfoSourceBase>();
@@ -326,13 +326,13 @@ namespace Scripts.Abilities
             _subscribedToDashEvents = false;
         }
 
-        private void PlayerDash_OnDashStarted(DirectionSide directionSide)
+        private void PlayerDash_OnDashStarted(float directionDot)
         {
             _isDashBlockingAbilitySlots = true;
             SetAllSlotsBlocked(true);
         }
 
-        private void PlayerDash_OnDashFinished(DirectionSide directionSide)
+        private void PlayerDash_OnDashFinished(float directionDot)
         {
             _isDashBlockingAbilitySlots = false;
             SetAllSlotsBlocked(false);

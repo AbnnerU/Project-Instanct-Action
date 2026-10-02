@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fabc2f4b11ea33438dcdf23fa8d7447, type: 3}
+  m_Name: Test_WeaponLoadoutSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Weapon.WeaponLoadoutSO
+  ID: Test
+  DisplayName: Machadinho
+  ComboAttackSet: {fileID: 11400000, guid: 124620e5373355142a9e27ca9bf8b9f1, type: 2}
+  AnimatorController: {fileID: 22100000, guid: 824468a2a3a8be9479d52887ed9de994, type: 2}
+  List_WeaponModels:
+  - WeaponPrefabReference:
+      m_AssetGUID: bda0e0a54afa7464ab2ce114082b55d6
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    SocketID: Hand_Right_1
+    LocalPositionOffset: {x: -0.18, y: 0.11, z: -0.01}
+    LocalEulerAngles: {x: -7.61, y: 160.7, z: -60.4}
+    LocalScale: {x: 1, y: 1, z: 1}

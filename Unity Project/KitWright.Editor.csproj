@@ -94,8 +94,8 @@
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\VisualFeedbackFunctions.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\AssemblyDefinitionFunctions.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\NavMeshFunctions.cs" />
-    <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\ParticleFunctions.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Helpers\ObjectIdCodec.cs" />
+    <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\ParticleFunctions.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\ScreenshotFunctions.Simulator.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Properties\AssemblyInfo.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\UI\MCPSwitchToggle.cs" />
@@ -144,8 +144,8 @@
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\TerrainFunctions.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\TextureFunctions.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Threading\EditorThreadHelper.cs" />
-    <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\ShaderFunctions.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\ComponentPropertyFunctions.cs" />
+    <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\ShaderFunctions.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Helpers\TypeResolver.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Services\PackageVersion.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Services\CompilationService.cs" />
@@ -875,16 +875,16 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@8bed5ad90189\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@8bed5ad90189\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">

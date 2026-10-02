@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Scripts.Combat;
-using Scripts.Player;
+using Scripts.DashHandler;
 using Scripts.Status;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Scripts.Abilities
     public class TemporaryStatusBuffOnDashAbility : AbilityBase, IBuffDataAbility
     {
         [SerializeField] private StatusInfoSourceBase _statusSource;
-        [SerializeField] private PlayerDash _dashComponent;
+        [SerializeField] private DashHandler.DashBase _dashComponent;
         [Header("Trigger")]
         [SerializeField] private AbilityTriggerType _triggerType = AbilityTriggerType.ON_DASH_FINISHED;
 
@@ -27,7 +27,7 @@ namespace Scripts.Abilities
 
         #region Setup
 
-        public void Setup(StatusInfoSourceBase statusSource, PlayerDash dashComponent)
+        public void Setup(StatusInfoSourceBase statusSource, DashHandler.DashBase dashComponent)
         {
             _statusSource = statusSource;
             _dashComponent = dashComponent;
@@ -88,15 +88,15 @@ namespace Scripts.Abilities
             _subscribed = false;
         }
 
-        private void PlayerDash_OnDashStarted(DirectionSide directionSide)
+        private void PlayerDash_OnDashStarted(float directionDot)
         {
             if (_triggerType == AbilityTriggerType.ON_DASH_STARTED)
                 Execute();
         }
 
-        private void PlayerDash_OnDashFinished(DirectionSide directionSide)
+        private void PlayerDash_OnDashFinished(float directionDot)
         {
-            if (_triggerType == AbilityTriggerType.ON_DASH_FINISHED)
+            if (!_dashComponent.LastDashCanceled && _triggerType == AbilityTriggerType.ON_DASH_FINISHED)
                 Execute();
         }
         #endregion

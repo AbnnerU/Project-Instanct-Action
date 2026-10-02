@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using Scripts.Combat;
 using Scripts.ObjectPooling;
-using Scripts.Player;
+using Scripts.DashHandler;
 using Scripts.Status;
 using UnityEngine;
 using Scripts.Projectile;
@@ -45,7 +45,7 @@ namespace Scripts.Abilities
         [SerializeField] private bool _disableComboOnExecute = true;
         [SerializeField] private float _comboDisableDuration = 0.1f;
         [Header("Dash Lock")]
-        [SerializeField] private PlayerDash _dashComponent;
+        [SerializeField] private DashHandler.DashBase _dashComponent;
         [SerializeField] private bool _disableDashOnExecute = true;
         [SerializeField] private float _disableDashDuration = 0.1f;
 
@@ -64,7 +64,7 @@ namespace Scripts.Abilities
 
         #region Public
 
-        public void Setup(StatusInfoSourceBase statusSource, ComboControllerBase comboController, GameObject attackerObject, PlayerDash dash)
+        public void Setup(StatusInfoSourceBase statusSource, ComboControllerBase comboController, GameObject attackerObject, DashHandler.DashBase dash)
         {
             _statusSource = statusSource;
             _comboController = comboController;

@@ -1665,7 +1665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdcbb4af025e0554e85f68e196820f42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.UI.PlayerDashCooldownView
-  _playerDash: {fileID: 711513684}
+  _playerDash: {fileID: 0}
   _list_DashCooldownBindings:
   - DirectionSide: 0
     RechargeImage: {fileID: 1495967491}
@@ -1942,17 +1942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157001e64e506184d94f0486852040aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerAttackHitbox
---- !u!114 &711513684 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6926919428431626392, guid: 42a308debae41784e867944925962cab, type: 3}
-  m_PrefabInstance: {fileID: 4206290719789535704}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711513674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcfaf57392b31ee4c8e951fc034fc4cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDash
 --- !u!114 &711513686 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8709150000114935703, guid: 42a308debae41784e867944925962cab, type: 3}
@@ -1975,6 +1964,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d6153af76b6f841af2ee5390c8bb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.StatusInfoByMN_PlayerStatus
+--- !u!114 &711513692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298ba43ce8d403548b6d074b534b205e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.DashHandler.Dash_ComboControllerHandler
+  _dashHandler: {fileID: 711513693}
+  _comboController: {fileID: 711513680}
+--- !u!114 &711513693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5265ac8090c86849af4eb79dc314c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.DashHandler.Dash
+  _active: 1
+  _targetTransform: {fileID: 4206290719789535706}
+  _directionReference: {fileID: 4206290719789535706}
+  _referenceAxis: 0
+  _dashDistance: 4
+  _dashDuration: 0.25
+  _movementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _rightInput: {fileID: 7162467061146757405, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  _leftInput: {fileID: 5594487404767259243, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  _movementAxis: 0
+  _rightCooldown: 0.75
+  _leftCooldown: 0.75
 --- !u!1 &718721438
 GameObject:
   m_ObjectHideFlags: 0
@@ -4283,7 +4333,7 @@ MonoBehaviour:
   _playerStatus: {fileID: 1151873708}
   _comboController: {fileID: 711513680}
   _attackHitbox: {fileID: 711513681}
-  _playerDash: {fileID: 711513684}
+  _playerDash: {fileID: 0}
   _statusSource: {fileID: 711513691}
   _list_ActiveAbilitySlots:
   - _slotState: 0
@@ -4358,21 +4408,11 @@ MonoBehaviour:
   _offerEnchantmentsOnLevelUp: 1
   _optionsPerLevelUp: 3
   _list_AvailableEnchantments:
-  - {fileID: 11400000, guid: bb641e477f506254c9bd0b3e893da344, type: 2}
+  - {fileID: 11400000, guid: 5580ce164be7fcc41a520a935d0e7ef7, type: 2}
   - {fileID: 11400000, guid: eef4c754210dcd44fba6e14aef84541d, type: 2}
   - {fileID: 11400000, guid: 9a19e6847f9102f4f9393618bb807569, type: 2}
   - {fileID: 11400000, guid: b0fa00c498b8df449a1324eb314598a4, type: 2}
   - {fileID: 11400000, guid: 0ec3c7e91e569144e99110421680656e, type: 2}
-  - {fileID: 11400000, guid: beb72307bb35e464b90a43ea3d887043, type: 2}
-  - {fileID: 11400000, guid: 051f0be7f14d4ea297516dfc1d70c29c, type: 2}
-  - {fileID: 11400000, guid: af36371220314533b1d015ed86490d06, type: 2}
-  - {fileID: 11400000, guid: 7103dde1d54841b9b260bb29e4cc1170, type: 2}
-  - {fileID: 11400000, guid: 10bad6a68f6b416d930e1659579ad5d1, type: 2}
-  - {fileID: 11400000, guid: be671c6546404534a68e4bd58aec5799, type: 2}
-  - {fileID: 11400000, guid: 642408b45786462eb687ea50ad65ecfb, type: 2}
-  - {fileID: 11400000, guid: 365d06c3c8864ef2a653b6d42fad1b51, type: 2}
-  - {fileID: 11400000, guid: fe32cd08dc314b2e9df51877db23064c, type: 2}
-  - {fileID: 11400000, guid: 9b599abf189440fbbe6c3a21b37b48b7, type: 2}
   _list_AppliedEnchantments: []
 --- !u!114 &1879613187
 MonoBehaviour:
@@ -4794,6 +4834,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2806434940722750435, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _playerDashComponent
+      value: 
+      objectReference: {fileID: 711513693}
+    - target: {fileID: 3625371646929984785, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _playerDash
+      value: 
+      objectReference: {fileID: 711513693}
+    - target: {fileID: 3809105826719126910, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4915847422390050145, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4846,10 +4898,26 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6928627093028576957, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _playerDash
+      value: 
+      objectReference: {fileID: 711513693}
+    - target: {fileID: 6928627093028576957, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _useDirectionSign
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7997707731514666529, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8402393144809859780, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _leftInput
+      value: 
+      objectReference: {fileID: 7277778564736042800, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+    - target: {fileID: 8402393144809859780, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _rightInput
+      value: 
+      objectReference: {fileID: -3105849121650280034, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
     - target: {fileID: 8499587158038290663, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4858,11 +4926,55 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8563990564831857866, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _list_ComboAttackData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6926919428431626392, guid: 42a308debae41784e867944925962cab, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: 11
+      addedObject: {fileID: 711513693}
+    - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: 12
+      addedObject: {fileID: 711513692}
+    - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: 13
+      addedObject: {fileID: 4206290719789535707}
   m_SourcePrefab: {fileID: 100100000, guid: 42a308debae41784e867944925962cab, type: 3}
+--- !u!114 &4206290719789535705 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8402393144809859780, guid: 42a308debae41784e867944925962cab, type: 3}
+  m_PrefabInstance: {fileID: 4206290719789535704}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a85bfde8ef8ec547a37e1e34e0e0fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDirection
+--- !u!4 &4206290719789535706 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4915847422390050145, guid: 42a308debae41784e867944925962cab, type: 3}
+  m_PrefabInstance: {fileID: 4206290719789535704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4206290719789535707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7584296a6d64b38b5cd6d25c2263147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.DashHandler.Dash_DirectionHandler
+  _dash: {fileID: 711513693}
+  _directionHandler: {fileID: 4206290719789535705}
 --- !u!1001 &8199929961677144170
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,8 +10,8 @@ namespace Scripts.Combat
         [SerializeField] private float _transitionDuration = 0.05f;
         [SerializeField] private DamageData _damageData;
 
-        [Header("Advance")]
-        [SerializeField] private AttackAdvance _attackAdvance;
+        //[Header("Advance")]
+        //[SerializeField] private AttackAdvance _attackAdvance;
 
         [Header("Knockback")]
         [SerializeField] private AttackKnockback _attackKnockback;
@@ -26,10 +26,10 @@ namespace Scripts.Combat
         public string AnimationStateName => _animationStateName;
         public float TransitionDuration => _transitionDuration;
         public DamageData DamageData => _damageData;
-        public float AdvanceDistance => _attackAdvance.AdvanceDistance;
-        public float AdvanceDuration => _attackAdvance.AvanceDuration;
-        public float AdvanceDelay => _attackAdvance.AdvanceDelay;
-        public AnimationCurve AdvanceCurve => _attackAdvance.AdvanceCurve;
+        //public float AdvanceDistance => _attackAdvance.AdvanceDistance;
+        //public float AdvanceDuration => _attackAdvance.AvanceDuration;
+        //public float AdvanceDelay => _attackAdvance.AdvanceDelay;
+        ////public AnimationCurve AdvanceCurve => _attackAdvance.AdvanceCurve;
         public float KnockbackDistance => _attackKnockback.KnockbackDistance;
         public float KnockbackDuration => _attackKnockback.KnockbackDuration;
         public AnimationCurve KnockbackCurve => _attackKnockback.KnockbackCurve;
@@ -40,14 +40,14 @@ namespace Scripts.Combat
         public int MaxTargets => _maxTargets;
     }
 
-    [Serializable]
-    public class AttackAdvance
-    {
-        public float AdvanceDistance;
-        public float AvanceDuration;
-        public float AdvanceDelay;
-        public AnimationCurve AdvanceCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
-    }
+    //[Serializable]
+    //public class AttackAdvance
+    //{
+    //    public float AdvanceDistance;
+    //    public float AvanceDuration;
+    //    public float AdvanceDelay;
+    //    public AnimationCurve AdvanceCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+    //}
 
     [Serializable]
     public class AttackKnockback

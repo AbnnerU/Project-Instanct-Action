@@ -7,18 +7,9 @@
             "id": "3be318ac-8ee5-42a8-a8d9-a1d86c050e06",
             "actions": [
                 {
-                    "name": "Attack Right",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "fcab6a7e-9e93-4f84-8fc2-cfa40005ed11",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Attack Left",
-                    "type": "Button",
-                    "id": "5410ea85-5c18-4586-b9f1-973e28db2570",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -59,20 +50,27 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Look Right",
+                    "type": "Button",
+                    "id": "e0f2b695-9115-4090-9c94-e8be05f308a5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press(behavior=0)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Look Left",
+                    "type": "Button",
+                    "id": "56790f0d-0b4b-44c4-949b-8c62ae3328b6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=0)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "ce4c0656-96b8-4c30-9eaf-d3a41ed024ac",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack Right",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "7abf2d82-8c95-404b-ba1f-e3c3ca3e2a74",
@@ -80,7 +78,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack Left",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a0ed27e1-4842-4490-89c9-266b121858a3",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -88,7 +97,7 @@
                     "name": "",
                     "id": "8a6c3d1b-24be-4370-ab8c-5a4785e4af18",
                     "path": "<Keyboard>/d",
-                    "interactions": "",
+                    "interactions": "MultiTap",
                     "processors": "",
                     "groups": "",
                     "action": "Dash Right",
@@ -99,7 +108,7 @@
                     "name": "",
                     "id": "2afd4371-d4cf-43e6-9cc9-5b9764723e99",
                     "path": "<Keyboard>/a",
-                    "interactions": "",
+                    "interactions": "MultiTap",
                     "processors": "",
                     "groups": "",
                     "action": "Dash Left",
@@ -125,6 +134,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Ability 2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8abbe921-de72-4696-975d-4a6a905e6740",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a279a580-76db-4e23-bbf2-6a06d418c13b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

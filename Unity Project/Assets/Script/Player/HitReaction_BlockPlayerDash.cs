@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Scripts.Player
+namespace Scripts.DashHandler
 {
     public class HitReaction_BlockPlayerDash : MonoBehaviour
     {
         [SerializeField] private GameObject _hittableReference;
-        [SerializeField] private PlayerDash _playerDashComponent;
+        [SerializeField] private DashBase _playerDashComponent;
         [SerializeField] private float _blockTime;
 
         private Coroutine _blockDashRoutine;

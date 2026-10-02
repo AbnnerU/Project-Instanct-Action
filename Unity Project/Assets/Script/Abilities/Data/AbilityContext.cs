@@ -1,6 +1,6 @@
 using Scripts.Combat;
 using Scripts.Managers;
-using Scripts.Player;
+using Scripts.DashHandler;
 using Scripts.Status;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +14,7 @@ namespace Scripts.Abilities
         public MN_PlayerStatus PlayerStatus { get; }
         public ComboControllerBase ComboController { get; }
         public AttackHitbox AttackHitbox { get; }
-        public PlayerDash PlayerDash { get; }
+        public DashHandler.DashBase PlayerDash { get; }
         public StatusInfoSourceBase StatusSource { get; }
         public IReadOnlyList<DamageData> Lits_DamageData { get; }
         public IReadOnlyList<BuffData> Lits_BuffData { get; }
@@ -24,7 +24,7 @@ namespace Scripts.Abilities
             MN_PlayerStatus playerStatus,
             ComboControllerBase comboController,
             AttackHitbox attackHitbox,
-            PlayerDash playerDash,
+            DashHandler.DashBase playerDash,
             StatusInfoSourceBase statusSource,
             IReadOnlyList<DamageData> list_damageData,
             IReadOnlyList<BuffData> lits_buffData)

@@ -1,12 +1,20 @@
 using Scripts.Animation;
 using UnityEngine;
 
-namespace Scripts.Player
+namespace Scripts.DashHandler
 {
-    public class PlayerDashAnimation : AnimationModuleBase
+    public class DashAnimation : AnimationModuleBase
     {
-        [SerializeField] private PlayerDash _playerDash;
+        #region Fields
+
+        [SerializeField] private DashBase _playerDash;
+        [SerializeField] private string _dashDirectionParameter = "DashDirection";
+        [SerializeField] private bool _useDirectionSign;
         [SerializeField] private string _dashTriggerParameter = "Dash";
+
+        #endregion
+
+        #region Unity
 
         protected override void Awake()
         {
@@ -28,11 +36,21 @@ namespace Scripts.Player
                 _playerDash.OnDashStarted -= PlayerDash_OnDashStarted;
         }
 
-        private void PlayerDash_OnDashStarted(DirectionSide directionSide)
+        #endregion
+
+        #region Animation
+
+        private void PlayerDash_OnDashStarted(float directionDot)
         {
             if (_animationControllerComponent == null) return;
 
+            float value = _useDirectionSign
+                ? (Mathf.Abs(directionDot) < 0.0001f ? 0f : Mathf.Sign(directionDot))
+                : directionDot;
+            _animationControllerComponent.SetFloat(_dashDirectionParameter, value);
             _animationControllerComponent.SetTrigger(_dashTriggerParameter);
         }
+
+        #endregion
     }
 }
