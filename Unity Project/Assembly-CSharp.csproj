@@ -151,6 +151,7 @@
     <Compile Include="Assets\Script\Health\OnHit_Particles.cs" />
     <Compile Include="Assets\Script\AI\Abstract\BTnodeNavMeshAjust.cs" />
     <Compile Include="Assets\Script\Interface\General\IUniqueId.cs" />
+    <Compile Include="Assets\Script\Combat\AttackApproachAssist.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ReleaseAfterTime.cs" />
     <Compile Include="Assets\Script\Combat\Damage Effects\HealOnDamageDealt.cs" />
     <Compile Include="Assets\Script\Health\OnRespawn_UnityEvent.cs" />

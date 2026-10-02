@@ -11,6 +11,7 @@ namespace Scripts.Combat
         public event Action OnComboStarted;
         public event Action OnComboFinished;
         public event Action OnAttackStarted;
+        public event Action<ComboAttackData> OnBeforeAttack;
         public event Action OnAttackFinished;
         public event Action OnAttackCanceled;
         public event Action<AttackExecutionData> OnAttackHitboxExecuted;
@@ -216,6 +217,8 @@ namespace Scripts.Combat
             _hasQueuedNextAttack = false;
 
             //StartAttackMovement(attackData);
+            OnBeforeAttack?.Invoke(attackData);
+            if (!_active || !_isAttacking) return;
             _animator.CrossFade(attackData.AnimationStateName, attackData.TransitionDuration, 0, 0f);
             OnAttackStarted?.Invoke();
         }
