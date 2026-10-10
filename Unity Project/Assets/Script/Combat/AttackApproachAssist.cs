@@ -89,6 +89,7 @@ namespace Scripts.Combat
         private void ComboController_OnBeforeAttack(ComboAttackData attackData)
         {
             StopMovement();
+            if (!isActiveAndEnabled) return;
             if (attackData == null || _attackHitbox == null || _targetTransform == null || _directionReference == null)
                 return;
 

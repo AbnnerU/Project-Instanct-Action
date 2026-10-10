@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Scripts.Combat;
 using Scripts.Status;
@@ -21,8 +22,8 @@ namespace Scripts.Abilities
         private int _attackCounter;
         private bool _subscribed;
 
-        private readonly HashSet<int> _hashSet_BonusExecutionIds = new HashSet<int>();
-        private readonly HashSet<int> _hashSet_ConsumedExecutionIds = new HashSet<int>();
+        private readonly HashSet<Guid> _hashSet_BonusExecutionIds = new HashSet<Guid>();
+        private readonly HashSet<Guid> _hashSet_ConsumedExecutionIds = new HashSet<Guid>();
 
         #region IDamageDataAbility
         public void SetDamageData(IReadOnlyList<DamageData> list_Damage)

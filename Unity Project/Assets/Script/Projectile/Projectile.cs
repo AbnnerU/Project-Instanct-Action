@@ -37,20 +37,13 @@ namespace Scripts.Projectile
         {
             GameObject hitObject = hitCollider.gameObject;
             IHittable damageable = hitObject.GetComponent<IHittable>();
-            IHittable damageableChild = hitObject.GetComponentInChildren<IHittable>();
-
+         
             if (damageable != null)
             {
                 damageable.Hit(_damage);
                 OnHitDamageableTarget?.Invoke(damageable);
                 return;
             }
-
-            if (damageableChild == null)
-                return;
-
-            damageableChild.Hit(_damage);
-            OnHitDamageableTarget?.Invoke(damageableChild);
         }
     }
 }

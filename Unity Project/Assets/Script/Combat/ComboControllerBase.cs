@@ -21,8 +21,6 @@ namespace Scripts.Combat
         [SerializeField] protected AttackHitbox _attackHitbox;
         [SerializeField] protected Animator _animator;
         [SerializeField] protected CharacterAnimationController _characterAnimationController;
-        //[SerializeField] protected Transform _movementTransform;
-        //[SerializeField] protected Transform _movementDirectionReference;
         [SerializeField] protected ComboAttackSetSO _comboAttackSet;
         [SerializeField] protected List<ComboAttackData> _list_ComboAttackData = new List<ComboAttackData>();
         [SerializeField] protected bool _triggerIdle = true;
@@ -34,11 +32,10 @@ namespace Scripts.Combat
 
 
         protected int _currentComboIndex;
-        protected int _attackExecutionId;
+        protected Guid _attackExecutionId;
         protected bool _isAttacking;
         protected bool _isComboWindowOpen;
         protected bool _hasQueuedNextAttack;
-        //protected Coroutine _attackMovementRoutine;
 
         public bool Active => _active;
         public bool IsAttacking => _isAttacking;
@@ -104,7 +101,6 @@ namespace Scripts.Combat
             _hasQueuedNextAttack = false;
             _currentComboIndex = 0;
 
-            //StopAttackMovement();
             PlayIdle();
 
             if (wasAttacking)
@@ -120,8 +116,6 @@ namespace Scripts.Combat
             _hasQueuedNextAttack = false;
             _currentComboIndex = 0;
 
-            //StopAttackMovement();
-
             if (playIdle)
                 PlayIdle();
 
@@ -135,7 +129,8 @@ namespace Scripts.Combat
             if (!CanUseCurrentAttack()) return;
 
             ComboAttackData attackData = _list_ComboAttackData[_currentComboIndex];
-            AttackExecutionData executionData = new AttackExecutionData(++_attackExecutionId, _currentComboIndex, attackData, gameObject);
+            _attackExecutionId = Guid.NewGuid();
+            AttackExecutionData executionData = new AttackExecutionData(_attackExecutionId, _currentComboIndex, attackData, gameObject);
 
             OnAttackHitboxExecuted?.Invoke(executionData);
             _attackHitbox.ExecuteHitbox(attackData, executionData);
@@ -178,12 +173,6 @@ namespace Scripts.Combat
 
             if (_attackHitbox == null)
                 TryGetComponent(out _attackHitbox);
-
-            //if (_movementTransform == null)
-            //    _movementTransform = transform;
-
-            //if (_movementDirectionReference == null)
-            //    _movementDirectionReference = _movementTransform;
         }
 
         protected virtual void ApplyInitialComboAttackSet()
@@ -249,96 +238,6 @@ namespace Scripts.Combat
                    _currentComboIndex >= 0 &&
                    _currentComboIndex < _list_ComboAttackData.Count;
         }
-
-        // Legacy attack advance, disabled pending replacement.
-        /*
-        protected virtual void StartAttackMovement(ComboAttackData attackData)
-        {
-            StopAttackMovement();
-
-            if (attackData == null) return;
-            if (_movementTransform == null) return;
-            //if (Mathf.Approximately(attackData.AdvanceDistance, 0f)) return;
-
-            //_attackMovementRoutine = StartCoroutine(AttackMovementRoutine(attackData));
-        }
-
-        protected virtual void StopAttackMovement()
-        {
-            if (_attackMovementRoutine == null)
-                return;
-
-            StopCoroutine(_attackMovementRoutine);
-            _attackMovementRoutine = null;
-        }
-
-        //protected virtual IEnumerator AttackMovementRoutine(ComboAttackData attackData)
-        //{
-        //    float delayTimer = 0f;
-
-        //    while (delayTimer < attackData.AdvanceDelay)
-        //    {
-        //        if (!CanContinueAttackMovement(attackData))
-        //            yield break;
-
-        //        delayTimer += Time.deltaTime;
-        //        yield return null;
-        //    }
-
-        //    Vector3 direction = GetAttackMovementDirection();
-
-        //    if (direction.sqrMagnitude <= 0.0001f)
-        //        yield break;
-
-        //    if (attackData.AdvanceDuration <= 0f)
-        //    {
-        //        _movementTransform.position += direction * attackData.AdvanceDistance;
-        //        _attackMovementRoutine = null;
-        //        yield break;
-        //    }
-
-        //    Vector3 startPosition = _movementTransform.position;
-        //    Vector3 endPosition = startPosition + direction * attackData.AdvanceDistance;
-        //    float elapsedTime = 0f;
-
-        //    while (elapsedTime < attackData.AdvanceDuration)
-        //    {
-        //        if (!CanContinueAttackMovement(attackData))
-        //            yield break;
-
-        //        elapsedTime += Time.deltaTime;
-
-        //        float percentage = Mathf.Clamp01(elapsedTime / attackData.AdvanceDuration);
-        //        float curveValue = attackData.AdvanceCurve != null ? attackData.AdvanceCurve.Evaluate(percentage) : percentage;
-
-        //        _movementTransform.position = Vector3.LerpUnclamped(startPosition, endPosition, curveValue);
-        //        yield return null;
-        //    }
-
-        //    if (CanContinueAttackMovement(attackData))
-        //        _movementTransform.position = endPosition;
-
-        //    _attackMovementRoutine = null;
-        //}
-
-        protected virtual Vector3 GetAttackMovementDirection()
-        {
-            Transform directionReference = _movementDirectionReference != null ? _movementDirectionReference : _movementTransform;
-            Vector3 direction = directionReference != null ? directionReference.forward : transform.forward;
-            direction.y = 0f;
-
-            return direction.normalized;
-        }
-
-        protected virtual bool CanContinueAttackMovement(ComboAttackData attackData)
-        {
-            return _isAttacking &&
-                   CanUseCurrentAttack() &&
-                   _list_ComboAttackData[_currentComboIndex] == attackData &&
-                   _movementTransform != null;
-        }
-
-        */
 
         protected virtual void OnDrawGizmos()
         {

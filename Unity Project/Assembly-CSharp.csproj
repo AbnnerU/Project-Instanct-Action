@@ -141,6 +141,7 @@
     <Compile Include="Assets\Script\AI\Main nodes\BTInverter.cs" />
     <Compile Include="Assets\Script\Interface\General\ICursorVisibilyHandler.cs" />
     <Compile Include="Assets\Script\Progression\MN_Xp.cs" />
+    <Compile Include="Assets\Script\Animation\AnimationRootMotionDriver.cs" />
     <Compile Include="Assets\Script\Abilities\UI\AbilitySlotView.cs" />
     <Compile Include="Assets\Script\Panel\PanelAnimation.cs" />
     <Compile Include="Assets\Script\Abstract\Do Action\DoActionBase.cs" />

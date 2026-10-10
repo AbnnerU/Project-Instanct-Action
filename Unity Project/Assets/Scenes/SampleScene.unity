@@ -1072,6 +1072,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361122715}
   m_CullTransparentMesh: 1
+--- !u!1 &390562891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3699263677126291169, guid: 42a308debae41784e867944925962cab, type: 3}
+  m_PrefabInstance: {fileID: 4206290719789535704}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2464,7 +2469,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4.08, z: 0}
-  m_LocalScale: {x: 100, y: 1, z: 18.3}
+  m_LocalScale: {x: 100, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 821911183}
@@ -2885,7 +2890,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.083333336
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: a5f060e3a03daf545903f994969e38e7, type: 2}
   m_BuildHeightMesh: 0
@@ -3478,6 +3483,24 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 7997707731514666529, guid: 42a308debae41784e867944925962cab, type: 3}
   m_PrefabInstance: {fileID: 4206290719789535704}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1484080729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390562891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a189611f23191408913edb7707076b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Animation.AnimationRootMotionDriver
+  _targetTransform: {fileID: 4206290719789535706}
+  _usePositionX: 1
+  _usePositionY: 0
+  _usePositionZ: 0
+  _positionInfluence: 100
+  _applyRotation: 0
 --- !u!1 &1495967489
 GameObject:
   m_ObjectHideFlags: 0
@@ -4908,7 +4931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7997707731514666529, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8402393144809859780, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: _leftInput
@@ -4947,6 +4970,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
       insertIndex: 14
       addedObject: {fileID: 4206290719789535707}
+    - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4206290719789535740}
+    - targetCorrespondingSourceObject: {fileID: 3699263677126291169, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1484080729}
   m_SourcePrefab: {fileID: 100100000, guid: 42a308debae41784e867944925962cab, type: 3}
 --- !u!114 &4206290719789535705 stripped
 MonoBehaviour:
@@ -5046,6 +5075,18 @@ MonoBehaviour:
   _searchColor: {r: 1, g: 0, b: 0.9035686, a: 1}
   _destinationColor: {r: 0, g: 1, b: 0, a: 1}
   _debugDuration: 1
+--- !u!114 &4206290719789535740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af592f24f001c3449e1b460565a0b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.AttackRootMotionHandler
 --- !u!1001 &8199929961677144170
 PrefabInstance:
   m_ObjectHideFlags: 0
