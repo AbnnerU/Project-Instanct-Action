@@ -424,7 +424,9 @@ namespace Scripts.Editor.CombatWorkshop
                 {
                     Undo.RecordObject(_document, "Add default markers");
                     float length = Attack.Clip.length;
-                    for (int i = 0; i < 4; i++) markers.Add(new CombatMarker { Type = (CombatMarkerType)i, Time = length * new[] { 0.35f, 0.45f, 0.75f, 0.95f }[i] });
+                    markers.Add(new CombatMarker { Type = CombatMarkerType.HIT, Time = length * 0.35f });
+                    markers.Add(new CombatMarker { Type = CombatMarkerType.CLOSE_COMBO, Time = length * 0.75f });
+                    markers.Add(new CombatMarker { Type = CombatMarkerType.FINISH, Time = length * 0.95f });
                     Dirty();
                 }
             }
@@ -543,7 +545,6 @@ namespace Scripts.Editor.CombatWorkshop
             switch (type)
             {
                 case CombatMarkerType.HIT: return new Color(1, 0.4f, 0.15f);
-                case CombatMarkerType.OPEN_COMBO: return new Color(0.3f, 0.85f, 0.6f);
                 case CombatMarkerType.CLOSE_COMBO: return new Color(0.35f, 0.65f, 1);
                 default: return Color.white;
             }

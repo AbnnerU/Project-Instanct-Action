@@ -20,45 +20,8 @@ MonoBehaviour:
       _baseDamage: 50
       _physicForceScaling: 120.00001
       _magicForceScaling: 0
-    _attackAdvance:
-      AdvanceDistance: 0.15
-      AvanceDuration: 0.1
-      AdvanceDelay: 0
-      AdvanceCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 0.6526779
-          value: 0.147585
-          inSlope: 0.3362578
-          outSlope: 0.3362578
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.11416267
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
     _attackKnockback:
-      KnockbackDistance: 0.15
+      KnockbackDistance: 0.35
       KnockbackDuration: 0.1
       KnockbackCurve:
         serializedVersion: 2
@@ -98,45 +61,8 @@ MonoBehaviour:
       _baseDamage: 50
       _physicForceScaling: 120.00001
       _magicForceScaling: 0
-    _attackAdvance:
-      AdvanceDistance: 0.15
-      AvanceDuration: 0.1
-      AdvanceDelay: 0
-      AdvanceCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 0.6526779
-          value: 0.147585
-          inSlope: 0.3362578
-          outSlope: 0.3362578
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.11416267
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
     _attackKnockback:
-      KnockbackDistance: 0.15
+      KnockbackDistance: 0.35
       KnockbackDuration: 0.1
       KnockbackCurve:
         serializedVersion: 2

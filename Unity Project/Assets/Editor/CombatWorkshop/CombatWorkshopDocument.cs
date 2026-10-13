@@ -11,7 +11,8 @@ using UnityEngine;
 
 namespace Scripts.Editor.CombatWorkshop
 {
-    public enum CombatMarkerType { HIT, OPEN_COMBO, CLOSE_COMBO, FINISH }
+    // Keep the serialized values of existing workshop drafts.
+    public enum CombatMarkerType { HIT = 0, CLOSE_COMBO = 2, FINISH = 3 }
 
     [Serializable]
     public class CombatMarker
@@ -83,7 +84,8 @@ namespace Scripts.Editor.CombatWorkshop
             foreach (var animationEvent in AnimationUtility.GetAnimationEvents(clip))
             {
                 int index = Array.IndexOf(EventNames, animationEvent.functionName);
-                if (index >= 0) attack.List_Markers.Add(new CombatMarker { Type = (CombatMarkerType)index, Time = animationEvent.time });
+                if (index >= 0 && index != 1)
+                    attack.List_Markers.Add(new CombatMarker { Type = (CombatMarkerType)index, Time = animationEvent.time });
             }
         }
 
@@ -181,9 +183,7 @@ namespace Scripts.Editor.CombatWorkshop
                 if (draft.List_Markers.Count(x => x.Type == CombatMarkerType.FINISH) > 1) errors.Add($"Attack {i + 1}: only one Finish marker is allowed.");
                 float finish = draft.List_Markers.Where(x => x.Type == CombatMarkerType.FINISH).Select(x => x.Time).DefaultIfEmpty(draft.Clip.length).First();
                 if (draft.List_Markers.Any(x => x.Time < 0 || x.Time > draft.Clip.length || x.Time > finish)) errors.Add($"Attack {i + 1}: markers must be inside the clip and not after Finish.");
-                float open = draft.List_Markers.Where(x => x.Type == CombatMarkerType.OPEN_COMBO).Select(x => x.Time).DefaultIfEmpty(-1).First();
-                float close = draft.List_Markers.Where(x => x.Type == CombatMarkerType.CLOSE_COMBO).Select(x => x.Time).DefaultIfEmpty(-1).First();
-                if ((open >= 0 || close >= 0) && (open < 0 || close < open)) errors.Add($"Attack {i + 1}: invalid combo window.");
+                if (draft.List_Markers.Count(x => x.Type == CombatMarkerType.CLOSE_COMBO) > 1) errors.Add($"Attack {i + 1}: only one Close Combo marker is allowed.");
                 if (data.HitboxHalfExtents.x <= 0 || data.HitboxHalfExtents.y <= 0 || data.HitboxHalfExtents.z <= 0) errors.Add($"Attack {i + 1}: hitbox dimensions must be positive.");
             }
             foreach (var model in Loadout.List_WeaponModels)
@@ -295,7 +295,8 @@ namespace Scripts.Editor.CombatWorkshop
             if (target != attack.Clip) EditorUtility.CopySerialized(attack.Clip, target);
             target.hideFlags = HideFlags.None;
             var events = AnimationUtility.GetAnimationEvents(attack.Clip).Where(x => !EventNames.Contains(x.functionName)).ToList();
-            events.AddRange(attack.List_Markers.Select(x => new AnimationEvent { functionName = EventNames[(int)x.Type], time = x.Time }));
+            events.AddRange(attack.List_Markers.Where(x => Enum.IsDefined(typeof(CombatMarkerType), x.Type))
+                .Select(x => new AnimationEvent { functionName = EventNames[(int)x.Type], time = x.Time }));
             AnimationUtility.SetAnimationEvents(target, events.OrderBy(x => x.time).ToArray());
             var settings = AnimationUtility.GetAnimationClipSettings(target);
             settings.loopTime = false;

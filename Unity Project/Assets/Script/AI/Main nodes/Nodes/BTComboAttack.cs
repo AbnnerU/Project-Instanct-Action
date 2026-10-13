@@ -30,7 +30,7 @@ namespace Scripts.BT
             _comboFinished = false;
             _comboCanceled = false;
 
-            _comboController.OnComboFinished += ComboController_OnComboFinished;
+            _comboController.OnComboStopped += ComboController_OnComboStopped;
             _comboController.OnAttackCanceled += ComboController_OnAttackCanceled;
 
             _comboController.RequestAttack();
@@ -63,7 +63,7 @@ namespace Scripts.BT
             status = _comboFinished ? BTstatus.SUCCESS : BTstatus.FAILURE;
         }
 
-        private void ComboController_OnComboFinished()
+        private void ComboController_OnComboStopped()
         {
             _comboFinished = true;
         }
@@ -77,7 +77,7 @@ namespace Scripts.BT
         {
             if (_comboController == null) return;
 
-            _comboController.OnComboFinished -= ComboController_OnComboFinished;
+            _comboController.OnComboStopped -= ComboController_OnComboStopped;
             _comboController.OnAttackCanceled -= ComboController_OnAttackCanceled;
         }
     }

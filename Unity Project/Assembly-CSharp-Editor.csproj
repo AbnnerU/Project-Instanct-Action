@@ -74,6 +74,7 @@
     <Compile Include="Assets\Editor\Tests\DashDirectionChecks.cs" />
     <Compile Include="Assets\Editor\CombatWorkshop\CombatWorkshopDocument.cs" />
     <Compile Include="Assets\Editor\PercentageConventionMigration.cs" />
+    <Compile Include="Assets\Editor\Combat\Tests\ComboControllerChecks.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

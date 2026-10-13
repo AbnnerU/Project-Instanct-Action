@@ -25,7 +25,11 @@ namespace Scripts.Editor.CombatWorkshop
             {
                 var idle = MakeClip(folder + "/Idle.anim");
                 var attackClip = MakeClip(folder + "/Attack.anim");
-                AnimationUtility.SetAnimationEvents(attackClip, new[] { new AnimationEvent { time = 0.1f, functionName = "ExistingEvent" } });
+                AnimationUtility.SetAnimationEvents(attackClip, new[]
+                {
+                    new AnimationEvent { time = 0.1f, functionName = "ExistingEvent" },
+                    new AnimationEvent { time = 0.2f, functionName = "Attack_OpenComboWindow" }
+                });
                 var controller = AnimatorController.CreateAnimatorControllerAtPath(folder + "/Base.controller");
                 var machine = controller.layers[0].stateMachine;
                 machine.AddState("Idle").motion = idle;
@@ -38,8 +42,8 @@ namespace Scripts.Editor.CombatWorkshop
                 document.Loadout.DisplayName = "Test Weapon";
                 document.AddAttack();
                 CombatWorkshopDocument.SetClip(document.List_Attacks[0], attackClip);
+                Assert(document.List_Attacks[0].List_Markers.Count == 0, "Legacy opening marker ignored", ref checks);
                 document.List_Attacks[0].List_Markers.Add(new CombatMarker { Type = CombatMarkerType.HIT, Time = 0.3f });
-                document.List_Attacks[0].List_Markers.Add(new CombatMarker { Type = CombatMarkerType.OPEN_COMBO, Time = 0.4f });
                 document.List_Attacks[0].List_Markers.Add(new CombatMarker { Type = CombatMarkerType.CLOSE_COMBO, Time = 0.6f });
                 document.List_Attacks[0].List_Markers.Add(new CombatMarker { Type = CombatMarkerType.FINISH, Time = 0.8f });
                 Assert(document.Validate().Count == 0, "Valid draft", ref checks);
@@ -52,14 +56,15 @@ namespace Scripts.Editor.CombatWorkshop
                 ((AnimatorOverrideController)saved.AnimatorController).GetOverrides(pairs);
                 var copy = pairs.First(x => x.Key == attackClip).Value;
                 Assert(copy != attackClip && AssetDatabase.Contains(copy), "Own attack clip asset", ref checks);
-                Assert(AnimationUtility.GetAnimationEvents(attackClip).Length == 1, "Original events unchanged", ref checks);
-                Assert(AnimationUtility.GetAnimationEvents(copy).Length == 5, "Preserved unrelated event and added combat markers", ref checks);
+                Assert(AnimationUtility.GetAnimationEvents(attackClip).Length == 2, "Original events unchanged", ref checks);
+                Assert(AnimationUtility.GetAnimationEvents(copy).Length == 4, "Preserved unrelated event and added combat markers", ref checks);
+                Assert(!AnimationUtility.GetAnimationEvents(copy).Any(x => x.functionName == "Attack_OpenComboWindow"), "Legacy opening marker not exported", ref checks);
                 Assert(!copy.isLooping, "Attack copy does not loop", ref checks);
                 string copyGuid = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(copy));
                 document.Dispose();
                 document = CombatWorkshopDocument.Create(saved);
                 Assert(document.List_Attacks[0].Clip == copy, "Reopened effective override", ref checks);
-                Assert(document.List_Attacks[0].List_Markers.Count == 4, "Reopened markers", ref checks);
+                Assert(document.List_Attacks[0].List_Markers.Count == 3, "Reopened markers", ref checks);
                 document.List_Attacks[0].List_Markers[0].Time = 0.25f;
                 Assert(Mathf.Approximately(AnimationUtility.GetAnimationEvents(copy).First(x => x.functionName == "Attack_ExecuteHitbox").time, 0.3f), "Draft does not change source", ref checks);
                 document.Save();

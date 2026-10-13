@@ -9,6 +9,7 @@ namespace Scripts.DashHandler
 
         [SerializeField] private DashBase _dashHandler;
         [SerializeField] private ComboControllerBase _comboController;
+        [SerializeField] private bool _maintainComboIndex;
 
         private bool _isBlocking;
         private bool _wasComboActive;
@@ -65,7 +66,7 @@ namespace Scripts.DashHandler
             _wasComboActive = _comboController.Active;
             _isBlocking = true;
             _comboController.Disable();
-            _comboController.CancelAttack(false);
+            _comboController.CancelAttack(false, _maintainComboIndex);
         }
 
         #endregion

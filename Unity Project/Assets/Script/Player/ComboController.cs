@@ -24,17 +24,16 @@ namespace Scripts.Combat
             _attackInput.action.Enable();
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
             if (_attackInput != null && _attackInput.action != null)
                 _attackInput.action.performed -= Attack_Performed;
+            base.OnDisable();
         }
 
         #endregion
 
         #region Attack
-
-        protected override void QueueNextAttack() => _hasQueuedNextAttack = true;
 
         private void Attack_Performed(InputAction.CallbackContext context)
         {

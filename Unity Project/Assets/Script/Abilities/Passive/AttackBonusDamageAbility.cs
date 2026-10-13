@@ -73,8 +73,8 @@ namespace Scripts.Abilities
             if (_subscribed || _comboController == null || _attackHitbox == null)
                 return;
 
-            _comboController.OnAttackHitboxExecuted += ComboController_OnAttackHitboxExecuted;
-            _comboController.OnAttackHitboxFinished += ComboController_OnAttackHitboxFinished;
+            _comboController.OnAttackHitboxExecutionStarted += ComboController_OnAttackHitboxExecuted;
+            _comboController.OnAttackHitboxExecutionFinished += ComboController_OnAttackHitboxFinished;
             _attackHitbox.OnDamageDealtWithExecution += AttackHitbox_OnDamageDealtWithExecution;
             _subscribed = true;
         }
@@ -86,8 +86,8 @@ namespace Scripts.Abilities
 
             if (_comboController != null)
             {
-                _comboController.OnAttackHitboxExecuted -= ComboController_OnAttackHitboxExecuted;
-                _comboController.OnAttackHitboxFinished -= ComboController_OnAttackHitboxFinished;
+                _comboController.OnAttackHitboxExecutionStarted -= ComboController_OnAttackHitboxExecuted;
+                _comboController.OnAttackHitboxExecutionFinished -= ComboController_OnAttackHitboxFinished;
             }
 
             if (_attackHitbox != null)

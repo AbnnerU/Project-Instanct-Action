@@ -57,7 +57,7 @@ namespace Scripts.Combat
             {
                 _comboController.OnBeforeAttack += ComboController_OnBeforeAttack;
                 _comboController.OnAttackCanceled += StopMovement;
-                _comboController.OnComboFinished += StopMovement;
+                _comboController.OnComboStopped += StopMovement;
             }
         }
 
@@ -67,7 +67,7 @@ namespace Scripts.Combat
             {
                 _comboController.OnBeforeAttack -= ComboController_OnBeforeAttack;
                 _comboController.OnAttackCanceled -= StopMovement;
-                _comboController.OnComboFinished -= StopMovement;
+                _comboController.OnComboStopped -= StopMovement;
             }
             StopMovement();
             _debugUntil = 0f;

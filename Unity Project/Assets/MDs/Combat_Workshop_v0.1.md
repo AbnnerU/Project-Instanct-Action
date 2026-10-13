@@ -12,7 +12,7 @@ Socket registry aceita o WeaponSocketRegistry mesmo quando ele esta fora do pers
 2. Em Loadout, configure ID, nome, controller base, state de idle e clip de idle.
 3. Em Weapons, adicione prefabs e escolha os sockets. Posicao, rotacao e escala sao locais a cada socket. O ponto azul move a arma; o modo de rotacao usa um anel. Os campos numericos permitem ajustes nos tres eixos.
 4. Em Attacks, selecione o state, o clip e os dados de cada ataque. Ao substituir o clip, seus eventos de combate sao lidos; eventos do clip anterior nao sao transportados automaticamente.
-5. Adicione os marcadores Hit, Open Combo, Close Combo e Finish. Arraste-os na linha do tempo, edite o tempo em segundos ou use `@` para colocar no cursor. Default markers fornece somente um ponto de partida, nao detecta o impacto da animacao.
+5. Adicione os marcadores Hit, Close Combo e Finish. A janela de combo abre automaticamente no inicio do ataque; Close Combo encerra a entrada de novos comandos, sem apagar o proximo ataque ja enfileirado. Arraste os marcadores na linha do tempo, edite o tempo em segundos ou use `@` para colocar no cursor. Default markers fornece somente um ponto de partida, nao detecta o impacto da animacao.
 6. Arraste o ponto amarelo da hitbox para mover e o ponto branco para redimensionar. Os handles operam no plano da camera; use os campos numericos para profundidade. Arraste com o botao direito para orbitar e use a roda para zoom.
 7. Use Play, os botoes de frame, Loop e Combo para visualizar. Velocidade da previa usa porcentagem: 100 e a velocidade normal.
 8. Valide em Checks e salve pelo icone de disquete.
@@ -25,7 +25,7 @@ Socket registry aceita o WeaponSocketRegistry mesmo quando ele esta fora do pers
 - Register Addressable e uma acao separada que altera imediatamente o cadastro Addressables do modelo. Nao faz parte do rascunho do loadout.
 - Salvar atualiza o WeaponLoadoutSO e seu ComboAttackSetSO. Se esse conjunto for compartilhado por outros loadouts, eles tambem receberao as alteracoes. Duplique o conjunto antes caso deseje variantes independentes.
 - O Workshop cria uma pasta propria ao lado do loadout, identificada pelo nome e parte do GUID. Ali ficam o AnimatorOverrideController e os clips editaveis Attack_1.anim, Attack_2.anim etc.
-- Clips de origem nao sao modificados. Eventos que nao pertencem aos quatro eventos de combate sao preservados nas copias; loops sao desligados nos ataques.
+- Clips de origem nao sao modificados. Eventos que nao pertencem ao combate sao preservados nas copias; o antigo Attack_OpenComboWindow e descartado e loops sao desligados nos ataques.
 - Salvar novamente atualiza as mesmas referencias. Remover ataques nao apaga automaticamente os arquivos antigos da pasta.
 - O controller base nao e reestruturado: precisa ter os states desejados, no layer zero, com clips-base distintos. Blend Trees nao sao aceitos como slots de ataque/idle nesta versao.
 - Nao cria encantamentos nem altera o catalogo ou o equipamento atual da cena.
