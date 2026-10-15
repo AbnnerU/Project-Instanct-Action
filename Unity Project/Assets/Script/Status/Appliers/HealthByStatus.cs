@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Status
 {
-    public class PlayerHealthByStatus : MonoBehaviour
+    public class HealthByStatus : MonoBehaviour
     {
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private HealthManager _healthManager;

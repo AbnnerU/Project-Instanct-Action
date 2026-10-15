@@ -88,7 +88,6 @@
     <Compile Include="Assets\Script\Abilities\Passive\TemporaryStatusBuffOnDashAbility.cs" />
     <Compile Include="Assets\Script\Combat\EnemyComboController.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasNavMeshAgentSpeedUpdate.cs" />
-    <Compile Include="Assets\Script\Status\Appliers\PlayerHealthByStatus.cs" />
     <Compile Include="Assets\Script\Singleton\SceneSingleton.cs" />
     <Compile Include="Assets\Script\Health\LifeCycle_HandleCollider.cs" />
     <Compile Include="Assets\Script\Health\HealthStatusReference.cs" />
@@ -159,6 +158,7 @@
     <Compile Include="Assets\Script\Abilities\Auto Setup\PiercingThrustAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Dash Handler\Dash_ComboControllerHandler.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Weapon\WeaponLoadoutSO.cs" />
+    <Compile Include="Assets\Script\Job System\Look At Camera\MN_ParallelLookAtCamera.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActionValidation.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTSetAIState.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IMutableAddressableSpawnerWithPreview.cs" />
@@ -185,6 +185,7 @@
     <Compile Include="Assets\Script\Scripts Pool\ObjectPool.cs" />
     <Compile Include="Assets\Script\Combat\ComboControllerBase.cs" />
     <Compile Include="Assets\Script\Health\DynamicHealthRepairUI.cs" />
+    <Compile Include="Assets\Script\Status\Appliers\HealthByStatus.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTTryFindObjectInArea.cs" />
     <Compile Include="Assets\Script\Abilities\Enum\AbilityTriggerType.cs" />
     <Compile Include="Assets\Script\Abilities\Enum\AbilityValueType.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Assets\Script\Interactable\Interactable.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTSelector.cs" />
     <Compile Include="Assets\Script\Combat\Data\ComboAttackData.cs" />
+    <Compile Include="Assets\Script\Job System\Look At Camera\ParallelLookAtCamera_Register.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTIsTargetInRange.cs" />
     <Compile Include="Assets\Script\Enchantment\Description\EnchantmentDescriptionFormatter.cs" />
     <Compile Include="Assets\Script\Player\HitReaction_BlockPlayerDash.cs" />

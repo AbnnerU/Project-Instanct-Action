@@ -424,6 +424,7 @@ GameObject:
   - component: {fileID: 834530634035030108}
   - component: {fileID: 729762752570621824}
   - component: {fileID: 5204040487609098771}
+  - component: {fileID: 4200150877479531522}
   m_Layer: 7
   m_Name: Health Bar - Canvas
   m_TagString: Untagged
@@ -498,6 +499,19 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
+--- !u!114 &4200150877479531522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960359353670034133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c4a295a22d3b24f977fe16936c9ae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Job.LookAtCamera.ParallelLookAtCamera_Register
+  _transformRef: {fileID: 834530634035030108}
 --- !u!1 &7668894675120357355
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,8 +781,6 @@ MonoBehaviour:
   _attackHitbox: {fileID: 2416860590309405740}
   _animator: {fileID: 7345589929129320918}
   _characterAnimationController: {fileID: 8320340935477062313}
-  _movementTransform: {fileID: 2962371085109248886}
-  _movementDirectionReference: {fileID: 2962371085109248886}
   _comboAttackSet: {fileID: 0}
   _list_ComboAttackData:
   - _animationStateName: Attack
@@ -778,34 +790,6 @@ MonoBehaviour:
       _baseDamage: 0
       _physicForceScaling: 0
       _magicForceScaling: 0
-    _attackAdvance:
-      AdvanceDistance: 0
-      AvanceDuration: 0
-      AdvanceDelay: 0
-      AdvanceCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
     _attackKnockback:
       KnockbackDistance: 0
       KnockbackDuration: 0
@@ -842,6 +826,7 @@ MonoBehaviour:
     _maxTargets: 0
   _triggerIdle: 1
   _backToIdleTriggerParameter: Idle
+  _comboRetentionDuration: 0.87
   _drawGizmos: 1
   _debugAttackIndex: 0
   _debugHitboxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

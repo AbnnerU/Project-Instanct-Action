@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 8429938883490070474}
   - component: {fileID: 3809105826719126910}
   - component: {fileID: 8957741815748552983}
+  - component: {fileID: 8093511883819088631}
   - component: {fileID: 8402393144809859780}
   - component: {fileID: 6767258241694591359}
   - component: {fileID: 99004075763758795}
@@ -215,7 +216,6 @@ GameObject:
   - component: {fileID: 2530762080907638962}
   - component: {fileID: 8664224395122197948}
   - component: {fileID: 8563990564831857866}
-  - component: {fileID: 6926919428431626392}
   - component: {fileID: 3625371646929984785}
   - component: {fileID: 6928627093028576957}
   - component: {fileID: 8709150000114935703}
@@ -226,7 +226,6 @@ GameObject:
   - component: {fileID: 8931323131653704258}
   - component: {fileID: 1918671384792004575}
   - component: {fileID: 1430338522816146861}
-  - component: {fileID: 8093511883819088631}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -318,6 +317,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d6153af76b6f841af2ee5390c8bb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.StatusInfoByMN_PlayerStatus
+--- !u!114 &8093511883819088631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437302767631231260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c0434f1d554f44fb7b654575d7aaa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.PlayerHealthByStatus
+  _statusSource: {fileID: 8957741815748552983}
+  _healthManager: {fileID: 99004075763758795}
+  _healDifferenceWhenMaxHealthIncreases: 0
+  _clampCurrentHealthWhenMaxHealthDecreases: 1
 --- !u!114 &8402393144809859780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a85bfde8ef8ec547a37e1e34e0e0fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDirection
+  _active: 1
+  _rightInput: {fileID: 0}
+  _leftInput: {fileID: 0}
   _currentDirection: 1
   _visualTransform: {fileID: 4915847422390050145}
   _useLocalEulerAngles: 1
@@ -464,74 +482,15 @@ MonoBehaviour:
   _attackHitbox: {fileID: 8664224395122197948}
   _animator: {fileID: 7997707731514666529}
   _characterAnimationController: {fileID: 8709150000114935703}
-  _movementTransform: {fileID: 4915847422390050145}
-  _movementDirectionReference: {fileID: 4915847422390050145}
   _comboAttackSet: {fileID: 11400000, guid: 99245aad33389444e83aaa49757b9a15, type: 2}
   _list_ComboAttackData: []
   _triggerIdle: 1
   _backToIdleTriggerParameter: Idle
+  _comboRetentionDuration: 0.87
   _drawGizmos: 1
   _debugAttackIndex: 0
   _debugHitboxColor: {r: 0, g: 0, b: 0, a: 1}
-  _rightInput: {fileID: 2202181311478303124, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
-  _leftInput: {fileID: 7655917323739324251, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
-  _playerDirection: {fileID: 8402393144809859780}
-  _fallbackInputDirection: 1
---- !u!114 &6926919428431626392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437302767631231260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcfaf57392b31ee4c8e951fc034fc4cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDash
-  _active: 1
-  _rightInput: {fileID: 7162467061146757405, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
-  _leftInput: {fileID: 5594487404767259243, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
-  _targetTransform: {fileID: 4915847422390050145}
-  _playerDirection: {fileID: 8402393144809859780}
-  _comboController: {fileID: 8563990564831857866}
-  _dashDistance: 3
-  _dashDuration: 0.465
-  _movementCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.32311106
-      value: 0.06224054
-      inSlope: 0.29435307
-      outSlope: 0.29435307
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.20604405
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _rightCooldown: 0.5
-  _leftCooldown: 0.5
+  _attackInput: {fileID: 2202181311478303124, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
 --- !u!114 &3625371646929984785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5cd443794c9c334791d3f0d57b1218c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDashInvulnerability
-  _playerDash: {fileID: 6926919428431626392}
+  _playerDash: {fileID: 0}
   _list_CollidersToDisable:
   - {fileID: 3809105826719126910}
   _duration: 0.465
@@ -562,7 +521,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDashAnimation
   _active: 1
   _animationControllerComponent: {fileID: 8709150000114935703}
-  _playerDash: {fileID: 6926919428431626392}
+  _playerDash: {fileID: 0}
+  _dashDirectionParameter: DashDirection
+  _useDirectionSign: 0
   _dashTriggerParameter: Dash
 --- !u!114 &8709150000114935703
 MonoBehaviour:
@@ -594,6 +555,8 @@ MonoBehaviour:
   _animationControllerComponent: {fileID: 8709150000114935703}
   _hittableReference: {fileID: 1437302767631231260}
   _hittedParameter: Hitted
+  _hittedStateName: 
+  _transitionDuration: 0.05
 --- !u!114 &2806434940722750435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.HitReaction_BlockPlayerDash
   _hittableReference: {fileID: 1437302767631231260}
-  _playerDashComponent: {fileID: 6926919428431626392}
+  _playerDashComponent: {fileID: 0}
   _blockTime: 0.1
 --- !u!114 &8393514228291186048
 MonoBehaviour:
@@ -689,22 +652,6 @@ MonoBehaviour:
   _attackSpeedParameter: AttackSpeed
   _defaultAttackSpeed: 100
   _minimumAttackSpeed: 1
---- !u!114 &8093511883819088631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437302767631231260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c0434f1d554f44fb7b654575d7aaa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.PlayerHealthByStatus
-  _statusSource: {fileID: 8957741815748552983}
-  _healthManager: {fileID: 99004075763758795}
-  _healDifferenceWhenMaxHealthIncreases: 0
-  _clampCurrentHealthWhenMaxHealthDecreases: 1
 --- !u!1 &1557568472590508371
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +694,7 @@ GameObject:
   - component: {fileID: 7363989214041524618}
   - component: {fileID: 1667857453292459857}
   - component: {fileID: 2886880855518237382}
+  - component: {fileID: 1540175581778010283}
   m_Layer: 7
   m_Name: Health Bar - Canvas
   m_TagString: Untagged
@@ -821,6 +769,19 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
+--- !u!114 &1540175581778010283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2374789827509591902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c4a295a22d3b24f977fe16936c9ae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Job.LookAtCamera.ParallelLookAtCamera_Register
+  _transformRef: {fileID: 7363989214041524618}
 --- !u!1 &2889947503651189117
 GameObject:
   m_ObjectHideFlags: 0

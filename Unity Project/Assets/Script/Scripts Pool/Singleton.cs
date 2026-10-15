@@ -10,7 +10,7 @@ namespace Scripts.ObjectPooling
             {
                 if (instance == null)
                 {
-                    T[] managers = Object.FindObjectsOfType(typeof(T)) as T[];
+                    T[] managers = Object.FindObjectsByType(typeof(T)) as T[];
                     if (managers.Length != 0)
                     {
                         if (managers.Length == 1)
@@ -51,7 +51,7 @@ namespace Scripts.ObjectPooling
             {
                 if (instance == null)
                 {
-                    T[] managers = Object.FindObjectsOfType(typeof(T)) as T[];
+                    T[] managers = Object.FindObjectsByType(typeof(T)) as T[];
                     if (managers.Length != 0)
                     {
                         if (managers.Length == 1)

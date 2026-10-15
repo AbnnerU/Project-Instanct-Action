@@ -117,7 +117,7 @@ namespace Scripts.Editor.CombatWorkshop
         {
             _socketRegistry = _character != null ? _character.GetComponentInChildren<WeaponSocketRegistry>(true) : null;
             if (_character == null || _socketRegistry != null) return;
-            foreach (var registry in FindObjectsByType<WeaponSocketRegistry>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            foreach (var registry in FindObjectsByType<WeaponSocketRegistry>(FindObjectsInactive.Include))
             {
                 var sockets = new SerializedObject(registry).FindProperty("_list_WeaponSockets");
                 for (int i = 0; i < sockets.arraySize; i++)

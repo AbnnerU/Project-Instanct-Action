@@ -34,20 +34,20 @@ namespace Scripts.Combat
         [SerializeField] protected int _debugAttackIndex;
         [SerializeField] protected Color _debugHitboxColor = Color.yellow;
 
-        private float _comboRetentionExpiresAt;
+        protected float _comboRetentionExpiresAt;
 
-        private enum AttackStatus { IDLE, ACCEPTING_INPUT, RECOVERY, FINISHING }
-        private enum AttackPhase { NONE, STARTED, HITBOX_EXECUTED, HOLDING_ATTACK_INDEX, FINISHING }
+        protected enum AttackStatus { IDLE, ACCEPTING_INPUT, RECOVERY, FINISHING }
+        protected enum AttackPhase { NONE, STARTED, HITBOX_EXECUTED, HOLDING_ATTACK_INDEX, FINISHING }
 
-        private AttackStatus _status;
-        private AttackPhase _phase;
+        protected AttackStatus _status;
+        protected AttackPhase _phase;
 
         protected int _currentComboIndex;
         protected bool _hasQueuedNextAttack;
 
-        private int _attackStartedFrame;
+        protected int _attackStartedFrame;
 
-        private int _executionVersion;
+        protected int _executionVersion;
 
         public bool Active => _active;
         public bool IsAttacking => _status != AttackStatus.IDLE;
