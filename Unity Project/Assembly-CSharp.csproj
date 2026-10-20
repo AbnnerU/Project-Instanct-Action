@@ -103,6 +103,7 @@
     <Compile Include="Assets\Script\AI\Agents\EnemyBrain.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTConditionalSequence.cs" />
     <Compile Include="Assets\Script\Interface\Abilities\IHasCastTime.cs" />
+    <Compile Include="Assets\Script\Status\StatusInfoByReference.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasTargetProvider.cs" />
     <Compile Include="Assets\Script\Status\Appliers\AttackSpeedByStatus.cs" />
     <Compile Include="Assets\Script\Combat\HitReaction_CancelAndBlockComboController.cs" />
@@ -137,7 +138,9 @@
     <Compile Include="Assets\Script\Dash Handler\Dash2D.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTComboAttack.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageRequest.cs" />
+    <Compile Include="Assets\Script\Status\EnemyScaledStatusSource.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTInverter.cs" />
+    <Compile Include="Assets\Script\Interface\Status\IHasStatusInfoReference.cs" />
     <Compile Include="Assets\Script\Interface\General\ICursorVisibilyHandler.cs" />
     <Compile Include="Assets\Script\Progression\MN_Xp.cs" />
     <Compile Include="Assets\Script\Animation\AnimationRootMotionDriver.cs" />
@@ -157,6 +160,7 @@
     <Compile Include="Assets\Script\Health\OnRespawn_UnityEvent.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\PiercingThrustAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Dash Handler\Dash_ComboControllerHandler.cs" />
+    <Compile Include="Assets\Script\Progression\MN_EnemyProgression.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Weapon\WeaponLoadoutSO.cs" />
     <Compile Include="Assets\Script\Job System\Look At Camera\MN_ParallelLookAtCamera.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActionValidation.cs" />

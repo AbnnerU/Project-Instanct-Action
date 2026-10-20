@@ -13,23 +13,24 @@ GameObject:
   - component: {fileID: 2857506347262930443}
   - component: {fileID: 6983699681527380791}
   - component: {fileID: 8609405625918951327}
+  - component: {fileID: 4927542468898909118}
+  - component: {fileID: 8279000431274479677}
   - component: {fileID: 7231527614648297650}
+  - component: {fileID: 7895469071761944818}
+  - component: {fileID: 1826758174271530299}
+  - component: {fileID: 3235657999409740104}
+  - component: {fileID: 1764168608193628138}
+  - component: {fileID: 6232966678816958479}
   - component: {fileID: 4564397152144541060}
   - component: {fileID: 7651743264658319734}
   - component: {fileID: 7773916649188686455}
   - component: {fileID: 2651949697427157578}
-  - component: {fileID: 199503535975834629}
   - component: {fileID: 8733042703824664223}
-  - component: {fileID: 7895469071761944818}
   - component: {fileID: 301626572502348817}
   - component: {fileID: 8864495692353785839}
   - component: {fileID: 5752072415533641781}
   - component: {fileID: 719550394201319586}
   - component: {fileID: 4098462770203856925}
-  - component: {fileID: 3235657999409740104}
-  - component: {fileID: 1764168608193628138}
-  - component: {fileID: 1826758174271530299}
-  - component: {fileID: 6232966678816958479}
   m_Layer: 7
   m_Name: Enemy (Melee)
   m_TagString: Enemy
@@ -144,6 +145,46 @@ MonoBehaviour:
   _maxAttackDuration: 2
   _useXZDistanceForAttack: 1
   _btExecutionInterval: 0.1
+--- !u!114 &4927542468898909118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d54afdc3ad513941aef40a7eb6819c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.EnemyScaledStatusSource
+  _statusInfo:
+    List_StatusData:
+    - StatusType: 0
+      BaseValue: 150
+      CurrentValue: 150
+    - StatusType: 10
+      BaseValue: 25
+      CurrentValue: 25
+    - StatusType: 3
+      BaseValue: 10
+      CurrentValue: 0
+--- !u!114 &8279000431274479677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c0434f1d554f44fb7b654575d7aaa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.HealthByStatus
+  _statusSource: {fileID: 4927542468898909118}
+  _healthManager: {fileID: 7231527614648297650}
+  _healDifferenceWhenMaxHealthIncreases: 0
+  _clampCurrentHealthWhenMaxHealthDecreases: 1
+  _resetHealthOnEnable: 1
 --- !u!114 &7231527614648297650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +203,88 @@ MonoBehaviour:
   isKillable: 1
   releaseOnDeath: 0
   resetHealthOnEnable: 1
+--- !u!114 &7895469071761944818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aeb4e18a3bd1ea4ea6ff904c83e2eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  healthObject: {fileID: 7231527614648297650}
+  slider: {fileID: 3039512652699835991}
+  disableGameObjectSliderOnBlock: 0
+  disableGameObjectSliderOnDeath: 1
+  enableGameObjectSliderOnRespawn: 1
+--- !u!114 &1826758174271530299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2383b57d2dbf6d34392748a45b9c8dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LifeCycle_HandleCollider
+  _healthEventsComponent: {fileID: 7231527614648297650}
+  _verifyStateOnStart: 1
+  _colliderComponent: {fileID: 8922168734197783621}
+--- !u!114 &3235657999409740104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66520b0137f5b1a4dabbc8aedb03c0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OnDeath_TriggerParameter
+  _healthEventsComponent: {fileID: 7231527614648297650}
+  _verifyStateOnStart: 1
+  _animationControllerComponent: {fileID: 301626572502348817}
+  _deathParameter: Death
+--- !u!114 &1764168608193628138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3274652e1da3d674990a9f7748fa6182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.AI.OnDeath_StopBrainAndReleaseObject
+  _healthEventsComponent: {fileID: 7231527614648297650}
+  _verifyStateOnStart: 1
+  _enemyBrainComponent: {fileID: 8609405625918951327}
+  _navMeshAgentComponent: {fileID: 2857506347262930443}
+  _objectToRelease: {fileID: 54779437082285969}
+  _releaseDelay: 10
+  _releaseObject: 1
+--- !u!114 &6232966678816958479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04130fe236678b4e96169d8f091d708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Progression.OnDeath_AddXp
+  _healthEventsComponent: {fileID: 7231527614648297650}
+  _verifyStateOnStart: 1
+  _xpValue: 100
 --- !u!114 &4564397152144541060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.DamageReceiver
   _hittableReference: {fileID: 54779437082285969}
-  _statusSource: {fileID: 199503535975834629}
+  _statusSource: {fileID: 4927542468898909118}
 --- !u!114 &7651743264658319734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +382,7 @@ MonoBehaviour:
     _damageData:
       _damageType: 0
       _baseDamage: 10
-      _physicForceScaling: 0
+      _physicForceScaling: 10
       _magicForceScaling: 0
     _attackKnockback:
       KnockbackDistance: 0
@@ -301,23 +424,6 @@ MonoBehaviour:
   _drawGizmos: 1
   _debugAttackIndex: 0
   _debugHitboxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
---- !u!114 &199503535975834629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54779437082285969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8394fce931e9f534cbbf115da0e3c447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.StatusInfoSource
-  _statusInfo:
-    List_StatusData:
-    - StatusType: 10
-      BaseValue: 10
-      CurrentValue: 10
 --- !u!114 &8733042703824664223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,29 +437,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.AttackHitbox
   _hitboxOrigin: {fileID: 1954381815328986970}
-  _statusSource: {fileID: 0}
+  _statusSource: {fileID: 4927542468898909118}
   _useHitboxOriginRotation: 1
   _drawGizmos: 1
   _drawExecutedHitboxGizmos: 1
   _executedHitboxColor: {r: 1, g: 0, b: 0, a: 1}
   _executedHitboxGizmosDuration: 0.15
---- !u!114 &7895469071761944818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54779437082285969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aeb4e18a3bd1ea4ea6ff904c83e2eb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  healthObject: {fileID: 7231527614648297650}
-  slider: {fileID: 3039512652699835991}
-  disableGameObjectSliderOnBlock: 0
-  disableGameObjectSliderOnDeath: 1
-  enableGameObjectSliderOnRespawn: 1
 --- !u!114 &301626572502348817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,71 +529,6 @@ MonoBehaviour:
   _enemyBrainComponent: {fileID: 8609405625918951327}
   _blockTime: 1
   _resetPath: 0
---- !u!114 &3235657999409740104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54779437082285969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66520b0137f5b1a4dabbc8aedb03c0af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OnDeath_TriggerParameter
-  _healthEventsComponent: {fileID: 7231527614648297650}
-  _verifyStateOnStart: 1
-  _animationControllerComponent: {fileID: 301626572502348817}
-  _deathParameter: Death
---- !u!114 &1764168608193628138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54779437082285969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3274652e1da3d674990a9f7748fa6182, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.AI.OnDeath_StopBrainAndReleaseObject
-  _healthEventsComponent: {fileID: 7231527614648297650}
-  _verifyStateOnStart: 1
-  _enemyBrainComponent: {fileID: 8609405625918951327}
-  _navMeshAgentComponent: {fileID: 2857506347262930443}
-  _objectToRelease: {fileID: 54779437082285969}
-  _releaseDelay: 10
-  _releaseObject: 1
---- !u!114 &1826758174271530299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54779437082285969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2383b57d2dbf6d34392748a45b9c8dba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LifeCycle_HandleCollider
-  _healthEventsComponent: {fileID: 7231527614648297650}
-  _verifyStateOnStart: 1
-  _colliderComponent: {fileID: 8922168734197783621}
---- !u!114 &6232966678816958479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54779437082285969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b04130fe236678b4e96169d8f091d708, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Progression.OnDeath_AddXp
-  _healthEventsComponent: {fileID: 7231527614648297650}
-  _verifyStateOnStart: 1
-  _xpValue: 100
 --- !u!1 &1378778652017181660
 GameObject:
   m_ObjectHideFlags: 0

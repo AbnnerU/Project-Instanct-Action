@@ -31,7 +31,7 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   List_DamageDatas:
   - _damageType: 1
-    _baseDamage: 80
+    _baseDamage: 100
     _physicForceScaling: 0
     _magicForceScaling: 100
   List_BuffDatas: []

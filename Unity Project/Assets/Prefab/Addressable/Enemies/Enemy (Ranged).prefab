@@ -523,25 +523,25 @@ GameObject:
   - component: {fileID: 2962371085109248886}
   - component: {fileID: 9018390104901938156}
   - component: {fileID: 1361017501748393965}
-  - component: {fileID: 3979419082900569362}
   - component: {fileID: 8658328471153798441}
   - component: {fileID: 2153284052778431660}
+  - component: {fileID: 8295450727726487473}
   - component: {fileID: 5058952256331780876}
+  - component: {fileID: 3017615716217013624}
+  - component: {fileID: 411065067123737881}
+  - component: {fileID: 4556523341283750844}
+  - component: {fileID: 8547232156055357868}
+  - component: {fileID: 3570458763929082464}
   - component: {fileID: 269525282480989534}
   - component: {fileID: 3286850368120043239}
   - component: {fileID: 7930047445353007004}
   - component: {fileID: 526492648152875300}
   - component: {fileID: 2416860590309405740}
-  - component: {fileID: 3017615716217013624}
   - component: {fileID: 8320340935477062313}
   - component: {fileID: 4738061897472445684}
   - component: {fileID: 1143225389941177119}
   - component: {fileID: 2842286385702380382}
   - component: {fileID: 4822639363391701490}
-  - component: {fileID: 4556523341283750844}
-  - component: {fileID: 8547232156055357868}
-  - component: {fileID: 411065067123737881}
-  - component: {fileID: 3570458763929082464}
   m_Layer: 7
   m_Name: Enemy (Ranged)
   m_TagString: Enemy
@@ -612,23 +612,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!114 &3979419082900569362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7668894675120357355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8394fce931e9f534cbbf115da0e3c447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.StatusInfoSource
-  _statusInfo:
-    List_StatusData:
-    - StatusType: 9
-      BaseValue: 10
-      CurrentValue: 10
 --- !u!114 &8658328471153798441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,6 +656,29 @@ MonoBehaviour:
   _maxAttackDuration: 8
   _useXZDistanceForAttack: 1
   _btExecutionInterval: 0.1
+--- !u!114 &8295450727726487473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668894675120357355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d54afdc3ad513941aef40a7eb6819c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.EnemyScaledStatusSource
+  _statusInfo:
+    List_StatusData:
+    - StatusType: 0
+      BaseValue: 100
+      CurrentValue: 100
+    - StatusType: 9
+      BaseValue: 25
+      CurrentValue: 25
+    - StatusType: 4
+      BaseValue: 5
+      CurrentValue: 0
 --- !u!114 &5058952256331780876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,6 +697,88 @@ MonoBehaviour:
   isKillable: 1
   releaseOnDeath: 0
   resetHealthOnEnable: 1
+--- !u!114 &3017615716217013624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668894675120357355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aeb4e18a3bd1ea4ea6ff904c83e2eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  healthObject: {fileID: 5058952256331780876}
+  slider: {fileID: 6004312723377842021}
+  disableGameObjectSliderOnBlock: 0
+  disableGameObjectSliderOnDeath: 1
+  enableGameObjectSliderOnRespawn: 1
+--- !u!114 &411065067123737881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668894675120357355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2383b57d2dbf6d34392748a45b9c8dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LifeCycle_HandleCollider
+  _healthEventsComponent: {fileID: 5058952256331780876}
+  _verifyStateOnStart: 1
+  _colliderComponent: {fileID: 9018390104901938156}
+--- !u!114 &4556523341283750844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668894675120357355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66520b0137f5b1a4dabbc8aedb03c0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OnDeath_TriggerParameter
+  _healthEventsComponent: {fileID: 5058952256331780876}
+  _verifyStateOnStart: 1
+  _animationControllerComponent: {fileID: 8320340935477062313}
+  _deathParameter: Death
+--- !u!114 &8547232156055357868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668894675120357355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3274652e1da3d674990a9f7748fa6182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.AI.OnDeath_StopBrainAndReleaseObject
+  _healthEventsComponent: {fileID: 5058952256331780876}
+  _verifyStateOnStart: 1
+  _enemyBrainComponent: {fileID: 2153284052778431660}
+  _navMeshAgentComponent: {fileID: 1361017501748393965}
+  _objectToRelease: {fileID: 7668894675120357355}
+  _releaseDelay: 10
+  _releaseObject: 1
+--- !u!114 &3570458763929082464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668894675120357355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04130fe236678b4e96169d8f091d708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Progression.OnDeath_AddXp
+  _healthEventsComponent: {fileID: 5058952256331780876}
+  _verifyStateOnStart: 1
+  _xpValue: 100
 --- !u!114 &269525282480989534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.DamageReceiver
   _hittableReference: {fileID: 7668894675120357355}
-  _statusSource: {fileID: 3979419082900569362}
+  _statusSource: {fileID: 8295450727726487473}
 --- !u!114 &3286850368120043239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,29 +931,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.AttackHitbox
   _hitboxOrigin: {fileID: 6244145426181694044}
-  _statusSource: {fileID: 0}
+  _statusSource: {fileID: 8295450727726487473}
   _useHitboxOriginRotation: 1
   _drawGizmos: 1
   _drawExecutedHitboxGizmos: 1
   _executedHitboxColor: {r: 1, g: 0, b: 0, a: 1}
   _executedHitboxGizmosDuration: 0.15
---- !u!114 &3017615716217013624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7668894675120357355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aeb4e18a3bd1ea4ea6ff904c83e2eb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  healthObject: {fileID: 5058952256331780876}
-  slider: {fileID: 6004312723377842021}
-  disableGameObjectSliderOnBlock: 0
-  disableGameObjectSliderOnDeath: 1
-  enableGameObjectSliderOnRespawn: 1
 --- !u!114 &8320340935477062313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,71 +1023,6 @@ MonoBehaviour:
   _enemyBrainComponent: {fileID: 2153284052778431660}
   _blockTime: 1
   _resetPath: 0
---- !u!114 &4556523341283750844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7668894675120357355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66520b0137f5b1a4dabbc8aedb03c0af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OnDeath_TriggerParameter
-  _healthEventsComponent: {fileID: 5058952256331780876}
-  _verifyStateOnStart: 1
-  _animationControllerComponent: {fileID: 8320340935477062313}
-  _deathParameter: Death
---- !u!114 &8547232156055357868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7668894675120357355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3274652e1da3d674990a9f7748fa6182, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.AI.OnDeath_StopBrainAndReleaseObject
-  _healthEventsComponent: {fileID: 5058952256331780876}
-  _verifyStateOnStart: 1
-  _enemyBrainComponent: {fileID: 2153284052778431660}
-  _navMeshAgentComponent: {fileID: 1361017501748393965}
-  _objectToRelease: {fileID: 7668894675120357355}
-  _releaseDelay: 10
-  _releaseObject: 1
---- !u!114 &411065067123737881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7668894675120357355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2383b57d2dbf6d34392748a45b9c8dba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LifeCycle_HandleCollider
-  _healthEventsComponent: {fileID: 5058952256331780876}
-  _verifyStateOnStart: 1
-  _colliderComponent: {fileID: 9018390104901938156}
---- !u!114 &3570458763929082464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7668894675120357355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b04130fe236678b4e96169d8f091d708, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Progression.OnDeath_AddXp
-  _healthEventsComponent: {fileID: 5058952256331780876}
-  _verifyStateOnStart: 1
-  _xpValue: 100
 --- !u!1 &8834474549328015737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,14 +1519,14 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 4551271130602059453, guid: d00d13a5f43fe1e4e91ca09fe9923789, type: 3}
   _firePoint: {fileID: 4316585524573515027}
   _attackerObject: {fileID: 7668894675120357355}
-  _statusSource: {fileID: 3979419082900569362}
+  _statusSource: {fileID: 8295450727726487473}
   _projectileContainer: {fileID: 0}
   _containerTag: ProjectilesContainer
   _damageData:
     _damageType: 1
     _baseDamage: 30
     _physicForceScaling: 0
-    _magicForceScaling: 0
+    _magicForceScaling: 10
   _projectileSpeed: 5
   _gravityValue: {x: 0, y: 0, z: 0}
   _projectileRadius: 0.25

@@ -1,14 +1,15 @@
-using Scripts.Managers;
 using UnityEngine;
 
 namespace Scripts.Status
 {
+    [DefaultExecutionOrder(200)]
     public class HealthByStatus : MonoBehaviour
     {
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private HealthManager _healthManager;
         [SerializeField] private bool _healDifferenceWhenMaxHealthIncreases;
         [SerializeField] private bool _clampCurrentHealthWhenMaxHealthDecreases = true;
+        [SerializeField] private bool _resetHealthOnEnable;
 
         private StatusData _healthStatusData;
 
@@ -18,18 +19,36 @@ namespace Scripts.Status
                 TryGetComponent(out _healthManager);
         }
 
+        private void OnEnable()
+        {
+            RefreshHealth();
+        }
+
         private void Start()
+        {
+            if (_healthStatusData == null)
+                RefreshHealth();
+        }
+
+        private void RefreshHealth()
         {
             CacheHealthStatus();
 
-            if (_healthStatusData != null)
-                ApplyHealthValue(_healthStatusData.CurrentValue);
+            if (_healthStatusData == null || _healthManager == null)
+                return;
+
+            ApplyHealthValue(_healthStatusData.CurrentValue);
+
+            if (_resetHealthOnEnable)
+                _healthManager.ResetHealth();
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (_healthStatusData != null)
                 _healthStatusData.OnCurrentValueUpdated -= HealthStatusData_OnCurrentValueUpdated;
+
+            _healthStatusData = null;
         }
 
         private void HealthStatusData_OnCurrentValueUpdated(float value)
@@ -60,6 +79,11 @@ namespace Scripts.Status
 
         private void CacheHealthStatus()
         {
+            if (_healthStatusData != null)
+                _healthStatusData.OnCurrentValueUpdated -= HealthStatusData_OnCurrentValueUpdated;
+
+            _healthStatusData = null;
+
             if (_statusSource == null)
                 return;
 

@@ -5,7 +5,7 @@ using Scripts.Status;
 
 namespace Scripts.Managers
 {
-    public class MN_PlayerStatus : SceneSingleton<MN_PlayerStatus>
+    public class MN_PlayerStatus : SceneSingleton<MN_PlayerStatus>, IHasStatusInfoReference
     {
         public event Action<StatusType, float> OnCurrentValueUpdated;
         public event Action<StatusType, float> OnBaseValueUpdated;

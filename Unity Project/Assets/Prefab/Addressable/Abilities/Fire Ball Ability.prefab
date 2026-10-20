@@ -67,7 +67,7 @@ MonoBehaviour:
   _attackerObject: {fileID: 0}
   _animator: {fileID: 0}
   _damageData:
-    _damageType: 1
+    _damageType: 0
     _baseDamage: 100
     _physicForceScaling: 0
     _magicForceScaling: 50
