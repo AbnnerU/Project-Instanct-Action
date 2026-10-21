@@ -19,9 +19,10 @@ namespace Scripts.Abilities
         [Header("Damage")]
         [SerializeField] private DamageData _bonusDamageData = new DamageData();
 
+        private ICriticalDamagePermissionsProvider _criticalPermissions;
         private int _attackCounter;
         private bool _subscribed;
-
+       
         private readonly HashSet<Guid> _hashSet_BonusExecutionIds = new HashSet<Guid>();
         private readonly HashSet<Guid> _hashSet_ConsumedExecutionIds = new HashSet<Guid>();
 
@@ -40,6 +41,8 @@ namespace Scripts.Abilities
             _comboController = comboController;
             _attackHitbox = attackHitbox;
             _statusSource = statusSource;
+
+            _criticalPermissions = GetComponentInParent<ICriticalDamagePermissionsProvider>();
         }
 
         public override void Initialize()
@@ -152,7 +155,8 @@ namespace Scripts.Abilities
                 sourceDamageResult.Attacker != null ? sourceDamageResult.Attacker : gameObject,
                 sourceDamageResult.Receiver,
                 sourceDamageResult.HitCollider,
-                sourceDamageResult.HitPoint);
+                sourceDamageResult.HitPoint,
+                allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes);
 
             DamageResult bonusDamageResult = damageReceiver.ReceiveDamage(damageRequest);
             _attackHitbox?.NotifyDamageDealt(bonusDamageResult);

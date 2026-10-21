@@ -1,4 +1,3 @@
-using Scripts.Player;
 using UnityEngine;
 
 namespace Scripts.Abilities

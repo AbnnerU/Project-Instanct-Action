@@ -31,6 +31,7 @@ GameObject:
   - component: {fileID: 5752072415533641781}
   - component: {fileID: 719550394201319586}
   - component: {fileID: 4098462770203856925}
+  - component: {fileID: 1266269832215162228}
   m_Layer: 7
   m_Name: Enemy (Melee)
   m_TagString: Enemy
@@ -160,8 +161,8 @@ MonoBehaviour:
   _statusInfo:
     List_StatusData:
     - StatusType: 0
-      BaseValue: 150
-      CurrentValue: 150
+      BaseValue: 400
+      CurrentValue: 400
     - StatusType: 10
       BaseValue: 25
       CurrentValue: 25
@@ -529,6 +530,29 @@ MonoBehaviour:
   _enemyBrainComponent: {fileID: 8609405625918951327}
   _blockTime: 1
   _resetPath: 0
+--- !u!114 &1266269832215162228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8e59083eb13f57419071830e1147178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HitParticleSpawner
+  _damageReceiverReference: {fileID: 54779437082285969}
+  _particlePrefabReference:
+    m_AssetGUID: 838da9c5e89288c4c8005ffa2ff9fb9c
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _positionOffset: {x: 0, y: 0, z: 0}
+  _container: {fileID: 0}
+  _findContainerByTag: 1
+  _containerTag: VFXContainer
 --- !u!1 &1378778652017181660
 GameObject:
   m_ObjectHideFlags: 0

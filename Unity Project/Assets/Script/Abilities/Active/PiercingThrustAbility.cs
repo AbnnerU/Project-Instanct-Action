@@ -42,6 +42,7 @@ namespace Scripts.Abilities
         [SerializeField] private bool _disableColliderDuringExecution = true;
         [Header("Combat Lock")]
         [SerializeField] private ComboControllerBase _comboController;
+        [SerializeField] private bool _maintainComboIndex = true;
         [SerializeField] private bool _cancelAttackOnExecute = true;
         [SerializeField] private bool _disableComboDuringExecution = true;
         [Header("Dash Lock")]
@@ -53,6 +54,9 @@ namespace Scripts.Abilities
 
         private Collider[] _hitResults;
         private Coroutine _executionRoutine;
+
+        private ICriticalDamagePermissionsProvider _criticalPermissions;
+
         private readonly HashSet<IDamageReceiver> _hashSet_DamageReceivers = new HashSet<IDamageReceiver>();
         public float CastTime { get => _castTime; set => _castTime = value; }
 
@@ -81,6 +85,8 @@ namespace Scripts.Abilities
 
             if (_animator == null && _attackerObject != null)
                 _animator = _attackerObject.GetComponentInChildren<Animator>();
+
+            _criticalPermissions = _attackerObject.GetComponentInParent<ICriticalDamagePermissionsProvider>();
         }
 
         public override void Execute()
@@ -94,7 +100,7 @@ namespace Scripts.Abilities
             PlayAnimation();
 
             if (_cancelAttackOnExecute)
-                _comboController?.CancelAttack(false);
+                _comboController?.CancelAttack(false, _maintainComboIndex);
 
             if (_disableComboDuringExecution && _comboController != null)
                 _comboController.Disable();
@@ -237,7 +243,8 @@ namespace Scripts.Abilities
                     _attackerObject != null ? _attackerObject : gameObject,
                     receiverObject,
                     hitCollider,
-                    hitCollider.ClosestPoint(center));
+                    hitCollider.ClosestPoint(center),
+                    allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes);
 
                 damageReceiver.ReceiveDamage(damageRequest);
             }

@@ -542,6 +542,7 @@ GameObject:
   - component: {fileID: 1143225389941177119}
   - component: {fileID: 2842286385702380382}
   - component: {fileID: 4822639363391701490}
+  - component: {fileID: 2648305099959604047}
   m_Layer: 7
   m_Name: Enemy (Ranged)
   m_TagString: Enemy
@@ -1023,6 +1024,29 @@ MonoBehaviour:
   _enemyBrainComponent: {fileID: 2153284052778431660}
   _blockTime: 1
   _resetPath: 0
+--- !u!114 &2648305099959604047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668894675120357355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8e59083eb13f57419071830e1147178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HitParticleSpawner
+  _damageReceiverReference: {fileID: 7668894675120357355}
+  _particlePrefabReference:
+    m_AssetGUID: 838da9c5e89288c4c8005ffa2ff9fb9c
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _positionOffset: {x: 0, y: 0, z: 0}
+  _container: {fileID: 0}
+  _findContainerByTag: 1
+  _containerTag: VFXContainer
 --- !u!1 &8834474549328015737
 GameObject:
   m_ObjectHideFlags: 0

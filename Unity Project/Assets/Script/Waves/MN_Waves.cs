@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Scripts.ObjectPooling;
+using Scripts.Spawner;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
@@ -29,6 +30,7 @@ namespace Scripts.Waves
         [SerializeField] private bool _useSpawnPointLocalEulerAngles;
         [SerializeField] private bool _sampleNavMeshPosition = true;
         [SerializeField] private float _navMeshSampleRadius = 1f;
+        [SerializeField] private SpawnAreaFilter _spawnAreaFilter = new SpawnAreaFilter();
 
         [Header("Gizmos")]
         [SerializeField] private bool _drawGizmos = true;
@@ -70,7 +72,7 @@ namespace Scripts.Waves
 
             if (_array_SpawnPoints == null || _array_SpawnPoints.Length == 0)
             {
-                DrawSpawnGizmo(transform.position);
+                DrawSpawnGizmo(transform.position, transform.rotation);
                 return;
             }
 
@@ -80,7 +82,7 @@ namespace Scripts.Waves
 
                 if (spawnPoint == null) continue;
 
-                DrawSpawnGizmo(spawnPoint.position);
+                DrawSpawnGizmo(spawnPoint.position, GetSpawnRotation(spawnPoint));
                 Gizmos.DrawLine(transform.position, spawnPoint.position);
             }
         }
@@ -123,12 +125,7 @@ namespace Scripts.Waves
             if (enemyPrefab == null)
                 return false;
 
-            Transform spawnPoint = GetRandomSpawnPoint();
-            Vector3 spawnPosition = spawnPoint != null ? spawnPoint.position : transform.position;
-            Quaternion spawnRotation = GetSpawnRotation(spawnPoint);
-
-            SpawnEnemy(enemyPrefab, spawnPosition, spawnRotation);
-            return true;
+            return TrySpawnAtAvailablePoint(enemyPrefab);
         }
 
         #endregion
@@ -236,6 +233,9 @@ namespace Scripts.Waves
             if (_sampleNavMeshPosition && NavMesh.SamplePosition(position, out NavMeshHit hit, _navMeshSampleRadius, NavMesh.AllAreas))
                 position = hit.position;
 
+            if (_spawnAreaFilter.IsBlocked(position, rotation))
+                return null;
+
             GameObject enemyObject = PoolManager.SpawnObject(enemyPrefab, position, rotation);
 
             if (_spawnParent != null)
@@ -281,13 +281,22 @@ namespace Scripts.Waves
             return _list_LoadedEnemyPrefabs[index];
         }
 
-        private Transform GetRandomSpawnPoint()
+        private bool TrySpawnAtAvailablePoint(GameObject enemyPrefab)
         {
             if (_array_SpawnPoints == null || _array_SpawnPoints.Length == 0)
-                return null;
+                return SpawnEnemy(enemyPrefab, transform.position, transform.rotation) != null;
 
-            int index = UnityEngine.Random.Range(0, _array_SpawnPoints.Length);
-            return _array_SpawnPoints[index];
+            int startIndex = UnityEngine.Random.Range(0, _array_SpawnPoints.Length);
+            for (int i = 0; i < _array_SpawnPoints.Length; i++)
+            {
+                Transform point = _array_SpawnPoints[(startIndex + i) % _array_SpawnPoints.Length];
+                if (point == null) continue;
+
+                if (SpawnEnemy(enemyPrefab, point.position, GetSpawnRotation(point)) != null)
+                    return true;
+            }
+
+            return false;
         }
 
         private Quaternion GetSpawnRotation(Transform spawnPoint)
@@ -347,12 +356,17 @@ namespace Scripts.Waves
 
         #region Gizmos
 
-        private void DrawSpawnGizmo(Vector3 position)
+        private void DrawSpawnGizmo(Vector3 position, Quaternion rotation)
         {
             Gizmos.DrawWireSphere(position, _gizmoRadius);
 
             if (_sampleNavMeshPosition)
                 Gizmos.DrawWireSphere(position, _navMeshSampleRadius);
+
+            if (_sampleNavMeshPosition && NavMesh.SamplePosition(position, out NavMeshHit hit, _navMeshSampleRadius, NavMesh.AllAreas))
+                position = hit.position;
+
+            _spawnAreaFilter.DrawGizmo(position, rotation);
         }
 
         #endregion

@@ -216,10 +216,10 @@ GameObject:
   - component: {fileID: 2530762080907638962}
   - component: {fileID: 8664224395122197948}
   - component: {fileID: 4977585416239788996}
+  - component: {fileID: 8563990564831857866}
   - component: {fileID: 8889931655858333428}
   - component: {fileID: 2511505656132928410}
   - component: {fileID: 8494587181052925510}
-  - component: {fileID: 8563990564831857866}
   - component: {fileID: 3625371646929984785}
   - component: {fileID: 6928627093028576957}
   - component: {fileID: 8709150000114935703}
@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 8931323131653704258}
   - component: {fileID: 1918671384792004575}
   - component: {fileID: 1430338522816146861}
+  - component: {fileID: 7022363560736055592}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -470,7 +471,7 @@ MonoBehaviour:
   _hitboxOrigin: {fileID: 8192174699944662036}
   _statusSource: {fileID: 6204951687772877657}
   _useHitboxOriginRotation: 1
-  _drawGizmos: 1
+  _drawGizmos: 0
   _drawExecutedHitboxGizmos: 1
   _executedHitboxColor: {r: 1, g: 0, b: 0, a: 1}
   _executedHitboxGizmosDuration: 0.15
@@ -537,6 +538,54 @@ MonoBehaviour:
   _searchColor: {r: 1, g: 0, b: 0.9035686, a: 1}
   _destinationColor: {r: 0, g: 1, b: 0, a: 1}
   _debugDuration: 1
+--- !u!114 &8563990564831857866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437302767631231260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be13fcd1bd317a48bbb4530aa106a2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerComboController
+  _active: 1
+  _attackHitbox: {fileID: 8664224395122197948}
+  _animator: {fileID: 7997707731514666529}
+  _characterAnimationController: {fileID: 8709150000114935703}
+  _comboAttackSet: {fileID: 11400000, guid: 99245aad33389444e83aaa49757b9a15, type: 2}
+  _list_ComboAttackData:
+  - _animationStateName: 
+    _transitionDuration: 0
+    _damageData:
+      _damageType: 0
+      _baseDamage: 0
+      _physicForceScaling: 0
+      _magicForceScaling: 0
+    _attackKnockback:
+      KnockbackDistance: 0
+      KnockbackDuration: 0
+      KnockbackCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    _hitboxCenterOffset: {x: 0, y: 0, z: 0}
+    _hitboxHalfExtents: {x: 0, y: 0, z: 0}
+    _targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    _queryTriggerInteraction: 0
+    _maxTargets: 0
+  _triggerIdle: 1
+  _backToIdleTriggerParameter: Idle
+  _comboRetentionDuration: 1.5
+  _drawGizmos: 1
+  _debugAttackIndex: 0
+  _debugHitboxColor: {r: 0, g: 0, b: 0, a: 1}
+  _attackInput: {fileID: 2202181311478303124, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
 --- !u!114 &8889931655858333428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,54 +662,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.DashHandler.Dash_DirectionHandler
   _dash: {fileID: 8889931655858333428}
   _directionHandler: {fileID: 8402393144809859780}
---- !u!114 &8563990564831857866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437302767631231260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9be13fcd1bd317a48bbb4530aa106a2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerComboController
-  _active: 1
-  _attackHitbox: {fileID: 8664224395122197948}
-  _animator: {fileID: 7997707731514666529}
-  _characterAnimationController: {fileID: 8709150000114935703}
-  _comboAttackSet: {fileID: 11400000, guid: 99245aad33389444e83aaa49757b9a15, type: 2}
-  _list_ComboAttackData:
-  - _animationStateName: 
-    _transitionDuration: 0
-    _damageData:
-      _damageType: 0
-      _baseDamage: 0
-      _physicForceScaling: 0
-      _magicForceScaling: 0
-    _attackKnockback:
-      KnockbackDistance: 0
-      KnockbackDuration: 0
-      KnockbackCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    _hitboxCenterOffset: {x: 0, y: 0, z: 0}
-    _hitboxHalfExtents: {x: 0, y: 0, z: 0}
-    _targetLayerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    _queryTriggerInteraction: 0
-    _maxTargets: 0
-  _triggerIdle: 1
-  _backToIdleTriggerParameter: Idle
-  _comboRetentionDuration: 1.5
-  _drawGizmos: 1
-  _debugAttackIndex: 0
-  _debugHitboxColor: {r: 0, g: 0, b: 0, a: 1}
-  _attackInput: {fileID: 2202181311478303124, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
 --- !u!114 &3625371646929984785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,6 +823,19 @@ MonoBehaviour:
   _attackSpeedParameter: AttackSpeed
   _defaultAttackSpeed: 100
   _minimumAttackSpeed: 1
+--- !u!114 &7022363560736055592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437302767631231260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b865ff2c72ed04db535ac91625a7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.CriticalPermissions
+  _allowedTypes: 1
 --- !u!1 &1557568472590508371
 GameObject:
   m_ObjectHideFlags: 0

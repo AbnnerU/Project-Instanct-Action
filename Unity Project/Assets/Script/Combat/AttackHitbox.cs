@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Scripts.Player;
 using Scripts.Status;
 using UnityEngine;
 
@@ -27,11 +26,14 @@ namespace Scripts.Combat
         private AttackExecutionData _lastAttackExecutionData;
         private Vector3 _lastCenter;
         private Quaternion _lastRotation;
+        private ICriticalDamagePermissionsProvider _criticalPermissions;
         private float _lastExecutedHitboxExpireTime;
 
         private void Awake()
         {
             GetReferences();
+
+            _criticalPermissions = GetComponentInParent<ICriticalDamagePermissionsProvider>();
         }
 
         public void ExecuteHitbox(ComboAttackData attackData)
@@ -86,10 +88,12 @@ namespace Scripts.Combat
                 if (!TryGetHittable(hitCollider, out IHittable hittable)) continue;
                 if (!_hashSet_HittableTargets.Add(hittable)) continue;
 
-                ResolvedDamageData resolvedDamage = DamageResolver.Resolve(attackData.DamageData, _statusSource?.GetStatusInfo());
+                DamageRequest damageRequestFallback = CreateDamageRequest(attackData, hitCollider, GetHittableGameObject(hittable));
+                ResolvedDamageData resolvedDamage = DamageResolver.Resolve(
+                    damageRequestFallback.DamageData, damageRequestFallback.AttackerStatus,
+                    null, damageRequestFallback.AllowedCriticalTypes);
                 hittable.Hit(resolvedDamage.FinalDamage, out bool killed);
 
-                DamageRequest damageRequestFallback = CreateDamageRequest(attackData, hitCollider, GetHittableGameObject(hittable));
                 DamageResult damageResultFallback = new DamageResult(
                     resolvedDamage.DamageType,
                     resolvedDamage.RawDamage,
@@ -175,7 +179,8 @@ namespace Scripts.Combat
                 receiver,
                 hitCollider,
                 hitCollider.ClosestPoint(_hitboxOrigin.position),
-                attackData);
+                attackData,
+                _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes);
         }
 
         private void EnsureHitResultsCapacity(int maxTargets)

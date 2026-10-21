@@ -31,6 +31,7 @@ namespace Scripts.Spawner
         [SerializeField] private float _spawnInterval = 2f;
         [SerializeField] private bool _sampleNavMeshPosition = true;
         [SerializeField] private float _navMeshSampleRadius = 1f;
+        [SerializeField] private SpawnAreaFilter _spawnAreaFilter = new SpawnAreaFilter();
 
         [Header("Gizmos")]
         [SerializeField] private bool _drawGizmos = true;
@@ -41,6 +42,7 @@ namespace Scripts.Spawner
         private readonly List<SpawnRequest> _list_PendingSpawnRequests = new List<SpawnRequest>();
 
         private Coroutine _spawnRoutine;
+        private Coroutine _pendingSpawnRoutine;
         private AsyncOperationHandle<GameObject> _enemyPrefabLoadHandle;
         private GameObject _loadedEnemyPrefab;
         private bool _isLoadingEnemyPrefab;
@@ -53,6 +55,12 @@ namespace Scripts.Spawner
 
         private void OnDisable()
         {
+            if (_pendingSpawnRoutine != null)
+            {
+                StopCoroutine(_pendingSpawnRoutine);
+                _pendingSpawnRoutine = null;
+            }
+
             if (_spawnRoutine != null)
             {
                 StopCoroutine(_spawnRoutine);
@@ -84,7 +92,8 @@ namespace Scripts.Spawner
                 return;
             }
 
-            SpawnEnemy(position, Quaternion.identity);
+            if (SpawnEnemy(position, Quaternion.identity) == null)
+                QueueSpawnRequest(position, Quaternion.identity);
         }
 
         public void Enable()
@@ -121,12 +130,7 @@ namespace Scripts.Spawner
             if (_hashSet_AliveEnemies.Count >= _maxAliveEnemies)
                 return false;
 
-            Transform spawnPoint = GetSpawnPoint();
-            Vector3 spawnPosition = spawnPoint != null ? spawnPoint.position : transform.position;
-            Quaternion spawnRotation = spawnPoint != null ? spawnPoint.rotation : transform.rotation;
-
-            SpawnEnemy(spawnPosition, spawnRotation);
-            return true;
+            return TrySpawnAtAvailablePoint();
         }
 
         private IEnumerator AutoSpawnRoutine()
@@ -208,6 +212,9 @@ namespace Scripts.Spawner
             if (_loadedEnemyPrefab == null)
                 return null;
 
+            if (_spawnAreaFilter.IsBlocked(position, rotation))
+                return null;
+
             GameObject enemyObject = PoolManager.SpawnObject(_loadedEnemyPrefab, position, rotation);
 
             if (_spawnParent != null)
@@ -249,13 +256,22 @@ namespace Scripts.Spawner
         }
 
 
-        private Transform GetSpawnPoint()
+        private bool TrySpawnAtAvailablePoint()
         {
             if (_list_SpawnPoints == null || _list_SpawnPoints.Count == 0)
-                return null;
+                return SpawnEnemy(transform.position, transform.rotation) != null;
 
-            int index = UnityEngine.Random.Range(0, _list_SpawnPoints.Count);
-            return _list_SpawnPoints[index];
+            int startIndex = UnityEngine.Random.Range(0, _list_SpawnPoints.Count);
+            for (int i = 0; i < _list_SpawnPoints.Count; i++)
+            {
+                Transform point = _list_SpawnPoints[(startIndex + i) % _list_SpawnPoints.Count];
+                if (point == null) continue;
+
+                if (SpawnEnemy(point.position, point.rotation) != null)
+                    return true;
+            }
+
+            return false;
         }
 
         private void CleanupAliveEnemies()
@@ -266,6 +282,30 @@ namespace Scripts.Spawner
         private void QueueSpawnRequest(Vector3 position, Quaternion rotation)
         {
             _list_PendingSpawnRequests.Add(new SpawnRequest(position, rotation));
+            StartPendingSpawnRoutine();
+        }
+
+        private void OnEnable()
+        {
+            StartPendingSpawnRoutine();
+        }
+
+        private void StartPendingSpawnRoutine()
+        {
+            if (_pendingSpawnRoutine == null && isActiveAndEnabled && _list_PendingSpawnRequests.Count > 0)
+                _pendingSpawnRoutine = StartCoroutine(RetryPendingSpawns());
+        }
+
+        private IEnumerator RetryPendingSpawns()
+        {
+            while (_list_PendingSpawnRequests.Count > 0)
+            {
+                yield return new WaitForSeconds(Mathf.Max(0.01f, _spawnInterval));
+                if (_active)
+                    SpawnPendingRequests();
+            }
+
+            _pendingSpawnRoutine = null;
         }
 
         private void SpawnPendingRequests()
@@ -273,10 +313,14 @@ namespace Scripts.Spawner
             if (_loadedEnemyPrefab == null || _list_PendingSpawnRequests.Count == 0)
                 return;
 
-            for (int i = 0; i < _list_PendingSpawnRequests.Count; i++)
-                SpawnEnemy(_list_PendingSpawnRequests[i].Position, _list_PendingSpawnRequests[i].Rotation);
-
-            _list_PendingSpawnRequests.Clear();
+            for (int i = 0; i < _list_PendingSpawnRequests.Count;)
+            {
+                SpawnRequest request = _list_PendingSpawnRequests[i];
+                if (SpawnEnemy(request.Position, request.Rotation) != null)
+                    _list_PendingSpawnRequests.RemoveAt(i);
+                else
+                    i++;
+            }
         }
 
         private void OnDrawGizmosSelected()
@@ -287,7 +331,7 @@ namespace Scripts.Spawner
 
             if (_list_SpawnPoints == null || _list_SpawnPoints.Count == 0)
             {
-                DrawSpawnGizmo(transform.position);
+                DrawSpawnGizmo(transform.position, transform.rotation);
                 return;
             }
 
@@ -295,17 +339,22 @@ namespace Scripts.Spawner
             {
                 if (_list_SpawnPoints[i] == null) continue;
 
-                DrawSpawnGizmo(_list_SpawnPoints[i].position);
+                DrawSpawnGizmo(_list_SpawnPoints[i].position, _list_SpawnPoints[i].rotation);
                 Gizmos.DrawLine(transform.position, _list_SpawnPoints[i].position);
             }
         }
 
-        private void DrawSpawnGizmo(Vector3 position)
+        private void DrawSpawnGizmo(Vector3 position, Quaternion rotation)
         {
             Gizmos.DrawWireSphere(position, _gizmoRadius);
 
             if (_sampleNavMeshPosition)
                 Gizmos.DrawWireSphere(position, _navMeshSampleRadius);
+
+            if (_sampleNavMeshPosition && NavMesh.SamplePosition(position, out NavMeshHit hit, _navMeshSampleRadius, NavMesh.AllAreas))
+                position = hit.position;
+
+            _spawnAreaFilter.DrawGizmo(position, rotation);
         }
 
         private readonly struct SpawnRequest

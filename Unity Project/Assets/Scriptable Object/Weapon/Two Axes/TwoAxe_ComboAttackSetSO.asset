@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8752c0cdc5e0b984dbd591abb37d7505, type: 3}
+  m_Name: TwoAxe_ComboAttackSetSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.ComboAttackSetSO
+  _list_ComboAttackData:
+  - _animationStateName: Attack 1
+    _transitionDuration: 0.02
+    _damageData:
+      _damageType: 0
+      _baseDamage: 50
+      _physicForceScaling: 120.00001
+      _magicForceScaling: 0
+    _attackKnockback:
+      KnockbackDistance: 0.35
+      KnockbackDuration: 0.1
+      KnockbackCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _hitboxCenterOffset: {x: 0, y: 0, z: 0.93}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.93}
+    _targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _queryTriggerInteraction: 0
+    _maxTargets: 5
+  - _animationStateName: Attack 2
+    _transitionDuration: 0.02
+    _damageData:
+      _damageType: 1
+      _baseDamage: 50
+      _physicForceScaling: 120.00001
+      _magicForceScaling: 0
+    _attackKnockback:
+      KnockbackDistance: 0.35
+      KnockbackDuration: 0.1
+      KnockbackCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _hitboxCenterOffset: {x: 0, y: 0, z: 0.93}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.93}
+    _targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _queryTriggerInteraction: 0
+    _maxTargets: 5

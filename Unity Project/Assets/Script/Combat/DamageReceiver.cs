@@ -28,7 +28,8 @@ namespace Scripts.Combat
             ResolvedDamageData resolvedDamage = DamageResolver.Resolve(
                 damageRequest.DamageData,
                 damageRequest.AttackerStatus,
-                _statusSource?.GetStatusInfo());
+                _statusSource?.GetStatusInfo(),
+                damageRequest.AllowedCriticalTypes);
 
             _hittableHandler.Hit(resolvedDamage.FinalDamage, out bool killed);
 

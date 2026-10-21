@@ -41,6 +41,7 @@ namespace Scripts.Abilities
         [SerializeField] private string _containerTag;
         [Header("Combat Lock")]
         [SerializeField] private ComboControllerBase _comboController;
+        [SerializeField] private bool _maintainComboIndex = true;
         [SerializeField] private bool _cancelAttackOnExecute = true;
         [SerializeField] private bool _disableComboOnExecute = true;
         [SerializeField] private float _comboDisableDuration = 0.1f;
@@ -52,6 +53,9 @@ namespace Scripts.Abilities
         private Coroutine _dashDisableRoutine;
         private Coroutine _comboDisableRoutine;
         private Coroutine _castRoutine;
+
+        private ICriticalDamagePermissionsProvider _criticalPermissions;
+
         public float CastTime { get => _castTime; set => _castTime = value; }
 
         #region IDamageDataAbility
@@ -76,6 +80,8 @@ namespace Scripts.Abilities
 
             if (_containerTag != string.Empty)
                 _projectileContainer = GameObject.FindGameObjectWithTag(_containerTag).transform;
+
+            _criticalPermissions = GetComponentInParent<ICriticalDamagePermissionsProvider>();
         }
 
         public override void Execute()
@@ -190,7 +196,7 @@ namespace Scripts.Abilities
                 return;
 
             if (_cancelAttackOnExecute)
-                _comboController.CancelAttack(false);
+                _comboController.CancelAttack(false, _maintainComboIndex);
 
             if (!_disableComboOnExecute)
                 return;
@@ -243,7 +249,8 @@ namespace Scripts.Abilities
                 _attackerObject != null ? _attackerObject : gameObject,
                 null,
                 null,
-                spawnPosition);
+                spawnPosition,
+                allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes);
 
             abilityProjectile.SetDamageRequest(damageRequest);
             abilityProjectile.EnableProjectile(

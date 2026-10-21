@@ -21,7 +21,7 @@ MonoBehaviour:
       _physicForceScaling: 200
       _magicForceScaling: 0
     _attackKnockback:
-      KnockbackDistance: 0.35
+      KnockbackDistance: 1
       KnockbackDuration: 0.1
       KnockbackCurve:
         serializedVersion: 2
@@ -62,7 +62,7 @@ MonoBehaviour:
       _physicForceScaling: 200
       _magicForceScaling: 0
     _attackKnockback:
-      KnockbackDistance: 0.35
+      KnockbackDistance: 1
       KnockbackDuration: 0.1
       KnockbackCurve:
         serializedVersion: 2
@@ -103,7 +103,7 @@ MonoBehaviour:
       _physicForceScaling: 200
       _magicForceScaling: 0
     _attackKnockback:
-      KnockbackDistance: 0.35
+      KnockbackDistance: 0.5
       KnockbackDuration: 0.1
       KnockbackCurve:
         serializedVersion: 2

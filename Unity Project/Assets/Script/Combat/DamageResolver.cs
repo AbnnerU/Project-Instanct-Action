@@ -10,7 +10,8 @@ namespace Scripts.Combat
             return Resolve(damageData, attackerStatus, null);
         }
 
-        public static ResolvedDamageData Resolve(DamageData damageData, StatusInfo attackerStatus, StatusInfo receiverStatus)
+        public static ResolvedDamageData Resolve(DamageData damageData, StatusInfo attackerStatus, StatusInfo receiverStatus,
+            CriticalDamageTypes allowedCriticalTypes = DamageRequest.DefaultCriticalTypes)
         {
             if (damageData == null)
             {
@@ -25,7 +26,7 @@ namespace Scripts.Combat
                               (physicForce * damageData.PhysicForceScaling / 100f) +
                               (magicForce * damageData.MagicForceScaling / 100f);
 
-            bool isCritical = RollCritical(attackerStatus);
+            bool isCritical = CanCrit(damageData.DamageType, allowedCriticalTypes) && RollCritical(attackerStatus);
 
             if (isCritical)
                 rawDamage *= GetCriticalDamageMultiplier(attackerStatus);
@@ -34,6 +35,19 @@ namespace Scripts.Combat
             float finalDamage = ApplyResistance(rawDamage, damageData.DamageType, resistancePercentage);
 
             return new ResolvedDamageData(damageData.DamageType, rawDamage, finalDamage, isCritical);
+        }
+
+        private static bool CanCrit(DamageType damageType, CriticalDamageTypes allowedTypes)
+        {
+            CriticalDamageTypes type = damageType switch
+            {
+                DamageType.PHYSICAL => CriticalDamageTypes.PHYSICAL,
+                DamageType.MAGIC => CriticalDamageTypes.MAGIC,
+                DamageType.TRUE => CriticalDamageTypes.TRUE,
+                _ => CriticalDamageTypes.NONE
+            };
+
+            return type != CriticalDamageTypes.NONE && (allowedTypes & type) != 0;
         }
 
         private static bool RollCritical(StatusInfo attackerStatus)

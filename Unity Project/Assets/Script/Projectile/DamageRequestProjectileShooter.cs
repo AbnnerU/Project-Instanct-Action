@@ -20,7 +20,7 @@ namespace Scripts.Projectile
 
         [Header("Damage")]
         [SerializeField] private DamageData _damageData = new DamageData();
-
+     
         [Header("Projectile")]
         [SerializeField] private float _projectileSpeed = 8f;
         [SerializeField] private Vector3 _gravityValue = Vector3.zero;
@@ -30,6 +30,7 @@ namespace Scripts.Projectile
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private string _targetTag;
 
+        private ICriticalDamagePermissionsProvider _criticalPermissions;
         #endregion
 
         #region Unity
@@ -73,7 +74,8 @@ namespace Scripts.Projectile
                 _attackerObject != null ? _attackerObject : gameObject,
                 null,
                 null,
-                spawnPosition);
+                spawnPosition,
+                allowedCriticalTypes: _criticalPermissions != null? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes);
 
             projectile.SetDamageRequest(damageRequest);
             projectile.EnableProjectile(
@@ -104,6 +106,8 @@ namespace Scripts.Projectile
 
             if (_containerTag != string.Empty)
                 _projectileContainer = GameObject.FindGameObjectWithTag(_containerTag).transform;
+
+            _criticalPermissions = GetComponentInParent<ICriticalDamagePermissionsProvider>();
         }
 
         #endregion
