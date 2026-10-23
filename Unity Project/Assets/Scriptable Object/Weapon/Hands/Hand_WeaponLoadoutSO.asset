@@ -15,5 +15,48 @@ MonoBehaviour:
   ID: Handed
   DisplayName: Hands
   ComboAttackSet: {fileID: 11400000, guid: 857cbb28a04eea04bba8de91619771a2, type: 2}
-  AnimatorController: {fileID: 22100000, guid: 21dd0775597558f45801f323edbb5e0c, type: 2}
+  HasPostDashAttack: 1
+  PostDashAttack:
+    _animationStateName: Base Layer.Post Dash Attack
+    _transitionDuration: 0.01
+    _damageData:
+      _damageType: 0
+      _baseDamage: 30
+      _physicForceScaling: 150
+      _magicForceScaling: 0
+    _attackKnockback:
+      KnockbackDistance: 0.1
+      KnockbackDuration: 0.1
+      KnockbackCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _hitboxCenterOffset: {x: 0, y: 0, z: 0.55}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.55}
+    _targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _queryTriggerInteraction: 2
+    _maxTargets: 8
+  AnimatorController: {fileID: 22100000, guid: 176b08979747f1e48b3ae4650509c18e, type: 2}
   List_WeaponModels: []

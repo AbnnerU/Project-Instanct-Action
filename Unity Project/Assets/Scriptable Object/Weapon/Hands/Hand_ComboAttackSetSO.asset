@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8752c0cdc5e0b984dbd591abb37d7505, type: 3}
-  m_Name: Hand_ComboAttackSetSO
+  m_Name: Hand_ComboAttackSetSO(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.ComboAttackSetSO
   _list_ComboAttackData:
-  - _animationStateName: Attack 1
+  - _animationStateName: Base Layer.Attack 1
     _transitionDuration: 0.02
     _damageData:
       _damageType: 0

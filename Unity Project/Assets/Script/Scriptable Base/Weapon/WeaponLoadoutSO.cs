@@ -11,6 +11,8 @@ namespace Scripts.Weapon
         public string ID;
         public string DisplayName;
         public ComboAttackSetSO ComboAttackSet;
+        public bool HasPostDashAttack;
+        public ComboAttackData PostDashAttack = new ComboAttackData();
         public RuntimeAnimatorController AnimatorController;
         public List<WeaponModelSpawnData> List_WeaponModels = new List<WeaponModelSpawnData>();
     }

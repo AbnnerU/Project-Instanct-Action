@@ -37,6 +37,8 @@ namespace Scripts.Editor.CombatWorkshop
         public string IdleState = "Base Layer.Idle";
         public AnimationClip IdleClip;
         public List<WorkshopAttack> List_Attacks = new List<WorkshopAttack>();
+        public WorkshopAttack PostDashAttack = new WorkshopAttack();
+        public const string PostDashStateName = "Base Layer.Post Dash Attack";
 
         public static readonly string[] EventNames =
         {
@@ -66,6 +68,17 @@ namespace Scripts.Editor.CombatWorkshop
                 SetClip(draft, document.GetEffectiveClip(attack.AnimationStateName));
                 document.List_Attacks.Add(draft);
             }
+            if (document.Loadout.PostDashAttack == null) document.Loadout.PostDashAttack = new ComboAttackData();
+            if (string.IsNullOrEmpty(document.Loadout.PostDashAttack.AnimationStateName))
+            {
+                var fields = new SerializedObject(document.Loadout);
+                var attack = fields.FindProperty("PostDashAttack");
+                attack.FindPropertyRelative("_animationStateName").stringValue = PostDashStateName;
+                attack.FindPropertyRelative("_hitboxCenterOffset").vector3Value = Vector3.forward;
+                attack.FindPropertyRelative("_targetLayerMask").intValue = LayerMask.GetMask("Enemy");
+                fields.ApplyModifiedPropertiesWithoutUndo();
+            }
+            SetPostDashClip(document.PostDashAttack, document.GetEffectiveClip(document.Loadout.PostDashAttack.AnimationStateName));
             return document;
         }
 
@@ -87,6 +100,12 @@ namespace Scripts.Editor.CombatWorkshop
                 if (index >= 0 && index != 1)
                     attack.List_Markers.Add(new CombatMarker { Type = (CombatMarkerType)index, Time = animationEvent.time });
             }
+        }
+
+        public static void SetPostDashClip(WorkshopAttack attack, AnimationClip clip)
+        {
+            SetClip(attack, clip);
+            attack.List_Markers.RemoveAll(x => x.Type == CombatMarkerType.CLOSE_COMBO);
         }
 
         public void AddAttack()
@@ -117,6 +136,36 @@ namespace Scripts.Editor.CombatWorkshop
         #endregion
 
         #region Animator Mapping
+        public void CreatePostDashSlot()
+        {
+            if (BaseController == null || BaseController.layers.Length == 0)
+                throw new InvalidOperationException("Select a base Animator Controller first.");
+            var machine = BaseController.layers[0].stateMachine;
+            var state = machine.states.Select(x => x.state).FirstOrDefault(x => x.name == "Post Dash Attack");
+            if (state == null)
+            {
+                Undo.RegisterCompleteObjectUndo(machine, "Create post-dash state");
+                state = machine.AddState("Post Dash Attack");
+                Undo.RegisterCreatedObjectUndo(state, "Create post-dash state");
+            }
+            if (state.motion == null)
+            {
+                string folder = Path.GetDirectoryName(AssetDatabase.GetAssetPath(BaseController)).Replace('\\', '/');
+                var clip = new AnimationClip { name = "Post Dash Attack Slot" };
+                AssetDatabase.CreateAsset(clip, AssetDatabase.GenerateUniqueAssetPath(folder + "/Post Dash Attack Slot.anim"));
+                Undo.RegisterCreatedObjectUndo(clip, "Create post-dash slot clip");
+                Undo.RecordObject(state, "Assign post-dash slot clip");
+                state.motion = clip;
+                EditorUtility.SetDirty(state);
+            }
+            var fields = new SerializedObject(Loadout);
+            fields.FindProperty("PostDashAttack").FindPropertyRelative("_animationStateName").stringValue =
+                BaseController.layers[0].name + ".Post Dash Attack";
+            fields.ApplyModifiedProperties();
+            EditorUtility.SetDirty(BaseController);
+            AssetDatabase.SaveAssetIfDirty(BaseController);
+        }
+
         public static AnimatorController GetBaseController(RuntimeAnimatorController controller)
         {
             while (controller is AnimatorOverrideController overrides) controller = overrides.runtimeAnimatorController;
@@ -185,6 +234,28 @@ namespace Scripts.Editor.CombatWorkshop
                 if (draft.List_Markers.Any(x => x.Time < 0 || x.Time > draft.Clip.length || x.Time > finish)) errors.Add($"Attack {i + 1}: markers must be inside the clip and not after Finish.");
                 if (draft.List_Markers.Count(x => x.Type == CombatMarkerType.CLOSE_COMBO) > 1) errors.Add($"Attack {i + 1}: only one Close Combo marker is allowed.");
                 if (data.HitboxHalfExtents.x <= 0 || data.HitboxHalfExtents.y <= 0 || data.HitboxHalfExtents.z <= 0) errors.Add($"Attack {i + 1}: hitbox dimensions must be positive.");
+            }
+            if (Loadout.HasPostDashAttack)
+            {
+                var data = Loadout.PostDashAttack;
+                if (data == null) errors.Add("Post-dash: missing attack data.");
+                else
+                {
+                    ValidateSlot(states, data.AnimationStateName, used, errors);
+                    if (data.HitboxHalfExtents.x <= 0 || data.HitboxHalfExtents.y <= 0 || data.HitboxHalfExtents.z <= 0)
+                        errors.Add("Post-dash: hitbox dimensions must be positive.");
+                }
+                if (PostDashAttack == null || PostDashAttack.Clip == null) errors.Add("Post-dash: missing clip.");
+                else
+                {
+                    var markers = PostDashAttack.List_Markers;
+                    if (!markers.Any(x => x.Type == CombatMarkerType.HIT)) errors.Add("Post-dash: missing Hit marker.");
+                    if (markers.Count(x => x.Type == CombatMarkerType.FINISH) != 1) errors.Add("Post-dash: exactly one Finish marker is required.");
+                    float finish = markers.Where(x => x.Type == CombatMarkerType.FINISH).Select(x => x.Time).DefaultIfEmpty(PostDashAttack.Clip.length).First();
+                    if (markers.Any(x => x.Time < 0 || x.Time > PostDashAttack.Clip.length || x.Time > finish))
+                        errors.Add("Post-dash: markers must be inside the clip and not after Finish.");
+                    if (markers.Any(x => x.Type == CombatMarkerType.CLOSE_COMBO)) errors.Add("Post-dash: Close Combo is not used.");
+                }
             }
             foreach (var model in Loadout.List_WeaponModels)
             {
@@ -266,6 +337,11 @@ namespace Scripts.Editor.CombatWorkshop
             {
                 AnimationClip clip = SaveClip(List_Attacks[i], folder + $"/Attack_{i + 1}.anim");
                 SetOverride(pairs, FindStateClip(states, Combo.List_ComboAttackData[i].AnimationStateName), clip);
+            }
+            if (Loadout.HasPostDashAttack)
+            {
+                AnimationClip clip = SaveClip(PostDashAttack, folder + "/PostDashAttack.anim");
+                SetOverride(pairs, FindStateClip(states, Loadout.PostDashAttack.AnimationStateName), clip);
             }
             controller.ApplyOverrides(pairs);
             Undo.RecordObject(Source, "Save weapon loadout");

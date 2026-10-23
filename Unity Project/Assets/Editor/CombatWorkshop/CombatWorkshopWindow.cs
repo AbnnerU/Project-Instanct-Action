@@ -16,6 +16,7 @@ namespace Scripts.Editor.CombatWorkshop
         [SerializeField] private GameObject _character;
         [SerializeField] private WeaponSocketRegistry _socketRegistry;
         [SerializeField] private int _attackIndex;
+        [SerializeField] private bool _editPostDash;
         [SerializeField] private int _modelIndex;
         [SerializeField] private int _tab;
         private CombatWorkshopPreview _preview;
@@ -33,8 +34,11 @@ namespace Scripts.Editor.CombatWorkshop
         private string _status = "Ready";
         private List<string> _list_Errors = new List<string>();
 
-        private WorkshopAttack Attack => _document != null && _attackIndex >= 0 && _attackIndex < _document.List_Attacks.Count ? _document.List_Attacks[_attackIndex] : null;
-        private ComboAttackData AttackData => Attack != null && _attackIndex < _document.Combo.List_ComboAttackData.Count ? _document.Combo.List_ComboAttackData[_attackIndex] : null;
+        private WorkshopAttack Attack => _document == null ? null : _editPostDash
+            ? (_document.Loadout.HasPostDashAttack ? _document.PostDashAttack : null)
+            : (_attackIndex >= 0 && _attackIndex < _document.List_Attacks.Count ? _document.List_Attacks[_attackIndex] : null);
+        private ComboAttackData AttackData => Attack == null ? null : _editPostDash ? _document.Loadout.PostDashAttack
+            : (_attackIndex < _document.Combo.List_ComboAttackData.Count ? _document.Combo.List_ComboAttackData[_attackIndex] : null);
         private AnimationClip CurrentClip => _previewIdle ? _document?.IdleClip : Attack?.Clip;
 
         #region Lifecycle
@@ -333,24 +337,55 @@ namespace Scripts.Editor.CombatWorkshop
         #region Attacks
         private void DrawAttacks()
         {
-            using (new EditorGUILayout.HorizontalScope())
+            int mode = GUILayout.Toolbar(_editPostDash ? 1 : 0, new[] { "Combo", "Post-dash" });
+            if ((mode == 1) != _editPostDash)
             {
-                EditorGUILayout.LabelField("Combo", EditorStyles.boldLabel);
-                if (GUILayout.Button(Icon("Toolbar Plus", "Add attack"), GUILayout.Width(28)))
+                _editPostDash = mode == 1;
+                _time = 0;
+                _previewIdle = false;
+                _playing = false;
+            }
+            if (_editPostDash)
+            {
+                var loadoutFields = new SerializedObject(_document.Loadout);
+                EditorGUILayout.PropertyField(loadoutFields.FindProperty("HasPostDashAttack"), new GUIContent("Enabled"));
+                loadoutFields.ApplyModifiedProperties();
+                if (!_document.Loadout.HasPostDashAttack) return;
+                var states = CombatWorkshopDocument.GetStates(_document.BaseController);
+                if (CombatWorkshopDocument.FindStateClip(states, _document.Loadout.PostDashAttack.AnimationStateName) == null)
                 {
-                    _document.AddAttack();
-                    Dirty();
-                    _attackIndex = _document.List_Attacks.Count - 1;
-                    _previewIdle = false;
-                    _time = 0;
+                    using (new EditorGUI.DisabledScope(_document.BaseController == null))
+                        if (GUILayout.Button("Create post-dash Animator slot"))
+                        {
+                            _document.CreatePostDashSlot();
+                            Dirty();
+                        }
+                }
+            }
+            else
+            {
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    EditorGUILayout.LabelField("Combo", EditorStyles.boldLabel);
+                    if (GUILayout.Button(Icon("Toolbar Plus", "Add attack"), GUILayout.Width(28)))
+                    {
+                        _document.AddAttack();
+                        Dirty();
+                        _attackIndex = _document.List_Attacks.Count - 1;
+                        _previewIdle = false;
+                        _time = 0;
+                    }
+                }
+                if (_document.List_Attacks.Count > 0)
+                {
+                    int selected = EditorGUILayout.Popup("Attack", _attackIndex, _document.Combo.List_ComboAttackData.Select((x, i) => $"{i + 1}  {x.AnimationStateName}").ToArray());
+                    if (selected != _attackIndex) { _attackIndex = selected; _time = 0; _previewIdle = false; }
                 }
             }
             if (Attack == null) return;
-            int selected = EditorGUILayout.Popup("Attack", _attackIndex, _document.Combo.List_ComboAttackData.Select((x, i) => $"{i + 1}  {x.AnimationStateName}").ToArray());
-            if (selected != _attackIndex) { _attackIndex = selected; _time = 0; _previewIdle = false; }
-            var fields = new SerializedObject(_document.Combo);
+            var fields = GetAttackFields();
             fields.Update();
-            var attack = fields.FindProperty("_list_ComboAttackData").GetArrayElementAtIndex(_attackIndex);
+            var attack = GetAttackProperty(fields);
             var state = attack.FindPropertyRelative("_animationStateName");
             state.stringValue = StatePopup("Animator state", state.stringValue);
             EditorGUILayout.PropertyField(attack.FindPropertyRelative("_transitionDuration"), new GUIContent("Blend (normalized)", "Existing runtime CrossFade duration, relative to the source state."));
@@ -358,7 +393,8 @@ namespace Scripts.Editor.CombatWorkshop
             if (clip != Attack.Clip)
             {
                 Undo.RecordObject(_document, "Replace attack clip");
-                CombatWorkshopDocument.SetClip(Attack, clip);
+                if (_editPostDash) CombatWorkshopDocument.SetPostDashClip(Attack, clip);
+                else CombatWorkshopDocument.SetClip(Attack, clip);
                 _previewIdle = false;
                 _time = 0;
             }
@@ -374,7 +410,7 @@ namespace Scripts.Editor.CombatWorkshop
             //EditorGUILayout.PropertyField(attack.FindPropertyRelative("_attackAdvance"), true);
             EditorGUILayout.PropertyField(attack.FindPropertyRelative("_attackKnockback"), true);
             fields.ApplyModifiedProperties();
-            if (GUILayout.Button("Remove attack"))
+            if (!_editPostDash && GUILayout.Button("Remove attack"))
             {
                 _document.RemoveAttack(_attackIndex);
                 Dirty();
@@ -382,6 +418,13 @@ namespace Scripts.Editor.CombatWorkshop
                 _time = 0;
             }
         }
+
+        private SerializedObject GetAttackFields() => new SerializedObject(_editPostDash
+            ? (UnityEngine.Object)_document.Loadout : _document.Combo);
+
+        private SerializedProperty GetAttackProperty(SerializedObject fields) => _editPostDash
+            ? fields.FindProperty("PostDashAttack")
+            : fields.FindProperty("_list_ComboAttackData").GetArrayElementAtIndex(_attackIndex);
 
         private string StatePopup(string label, string current)
         {
@@ -402,7 +445,10 @@ namespace Scripts.Editor.CombatWorkshop
                 var marker = markers[i];
                 using (new EditorGUILayout.HorizontalScope())
                 {
-                    var type = (CombatMarkerType)EditorGUILayout.EnumPopup(marker.Type, GUILayout.Width(113));
+                    var type = _editPostDash
+                        ? (EditorGUILayout.Popup(marker.Type == CombatMarkerType.FINISH ? 1 : 0, new[] { "HIT", "FINISH" }, GUILayout.Width(113)) == 1
+                            ? CombatMarkerType.FINISH : CombatMarkerType.HIT)
+                        : (CombatMarkerType)EditorGUILayout.EnumPopup(marker.Type, GUILayout.Width(113));
                     float time = EditorGUILayout.FloatField(marker.Time);
                     if (type != marker.Type || time != marker.Time)
                     {
@@ -425,7 +471,7 @@ namespace Scripts.Editor.CombatWorkshop
                     Undo.RecordObject(_document, "Add default markers");
                     float length = Attack.Clip.length;
                     markers.Add(new CombatMarker { Type = CombatMarkerType.HIT, Time = length * 0.35f });
-                    markers.Add(new CombatMarker { Type = CombatMarkerType.CLOSE_COMBO, Time = length * 0.75f });
+                    if (!_editPostDash) markers.Add(new CombatMarker { Type = CombatMarkerType.CLOSE_COMBO, Time = length * 0.75f });
                     markers.Add(new CombatMarker { Type = CombatMarkerType.FINISH, Time = length * 0.95f });
                     Dirty();
                 }
@@ -435,8 +481,8 @@ namespace Scripts.Editor.CombatWorkshop
         private void ChangeHitbox(Vector3 offset, Vector3 extents)
         {
             if (AttackData == null) return;
-            var fields = new SerializedObject(_document.Combo);
-            var attack = fields.FindProperty("_list_ComboAttackData").GetArrayElementAtIndex(_attackIndex);
+            var fields = GetAttackFields();
+            var attack = GetAttackProperty(fields);
             attack.FindPropertyRelative("_hitboxCenterOffset").vector3Value = offset;
             attack.FindPropertyRelative("_hitboxHalfExtents").vector3Value = extents;
             fields.ApplyModifiedProperties();
@@ -562,8 +608,8 @@ namespace Scripts.Editor.CombatWorkshop
                 end = Attack.List_Markers.Where(x => x.Type == CombatMarkerType.FINISH).Select(x => x.Time).DefaultIfEmpty(end).Min();
             if (_time >= end)
             {
-                if (_playCombo && !_previewIdle && _attackIndex + 1 < _document.List_Attacks.Count) { _attackIndex++; _time = 0; }
-                else if (_loop) { _time = 0; if (_playCombo) _attackIndex = 0; }
+                if (_playCombo && !_editPostDash && !_previewIdle && _attackIndex + 1 < _document.List_Attacks.Count) { _attackIndex++; _time = 0; }
+                else if (_loop) { _time = 0; if (_playCombo && !_editPostDash) _attackIndex = 0; }
                 else { _time = end; _playing = false; }
             }
             Repaint();

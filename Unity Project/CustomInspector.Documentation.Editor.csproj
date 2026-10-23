@@ -56,6 +56,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\abnne\OneDrive\Geral\Desktop\Projetos\Project-Instanct-Action\Unity Project\Assets\Plugins\UMotionEditor\Plugins\Editor\UMotionEditor.dll" />
+    <Analyzer Include="C:\Users\abnne\OneDrive\Geral\Desktop\Projetos\Project-Instanct-Action\Unity Project\Assets\Plugins\UMotionEditor\Plugins\Application\UMotionApplication.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.5.4f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.5.4f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.5.4f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
@@ -747,6 +749,14 @@
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UMotionApplication">
+      <HintPath>Assets\Plugins\UMotionEditor\Plugins\Application\UMotionApplication.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UMotionEditor">
+      <HintPath>Assets\Plugins\UMotionEditor\Plugins\Editor\UMotionEditor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">

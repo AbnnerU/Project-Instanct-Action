@@ -56,6 +56,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\abnne\OneDrive\Geral\Desktop\Projetos\Project-Instanct-Action\Unity Project\Assets\Plugins\UMotionEditor\Plugins\Editor\UMotionEditor.dll" />
+    <Analyzer Include="C:\Users\abnne\OneDrive\Geral\Desktop\Projetos\Project-Instanct-Action\Unity Project\Assets\Plugins\UMotionEditor\Plugins\Application\UMotionApplication.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.5.4f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.5.4f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.5.4f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
@@ -194,7 +196,7 @@
     <Compile Include="Assets\Script\Status\StatusInfoSource.cs" />
     <Compile Include="Assets\Script\Progression\XpBar.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ObjectPool.cs" />
-    <Compile Include="Assets\Script\Combat\ComboControllerBase.cs" />
+    <Compile Include="Assets\Script\Combat\PostDashAttackController.cs" />
     <Compile Include="Assets\Script\Health\DynamicHealthRepairUI.cs" />
     <Compile Include="Assets\Script\Status\Appliers\HealthByStatus.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTTryFindObjectInArea.cs" />
@@ -233,6 +235,7 @@
     <Compile Include="Assets\Script\Status\MN_PlayerStatus.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\Boolean\BTIsValueGreater.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Enchantment\WeaponEnchantmentSO.cs" />
+    <Compile Include="Assets\Script\Abstract\Combat\ComboControllerBase.cs" />
     <Compile Include="Assets\Script\Interface\Tier\Visual\IReadOnlyEvolutionData.cs" />
     <Compile Include="Assets\Script\Tier\Enum\Tier.cs" />
     <Compile Include="Assets\Script\Interface\Combat\IDamageReceiver.cs" />
@@ -902,6 +905,10 @@
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UMotionApplication">
+      <HintPath>Assets\Plugins\UMotionEditor\Plugins\Application\UMotionApplication.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1718,6 +1725,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{C65DF7E6-5082-3454-2A7F-EDDBED1731B5}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+    <ProjectReference Include="UMotionSourceApplication.csproj">
+      <Project>{418396D7-6757-0D78-D7A3-2165E2604033}</Project>
+      <Name>UMotionSourceApplication</Name>
+    </ProjectReference>
     <ProjectReference Include="KitWright.Editor.InputSystem.csproj">
       <Project>{F2C18BB3-2A5A-AEEB-5E1E-C843AF75C95A}</Project>
       <Name>KitWright.Editor.InputSystem</Name>
@@ -1729,6 +1744,10 @@
     <ProjectReference Include="KitWright.Editor.csproj">
       <Project>{49F53FA5-AC3B-0939-C219-CF5B1E971362}</Project>
       <Name>KitWright.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UMotionSourceEditor.csproj">
+      <Project>{00580B3E-0312-96EB-EB65-97B141DAB002}</Project>
+      <Name>UMotionSourceEditor</Name>
     </ProjectReference>
     <ProjectReference Include="KitWright.Editor.Bootstrap.csproj">
       <Project>{9B15CAF1-144C-D5F8-DFCD-2E1F3FEB8F2E}</Project>

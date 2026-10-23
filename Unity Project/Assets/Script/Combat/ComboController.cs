@@ -11,10 +11,17 @@ namespace Scripts.Combat
         [Header("Input")]
         [FormerlySerializedAs("_rightInput")]
         [SerializeField] private InputActionReference _attackInput;
+        private PostDashAttackController _postDashAttack;
 
         #endregion
 
         #region Unity
+
+        protected override void Awake()
+        {
+            base.Awake();
+            TryGetComponent(out _postDashAttack);
+        }
 
         private void OnEnable()
         {
@@ -37,8 +44,9 @@ namespace Scripts.Combat
 
         private void Attack_Performed(InputAction.CallbackContext context)
         {
-            if (Time.timeScale > 0f)
-                RequestAttack();
+            if (Time.timeScale <= 0f) return;
+            if (_postDashAttack != null && _postDashAttack.TryQueueAttack()) return;
+            RequestAttack();
         }
 
         #endregion

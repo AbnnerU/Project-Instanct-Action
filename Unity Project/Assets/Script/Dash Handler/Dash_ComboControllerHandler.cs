@@ -12,7 +12,6 @@ namespace Scripts.DashHandler
         [SerializeField] private bool _maintainComboIndex;
 
         private bool _isBlocking;
-        private bool _wasComboActive;
 
         #endregion
 
@@ -55,17 +54,16 @@ namespace Scripts.DashHandler
             if (!_isBlocking)
                 return;
             _isBlocking = false;
-            if (_wasComboActive && _comboController != null)
-                _comboController.Enable();
+            if (_comboController != null)
+                _comboController.UnblockAttackInput(this);
         }
 
         private void OnDashStarted(float directionDot)
         {
             if (_isBlocking || _comboController == null)
                 return;
-            _wasComboActive = _comboController.Active;
             _isBlocking = true;
-            _comboController.Disable();
+            _comboController.BlockAttackInput(this);
             _comboController.CancelAttack(false, _maintainComboIndex);
         }
 

@@ -8,13 +8,13 @@ namespace Scripts.Combat
     {
         [SerializeField] private string _animationStateName;
         [SerializeField] private float _transitionDuration = 0.05f;
-        [SerializeField] private DamageData _damageData;
+        [SerializeField] private DamageData _damageData = new DamageData();
 
         //[Header("Advance")]
         //[SerializeField] private AttackAdvance _attackAdvance;
 
         [Header("Knockback")]
-        [SerializeField] private AttackKnockback _attackKnockback;
+        [SerializeField] private AttackKnockback _attackKnockback = new AttackKnockback();
 
         [Header("Hitbox")]
         [SerializeField] private Vector3 _hitboxCenterOffset = Vector3.right;
