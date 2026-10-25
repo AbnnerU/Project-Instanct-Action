@@ -58,10 +58,10 @@ namespace Scripts.Combat
         public bool HasQueuedNextAttack => _hasQueuedNextAttack;
         public int CurrentComboIndex => _currentComboIndex;
         public bool IsAttackInputBlocked => _attackInputBlockers.Count > 0;
-        public float ComboRetentionRemaining => _phase != AttackPhase.HOLDING_ATTACK_INDEX ? 0f :
+        public virtual float ComboRetentionRemaining => _phase != AttackPhase.HOLDING_ATTACK_INDEX ? 0f :
             _isRetentionPaused ? _pausedRetentionRemaining : Mathf.Max(0f, _comboRetentionExpiresAt - Time.time);
         public IReadOnlyList<ComboAttackData> List_ComboAttackData => _list_ComboAttackData;
-        protected ComboAttackData CurrentAttack => _currentComboIndex >= 0 && _currentComboIndex < _list_ComboAttackData.Count
+        protected virtual ComboAttackData CurrentAttack => _currentComboIndex >= 0 && _currentComboIndex < _list_ComboAttackData.Count
             ? _list_ComboAttackData[_currentComboIndex] : null;
         private bool CanProcessAttackEvents => _active && isActiveAndEnabled &&
             (_status == AttackStatus.ACCEPTING_INPUT || _status == AttackStatus.RECOVERY);

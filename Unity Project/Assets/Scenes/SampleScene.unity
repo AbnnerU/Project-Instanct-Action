@@ -474,6 +474,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3253391888486038218, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+      propertyPath: _comboController
+      value: 
+      objectReference: {fileID: 1770365737}
+    - target: {fileID: 3496074025348077903, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+      propertyPath: _comboController
+      value: 
+      objectReference: {fileID: 1770365737}
     - target: {fileID: 4371476881287337905, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -490,6 +498,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5399561043943606932, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+      propertyPath: _comboController
+      value: 
+      objectReference: {fileID: 1770365737}
     - target: {fileID: 5459610240766764081, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.76
@@ -542,7 +554,37 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8901143667215127760, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+      propertyPath: _comboControllerComponent
+      value: 
+      objectReference: {fileID: 1770365737}
+    - target: {fileID: 9110396234800243945, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+      propertyPath: _comboAttackSet
+      value: 
+      objectReference: {fileID: 11400000, guid: 99245aad33389444e83aaa49757b9a15, type: 2}
+    - target: {fileID: 9110396234800243945, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+      propertyPath: _debugHitboxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110396234800243945, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+      propertyPath: _debugHitboxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110396234800243945, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+      propertyPath: _debugHitboxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110396234800243945, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+      propertyPath: _comboRetentionDuration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110396234800243945, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+      propertyPath: _list_ComboAttackData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3253391888486038218, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+    - {fileID: 8729559041559328154, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2013,17 +2055,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
   m_PrefabInstance: {fileID: 4206290719789535704}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &711513680 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8563990564831857866, guid: 42a308debae41784e867944925962cab, type: 3}
-  m_PrefabInstance: {fileID: 4206290719789535704}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711513674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9be13fcd1bd317a48bbb4530aa106a2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerComboController
 --- !u!114 &711513681 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8664224395122197948, guid: 42a308debae41784e867944925962cab, type: 3}
@@ -4408,6 +4439,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760869619}
   m_CullTransparentMesh: 1
+--- !u!114 &1770365737 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9110396234800243945, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
+  m_PrefabInstance: {fileID: 157069592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e60df30ac7efa4886966e1817b14f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.PostDashAttackController
 --- !u!1 &1832022491
 GameObject:
   m_ObjectHideFlags: 0
@@ -4532,10 +4574,10 @@ MonoBehaviour:
   _passiveAbilitiesContainer: {fileID: 876544946}
   _activeAbilitiesContainer: {fileID: 946897046}
   _playerStatus: {fileID: 1151873708}
-  _comboController: {fileID: 711513680}
+  _comboController: {fileID: 4206290719789535742}
   _attackHitbox: {fileID: 711513681}
-  _playerDash: {fileID: 0}
-  _statusSource: {fileID: 0}
+  _playerDash: {fileID: 4206290719789535755}
+  _statusSource: {fileID: 4206290719789535741}
   _list_ActiveAbilitySlots:
   - _slotState: 0
     _inputAction: {fileID: -7274670403200970637, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
@@ -4791,7 +4833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Weapon.MN_PlayerWeapon
   _weaponSocketRegistry: {fileID: 1955501767}
-  _comboController: {fileID: 711513680}
+  _comboController: {fileID: 4206290719789535742}
   _animator: {fileID: 1484080727}
   _characterAnimationController: {fileID: 711513686}
   _initialLoadout: {fileID: 11400000, guid: 35ef158b7b7d4b9438645d881495ff94, type: 2}
@@ -5088,6 +5130,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2511505656132928410, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboController
+      value: 
+      objectReference: {fileID: 4206290719789535742}
+    - target: {fileID: 4573541162228342815, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboController
+      value: 
+      objectReference: {fileID: 4206290719789535742}
     - target: {fileID: 4915847422390050145, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5128,6 +5178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4977585416239788996, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboController
+      value: 
+      objectReference: {fileID: 4206290719789535742}
     - target: {fileID: 5286977557515502990, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5148,6 +5202,18 @@ PrefabInstance:
       propertyPath: _weaponManager
       value: 
       objectReference: {fileID: 1955501768}
+    - target: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboController
+      value: 
+      objectReference: {fileID: 4206290719789535742}
+    - target: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboRetentionDuration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393514228291186048, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboControllerComponent
+      value: 
+      objectReference: {fileID: 4206290719789535742}
     - target: {fileID: 8499587158038290663, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5156,7 +5222,9 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8563990564831857866, guid: 42a308debae41784e867944925962cab, type: 3}
+    - {fileID: 2511505656132928410, guid: 42a308debae41784e867944925962cab, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -5172,6 +5240,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52a51a0e3a87b94e86e60bcf3b3a39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.StatusInfoByReference
+--- !u!114 &4206290719789535742 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+  m_PrefabInstance: {fileID: 4206290719789535704}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e60df30ac7efa4886966e1817b14f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.PostDashAttackController
+--- !u!114 &4206290719789535755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8889931655858333428, guid: 42a308debae41784e867944925962cab, type: 3}
+  m_PrefabInstance: {fileID: 4206290719789535704}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5265ac8090c86849af4eb79dc314c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.DashHandler.Dash
 --- !u!1001 &8199929961677144170
 PrefabInstance:
   m_ObjectHideFlags: 0

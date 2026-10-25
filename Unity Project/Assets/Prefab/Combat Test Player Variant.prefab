@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Combat Test Player Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2511505656132928410, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboController
+      value: 
+      objectReference: {fileID: 9110396234800243945}
+    - target: {fileID: 4573541162228342815, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboController
+      value: 
+      objectReference: {fileID: 9110396234800243945}
     - target: {fileID: 4915847422390050145, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -52,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4977585416239788996, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboController
+      value: 
+      objectReference: {fileID: 9110396234800243945}
     - target: {fileID: 5286977557515502990, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -68,6 +80,34 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 37cbc1a0f91038d48b72a9190c13d18f, type: 2}
+    - target: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboAttackSet
+      value: 
+      objectReference: {fileID: 11400000, guid: 99245aad33389444e83aaa49757b9a15, type: 2}
+    - target: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _debugHitboxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _debugHitboxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _debugHitboxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboRetentionDuration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _list_ComboAttackData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393514228291186048, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _comboControllerComponent
+      value: 
+      objectReference: {fileID: 9110396234800243945}
     - target: {fileID: 8499587158038290663, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -76,8 +116,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2511505656132928410, guid: 42a308debae41784e867944925962cab, type: 3}
+    - {fileID: 8563990564831857866, guid: 42a308debae41784e867944925962cab, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a308debae41784e867944925962cab, type: 3}
+--- !u!114 &9110396234800243945 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+  m_PrefabInstance: {fileID: 1152067978664671568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e60df30ac7efa4886966e1817b14f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.PostDashAttackController

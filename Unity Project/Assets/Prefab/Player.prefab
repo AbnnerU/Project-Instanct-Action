@@ -216,9 +216,7 @@ GameObject:
   - component: {fileID: 2530762080907638962}
   - component: {fileID: 8664224395122197948}
   - component: {fileID: 4977585416239788996}
-  - component: {fileID: 8563990564831857866}
   - component: {fileID: 8889931655858333428}
-  - component: {fileID: 2511505656132928410}
   - component: {fileID: 8494587181052925510}
   - component: {fileID: 3625371646929984785}
   - component: {fileID: 6928627093028576957}
@@ -488,7 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5f6f1adf9517c45a0bd6ed5a4dbaae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.AttackApproachAssist
-  _comboController: {fileID: 8563990564831857866}
+  _comboController: {fileID: 8183698727932517817}
   _attackHitbox: {fileID: 8664224395122197948}
   _targetTransform: {fileID: 4915847422390050145}
   _directionReference: {fileID: 4915847422390050145}
@@ -539,54 +537,6 @@ MonoBehaviour:
   _searchColor: {r: 1, g: 0, b: 0.9035686, a: 1}
   _destinationColor: {r: 0, g: 1, b: 0, a: 1}
   _debugDuration: 1
---- !u!114 &8563990564831857866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437302767631231260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9be13fcd1bd317a48bbb4530aa106a2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerComboController
-  _active: 1
-  _attackHitbox: {fileID: 8664224395122197948}
-  _animator: {fileID: 7997707731514666529}
-  _characterAnimationController: {fileID: 8709150000114935703}
-  _comboAttackSet: {fileID: 11400000, guid: 99245aad33389444e83aaa49757b9a15, type: 2}
-  _list_ComboAttackData:
-  - _animationStateName: 
-    _transitionDuration: 0
-    _damageData:
-      _damageType: 0
-      _baseDamage: 0
-      _physicForceScaling: 0
-      _magicForceScaling: 0
-    _attackKnockback:
-      KnockbackDistance: 0
-      KnockbackDuration: 0
-      KnockbackCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    _hitboxCenterOffset: {x: 0, y: 0, z: 0}
-    _hitboxHalfExtents: {x: 0, y: 0, z: 0}
-    _targetLayerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    _queryTriggerInteraction: 0
-    _maxTargets: 0
-  _triggerIdle: 1
-  _backToIdleTriggerParameter: Idle
-  _comboRetentionDuration: 1.5
-  _drawGizmos: 1
-  _debugAttackIndex: 0
-  _debugHitboxColor: {r: 0, g: 0, b: 0, a: 1}
-  _attackInput: {fileID: 2202181311478303124, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
 --- !u!114 &8889931655858333428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,21 +584,6 @@ MonoBehaviour:
   _movementAxis: 0
   _rightCooldown: 0.75
   _leftCooldown: 0.75
---- !u!114 &2511505656132928410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437302767631231260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 298ba43ce8d403548b6d074b534b205e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.DashHandler.Dash_ComboControllerHandler
-  _dashHandler: {fileID: 8889931655858333428}
-  _comboController: {fileID: 8563990564831857866}
-  _maintainComboIndex: 1
 --- !u!114 &8494587181052925510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HitReaction_CancelAndBlockComboController
   _hittableReference: {fileID: 1437302767631231260}
-  _comboControllerComponent: {fileID: 8563990564831857866}
+  _comboControllerComponent: {fileID: 8183698727932517817}
   _hittedParameter: Hitted
   _blockAttacks: 1
   _blockTime: 0.1
@@ -849,14 +784,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e60df30ac7efa4886966e1817b14f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.PostDashAttackController
-  _dash: {fileID: 8889931655858333428}
-  _comboController: {fileID: 8563990564831857866}
-  _weaponManager: {fileID: 0}
+  _active: 1
   _attackHitbox: {fileID: 8664224395122197948}
   _animator: {fileID: 7997707731514666529}
+  _characterAnimationController: {fileID: 8709150000114935703}
+  _comboAttackSet: {fileID: 11400000, guid: 99245aad33389444e83aaa49757b9a15, type: 2}
+  _list_ComboAttackData:
+  - _animationStateName: 
+    _transitionDuration: 0
+    _damageData:
+      _damageType: 0
+      _baseDamage: 0
+      _physicForceScaling: 0
+      _magicForceScaling: 0
+    _attackKnockback:
+      KnockbackDistance: 0
+      KnockbackDuration: 0
+      KnockbackCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    _hitboxCenterOffset: {x: 0, y: 0, z: 0}
+    _hitboxHalfExtents: {x: 0, y: 0, z: 0}
+    _targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    _queryTriggerInteraction: 0
+    _maxTargets: 0
+  _triggerIdle: 1
+  _backToIdleTriggerParameter: Idle
+  _comboRetentionDuration: 1.5
+  _drawGizmos: 1
+  _debugAttackIndex: 0
+  _debugHitboxColor: {r: 0, g: 0, b: 0, a: 1}
+  _attackInput: {fileID: 2202181311478303124, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  _dash: {fileID: 8889931655858333428}
+  _weaponManager: {fileID: 0}
   _directionHandler: {fileID: 8402393144809859780}
   _hittableReference: {fileID: 1437302767631231260}
-  _idleStateName: Base Layer.Idle
+  _maintainComboIndexOnDash: 1
 --- !u!1 &1557568472590508371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,7 +1674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae059baff3ade747a80af76f5c3bc05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerAnimationEventReceiver
-  _comboController: {fileID: 8563990564831857866}
+  _comboController: {fileID: 8183698727932517817}
 --- !u!114 &529880281268845804
 MonoBehaviour:
   m_ObjectHideFlags: 0

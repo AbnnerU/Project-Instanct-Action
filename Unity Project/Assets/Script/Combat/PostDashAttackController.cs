@@ -1,48 +1,47 @@
-using System;
 using Scripts.DashHandler;
 using Scripts.Direction;
 using Scripts.Weapon;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Scripts.Combat
 {
     [DisallowMultipleComponent]
-    public class PostDashAttackController : MonoBehaviour
+    public class PostDashAttackController : ComboControllerBase
     {
         #region Fields
 
-        public event Action OnAttackStarted;
-        public event Action OnAttackFinished;
-        public event Action OnAttackCanceled;
-
+        [Header("Input")]
+        [SerializeField] private InputActionReference _attackInput;
+        [Header("Post-Dash")]
         [SerializeField] private DashBase _dash;
-        [SerializeField] private ComboControllerBase _comboController;
         [SerializeField] private MN_PlayerWeapon _weaponManager;
-        [SerializeField] private AttackHitbox _attackHitbox;
-        [SerializeField] private Animator _animator;
         [SerializeField] private DirectionHandler _directionHandler;
         [SerializeField] private GameObject _hittableReference;
-        [SerializeField] private string _idleStateName = "Base Layer.Idle";
+        [SerializeField] private bool _maintainComboIndexOnDash = true;
 
         private IHittable _hittable;
-        private ComboAttackData _attackData;
-        private bool _hasQueuedAttack;
-        private int _startedFrame;
-        private Guid _executionId;
+        private ComboAttackData _postDashAttack;
+        private bool _hasQueuedDashAttack;
+        private bool _isPostDashAttack;
+        private int _retainedComboIndex;
+        private float _retainedComboTime;
 
-        public bool IsExecuting { get; private set; }
-        public bool HasQueuedAttack => _hasQueuedAttack;
+        public bool HasQueuedAttack => _hasQueuedDashAttack;
+        public bool IsPostDashAttack => _isPostDashAttack;
+        public override float ComboRetentionRemaining =>
+            _isPostDashAttack ? _retainedComboTime : base.ComboRetentionRemaining;
+        protected override ComboAttackData CurrentAttack =>
+            _isPostDashAttack ? _postDashAttack : base.CurrentAttack;
 
         #endregion
 
         #region Lifecycle
 
-        private void Awake()
+        protected override void GetReferences()
         {
+            base.GetReferences();
             if (_dash == null) TryGetComponent(out _dash);
-            if (_comboController == null) TryGetComponent(out _comboController);
-            if (_attackHitbox == null) TryGetComponent(out _attackHitbox);
-            if (_animator == null) _animator = GetComponentInChildren<Animator>();
             if (_directionHandler == null) TryGetComponent(out _directionHandler);
             if (_weaponManager == null) _weaponManager = FindFirstObjectByType<MN_PlayerWeapon>();
             if (_hittableReference == null) _hittableReference = gameObject;
@@ -51,160 +50,123 @@ namespace Scripts.Combat
 
         private void OnEnable()
         {
+            if (_attackInput != null && _attackInput.action != null)
+            {
+                _attackInput.action.performed += Attack_Performed;
+                _attackInput.action.Enable();
+            }
             if (_dash != null)
             {
                 _dash.OnDashStarted += Dash_OnStarted;
                 _dash.OnDashFinished += Dash_OnFinished;
             }
-            if (_weaponManager != null) _weaponManager.OnWeaponLoadoutEquipped += Weapon_OnEquipped;
+            if (_weaponManager != null)
+            {
+                _weaponManager.OnWeaponLoadoutEquipped += ApplyWeaponLoadout;
+                ApplyWeaponLoadout(_weaponManager.CurrentLoadout);
+            }
             if (_hittable != null) _hittable.OnHitted += Hittable_OnHitted;
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            if (_attackInput != null && _attackInput.action != null)
+                _attackInput.action.performed -= Attack_Performed;
             if (_dash != null)
             {
                 _dash.OnDashStarted -= Dash_OnStarted;
                 _dash.OnDashFinished -= Dash_OnFinished;
             }
-            if (_weaponManager != null) _weaponManager.OnWeaponLoadoutEquipped -= Weapon_OnEquipped;
+            if (_weaponManager != null) _weaponManager.OnWeaponLoadoutEquipped -= ApplyWeaponLoadout;
             if (_hittable != null) _hittable.OnHitted -= Hittable_OnHitted;
-            CancelAttack();
-        }
-
-        private void LateUpdate()
-        {
-            if (!IsExecuting || Time.timeScale <= 0f || Time.frameCount == _startedFrame) return;
-            if (_comboController == null || !_comboController.Active || !_comboController.isActiveAndEnabled ||
-                !TryGetAttackState(out AnimatorStateInfo state))
-            {
-                CancelAttack();
-                return;
-            }
-            // Release the locks even if a clip is missing its Finish event.
-            if (!_animator.IsInTransition(0) && state.normalizedTime >= 1f) FinishAttack();
+            base.OnDisable();
         }
 
         #endregion
 
-        #region Dash And Input
+        #region Weapon
 
-        public bool TryQueueAttack()
+        private void ApplyWeaponLoadout(WeaponLoadoutSO loadout)
         {
-            if (!isActiveAndEnabled || _dash == null || !_dash.IsDashing ||
-                _comboController == null || !_comboController.Active) return false;
-            _hasQueuedAttack = true;
-            return true;
+            CancelAttack(playIdle: false);
+            _postDashAttack = loadout != null && loadout.HasPostDashAttack ? loadout.PostDashAttack : null;
+            // The normal combo keeps its own list. The special only overrides CurrentAttack.
+            if (loadout != null) SetComboAttackSet(loadout.ComboAttackSet);
         }
 
-        private void Dash_OnStarted(float directionDot) => CancelAttack();
+        #endregion
+
+        #region Input And Dash
+
+        private void Attack_Performed(InputAction.CallbackContext context) => RequestAttack();
+
+        public override void RequestAttack()
+        {
+            if (Time.timeScale <= 0f || !Active || !isActiveAndEnabled || IsAttackInputBlocked ||
+                (_hittable != null && !_hittable.IsAlive())) return;
+
+            if (_dash != null && _dash.IsDashing)
+            {
+                _hasQueuedDashAttack = _postDashAttack != null;
+                return;
+            }
+
+            if (!_isPostDashAttack) base.RequestAttack();
+        }
+
+        private void Dash_OnStarted(float directionDot)
+        {
+            CancelAttack(playIdle: false, maintainComboIndex: _maintainComboIndexOnDash);
+        }
 
         private void Dash_OnFinished(float directionDot)
         {
-            bool requested = _hasQueuedAttack;
-            _hasQueuedAttack = false;
-            if (!requested || _dash.LastDashCanceled || (_hittable != null && !_hittable.IsAlive())) return;
-            BeginAttack();
-        }
+            bool requested = _hasQueuedDashAttack;
+            _hasQueuedDashAttack = false;
+            if (!requested || _dash.LastDashCanceled || !Active || !isActiveAndEnabled ||
+                IsAttackInputBlocked || _postDashAttack == null ||
+                (_hittable != null && !_hittable.IsAlive())) return;
 
-        private void Weapon_OnEquipped(WeaponLoadoutSO loadout) => CancelAttack();
-
-        private void Hittable_OnHitted(int damage)
-        {
-            if ((IsExecuting || _hasQueuedAttack) && _comboController != null)
-                _comboController.CancelAttack(playIdle: false);
-            CancelAttack();
-        }
-
-        #endregion
-
-        #region Execution
-
-        private void BeginAttack()
-        {
-            WeaponLoadoutSO loadout = _weaponManager != null ? _weaponManager.CurrentLoadout : null;
-            if (loadout == null || !loadout.HasPostDashAttack || loadout.PostDashAttack == null) return;
-            if (_comboController == null || !_comboController.Active || !_comboController.isActiveAndEnabled ||
-                _comboController.IsAttacking || _attackHitbox == null || _animator == null ||
-                !_animator.isActiveAndEnabled || _animator.runtimeAnimatorController == null || _animator.layerCount == 0)
-                return;
-
-            _attackData = loadout.PostDashAttack;
-            if (string.IsNullOrWhiteSpace(_attackData.AnimationStateName) ||
-                !_animator.HasState(0, Animator.StringToHash(_attackData.AnimationStateName)))
-            {
-                Debug.LogWarning("[PostDashAttackController] The equipped weapon has no valid post-dash Animator state.", this);
-                _attackData = null;
-                return;
-            }
-
-            IsExecuting = true;
-            _startedFrame = Time.frameCount;
-            _executionId = Guid.NewGuid();
-            _comboController.BlockAttackInput(this);
-            _comboController.PauseComboRetention();
+            _retainedComboIndex = _currentComboIndex;
+            _retainedComboTime = base.ComboRetentionRemaining;
+            _isPostDashAttack = true;
             if (_directionHandler != null) _directionHandler.BlockDirection(this);
-            _animator.CrossFade(_attackData.AnimationStateName, _attackData.TransitionDuration, 0, 0f);
-            OnAttackStarted?.Invoke();
+            PlayCurrentAttack();
+            if (IsAttacking) AnimationEvent_CloseComboWindow();
         }
 
-        public void ExecuteHitbox()
-        {
-            if (!IsExecuting || _attackData == null || _attackHitbox == null) return;
-            // Index -1 identifies an attack outside the normal combo sequence.
-            var execution = new AttackExecutionData(_executionId, -1, _attackData, gameObject);
-            _attackHitbox.ExecuteHitbox(_attackData, execution);
-        }
-
-        public void FinishAttack()
-        {
-            if (!IsExecuting) return;
-            ReleaseAttack();
-            if (_animator != null && _animator.isActiveAndEnabled && !string.IsNullOrEmpty(_idleStateName) &&
-                _animator.HasState(0, Animator.StringToHash(_idleStateName)))
-                _animator.CrossFadeInFixedTime(_idleStateName, 0.05f, 0, 0f);
-            OnAttackFinished?.Invoke();
-        }
-
-        public void CancelAttack()
-        {
-            _hasQueuedAttack = false;
-            if (!IsExecuting) return;
-            ReleaseAttack();
-            OnAttackCanceled?.Invoke();
-        }
-
-        private void ReleaseAttack()
-        {
-            IsExecuting = false;
-            _attackData = null;
-            if (_comboController != null)
-            {
-                _comboController.ResumeComboRetention();
-                _comboController.UnblockAttackInput(this);
-            }
-            if (_directionHandler != null) _directionHandler.UnblockDirection(this);
-        }
+        private void Hittable_OnHitted(int damage) => CancelAttack(playIdle: false);
 
         #endregion
 
-        #region Animation Events
+        #region Finish And Cancellation
 
-        public bool CanAcceptAnimationEvent(Animator source, AnimationEvent animationEvent)
+        protected override void FinishCombo()
         {
-            if (!isActiveAndEnabled || !IsExecuting || source != _animator || animationEvent == null ||
-                !animationEvent.isFiredByAnimator || !TryGetAttackState(out AnimatorStateInfo state)) return false;
-            AnimatorStateInfo eventState = animationEvent.animatorStateInfo;
-            return eventState.fullPathHash == state.fullPathHash && eventState.normalizedTime <= state.normalizedTime + 0.01f;
+            bool wasPostDashAttack = _isPostDashAttack;
+            base.FinishCombo();
+            if (wasPostDashAttack) EndPostDashAttack(restoreCombo: true);
         }
 
-        private bool TryGetAttackState(out AnimatorStateInfo state)
+        public override void CancelAttack(bool playIdle = true, bool maintainComboIndex = false)
         {
-            state = default;
-            if (_attackData == null || _animator == null || !_animator.isActiveAndEnabled ||
-                _animator.runtimeAnimatorController == null || _animator.layerCount == 0) return false;
-            state = _animator.IsInTransition(0) ? _animator.GetNextAnimatorStateInfo(0) : _animator.GetCurrentAnimatorStateInfo(0);
-            return state.IsName(_attackData.AnimationStateName);
+            _hasQueuedDashAttack = false;
+            bool wasPostDashAttack = _isPostDashAttack;
+            base.CancelAttack(playIdle, !wasPostDashAttack && maintainComboIndex);
+            if (wasPostDashAttack) EndPostDashAttack(maintainComboIndex);
+        }
+
+        private void EndPostDashAttack(bool restoreCombo)
+        {
+            _isPostDashAttack = false;
+            if (restoreCombo && _retainedComboTime > 0f)
+            {
+                _currentComboIndex = _retainedComboIndex;
+                _phase = AttackPhase.HOLDING_ATTACK_INDEX;
+                _comboRetentionExpiresAt = Time.time + _retainedComboTime;
+            }
+            _retainedComboTime = 0f;
+            if (_directionHandler != null) _directionHandler.UnblockDirection(this);
         }
 
         #endregion
