@@ -354,8 +354,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerDirection
   _active: 1
-  _rightInput: {fileID: -3105849121650280034, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
-  _leftInput: {fileID: 7277778564736042800, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
   _currentDirection: 1
   _visualTransform: {fileID: 4915847422390050145}
   _useLocalEulerAngles: 1
@@ -819,7 +817,8 @@ MonoBehaviour:
   _drawGizmos: 1
   _debugAttackIndex: 0
   _debugHitboxColor: {r: 0, g: 0, b: 0, a: 1}
-  _attackInput: {fileID: 2202181311478303124, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  _leftAttackInput: {fileID: 7277778564736042800, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
+  _rightAttackInput: {fileID: -3105849121650280034, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
   _dash: {fileID: 8889931655858333428}
   _weaponManager: {fileID: 0}
   _directionHandler: {fileID: 8402393144809859780}

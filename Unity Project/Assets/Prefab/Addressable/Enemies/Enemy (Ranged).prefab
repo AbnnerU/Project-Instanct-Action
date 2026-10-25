@@ -779,7 +779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Progression.OnDeath_AddXp
   _healthEventsComponent: {fileID: 5058952256331780876}
   _verifyStateOnStart: 1
-  _xpValue: 1
+  _xpValue: 100
 --- !u!114 &269525282480989534
 MonoBehaviour:
   m_ObjectHideFlags: 0

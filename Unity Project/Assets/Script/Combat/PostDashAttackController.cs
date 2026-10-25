@@ -12,7 +12,8 @@ namespace Scripts.Combat
         #region Fields
 
         [Header("Input")]
-        [SerializeField] private InputActionReference _attackInput;
+        [SerializeField] private InputActionReference _leftAttackInput;
+        [SerializeField] private InputActionReference _rightAttackInput;
         [Header("Post-Dash")]
         [SerializeField] private DashBase _dash;
         [SerializeField] private MN_PlayerWeapon _weaponManager;
@@ -26,6 +27,7 @@ namespace Scripts.Combat
         private bool _isPostDashAttack;
         private int _retainedComboIndex;
         private float _retainedComboTime;
+        private DirectionSide _attackDirection;
 
         public bool HasQueuedAttack => _hasQueuedDashAttack;
         public bool IsPostDashAttack => _isPostDashAttack;
@@ -50,10 +52,15 @@ namespace Scripts.Combat
 
         private void OnEnable()
         {
-            if (_attackInput != null && _attackInput.action != null)
+            if (_leftAttackInput != null && _leftAttackInput.action != null)
             {
-                _attackInput.action.performed += Attack_Performed;
-                _attackInput.action.Enable();
+                _leftAttackInput.action.performed += LeftAttack_Performed;
+                _leftAttackInput.action.Enable();
+            }
+            if (_rightAttackInput != null && _rightAttackInput.action != null)
+            {
+                _rightAttackInput.action.performed += RightAttack_Performed;
+                _rightAttackInput.action.Enable();
             }
             if (_dash != null)
             {
@@ -70,8 +77,10 @@ namespace Scripts.Combat
 
         protected override void OnDisable()
         {
-            if (_attackInput != null && _attackInput.action != null)
-                _attackInput.action.performed -= Attack_Performed;
+            if (_leftAttackInput != null && _leftAttackInput.action != null)
+                _leftAttackInput.action.performed -= LeftAttack_Performed;
+            if (_rightAttackInput != null && _rightAttackInput.action != null)
+                _rightAttackInput.action.performed -= RightAttack_Performed;
             if (_dash != null)
             {
                 _dash.OnDashStarted -= Dash_OnStarted;
@@ -80,6 +89,14 @@ namespace Scripts.Combat
             if (_weaponManager != null) _weaponManager.OnWeaponLoadoutEquipped -= ApplyWeaponLoadout;
             if (_hittable != null) _hittable.OnHitted -= Hittable_OnHitted;
             base.OnDisable();
+        }
+
+        protected override void LateUpdate()
+        {
+            // All OnDashFinished subscribers have released their locks before starting the attack.
+            if (_hasQueuedDashAttack && _dash != null && !_dash.IsDashing)
+                BeginPostDashAttack();
+            base.LateUpdate();
         }
 
         #endregion
@@ -98,20 +115,28 @@ namespace Scripts.Combat
 
         #region Input And Dash
 
-        private void Attack_Performed(InputAction.CallbackContext context) => RequestAttack();
+        private void LeftAttack_Performed(InputAction.CallbackContext context) => RequestAttack(DirectionSide.LEFT);
+        private void RightAttack_Performed(InputAction.CallbackContext context) => RequestAttack(DirectionSide.RIGHT);
 
-        public override void RequestAttack()
+        public override void RequestAttack() =>
+            RequestAttack(_directionHandler != null ? _directionHandler.CurrentDirection : DirectionSide.RIGHT);
+
+        public void RequestAttack(DirectionSide direction)
         {
             if (Time.timeScale <= 0f || !Active || !isActiveAndEnabled || IsAttackInputBlocked ||
                 (_hittable != null && !_hittable.IsAlive())) return;
 
-            if (_dash != null && _dash.IsDashing)
+            if (_dash != null && (_dash.IsDashing || _hasQueuedDashAttack))
             {
                 _hasQueuedDashAttack = _postDashAttack != null;
+                if (_hasQueuedDashAttack) _attackDirection = direction;
                 return;
             }
 
-            if (!_isPostDashAttack) base.RequestAttack();
+            if (_isPostDashAttack || (IsAttacking && !IsComboWindowOpen) || _list_ComboAttackData.Count == 0) return;
+
+            _attackDirection = direction;
+            base.RequestAttack();
         }
 
         private void Dash_OnStarted(float directionDot)
@@ -121,16 +146,19 @@ namespace Scripts.Combat
 
         private void Dash_OnFinished(float directionDot)
         {
-            bool requested = _hasQueuedDashAttack;
+            if (_dash.LastDashCanceled) _hasQueuedDashAttack = false;
+        }
+
+        private void BeginPostDashAttack()
+        {
             _hasQueuedDashAttack = false;
-            if (!requested || _dash.LastDashCanceled || !Active || !isActiveAndEnabled ||
+            if (_dash.LastDashCanceled || !Active || !isActiveAndEnabled ||
                 IsAttackInputBlocked || _postDashAttack == null ||
                 (_hittable != null && !_hittable.IsAlive())) return;
 
             _retainedComboIndex = _currentComboIndex;
             _retainedComboTime = base.ComboRetentionRemaining;
             _isPostDashAttack = true;
-            if (_directionHandler != null) _directionHandler.BlockDirection(this);
             PlayCurrentAttack();
             if (IsAttacking) AnimationEvent_CloseComboWindow();
         }
@@ -141,9 +169,20 @@ namespace Scripts.Combat
 
         #region Finish And Cancellation
 
+        protected override bool PrepareAttack()
+        {
+            if (_directionHandler == null) return false;
+            _directionHandler.UnblockDirection(this);
+            if (!_directionHandler.Active) return false;
+            _directionHandler.SetDirection(_attackDirection);
+            _directionHandler.BlockDirection(this);
+            return true;
+        }
+
         protected override void FinishCombo()
         {
             bool wasPostDashAttack = _isPostDashAttack;
+            if (_directionHandler != null) _directionHandler.UnblockDirection(this);
             base.FinishCombo();
             if (wasPostDashAttack) EndPostDashAttack(restoreCombo: true);
         }
@@ -152,6 +191,7 @@ namespace Scripts.Combat
         {
             _hasQueuedDashAttack = false;
             bool wasPostDashAttack = _isPostDashAttack;
+            if (_directionHandler != null) _directionHandler.UnblockDirection(this);
             base.CancelAttack(playIdle, !wasPostDashAttack && maintainComboIndex);
             if (wasPostDashAttack) EndPostDashAttack(maintainComboIndex);
         }
@@ -166,7 +206,6 @@ namespace Scripts.Combat
                 _comboRetentionExpiresAt = Time.time + _retainedComboTime;
             }
             _retainedComboTime = 0f;
-            if (_directionHandler != null) _directionHandler.UnblockDirection(this);
         }
 
         #endregion

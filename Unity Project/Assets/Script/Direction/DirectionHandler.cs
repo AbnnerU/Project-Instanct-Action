@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Scripts.Direction
 {
@@ -12,9 +11,6 @@ namespace Scripts.Direction
         public event Action<DirectionSide> OnDirectionUpdated;
 
         [SerializeField] private bool _active = true;
-        [Header("Optional Input")]
-        [SerializeField] private InputActionReference _rightInput;
-        [SerializeField] private InputActionReference _leftInput;
         [Header("Direction")]
         [SerializeField] private DirectionSide _currentDirection = DirectionSide.RIGHT;
         [SerializeField] private Transform _visualTransform;
@@ -37,43 +33,9 @@ namespace Scripts.Direction
             UpdateVisualDirection();
         }
 
-        private void OnEnable()
-        {
-            if (_rightInput != null && _rightInput.action != null)
-            {
-                _rightInput.action.performed += RightInput_Performed;
-                _rightInput.action.Enable();
-            }
-            if (_leftInput != null && _leftInput.action != null)
-            {
-                _leftInput.action.performed += LeftInput_Performed;
-                _leftInput.action.Enable();
-            }
-        }
-
-        private void OnDisable()
-        {
-            if (_rightInput != null && _rightInput.action != null)
-                _rightInput.action.performed -= RightInput_Performed;
-            if (_leftInput != null && _leftInput.action != null)
-                _leftInput.action.performed -= LeftInput_Performed;
-        }
-
         #endregion
 
-        #region Input And Blocking
-
-        private void RightInput_Performed(InputAction.CallbackContext context)
-        {
-            if (Time.timeScale > 0f)
-                LookRight();
-        }
-
-        private void LeftInput_Performed(InputAction.CallbackContext context)
-        {
-            if (Time.timeScale > 0f)
-                LookLeft();
-        }
+        #region Blocking
 
         public void Enable() => _active = true;
         public void Disable() => _active = false;

@@ -6,8 +6,11 @@ Nao ha referencia para um segundo controlador.
 
 ## Funcionamento
 
-- Fora do dash, o input chama o combo normal herdado.
-- Durante o dash, o mesmo input guarda um unico pedido de golpe especial.
+- Fora do dash, os inputs de esquerda/direita viram e iniciam o combo normal.
+- Durante cada golpe, a direcao fica bloqueada. A ultima direcao aceita na janela
+  de combo e aplicada somente quando o proximo ataque comeca.
+- Durante o dash, esses inputs guardam um unico pedido de golpe especial e a
+  ultima direcao escolhida, sem virar durante o dash.
 - No fim de um dash nao cancelado, executa o `PostDashAttack` da arma.
 - A lista de ataques normais permanece intacta. Apenas `CurrentAttack` seleciona
   temporariamente o golpe especial.
@@ -23,7 +26,12 @@ Nao ha referencia para um segundo controlador.
 - Player: somente `PostDashAttackController` como controlador de combate.
 - Nao adicionar `ComboController` nem `Dash_ComboControllerHandler` ao mesmo
   personagem. O pos-dash ja cuida do cancelamento no inicio do dash.
-- Configure `Attack Input`, `Dash`, `Weapon Manager` e as referencias herdadas.
+- Configure `Left Attack Input`, `Right Attack Input`, `Direction Handler`,
+  `Dash`, `Weapon Manager` e as referencias herdadas.
+- `DirectionHandler` nao le inputs. O pos-dash aplica a direcao antes de iniciar
+  cada ataque e mantem seu proprio bloqueio ate o termino ou cancelamento.
+- Nao use `Combo_DirectionHandler` adicional neste personagem: o bloqueio ja e
+  responsabilidade do controlador. `Dash_DirectionHandler` pode permanecer.
 - `Maintain Combo Index On Dash` controla a preservacao ao iniciar um dash.
 - Armas, habilidades, hit reaction e `ComboAnimationEventReceiver` devem
   referenciar esse mesmo componente.

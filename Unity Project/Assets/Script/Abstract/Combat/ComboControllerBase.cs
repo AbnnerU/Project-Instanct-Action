@@ -361,6 +361,12 @@ namespace Scripts.Combat
                 return;
             }
 
+            if (!PrepareAttack())
+            {
+                CancelAttack(playIdle: false);
+                return;
+            }
+
             int version = ++_executionVersion;
             _attackStartedFrame = Time.frameCount;
             _status = AttackStatus.ACCEPTING_INPUT;
@@ -378,6 +384,8 @@ namespace Scripts.Combat
             _animator.CrossFade(attackData.AnimationStateName, attackData.TransitionDuration, 0, 0f);
             OnAttackStarted?.Invoke();
         }
+
+        protected virtual bool PrepareAttack() => true;
 
         protected virtual void FinishCombo()
         {
