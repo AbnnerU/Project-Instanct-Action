@@ -15,7 +15,50 @@ MonoBehaviour:
   ID: Test
   DisplayName: Machadinho
   ComboAttackSet: {fileID: 11400000, guid: 124620e5373355142a9e27ca9bf8b9f1, type: 2}
-  AnimatorController: {fileID: 22100000, guid: 824468a2a3a8be9479d52887ed9de994, type: 2}
+  HasPostDashAttack: 0
+  PostDashAttack:
+    _animationStateName: Base Layer.Post Dash Attack
+    _transitionDuration: 0.05
+    _damageData:
+      _damageType: 0
+      _baseDamage: 0
+      _physicForceScaling: 0
+      _magicForceScaling: 0
+    _attackKnockback:
+      KnockbackDistance: 0
+      KnockbackDuration: 0
+      KnockbackCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _hitboxCenterOffset: {x: 0, y: 0, z: 1}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
+    _targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _queryTriggerInteraction: 2
+    _maxTargets: 8
+  AnimatorController: {fileID: 22100000, guid: aa0e8e1adb5cf2743ba45087c9acd529, type: 2}
   List_WeaponModels:
   - WeaponPrefabReference:
       m_AssetGUID: bda0e0a54afa7464ab2ce114082b55d6

@@ -15,7 +15,50 @@ MonoBehaviour:
   ID: HeavyHammer
   DisplayName: HeavyHammer
   ComboAttackSet: {fileID: 11400000, guid: 99245aad33389444e83aaa49757b9a15, type: 2}
-  AnimatorController: {fileID: 22100000, guid: 79f7ec2e062d4e04a8f08312d81eb9da, type: 2}
+  HasPostDashAttack: 0
+  PostDashAttack:
+    _animationStateName: Base Layer.Post Dash Attack
+    _transitionDuration: 0.05
+    _damageData:
+      _damageType: 0
+      _baseDamage: 0
+      _physicForceScaling: 0
+      _magicForceScaling: 0
+    _attackKnockback:
+      KnockbackDistance: 0
+      KnockbackDuration: 0
+      KnockbackCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _hitboxCenterOffset: {x: 0, y: 0, z: 1}
+    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
+    _targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _queryTriggerInteraction: 2
+    _maxTargets: 8
+  AnimatorController: {fileID: 22100000, guid: 667fb320325a72749b2e274ad6010218, type: 2}
   List_WeaponModels:
   - WeaponPrefabReference:
       m_AssetGUID: aac5a422caf682d45bb63a88e5b01e00

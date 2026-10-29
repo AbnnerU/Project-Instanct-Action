@@ -17,7 +17,7 @@ MonoBehaviour:
   ComboAttackSet: {fileID: 11400000, guid: 857cbb28a04eea04bba8de91619771a2, type: 2}
   HasPostDashAttack: 1
   PostDashAttack:
-    _animationStateName: Base Layer.Post Dash Attack
+    _animationStateName: Base Layer.Attack.Post Dash Attack
     _transitionDuration: 0.01
     _damageData:
       _damageType: 0

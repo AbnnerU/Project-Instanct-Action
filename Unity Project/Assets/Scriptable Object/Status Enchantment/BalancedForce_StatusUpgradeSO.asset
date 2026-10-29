@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 9bbbb833-7c96-4b98-a4c8-16421af564b7
   DisplayName: Balanced Force
-  Description: "<statusmodifier index=0>\n<statusmodifier index=1>"
+  Description: '<statusmodifier index=0>
+
+    <statusmodifier index=1>'
   IconReference:
     m_AssetGUID: 2bf67b30afa6a6b4681094ea0cba6239
     m_SubObjectName: 
@@ -24,10 +26,8 @@ MonoBehaviour:
   _canRepeat: 1
   _list_StatusModifiers:
   - StatusType: 3
-    ValueType: 1
-    Value: 3
+    ValueType: 0
+    Value: 10
   - StatusType: 4
-    ValueType: 1
-    Value: 3
-
-
+    ValueType: 0
+    Value: 10

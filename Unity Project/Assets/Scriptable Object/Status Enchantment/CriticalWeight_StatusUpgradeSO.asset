@@ -25,5 +25,4 @@ MonoBehaviour:
   _list_StatusModifiers:
   - StatusType: 6
     ValueType: 0
-    Value: 8
-
+    Value: 15

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: a20b6bf6-7040-4891-82ff-cda3408a93b0
   DisplayName: Blood Magic
-  Description: "<statusmodifier index=0>\n<statusmodifier index=1>"
+  Description: '<statusmodifier index=0>
+
+    <statusmodifier index=1>'
   IconReference:
     m_AssetGUID: 5620ad4a5665fb84184dab2e923ecd3f
     m_SubObjectName: 
@@ -25,9 +27,7 @@ MonoBehaviour:
   _list_StatusModifiers:
   - StatusType: 2
     ValueType: 0
-    Value: 1.5
+    Value: 3
   - StatusType: 4
-    ValueType: 1
-    Value: 2
-
-
+    ValueType: 0
+    Value: 10

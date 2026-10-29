@@ -1383,7 +1383,7 @@ MonoBehaviour:
   _currentLevel: 0
   _currentXp: 0
   _xpToNextLevel: 100
-  _xpIncreasePerLevel: 50
+  _xpIncreasePerLevel: 15
 --- !u!114 &415616843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3196,14 +3196,14 @@ MonoBehaviour:
       BaseValue: 10
       CurrentValue: 10
     - StatusType: 5
-      BaseValue: 100
-      CurrentValue: 100
+      BaseValue: 0
+      CurrentValue: 0
     - StatusType: 6
       BaseValue: 125
       CurrentValue: 0
     - StatusType: 8
-      BaseValue: 100
-      CurrentValue: 100
+      BaseValue: 0
+      CurrentValue: 0
     - StatusType: 2
       BaseValue: 0
       CurrentValue: 0
@@ -4655,6 +4655,36 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a19e6847f9102f4f9393618bb807569, type: 2}
   - {fileID: 11400000, guid: b0fa00c498b8df449a1324eb314598a4, type: 2}
   - {fileID: 11400000, guid: beb72307bb35e464b90a43ea3d887043, type: 2}
+  - {fileID: 11400000, guid: 5580ce164be7fcc41a520a935d0e7ef7, type: 2}
+  - {fileID: 11400000, guid: eef4c754210dcd44fba6e14aef84541d, type: 2}
+  - {fileID: 11400000, guid: bb641e477f506254c9bd0b3e893da344, type: 2}
+  - {fileID: 11400000, guid: 051f0be7f14d4ea297516dfc1d70c29c, type: 2}
+  - {fileID: 11400000, guid: af36371220314533b1d015ed86490d06, type: 2}
+  - {fileID: 11400000, guid: 7103dde1d54841b9b260bb29e4cc1170, type: 2}
+  - {fileID: 11400000, guid: 10bad6a68f6b416d930e1659579ad5d1, type: 2}
+  - {fileID: 11400000, guid: be671c6546404534a68e4bd58aec5799, type: 2}
+  - {fileID: 11400000, guid: 642408b45786462eb687ea50ad65ecfb, type: 2}
+  - {fileID: 11400000, guid: 365d06c3c8864ef2a653b6d42fad1b51, type: 2}
+  - {fileID: 11400000, guid: fe32cd08dc314b2e9df51877db23064c, type: 2}
+  - {fileID: 11400000, guid: 9b599abf189440fbbe6c3a21b37b48b7, type: 2}
+  - {fileID: 11400000, guid: e30d1de510994691a51a6b9836177727, type: 2}
+  - {fileID: 11400000, guid: 6085d84643bb404487190d94e256a3b5, type: 2}
+  - {fileID: 11400000, guid: 74ac23f91e424a35a96d3b03aad1367c, type: 2}
+  - {fileID: 11400000, guid: f1d1009429874f78bda0464facc0039a, type: 2}
+  - {fileID: 11400000, guid: 06ab97fab17e4431a96a5e02233ac952, type: 2}
+  - {fileID: 11400000, guid: 394bcc79fa6849039d031557b276e0f0, type: 2}
+  - {fileID: 11400000, guid: 1e5b2cded21041eaa03dc4f3aad76c4d, type: 2}
+  - {fileID: 11400000, guid: b1f4d6a7c9e84d2f9a0b5c3e6f7a8123, type: 2}
+  - {fileID: 11400000, guid: 87b49f9d5dc44b6e8d6f6b55450214a0, type: 2}
+  - {fileID: 11400000, guid: f2307fb6c33e49a2a71612f89b9d87e2, type: 2}
+  - {fileID: 11400000, guid: 71de5edbd5dc4ac39294b9c78caf4796, type: 2}
+  - {fileID: 11400000, guid: dd49d22fb3fd4814af07c810c2742658, type: 2}
+  - {fileID: 11400000, guid: b394688b3d8b42b29f730b512904d923, type: 2}
+  - {fileID: 11400000, guid: 9da2dead7f114cdfacb17637f3a924b6, type: 2}
+  - {fileID: 11400000, guid: ec0506d4728a4709a53ed1dc53aeb739, type: 2}
+  - {fileID: 11400000, guid: 1d943fc8e4c54179a3c87b29144793d5, type: 2}
+  - {fileID: 11400000, guid: b88dd91ae26e42fca2909ec8f71f21ff, type: 2}
+  - {fileID: 11400000, guid: 52e4a711599146789f72acfdd9db84e6, type: 2}
   _list_AppliedEnchantments: []
 --- !u!114 &1879613187
 MonoBehaviour:
@@ -5197,6 +5227,10 @@ PrefabInstance:
       propertyPath: _reference
       value: 
       objectReference: {fileID: 1151873706}
+    - target: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _triggerIdle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8183698727932517817, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: _weaponManager
       value: 

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 9e967cab-aa17-47c6-9fc0-06dada842f66
   DisplayName: War Focus
-  Description: "<statusmodifier index=0>\n<statusmodifier index=1>"
+  Description: '<statusmodifier index=0>
+
+    <statusmodifier index=1>'
   IconReference:
     m_AssetGUID: d16ef7e8333a7c34782f9d8e921931d2
     m_SubObjectName: 
@@ -24,10 +26,8 @@ MonoBehaviour:
   _canRepeat: 1
   _list_StatusModifiers:
   - StatusType: 3
-    ValueType: 1
-    Value: 3
+    ValueType: 0
+    Value: 15
   - StatusType: 5
     ValueType: 0
-    Value: 1.5
-
-
+    Value: 5

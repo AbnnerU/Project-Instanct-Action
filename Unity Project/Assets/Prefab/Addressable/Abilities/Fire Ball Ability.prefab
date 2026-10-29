@@ -72,7 +72,7 @@ MonoBehaviour:
     _physicForceScaling: 0
     _magicForceScaling: 50
   _animationStateName: Ability 1
-  _animationTransitionDuration: 0.05
+  _animationTransitionDuration: 0
   _animationLayerIndex: 0
   _castTime: 0.15
   _projectileSpeed: 15
@@ -89,6 +89,7 @@ MonoBehaviour:
   _projectileContainer: {fileID: 0}
   _containerTag: ProjectilesContainer
   _comboController: {fileID: 0}
+  _maintainComboIndex: 1
   _cancelAttackOnExecute: 1
   _disableComboOnExecute: 1
   _comboDisableDuration: 0.18

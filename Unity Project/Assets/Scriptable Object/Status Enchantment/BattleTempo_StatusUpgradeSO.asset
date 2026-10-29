@@ -27,7 +27,7 @@ MonoBehaviour:
   _list_StatusModifiers:
   - StatusType: 1
     ValueType: 0
-    Value: 3
+    Value: 10
   - StatusType: 3
-    ValueType: 1
-    Value: 2
+    ValueType: 0
+    Value: 10
