@@ -43,6 +43,7 @@ namespace Scripts.Combat
                 damageRequest);
 
             OnDamageReceived?.Invoke(damageResult);
+            damageRequest.AttackerDamageResultReporter?.ReportDamage(damageResult);
             return damageResult;
         }
 

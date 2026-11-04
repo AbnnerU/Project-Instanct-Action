@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 1430338522816146861}
   - component: {fileID: 7022363560736055592}
   - component: {fileID: 8183698727932517817}
+  - component: {fileID: 1460330428452804354}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -722,6 +723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HealOnDamageDealt
   _statusSource: {fileID: 6204951687772877657}
+  _damageDealerReference: {fileID: 1460330428452804354}
   _healingStatusType: 8
   _list_ValidDamageTypes: 00000000
 --- !u!114 &1918671384792004575
@@ -737,6 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HealOnDamageDealt
   _statusSource: {fileID: 6204951687772877657}
+  _damageDealerReference: {fileID: 1460330428452804354}
   _healingStatusType: 2
   _list_ValidDamageTypes: 0100000002000000
 --- !u!114 &1430338522816146861
@@ -824,6 +827,18 @@ MonoBehaviour:
   _directionHandler: {fileID: 8402393144809859780}
   _hittableReference: {fileID: 1437302767631231260}
   _maintainComboIndexOnDash: 1
+--- !u!114 &1460330428452804354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437302767631231260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e448035f1e1c8940a2883583b291843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.DamageDealtReporter
 --- !u!1 &1557568472590508371
 GameObject:
   m_ObjectHideFlags: 0

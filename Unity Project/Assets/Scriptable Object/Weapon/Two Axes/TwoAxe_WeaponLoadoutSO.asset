@@ -15,26 +15,26 @@ MonoBehaviour:
   ID: TwoSwords
   DisplayName: TwoSwords
   ComboAttackSet: {fileID: 11400000, guid: b651d1cfa3cf7b1419d6d27c780ed9d1, type: 2}
-  HasPostDashAttack: 0
+  HasPostDashAttack: 1
   PostDashAttack:
-    _animationStateName: Base Layer.Post Dash Attack
+    _animationStateName: Base Layer.Attack.Post Dash Attack
     _transitionDuration: 0.05
     _damageData:
       _damageType: 0
-      _baseDamage: 0
-      _physicForceScaling: 0
-      _magicForceScaling: 0
+      _baseDamage: 75
+      _physicForceScaling: 200
+      _magicForceScaling: 10
     _attackKnockback:
-      KnockbackDistance: 0
-      KnockbackDuration: 0
+      KnockbackDistance: 1.8
+      KnockbackDuration: 0.1
       KnockbackCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 0
+          inSlope: 2
+          outSlope: 2
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -51,8 +51,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    _hitboxCenterOffset: {x: 0, y: 0, z: 1}
-    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
+    _hitboxCenterOffset: {x: 0.00000007002618, y: 0.09305692, z: 0.41257823}
+    _hitboxHalfExtents: {x: 0.50000006, y: 0.3982191, z: 1.1223179}
     _targetLayerMask:
       serializedVersion: 2
       m_Bits: 128

@@ -27,6 +27,7 @@ namespace Scripts.Combat
         private Vector3 _lastCenter;
         private Quaternion _lastRotation;
         private ICriticalDamagePermissionsProvider _criticalPermissions;
+        private IDamageResultReporter _damageResultReporter;
         private float _lastExecutedHitboxExpireTime;
 
         private void Awake()
@@ -34,6 +35,7 @@ namespace Scripts.Combat
             GetReferences();
 
             _criticalPermissions = GetComponentInParent<ICriticalDamagePermissionsProvider>();
+            _damageResultReporter = GetComponentInParent<IDamageResultReporter>();
         }
 
         public void ExecuteHitbox(ComboAttackData attackData)
@@ -103,14 +105,10 @@ namespace Scripts.Combat
                     true,
                     damageRequestFallback);
 
+                damageRequestFallback.AttackerDamageResultReporter?.ReportDamage(damageResultFallback);
                 OnDamageDealt?.Invoke(damageResultFallback);
                 OnDamageDealtWithExecution?.Invoke(executionData, damageResultFallback);
             }
-        }
-
-        public void NotifyDamageDealt(DamageResult damageResult)
-        {
-            OnDamageDealt?.Invoke(damageResult);
         }
 
         public Vector3 GetHitboxCenter(ComboAttackData attackData)
@@ -180,7 +178,8 @@ namespace Scripts.Combat
                 hitCollider,
                 hitCollider.ClosestPoint(_hitboxOrigin.position),
                 attackData,
-                _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes);
+                _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
+                _damageResultReporter);
         }
 
         private void EnsureHitResultsCapacity(int maxTargets)

@@ -15,26 +15,26 @@ MonoBehaviour:
   ID: HeavyHammer
   DisplayName: HeavyHammer
   ComboAttackSet: {fileID: 11400000, guid: 99245aad33389444e83aaa49757b9a15, type: 2}
-  HasPostDashAttack: 0
+  HasPostDashAttack: 1
   PostDashAttack:
-    _animationStateName: Base Layer.Post Dash Attack
+    _animationStateName: Base Layer.Attack.Post Dash Attack
     _transitionDuration: 0.05
     _damageData:
       _damageType: 0
-      _baseDamage: 0
-      _physicForceScaling: 0
+      _baseDamage: 200
+      _physicForceScaling: 250
       _magicForceScaling: 0
     _attackKnockback:
-      KnockbackDistance: 0
-      KnockbackDuration: 0
+      KnockbackDistance: 1
+      KnockbackDuration: 0.1
       KnockbackCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 0
+          inSlope: 2
+          outSlope: 2
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -51,8 +51,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    _hitboxCenterOffset: {x: 0, y: 0, z: 1}
-    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
+    _hitboxCenterOffset: {x: 0.00000003143297, y: 0.077552676, z: 0.7363218}
+    _hitboxHalfExtents: {x: 0.50000024, y: 0.44189537, z: 1.2980993}
     _targetLayerMask:
       serializedVersion: 2
       m_Bits: 128

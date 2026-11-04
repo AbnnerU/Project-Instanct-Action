@@ -21,8 +21,8 @@ MonoBehaviour:
     _transitionDuration: 0.01
     _damageData:
       _damageType: 0
-      _baseDamage: 30
-      _physicForceScaling: 150
+      _baseDamage: 25
+      _physicForceScaling: 90
       _magicForceScaling: 0
     _attackKnockback:
       KnockbackDistance: 0.1

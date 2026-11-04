@@ -55,6 +55,7 @@ namespace Scripts.Abilities
         private Coroutine _castRoutine;
 
         private ICriticalDamagePermissionsProvider _criticalPermissions;
+        private IDamageResultReporter _damageResultReporter;
 
         public float CastTime { get => _castTime; set => _castTime = value; }
 
@@ -73,6 +74,7 @@ namespace Scripts.Abilities
             _statusSource = statusSource;
             _comboController = comboController;
             _attackerObject = attackerObject;
+            _damageResultReporter = _attackerObject != null ? _attackerObject.GetComponent<IDamageResultReporter>() : null;
             _dashComponent = dash;
 
             if (_animator == null && _attackerObject != null)
@@ -250,7 +252,8 @@ namespace Scripts.Abilities
                 null,
                 null,
                 spawnPosition,
-                allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes);
+                allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
+                attackerDamageResultReporter: _damageResultReporter);
 
             abilityProjectile.SetDamageRequest(damageRequest);
             abilityProjectile.EnableProjectile(

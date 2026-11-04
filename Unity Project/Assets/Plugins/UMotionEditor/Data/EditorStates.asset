@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: "UMotionEditor.dll::\u0389\u038A\u038A\u038A\u038A\u0389\u038A\u0389\u0389\u0389\u0389\u0389\u0389\u0389\u038A\u038A\u0389\u038A\u038A\u0389\u038A\u0389\u0389\u0389\u0389\u038A\u0389\u038A\u038A\u038A\u038A\u038A\u038A\u038A\u0389\u038A\u038A\u038A\u038A\u0389\u038A\u0389\u0389\u038A\u0389\u038A\u0389"
   GeneralStates:
     LoadedProjectGUID:
-      valueInternal: 47142d2ce3ca3a94890a1d2cac1feff9
+      valueInternal: 696e53ac902d3e74980ccb92f5dfbf05
     RecentlyOpenedProjectPath:
       valueInternal: Assets\UI Motion Projects
     RecentlyOpenedProjectGUIDsList:
+    - valueInternal: 696e53ac902d3e74980ccb92f5dfbf05
     - valueInternal: 47142d2ce3ca3a94890a1d2cac1feff9

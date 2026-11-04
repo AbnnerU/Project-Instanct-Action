@@ -15,7 +15,7 @@ namespace Scripts.Abilities
             if (_ability == null || context == null)
                 return;
 
-            _ability.Setup(context.ComboController, context.AttackHitbox, context.StatusSource);
+            _ability.Setup(context.ComboController, context.AttackHitbox, context.StatusSource, context.OwnerObject);
             _ability.SetDamageData(context.Lits_DamageData);
         }
     }

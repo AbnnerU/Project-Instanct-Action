@@ -14,10 +14,13 @@ namespace Scripts.Combat
         public readonly Collider HitCollider;
         public readonly Vector3 HitPoint;
         public readonly ComboAttackData ComboAttackData;
+        public readonly IDamageResultReporter AttackerDamageResultReporter;
 
         public DamageRequest(DamageData damageData, StatusInfo attackerStatus, GameObject attacker, GameObject receiver, Collider hitCollider, Vector3 hitPoint, ComboAttackData comboAttackData = null,
-            CriticalDamageTypes allowedCriticalTypes = DefaultCriticalTypes)
+            CriticalDamageTypes allowedCriticalTypes = DefaultCriticalTypes,
+            IDamageResultReporter attackerDamageResultReporter = null)
         {
+            AttackerDamageResultReporter = attackerDamageResultReporter;
             AllowedCriticalTypes = allowedCriticalTypes;
             DamageData = damageData;
             AttackerStatus = attackerStatus;
@@ -38,7 +41,8 @@ namespace Scripts.Combat
                 hitCollider,
                 hitPoint,
                 ComboAttackData,
-                AllowedCriticalTypes);
+                AllowedCriticalTypes,
+                AttackerDamageResultReporter);
         }
     }
 }

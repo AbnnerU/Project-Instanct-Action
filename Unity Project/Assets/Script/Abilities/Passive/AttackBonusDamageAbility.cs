@@ -20,6 +20,7 @@ namespace Scripts.Abilities
         [SerializeField] private DamageData _bonusDamageData = new DamageData();
 
         private ICriticalDamagePermissionsProvider _criticalPermissions;
+        private IDamageResultReporter _damageResultReporter;
         private int _attackCounter;
         private bool _subscribed;
        
@@ -36,11 +37,14 @@ namespace Scripts.Abilities
 
         #region Setup
 
-        public void Setup(ComboControllerBase comboController, AttackHitbox attackHitbox, StatusInfoSourceBase statusSource)
+        public void Setup(ComboControllerBase comboController, AttackHitbox attackHitbox, StatusInfoSourceBase statusSource, GameObject attackerObject = null)
         {
             _comboController = comboController;
             _attackHitbox = attackHitbox;
             _statusSource = statusSource;
+            _damageResultReporter = attackerObject != null
+                ? attackerObject.GetComponent<IDamageResultReporter>()
+                : attackHitbox != null ? attackHitbox.GetComponentInParent<IDamageResultReporter>() : null;
 
             _criticalPermissions = GetComponentInParent<ICriticalDamagePermissionsProvider>();
         }
@@ -156,10 +160,10 @@ namespace Scripts.Abilities
                 sourceDamageResult.Receiver,
                 sourceDamageResult.HitCollider,
                 sourceDamageResult.HitPoint,
-                allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes);
+                allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
+                attackerDamageResultReporter: _damageResultReporter);
 
-            DamageResult bonusDamageResult = damageReceiver.ReceiveDamage(damageRequest);
-            _attackHitbox?.NotifyDamageDealt(bonusDamageResult);
+            damageReceiver.ReceiveDamage(damageRequest);
         }
 
         private bool TryGetDamageReceiver(DamageResult damageResult, out IDamageReceiver damageReceiver)

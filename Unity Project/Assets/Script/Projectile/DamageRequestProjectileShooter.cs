@@ -31,6 +31,7 @@ namespace Scripts.Projectile
         [SerializeField] private string _targetTag;
 
         private ICriticalDamagePermissionsProvider _criticalPermissions;
+        private IDamageResultReporter _damageResultReporter;
         #endregion
 
         #region Unity
@@ -75,7 +76,8 @@ namespace Scripts.Projectile
                 null,
                 null,
                 spawnPosition,
-                allowedCriticalTypes: _criticalPermissions != null? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes);
+                allowedCriticalTypes: _criticalPermissions != null? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
+                attackerDamageResultReporter: _damageResultReporter);
 
             projectile.SetDamageRequest(damageRequest);
             projectile.EnableProjectile(
@@ -100,6 +102,8 @@ namespace Scripts.Projectile
 
             if (_attackerObject == null)
                 _attackerObject = gameObject;
+
+            _damageResultReporter = _attackerObject.GetComponent<IDamageResultReporter>();
 
             if (_statusSource == null)
                 _statusSource = GetComponentInParent<StatusInfoSourceBase>();

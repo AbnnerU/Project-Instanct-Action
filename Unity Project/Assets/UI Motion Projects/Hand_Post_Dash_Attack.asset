@@ -20,7 +20,7 @@ MonoBehaviour:
     PoseToolPivotMode:
       valueInternal: 0
     PoseToolMode:
-      valueInternal: 1
+      valueInternal: 2
     PoseMirrorMode:
       valueInternal: 0
     ConfigMode:
@@ -40,7 +40,7 @@ MonoBehaviour:
     FramesZoom:
       valueInternal: 0.7079464
     PropertiesScrollPosition:
-      valueInternal: 22
+      valueInternal: 539
     PropertiesZoom:
       valueInternal: 1
     CurveYScrollPosition:
@@ -14560,4 +14560,13 @@ MonoBehaviour:
         valueInternal: 0
       StopReturnToStart:
         valueInternal: 1
-    EventList: []
+    EventList:
+    - Frame:
+        valueInternal: 0
+      EventFunctionList:
+      - FuncName:
+          valueInternal: 
+        ParamType:
+          valueInternal: 0
+        ParamValue:
+          valueInternal: 

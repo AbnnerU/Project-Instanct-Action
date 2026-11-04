@@ -140,6 +140,7 @@
     <Compile Include="Assets\Script\Abilities\Enum\AttackBonusDamageApplyMode.cs" />
     <Compile Include="Assets\Script\Interface\General\IMovementHandler.cs" />
     <Compile Include="Assets\Script\Requeriments\Scriptable Base\RequirementSO.cs" />
+    <Compile Include="Assets\Script\Combat\Damage Effects\DamageDealtReporter.cs" />
     <Compile Include="Assets\Script\Dash Handler\Dash2D.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTComboAttack.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageRequest.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\Boolean\BTBoolFunc.cs" />
     <Compile Include="Assets\Script\Abstract\Enchantment\EnchantmentSOBase.cs" />
     <Compile Include="Assets\Script\Dash Handler\Dash_DirectionHandler.cs" />
+    <Compile Include="Assets\Script\Interface\Combat\IDamageResultReporter.cs" />
     <Compile Include="Assets\Script\Spawner\EnemySpawner.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\LauchProjectileAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Dash Handler\DashInvulnerability.cs" />

@@ -1,6 +1,4 @@
 ﻿using Scripts.ObjectPooling;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Projectile
@@ -90,44 +88,75 @@ namespace Scripts.Projectile
                 distanceThisFrame,
                 _layerMask);
 
-            bool hasHitStoppingObject = false;
-            Vector3 finalStopPosition = targetPosition;
+            SortHitsByDistance(hits);
 
             for (int i = 0; i < hits; i++)
             {
-                Collider hitCollider = _hitResults[i].collider;
+                RaycastHit hit = _hitResults[i];
+                Collider hitCollider = hit.collider;
 
                 if (hitCollider == null)
                     continue;
 
-                if (IsGroundHit(hitCollider))
+                bool isGroundHit = IsGroundHit(hitCollider);
+                if (!isGroundHit && !IsTargetHit(hitCollider))
+                    continue;
+
+                // The sphere center and its contact point are different positions.
+                Vector3 impactPosition = currentPosition + normalizedDirection * Mathf.Clamp(hit.distance, 0f, distanceThisFrame);
+                hit.point = GetHitPoint(hitCollider, hit, currentPosition);
+
+                if (isGroundHit)
                 {
                     if (!_continueMovementOnHit)
                     {
-                        hasHitStoppingObject = true;
-                        finalStopPosition = _hitResults[i].point;
+                        _transform.position = impactPosition;
                         DeactiveAndRelease();
-                        break;
+                        return;
                     }
 
                     continue;
                 }
 
-                if (!IsTargetHit(hitCollider))
-                    continue;
+                if (!_continueMovementOnHit)
+                    _transform.position = impactPosition;
 
-                OnHit(hitCollider, _hitResults[i]);
+                OnHit(hitCollider, hit);
+
+                if (!_active)
+                    return;
 
                 if (!_continueMovementOnHit)
                 {
-                    hasHitStoppingObject = true;
-                    finalStopPosition = _hitResults[i].point;
                     DeactiveAndRelease();
-                    break;
+                    return;
                 }
             }
 
-            _transform.position = hasHitStoppingObject ? finalStopPosition : targetPosition;
+            _transform.position = targetPosition;
+        }
+
+        protected virtual Vector3 GetHitPoint(Collider hitCollider, RaycastHit hit, Vector3 castOrigin)
+        {
+            // Initial overlaps can return a zero point without a usable contact.
+            return hit.distance <= 0f ? hitCollider.ClosestPoint(castOrigin) : hit.point;
+        }
+
+        private void SortHitsByDistance(int count)
+        {
+            // NonAlloc casts do not guarantee nearest-first results.
+            for (int i = 1; i < count; i++)
+            {
+                RaycastHit hit = _hitResults[i];
+                int previousIndex = i - 1;
+                while (previousIndex >= 0 && _hitResults[previousIndex].distance > hit.distance)
+                {
+                    _hitResults[previousIndex + 1] = _hitResults[previousIndex];
+                    previousIndex--;
+                }
+
+                _hitResults[previousIndex + 1] = hit;
+            }
         }
 
         protected virtual bool IsGroundHit(Collider hitCollider)

@@ -27,9 +27,8 @@ namespace Scripts.Projectile
             GameObject receiverObject = damageReceiver is Component component ? component.gameObject : hitCollider.gameObject;
             DamageRequest hitDamageRequest = _damageRequest.WithHit(receiverObject, hitCollider, hit.point);
 
-            damageReceiver.ReceiveDamage(hitDamageRequest);
-
             _hashSet_DamageReceivers.Add(damageReceiver);
+            damageReceiver.ReceiveDamage(hitDamageRequest);
         }
 
         private bool TryGetDamageReceiver(Collider hitCollider, out IDamageReceiver damageReceiver)

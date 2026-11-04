@@ -18,7 +18,6 @@ namespace Scripts.Abilities
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private GameObject _attackerObject;
         [SerializeField] private Animator _animator;
-       
         [SerializeField] private float _castTime;
         [Header("Damage")]
         [SerializeField] private DamageData _damageData = new DamageData();
@@ -56,6 +55,7 @@ namespace Scripts.Abilities
         private Coroutine _executionRoutine;
 
         private ICriticalDamagePermissionsProvider _criticalPermissions;
+        private IDamageResultReporter _damageResultReporter;
 
         private readonly HashSet<IDamageReceiver> _hashSet_DamageReceivers = new HashSet<IDamageReceiver>();
         public float CastTime { get => _castTime; set => _castTime = value; }
@@ -78,6 +78,9 @@ namespace Scripts.Abilities
             _statusSource = statusSource;
             _comboController = comboController;
             _attackerObject = attackerObject;
+            _damageResultReporter = _attackerObject != null
+                ? _attackerObject.GetComponent<IDamageResultReporter>()
+                : null;
             _dashComponent = dash;
 
             if(_disableColliderDuringExecution)
@@ -244,7 +247,8 @@ namespace Scripts.Abilities
                     receiverObject,
                     hitCollider,
                     hitCollider.ClosestPoint(center),
-                    allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes);
+                    allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
+                    attackerDamageResultReporter: _damageResultReporter);
 
                 damageReceiver.ReceiveDamage(damageRequest);
             }

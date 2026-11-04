@@ -7,10 +7,12 @@ namespace Scripts.Combat
     public class HealOnDamageDealt : MonoBehaviour
     {
         [SerializeField] private StatusInfoSourceBase _statusSource;
+        [Tooltip("Component implementing IDamageDealer. Defaults to the local DamageDealtReporter.")]
+        [SerializeField] private GameObject _damageReporterReference;
         [SerializeField] private StatusType _healingStatusType = StatusType.LIFE_STEAL;
         [SerializeField] private List<DamageType> _list_ValidDamageTypes = new List<DamageType> { DamageType.PHYSICAL };
 
-        private IDamageDealer _damageDealer;
+        private IDamageResultReporter _damageDealer;
         private IHealable _healableHandler;
 
         private void Awake()
@@ -24,22 +26,22 @@ namespace Scripts.Combat
                 CacheReferences();
 
             if (_damageDealer != null)
-                _damageDealer.OnDamageDealt += DamageDealer_OnDamageDealt;
+                _damageDealer.OnDamageReport += DamageDealer_OnDamageDealt;
         }
 
         private void OnDisable()
         {
             if (_damageDealer != null)
-                _damageDealer.OnDamageDealt -= DamageDealer_OnDamageDealt;
+                _damageDealer.OnDamageReport -= DamageDealer_OnDamageDealt;
         }
 
         private void DamageDealer_OnDamageDealt(DamageResult damageResult)
         {
-            if (damageResult.FinalDamage <= 0f || !IsValidDamageType(damageResult.DamageType))
+            if (!damageResult.WasApplied || damageResult.FinalDamage <= 0f || !IsValidDamageType(damageResult.DamageType))
                 return;
 
             if (_healableHandler == null)
-                CacheReferences();
+                _healableHandler = GetComponent<IHealable>();
 
             if (_healableHandler == null)
                 return;
@@ -66,7 +68,7 @@ namespace Scripts.Combat
 
         private void CacheReferences()
         {
-            _damageDealer = GetComponent<IDamageDealer>();
+            _damageDealer = _damageReporterReference.GetComponent<IDamageResultReporter>(); ;
 
             _healableHandler = GetComponent<IHealable>();
         }
