@@ -468,7 +468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2021734674273964108, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2592806696734037086, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: m_Enabled
@@ -488,15 +488,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5090168923203337438, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5090168923203337438, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5090168923203337438, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5399561043943606932, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: _comboController
@@ -548,11 +548,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8793400068271036855, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8793400068271036855, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8901143667215127760, guid: 826c1e2fd221a024aa7ac993dfddee13, type: 3}
       propertyPath: _comboControllerComponent
