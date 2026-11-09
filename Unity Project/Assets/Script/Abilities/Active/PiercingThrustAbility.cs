@@ -127,13 +127,13 @@ namespace Scripts.Abilities
                 _executionRoutine = null;
             }
 
-            if (_disableComboDuringExecution && _comboController != null)
+            if (wasExecuting && _disableComboDuringExecution && _comboController != null)
                 _comboController.Enable();
 
-            if (_disableDashDuringExecution && _dashComponent != null)
+            if (wasExecuting && _disableDashDuringExecution && _dashComponent != null)
                 _dashComponent.Enable();
 
-            if (_disableColliderDuringExecution && _colliderComponent != null)
+            if (wasExecuting && _disableColliderDuringExecution && _colliderComponent != null)
                 _colliderComponent.enabled = true;
 
             _hashSet_DamageReceivers.Clear();
@@ -142,19 +142,13 @@ namespace Scripts.Abilities
                 OnAbilityFinished?.Invoke(this);
         }
 
-        public override void Deactivate()
-        {
-            Cancel();
-            base.Deactivate();
-        }
-
         #endregion
 
         #region Execution
 
         protected override bool CanExecute()
         {
-            return _executionRoutine == null && _active;
+            return _executionRoutine == null && base.CanExecute();
         }
 
         private void PlayAnimation()

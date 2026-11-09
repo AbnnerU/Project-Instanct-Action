@@ -34,10 +34,25 @@ namespace Scripts.Abilities.Extras
                 _abilityComponent.OnAbilityStarted += StartCooldown;
             else
                 _abilityComponent.OnAbilityFinished += StartCooldown;
+            _abilityComponent.OnAbilityDeactivating += Ability_Deactivating;
+        }
+
+        private void Ability_Deactivating(AbilityBase ability)
+        {
+            StopAllCoroutines();
+            _abilityComponent.OnAbilityStarted -= StartCooldown;
+            _abilityComponent.OnAbilityFinished -= StartCooldown;
+            _abilityComponent.OnAbilityDeactivating -= Ability_Deactivating;
+        }
+
+        private void OnDestroy()
+        {
+            if (_abilityComponent != null) Ability_Deactivating(_abilityComponent);
         }
 
         protected void StartCooldown(AbilityBase abilityBase)
         {
+            if (!abilityBase.Initialized) return;
             StopAllCoroutines();
             _currentTime = 0f;
 

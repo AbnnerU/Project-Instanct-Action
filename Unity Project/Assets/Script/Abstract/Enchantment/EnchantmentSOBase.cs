@@ -1,5 +1,6 @@
 using CustomInspector;
 using Scripts.Managers;
+using Scripts.TierManipulation;
 using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -13,6 +14,8 @@ namespace Scripts.Enchantment
 #endif
         public string ID;
         public string DisplayName;
+        public Tier Tier;
+        public EnchantmentType EnchantmentType;
         [TextArea]
         public string Description;
         public AssetReferenceSprite IconReference ;

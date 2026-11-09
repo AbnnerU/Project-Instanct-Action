@@ -39,11 +39,10 @@ namespace Scripts.Abilities
             Subscribe();
         }
 
-        public override void Deactivate()
+        protected override void OnDeactivate()
         {
             Unsubscribe();
             RemoveBuff();
-            base.Deactivate();
         }
 
         #endregion

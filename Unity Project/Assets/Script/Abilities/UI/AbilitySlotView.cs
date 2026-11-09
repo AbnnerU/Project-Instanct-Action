@@ -5,19 +5,20 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
-namespace Scripts.Abilities.UI
+namespace Scripts.Abilities
 {
     public class AbilitySlotView : MonoBehaviour
     {
         #region Fields
-
         [SerializeField] private Image _iconImage;
         [SerializeField] private Image _rechargeImage;
         [SerializeField] private GameObject _blockedObject;
 
-        private MN_PlayerAbilities.ActiveAbilitySlot _slot;
+        private MN_Abilities.ActiveAbilitySlot _slot;
         private AsyncOperationHandle<Sprite> _iconLoadHandle;
         private Coroutine _cooldownRoutine;
+
+        public Sprite IconSprite => _iconImage != null ? _iconImage.sprite : null;
 
         #endregion
 
@@ -38,7 +39,7 @@ namespace Scripts.Abilities.UI
 
         #region Public
 
-        public void Setup(MN_PlayerAbilities.ActiveAbilitySlot slot)
+        public void Setup(MN_Abilities.ActiveAbilitySlot slot)
         {
             if (_slot == slot)
             {
@@ -88,7 +89,7 @@ namespace Scripts.Abilities.UI
             _slot.OnAbilitySlotStateUpdated -= Slot_OnAbilitySlotStateUpdated;
         }
 
-        private void Slot_OnAbilityUpdated(MN_PlayerAbilities.ActiveAbilitySlot slot)
+        private void Slot_OnAbilityUpdated(MN_Abilities.ActiveAbilitySlot slot)
         {
             Refresh();
         }
@@ -104,9 +105,9 @@ namespace Scripts.Abilities.UI
             SetCooldownFillAmount(0f);
         }
 
-        private void Slot_OnAbilitySlotStateUpdated(MN_PlayerAbilities.ActiveAbilitySlot.AbilitySlotState slotState)
+        private void Slot_OnAbilitySlotStateUpdated(MN_Abilities.ActiveAbilitySlot.AbilitySlotState slotState)
         {
-            SetBlocked(slotState == MN_PlayerAbilities.ActiveAbilitySlot.AbilitySlotState.BLOCKED);
+            SetBlocked(slotState == MN_Abilities.ActiveAbilitySlot.AbilitySlotState.BLOCKED);
         }
 
         #endregion
@@ -115,6 +116,7 @@ namespace Scripts.Abilities.UI
 
         private void Refresh()
         {
+            SetIcon(null);
             ReleaseIconHandle();
 
             if (_slot == null || _slot.IsEmpty)
@@ -126,7 +128,7 @@ namespace Scripts.Abilities.UI
             }
 
             LoadIcon(_slot.IconReference);
-            SetBlocked(_slot.SlotState == MN_PlayerAbilities.ActiveAbilitySlot.AbilitySlotState.BLOCKED);
+            SetBlocked(_slot.SlotState == MN_Abilities.ActiveAbilitySlot.AbilitySlotState.BLOCKED);
             RefreshCooldown();
         }
 
@@ -134,7 +136,7 @@ namespace Scripts.Abilities.UI
         {
             IHasCooldown cooldownHandler = _slot.CooldownHandler;
 
-            if (cooldownHandler == null || _slot.SlotState != MN_PlayerAbilities.ActiveAbilitySlot.AbilitySlotState.ABILITY_IN_COOLDOWN)
+            if (cooldownHandler == null || _slot.SlotState != MN_Abilities.ActiveAbilitySlot.AbilitySlotState.ABILITY_IN_COOLDOWN)
             {
                 SetCooldownFillAmount(0f);
                 return;

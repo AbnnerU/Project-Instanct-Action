@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 691ed223-0567-4eff-bb66-90734c4e9393
   DisplayName: Guarded Mind
+  Tier: 2
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 0d367a35462be424abefc74b7b8dcd4d
@@ -21,8 +23,8 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  _canRepeat: 1
+  _canRepeat: 0
   _list_StatusModifiers:
   - StatusType: 4
     ValueType: 1
-    Value: 20
+    Value: 50

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 39de98ab-b362-43c7-ae87-05ec5b2a9cff
   DisplayName: Guarded Power
+  Tier: 2
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: ae2a72439316c2848b28cd3af4c774c4
@@ -21,8 +23,8 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  _canRepeat: 1
+  _canRepeat: 0
   _list_StatusModifiers:
   - StatusType: 3
     ValueType: 1
-    Value: 20
+    Value: 50

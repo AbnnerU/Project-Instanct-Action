@@ -115,18 +115,12 @@ namespace Scripts.Abilities
                 OnAbilityFinished?.Invoke(this);
         }
 
-        public override void Deactivate()
-        {
-            Cancel();
-            base.Deactivate();
-        }
-
         #endregion
 
         #region Execute
         protected override bool CanExecute()
         {
-            return _castRoutine == null && _active;
+            return _castRoutine == null && base.CanExecute();
         }
 
         private void PlayAnimation()

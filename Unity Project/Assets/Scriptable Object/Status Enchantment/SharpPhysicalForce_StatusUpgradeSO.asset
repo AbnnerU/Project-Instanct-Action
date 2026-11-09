@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 323c2d50-ad13-4fcd-94cb-f789a7b28354
   DisplayName: Sharp Physical Force
+  Tier: 2
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 85f6db0efa996b342ac40bb7aa6eb2f9
@@ -21,7 +23,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  _canRepeat: 1
+  _canRepeat: 0
   _list_StatusModifiers:
   - StatusType: 3
     ValueType: 1

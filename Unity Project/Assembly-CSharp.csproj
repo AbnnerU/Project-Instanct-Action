@@ -92,11 +92,13 @@
     <Compile Include="Assets\Script\Singleton\SceneSingleton.cs" />
     <Compile Include="Assets\Script\Health\LifeCycle_HandleCollider.cs" />
     <Compile Include="Assets\Script\Health\HealthStatusReference.cs" />
+    <Compile Include="Assets\Script\Enchantment\AbilityEnchantmentSelectionUI.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActiveState.cs" />
     <Compile Include="Assets\Script\Combat\CriticalPermissions.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTForceFailure.cs" />
     <Compile Include="Assets\Script\Direction\DirectionHandler.cs" />
     <Compile Include="Assets\Script\Abilities\Data\AbilityContext.cs" />
+    <Compile Include="Assets\Script\Scriptable Base\Enchantment\DefaultEnchantmentOfferBuilderSO.cs" />
     <Compile Include="Assets\Script\Abstract\Abilities\AbilityBase.cs" />
     <Compile Include="Assets\Script\Abilities\Enum\AbilityRefreshMode.cs" />
     <Compile Include="Assets\Script\Interface\General\IIgnorable.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="Assets\Script\Health\OnDeath_UnityEvent.cs" />
     <Compile Include="Assets\Script\Abilities\Extras\AbilityCooldown.cs" />
     <Compile Include="Assets\Script\Combat\HitReaction_DisableCollider.cs" />
+    <Compile Include="Assets\Script\Abstract\Enchantment\EnchantmentOfferBuilderSOBase.cs" />
     <Compile Include="Assets\Script\Animation\OnDeath_TriggerParameter.cs" />
     <Compile Include="Assets\Script\Abstract\Status\StatusInfoSourceBase.cs" />
     <Compile Include="Assets\Script\Spawner\SpawnAreaFilter.cs" />
@@ -171,6 +174,7 @@
     <Compile Include="Assets\Script\Scriptable Base\Weapon\WeaponLoadoutSO.cs" />
     <Compile Include="Assets\Script\Job System\Look At Camera\MN_ParallelLookAtCamera.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActionValidation.cs" />
+    <Compile Include="Assets\Script\Enchantment\Enum\EnchantmentType.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTSetAIState.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IMutableAddressableSpawnerWithPreview.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Enchantment\StatusUpgradeSO.cs" />
@@ -185,13 +189,12 @@
     <Compile Include="Assets\Script\Abilities\Active\PiercingThrustAbility.cs" />
     <Compile Include="Assets\Script\Singleton\Singleton.cs" />
     <Compile Include="Assets\Script\Interface\Tier\Visual\IHasEvolutionVisualInitialization.cs" />
+    <Compile Include="Assets\Script\Weapon\MN_Weapon.cs" />
     <Compile Include="Assets\Script\Interface\Animation\IHasCurrentVelocity.cs" />
     <Compile Include="Assets\Script\Interface\Effects\IHasEffectsPlayer.cs" />
     <Compile Include="Assets\Script\Combat\Combo_DirectionHandler.cs" />
-    <Compile Include="Assets\Script\Abilities\MN_PlayerAbilities.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IPreDestroyHandler.cs" />
     <Compile Include="Assets\Script\Abstract\Health\HealthBasics.cs" />
-    <Compile Include="Assets\Script\Abilities\UI\PlayerAbilitySlotsView.cs" />
     <Compile Include="Assets\Script\Status\StatusInfoSource.cs" />
     <Compile Include="Assets\Script\Progression\XpBar.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ObjectPool.cs" />
@@ -208,6 +211,7 @@
     <Compile Include="Assets\Script\Projectile\DamageRequestProjectile.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageData.cs" />
     <Compile Include="Assets\Script\Combat\Enum\DamageType.cs" />
+    <Compile Include="Assets\Script\Abilities\MN_Abilities.cs" />
     <Compile Include="Assets\Script\Status\StatusInfo.cs" />
     <Compile Include="Assets\Script\Loading Scene\GameSessionCleaner.cs" />
     <Compile Include="Assets\Script\Combat\Pop Up\DamagePopupView.cs" />
@@ -225,6 +229,7 @@
     <Compile Include="Assets\Script\Interface\Selectable\ISelectableObject.cs" />
     <Compile Include="Assets\Script\Abilities\Active\LauchProjectileAbility.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTWaitForSeconds.cs" />
+    <Compile Include="Assets\Script\Enchantment\EnchantmentsDeckConfig.cs" />
     <Compile Include="Assets\Script\Waves\MN_Waves.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler_LoadingBar.cs" />
     <Compile Include="Assets\Script\Health\LifeCycle_HandleCanvasActiveState.cs" />
@@ -272,7 +277,6 @@
     <Compile Include="Assets\Script\Loading Scene\LoadScene_TryLoad.cs" />
     <Compile Include="Assets\Script\Combat\Pop Up\DamagePopupSpawner.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_AnimSetBool.cs" />
-    <Compile Include="Assets\Script\Weapon\MN_PlayerWeapon.cs" />
     <Compile Include="Assets\Script\Animation\AnimationDirectionalVelocityModule.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveState.cs" />
     <Compile Include="Assets\Script\Interface\General\ISaveableTimer.cs" />

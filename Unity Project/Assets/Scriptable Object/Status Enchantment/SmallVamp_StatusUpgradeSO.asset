@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 3036ea18-1a50-47ed-8cfa-2e29e3113690
   DisplayName: Small Vamp
+  Tier: 1
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 58be3832980e0b34db72a081633cded0

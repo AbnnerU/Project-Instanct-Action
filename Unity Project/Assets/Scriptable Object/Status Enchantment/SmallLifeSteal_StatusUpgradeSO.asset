@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 632d6b99-5648-4975-ba06-f5824bcb9c68
   DisplayName: Small Life Steal
+  Tier: 1
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 32cf63def3300bb4a99dd151ea9a4d42

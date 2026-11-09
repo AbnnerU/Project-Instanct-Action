@@ -22,10 +22,10 @@ namespace Scripts.Enchantment
 
         public override void Apply(EnchantmentContext context)
         {
-            if (MN_PlayerAbilities.Instance == null)
+            if (MN_Abilities.Instance == null)
                 return;
 
-            MN_PlayerAbilities.Instance.AddAbility(AbilityPrefabReference, AbilityKind, List_DamageDatas, List_BuffDatas, IconReference);
+            MN_Abilities.Instance.AddAbility(AbilityPrefabReference, AbilityKind, List_DamageDatas, List_BuffDatas, IconReference);
         }
 
         public override string GetResolvedDescription()

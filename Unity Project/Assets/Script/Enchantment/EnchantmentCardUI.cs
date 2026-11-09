@@ -1,4 +1,7 @@
+
+using Scripts.TierManipulation;
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -16,6 +19,7 @@ namespace Scripts.Enchantment
         [SerializeField] private Image _iconImage;
         [SerializeField] private TMP_Text _displayNameText;
         [SerializeField] private TMP_Text _descriptionText;
+        [SerializeField] private TierVisual _tierVisual;
 
         private EnchantmentSOBase _enchantment;
         private AsyncOperationHandle<Sprite> _iconLoadHandle;
@@ -54,6 +58,9 @@ namespace Scripts.Enchantment
             if (enchantment == null)
                 return;
 
+            if (_tierVisual != null)
+                _tierVisual.EnableTierVisual(_enchantment.Tier);
+
             if (_displayNameText != null)
                 _displayNameText.text = enchantment.DisplayName;
 
@@ -62,6 +69,13 @@ namespace Scripts.Enchantment
 
             if (_iconImage != null)
                 LoadIcon(enchantment.IconReference);
+            else 
+                OnLoadIconCompleted?.Invoke();       
+        }
+
+        public void SetInteractable(bool interactable)
+        {
+            if (_buttonComponent != null) _buttonComponent.interactable = interactable;
         }
 
         public void Clear()
@@ -134,6 +148,36 @@ namespace Scripts.Enchantment
             _iconLoadHandle.Completed -= IconLoadHandle_Completed;
             Addressables.Release(_iconLoadHandle);
             _iconLoadHandle = default;
+        }
+
+        [Serializable]
+        public class TierVisual
+        {
+            public List<TierVisualConfig> TierVisualConfigs = new List<TierVisualConfig>();
+
+            public void EnableTierVisual(Tier tierReference)
+            {
+                DisableAll();
+
+                TierVisualConfig config = TierVisualConfigs.Find(x=>x.TierReference == tierReference);
+
+                if(config != null) 
+                    config.TierObj?.SetActive(true);
+            }
+
+            public void DisableAll()
+            {
+                foreach(var tierVisual in TierVisualConfigs)
+                    tierVisual.TierObj?.SetActive(false);
+            }
+
+        }
+
+        [Serializable]
+        public class TierVisualConfig
+        {
+            public Tier TierReference;
+            public GameObject TierObj;
         }
     }
 }

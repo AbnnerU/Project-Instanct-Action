@@ -17,10 +17,10 @@ namespace Scripts.Enchantment
 
         public override void Apply(EnchantmentContext context)
         {
-            if (_weaponLoadout == null || MN_PlayerWeapon.Instance == null)
+            if (_weaponLoadout == null || MN_Weapon.Instance == null)
                 return;
 
-            MN_PlayerWeapon.Instance.EquipWeaponLoadout(_weaponLoadout);
+            MN_Weapon.Instance.EquipWeaponLoadout(_weaponLoadout);
         }
 
         public override string GetResolvedDescription()

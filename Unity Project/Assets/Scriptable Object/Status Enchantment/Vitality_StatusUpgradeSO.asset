@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 8a4c514a-e69d-4ec7-b921-af581d39db0f
   DisplayName: Vitality
+  Tier: 3
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: d98b775a6f3c03e43ba95a50dd259d3f
@@ -25,4 +27,4 @@ MonoBehaviour:
   _list_StatusModifiers:
   - StatusType: 0
     ValueType: 0
-    Value: 100
+    Value: 1000

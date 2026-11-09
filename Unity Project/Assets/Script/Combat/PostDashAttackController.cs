@@ -16,7 +16,7 @@ namespace Scripts.Combat
         [SerializeField] private InputActionReference _rightAttackInput;
         [Header("Post-Dash")]
         [SerializeField] private DashBase _dash;
-        [SerializeField] private MN_PlayerWeapon _weaponManager;
+        [SerializeField] private MN_Weapon _weaponManager;
         [SerializeField] private DirectionHandler _directionHandler;
         [SerializeField] private GameObject _hittableReference;
         [SerializeField] private bool _maintainComboIndexOnDash = true;
@@ -45,7 +45,7 @@ namespace Scripts.Combat
             base.GetReferences();
             if (_dash == null) TryGetComponent(out _dash);
             if (_directionHandler == null) TryGetComponent(out _directionHandler);
-            if (_weaponManager == null) _weaponManager = FindFirstObjectByType<MN_PlayerWeapon>();
+            if (_weaponManager == null) _weaponManager = FindFirstObjectByType<MN_Weapon>();
             if (_hittableReference == null) _hittableReference = gameObject;
             _hittable = _hittableReference.GetComponent<IHittable>();
         }

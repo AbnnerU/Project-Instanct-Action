@@ -55,12 +55,11 @@ namespace Scripts.Abilities
             Subscribe();
         }
 
-        public override void Deactivate()
+        protected override void OnDeactivate()
         {
             Unsubscribe();
             _hashSet_BonusExecutionIds.Clear();
             _hashSet_ConsumedExecutionIds.Clear();
-            base.Deactivate();
         }
 
         #endregion
