@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 62154199-3cff-4f19-9f29-0b2bcfce24b2
   DisplayName: Minor Vitality
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: d83ec8a2332a17f4d9310f3415b42b47

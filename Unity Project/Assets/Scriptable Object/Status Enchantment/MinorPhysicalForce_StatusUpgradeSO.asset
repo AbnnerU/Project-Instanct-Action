@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 750304bc-23d1-498a-9981-3aacfde6c3c7
   DisplayName: Minor Physical Force
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 95916d24a5a199b4abc0cbff6abca015

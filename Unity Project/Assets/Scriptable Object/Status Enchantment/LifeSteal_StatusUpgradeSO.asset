@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: c8f8ddc5-46ed-4801-8497-bcab8b1de07b
   DisplayName: Life Steal
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 3d374cd3dfe286347a286e36190046e0

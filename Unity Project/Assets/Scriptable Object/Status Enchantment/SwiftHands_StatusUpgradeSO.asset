@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 93249e64-3ab4-40c0-bf38-95486d465dfa
   DisplayName: Swift Hands
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: b00564e353aca3e4a853c66d5568c6ca

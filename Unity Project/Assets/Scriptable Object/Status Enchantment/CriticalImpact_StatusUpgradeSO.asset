@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: bf74c3f9-8715-4153-9d38-cca1faa79d49
   DisplayName: Critical Impact
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: eb16c3cde1c506a4ab2126b917a71d96

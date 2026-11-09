@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 9a3f9b68-f90f-4734-8bb2-602db8af2add
   DisplayName: Minor Magic Force
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 302b4dea97d5ec843923598abe23f69a

@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  _canRepeat: 0
+  _canRepeat: 1
   _list_StatusModifiers:
   - StatusType: 4
     ValueType: 1

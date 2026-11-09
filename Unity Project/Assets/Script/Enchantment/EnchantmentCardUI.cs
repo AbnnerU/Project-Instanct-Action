@@ -14,8 +14,10 @@ namespace Scripts.Enchantment
     {
         public Action OnLoadIconCompleted;
         public Action<EnchantmentSOBase> OnSelected;
+        public event Action<EnchantmentCardUI> OnRerollRequested;
 
         [SerializeField] private Button _buttonComponent;
+        [SerializeField] private Button _rerollButton;
         [SerializeField] private Image _iconImage;
         [SerializeField] private TMP_Text _displayNameText;
         [SerializeField] private TMP_Text _descriptionText;
@@ -25,6 +27,7 @@ namespace Scripts.Enchantment
         private AsyncOperationHandle<Sprite> _iconLoadHandle;
 
         private GameObject _thisObject;
+        private bool _isLoadingIcon;
 
         private void Awake()
         {
@@ -35,6 +38,7 @@ namespace Scripts.Enchantment
                 _buttonComponent.onClick.AddListener(Select);
 
             _thisObject = gameObject;
+            if (_rerollButton != null) _rerollButton.onClick.AddListener(RequestReroll);
         }
 
         private void OnDestroy()
@@ -43,6 +47,7 @@ namespace Scripts.Enchantment
                 _buttonComponent.onClick.RemoveListener(Select);
 
             ReleaseIconHandle();
+            if (_rerollButton != null) _rerollButton.onClick.RemoveListener(RequestReroll);
         }
 
         public void Setup(EnchantmentSOBase enchantment, Action<EnchantmentSOBase> onSelected)
@@ -52,6 +57,14 @@ namespace Scripts.Enchantment
             ReleaseIconHandle();
 
             _enchantment = enchantment;
+            _isLoadingIcon = enchantment != null;
+            SetInteractable(false);
+            SetRerollInteractable(false);
+            if (_iconImage != null)
+            {
+                _iconImage.sprite = null;
+                _iconImage.enabled = false;
+            }
 
             gameObject.SetActive(enchantment != null);
 
@@ -70,12 +83,25 @@ namespace Scripts.Enchantment
             if (_iconImage != null)
                 LoadIcon(enchantment.IconReference);
             else 
-                OnLoadIconCompleted?.Invoke();       
+                CompleteIconLoad();
         }
 
         public void SetInteractable(bool interactable)
         {
-            if (_buttonComponent != null) _buttonComponent.interactable = interactable;
+            if (_buttonComponent != null)
+                _buttonComponent.interactable = interactable && !_isLoadingIcon && _enchantment != null;
+        }
+
+        public void SetRerollInteractable(bool interactable)
+        {
+            if (_rerollButton != null)
+                _rerollButton.interactable = interactable && !_isLoadingIcon && _enchantment != null;
+        }
+
+        private void RequestReroll()
+        {
+            if (_enchantment != null && !_isLoadingIcon) 
+                OnRerollRequested?.Invoke(this);
         }
 
         public void Clear()
@@ -83,6 +109,9 @@ namespace Scripts.Enchantment
             ReleaseIconHandle();
 
             _enchantment = null;
+            _isLoadingIcon = false;
+            SetInteractable(false);
+            SetRerollInteractable(false);
 
             if (_displayNameText != null)
                 _displayNameText.text = string.Empty;
@@ -118,7 +147,7 @@ namespace Scripts.Enchantment
         {
             if (iconReference == null || !iconReference.RuntimeKeyIsValid())
             {
-                OnLoadIconCompleted?.Invoke();
+                CompleteIconLoad();
                 return;
             }
 
@@ -130,13 +159,19 @@ namespace Scripts.Enchantment
         {
             if (_iconImage == null || handle.Status != AsyncOperationStatus.Succeeded)
             {
-                OnLoadIconCompleted?.Invoke();
+                CompleteIconLoad();
                 return;
             }
 
             _iconImage.sprite = handle.Result;
             _iconImage.enabled = true;
 
+            CompleteIconLoad();
+        }
+
+        private void CompleteIconLoad()
+        {
+            _isLoadingIcon = false;
             OnLoadIconCompleted?.Invoke();
         }
 

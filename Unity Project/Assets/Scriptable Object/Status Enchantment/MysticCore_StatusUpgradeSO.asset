@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 3e274eb7-9edb-4fdc-95cc-575950deb69a
   DisplayName: Mystic Core
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 874c6db0fc68dcd4291249d51033ddbe

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 8c8dbea1-e804-458c-8ce1-65aff5418af5
   DisplayName: Predator Rhythm
+  Tier: 0
+  EnchantmentType: 0
   Description: '<statusmodifier index=0>
 
     <statusmodifier index=1>'

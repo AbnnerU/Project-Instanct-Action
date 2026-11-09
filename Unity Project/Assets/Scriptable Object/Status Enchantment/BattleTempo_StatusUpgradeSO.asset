@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: dca4d65e-7636-4a6b-98d7-742adb667f07
   DisplayName: Battle Tempo
+  Tier: 0
+  EnchantmentType: 0
   Description: '<statusmodifier index=0>
 
     <statusmodifier index=1>'

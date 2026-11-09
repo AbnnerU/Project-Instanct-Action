@@ -76,12 +76,38 @@ namespace Scripts.Enchantment
                 var tierCandidates = candidates.FindAll(item => item.Tier == tier);
                 EnchantmentSOBase selected = tierCandidates[Random.Range(0, tierCandidates.Count)];
                 result.Add(selected);
-                candidates.RemoveAll(item => IsSameEnchantment(item, selected) ||
-                    (selected is WeaponEnchantmentSO && item is WeaponEnchantmentSO) ||
-                    (selected is AbilityEnchantmentSO && item is AbilityEnchantmentSO));
+                candidates.RemoveAll(item => ConflictsWith(item, selected));
             }
             return result;
         }
+
+        public override EnchantmentSOBase BuildReplacement(EnchantmentsDeckConfig config,
+            IReadOnlyList<EnchantmentSOBase> availableEnchantments,
+            IReadOnlyList<EnchantmentSOBase> history,
+            IReadOnlyList<EnchantmentSOBase> currentOffer, int replacedIndex)
+        {
+            if (availableEnchantments == null || currentOffer == null ||
+                replacedIndex < 0 || replacedIndex >= currentOffer.Count) return null;
+
+            var candidates = new List<EnchantmentSOBase>();
+            for (int i = 0; i < availableEnchantments.Count; i++)
+            {
+                EnchantmentSOBase candidate = availableEnchantments[i];
+                bool conflicts = IsSameEnchantment(candidate, currentOffer[replacedIndex]);
+                for (int j = 0; j < currentOffer.Count && !conflicts; j++)
+                    if (j != replacedIndex) conflicts = ConflictsWith(candidate, currentOffer[j]);
+
+                if (!conflicts) candidates.Add(candidate);
+            }
+
+            List<EnchantmentSOBase> replacement = Build(config, candidates, history, 1);
+            return replacement.Count > 0 ? replacement[0] : null;
+        }
+
+        private static bool ConflictsWith(EnchantmentSOBase candidate, EnchantmentSOBase selected) =>
+            IsSameEnchantment(candidate, selected) ||
+            (selected is WeaponEnchantmentSO && candidate is WeaponEnchantmentSO) ||
+            (selected is AbilityEnchantmentSO && candidate is AbilityEnchantmentSO);
 
         private bool TrySelectTier(List<EnchantmentSOBase> candidates, out Tier tier)
         {

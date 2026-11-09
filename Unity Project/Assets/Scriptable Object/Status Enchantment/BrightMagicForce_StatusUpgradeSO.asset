@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 35d50c10-ef1b-4f17-b13a-b063aa6c102a
   DisplayName: Bright Magic Force
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 04841b8a9cae96b42aa2a2689b689515

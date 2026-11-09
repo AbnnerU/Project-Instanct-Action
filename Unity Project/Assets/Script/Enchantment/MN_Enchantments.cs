@@ -12,6 +12,8 @@ namespace Scripts.Enchantment
         public event Action<EnchantmentSOBase> OnEnchantmentApplied;
         public event Action<IReadOnlyList<EnchantmentSOBase>> OnEnchantmentsOffered;
         public event Action<EnchantmentSelectionState> OnSelectionStateChanged;
+        public event Action<int, EnchantmentSOBase> OnEnchantmentRerolled;
+        public event Action<int> OnOfferRollsChanged;
 
         private EnchantmentSelectionState _state = EnchantmentSelectionState.NONE;
         [SerializeField] private GameObject _playerObject;
@@ -72,6 +74,24 @@ namespace Scripts.Enchantment
             CurrentOfferRolls = config.GetRollsAmount();
             SetState(EnchantmentSelectionState.ENCHANTMENTS_OFFERED);
             OnEnchantmentsOffered?.Invoke(_list_CurrentOfferedEnchantments.AsReadOnly());
+            OnOfferRollsChanged?.Invoke(CurrentOfferRolls);
+            return true;
+        }
+
+        public bool TryRerollEnchantment(int index)
+        {
+            if (_state != EnchantmentSelectionState.ENCHANTMENTS_OFFERED || CurrentOfferRolls <= 0 ||
+                _deckBuildRules == null || index < 0 || index >= _list_CurrentOfferedEnchantments.Count)
+                return false;
+
+            EnchantmentSOBase replacement = _deckBuildRules.BuildReplacement(_currentDeckConfig,
+                _list_AvailableEnchantments, _list_AppliedEnchantments, _list_CurrentOfferedEnchantments, index);
+            if (replacement == null) return false;
+
+            _list_CurrentOfferedEnchantments[index] = replacement;
+            CurrentOfferRolls--;
+            OnEnchantmentRerolled?.Invoke(index, replacement);
+            OnOfferRollsChanged?.Invoke(CurrentOfferRolls);
             return true;
         }
 
@@ -155,6 +175,7 @@ namespace Scripts.Enchantment
             CurrentOfferRolls = 0;
             _list_CurrentOfferedEnchantments.Clear();
             SetState(EnchantmentSelectionState.NONE);
+            OnOfferRollsChanged?.Invoke(CurrentOfferRolls);
         }
 
         private void SetState(EnchantmentSelectionState state)

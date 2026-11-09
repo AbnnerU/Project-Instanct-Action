@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 8affba87-f0c6-445b-b5c7-bbe4fda28179
   DisplayName: Critical Weight
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 4c79d075f66c8af4196cc6e11bc54127

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ namespace Scripts.Enchantment
         [SerializeField] private List<EnchantmentCardUI> _list_Cards = new List<EnchantmentCardUI>();
         [SerializeField] private bool _pauseGameWhileSelecting = true;
         [SerializeField] private Button _skipButton;
+        [SerializeField] private TMP_Text _rollsAmountText;
 
         private MN_Enchantments _enchantmentsManager;
 
@@ -39,6 +41,8 @@ namespace Scripts.Enchantment
             {
                 _enchantmentsManager.OnEnchantmentsOffered -= Enchantments_OnEnchantmentsOffered;
                 _enchantmentsManager.OnSelectionStateChanged -= RefreshSelectionControls;
+                _enchantmentsManager.OnEnchantmentRerolled -= RefreshRerolledCard;
+                _enchantmentsManager.OnOfferRollsChanged -= RefreshRolls;
             }
 
             foreach (EnchantmentCardUI card in _list_Cards)
@@ -46,6 +50,7 @@ namespace Scripts.Enchantment
                 {
                     card.OnLoadIconCompleted -= AllIconsLoaded;
                     card.OnSelected -= SelectEnchantment;
+                    card.OnRerollRequested -= RerollEnchantment;
                 }
 
             if (_skipButton != null) _skipButton.onClick.RemoveListener(Skip);
@@ -121,6 +126,25 @@ namespace Scripts.Enchantment
             if (_enchantmentsManager != null) _enchantmentsManager.TrySkipOffer();
         }
 
+        private void RerollEnchantment(EnchantmentCardUI card)
+        {
+            if (_enchantmentsManager != null)
+                _enchantmentsManager.TryRerollEnchantment(_list_Cards.IndexOf(card));
+        }
+
+        private void RefreshRerolledCard(int index, EnchantmentSOBase enchantment)
+        {
+            if (index < 0 || index >= _list_Cards.Count || _list_Cards[index] == null) return;
+            _list_Cards[index].Setup(enchantment, SelectEnchantment);
+            RefreshSelectionControls(_enchantmentsManager.CurrentState);
+        }
+
+        private void RefreshRolls(int amount)
+        {
+            if (_rollsAmountText != null) _rollsAmountText.text = amount.ToString();
+            RefreshSelectionControls(_enchantmentsManager.CurrentState);
+        }
+
         private void RefreshSelectionControls(EnchantmentSelectionState state)
         {      
             if (_enchantmentsManager == null) return;
@@ -138,7 +162,12 @@ namespace Scripts.Enchantment
                 _skipButton.gameObject.SetActive(showCards && _enchantmentsManager.CanSkip);
 
             foreach (EnchantmentCardUI card in _list_Cards)
-                if (card != null) card.SetInteractable(showCards && state == EnchantmentSelectionState.ENCHANTMENTS_OFFERED);
+                if (card != null)
+                {
+                    bool canSelect = showCards && state == EnchantmentSelectionState.ENCHANTMENTS_OFFERED;
+                    card.SetInteractable(canSelect);
+                    card.SetRerollInteractable(canSelect && _enchantmentsManager.CurrentOfferRolls > 0);
+                }
 
             if (showCards)
                 OpenPanel();
@@ -155,6 +184,8 @@ namespace Scripts.Enchantment
 
             _enchantmentsManager.OnEnchantmentsOffered += Enchantments_OnEnchantmentsOffered;
             _enchantmentsManager.OnSelectionStateChanged += RefreshSelectionControls;
+            _enchantmentsManager.OnEnchantmentRerolled += RefreshRerolledCard;
+            _enchantmentsManager.OnOfferRollsChanged += RefreshRolls;
             _isSubscribed = true;
 
             for (int i = 0; i < _list_Cards.Count; i++)
@@ -162,19 +193,20 @@ namespace Scripts.Enchantment
                 if (_list_Cards[i] == null) continue;
                 _list_Cards[i].OnLoadIconCompleted += AllIconsLoaded;
                 _list_Cards[i].OnSelected += SelectEnchantment;
+                _list_Cards[i].OnRerollRequested += RerollEnchantment;
             }
 
             if (_enchantmentsManager.CurrentState != EnchantmentSelectionState.NONE)
                 Open(_enchantmentsManager.List_CurrentOfferedEnchantments);
 
-            RefreshSelectionControls(_enchantmentsManager.CurrentState);
+            RefreshRolls(_enchantmentsManager.CurrentOfferRolls);
         }
 
         private void AllIconsLoaded()
         {
-            if (_expectedIconsAmount <= 0 || _iconsLoaded >= _expectedIconsAmount) return;
+            if (_expectedIconsAmount <= 0) return;
 
-            _iconsLoaded++;
+            if (_iconsLoaded < _expectedIconsAmount) _iconsLoaded++;
 
             RefreshSelectionControls(_enchantmentsManager.CurrentState);
         }

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: e040bf69-c9f7-4067-9cce-ee8c74578dda
   DisplayName: Steady Core
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: 69e45f85bcdd5804eb5dc34b5e807058

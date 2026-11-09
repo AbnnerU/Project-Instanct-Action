@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: 61348d74-5fc8-49a0-a103-b77ba22adfb8
   DisplayName: Critical Spark
+  Tier: 0
+  EnchantmentType: 0
   Description: <statusmodifier index=0>
   IconReference:
     m_AssetGUID: cb320a23f63271c4e852e4bd4284c1b7

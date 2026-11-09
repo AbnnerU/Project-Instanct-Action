@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.StatusUpgradeSO
   ID: e0a98527-d9cc-49d6-9c0b-1c4d9ea2f62f
   DisplayName: Arcane Focus
+  Tier: 0
+  EnchantmentType: 0
   Description: '<statusmodifier index=0>
 
     <statusmodifier index=1>'
