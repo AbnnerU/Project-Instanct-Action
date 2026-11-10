@@ -267,11 +267,11 @@ namespace Scripts.Editor.CombatWorkshop
         }
 
         public Quaternion HitboxRotation => _rotateHitbox && _hitboxOrigin != null ? _hitboxOrigin.rotation : Quaternion.identity;
-        public Vector3 GetHitboxCenter(ComboAttackData data) => _hitboxOrigin.position + HitboxRotation * data.HitboxCenterOffset;
+        public Vector3 GetHitboxCenter(AttackHitData data) => _hitboxOrigin.position + HitboxRotation * data.HitboxCenterOffset;
         #endregion
 
         #region View And Handles
-        public void Draw(Rect rect, ComboAttackData data, bool impact, bool editHitbox, WeaponModelSpawnData model, int modelIndex,
+        public void Draw(Rect rect, AttackHitData data, bool impact, bool editHitbox, WeaponModelSpawnData model, int modelIndex,
             Action<Vector3, Vector3> changeHitbox, Action<Vector3> changeWeapon, bool rotateWeapon, Action<Vector3> changeWeaponRotation)
         {
             if (rect.width < 2 || rect.height < 2) return;

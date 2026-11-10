@@ -22,7 +22,7 @@ namespace Scripts.Combat
         private readonly HashSet<IDamageReceiver> _hashSet_DamageReceivers = new HashSet<IDamageReceiver>();
         private readonly HashSet<IHittable> _hashSet_HittableTargets = new HashSet<IHittable>();
 
-        private ComboAttackData _lastAttackData;
+        private AttackHitData _lastAttackData;
         private AttackExecutionData _lastAttackExecutionData;
         private Vector3 _lastCenter;
         private Quaternion _lastRotation;
@@ -38,12 +38,12 @@ namespace Scripts.Combat
             _damageResultReporter = GetComponentInParent<IDamageResultReporter>();
         }
 
-        public void ExecuteHitbox(ComboAttackData attackData)
+        public void ExecuteHitbox(AttackHitData attackData)
         {
             ExecuteHitbox(attackData, default);
         }
 
-        public void ExecuteHitbox(ComboAttackData attackData, AttackExecutionData executionData)
+        public void ExecuteHitbox(AttackHitData attackData, AttackExecutionData executionData)
         {
             if (attackData == null)
             {
@@ -111,7 +111,7 @@ namespace Scripts.Combat
             }
         }
 
-        public Vector3 GetHitboxCenter(ComboAttackData attackData)
+        public Vector3 GetHitboxCenter(AttackHitData attackData)
         {
             GetReferences();
 
@@ -129,7 +129,7 @@ namespace Scripts.Combat
             return _useHitboxOriginRotation && _hitboxOrigin != null ? _hitboxOrigin.rotation : Quaternion.identity;
         }
 
-        private Vector3 GetHitboxCenterOffset(ComboAttackData attackData)
+        private Vector3 GetHitboxCenterOffset(AttackHitData attackData)
         {
             Vector3 offset = attackData.HitboxCenterOffset;
 
@@ -168,7 +168,7 @@ namespace Scripts.Combat
             return hittable is Component component ? component.gameObject : null;
         }
 
-        private DamageRequest CreateDamageRequest(ComboAttackData attackData, Collider hitCollider, GameObject receiver)
+        private DamageRequest CreateDamageRequest(AttackHitData attackData, Collider hitCollider, GameObject receiver)
         {
             return new DamageRequest(
                 attackData.DamageData,

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 3235657999409740104}
   - component: {fileID: 1764168608193628138}
   - component: {fileID: 6232966678816958479}
+  - component: {fileID: 1047260505821373292}
   - component: {fileID: 4564397152144541060}
   - component: {fileID: 7651743264658319734}
   - component: {fileID: 7773916649188686455}
@@ -286,6 +287,21 @@ MonoBehaviour:
   _healthEventsComponent: {fileID: 7231527614648297650}
   _verifyStateOnStart: 1
   _xpValue: 200
+--- !u!114 &1047260505821373292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1342c9f78040e4b4f8f59ac5044ee75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Economy.OnDeath_AddCoin
+  _healthEventsComponent: {fileID: 7231527614648297650}
+  _verifyStateOnStart: 1
+  _coinAmount: 100
 --- !u!114 &4564397152144541060
 MonoBehaviour:
   m_ObjectHideFlags: 0

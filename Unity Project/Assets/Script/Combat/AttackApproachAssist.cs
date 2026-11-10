@@ -86,9 +86,10 @@ namespace Scripts.Combat
 
         #region Approach
 
-        private void ComboController_OnBeforeAttack(ComboAttackData attackData)
+        private void ComboController_OnBeforeAttack(ComboAttackData attack)
         {
             StopMovement();
+            AttackHitData attackData = attack?.GetHit(0);
             if (!isActiveAndEnabled) return;
             if (attackData == null || _attackHitbox == null || _targetTransform == null || _directionReference == null)
                 return;
@@ -238,7 +239,7 @@ namespace Scripts.Combat
 
             var attacks = _comboController.List_ComboAttackData;
             if (attacks == null || attacks.Count == 0) return;
-            ComboAttackData attack = attacks[Mathf.Clamp(_debugAttackIndex, 0, attacks.Count - 1)];
+            AttackHitData attack = attacks[Mathf.Clamp(_debugAttackIndex, 0, attacks.Count - 1)]?.GetHit(0);
             if (attack == null) return;
             DrawSearch(_attackHitbox.GetHitboxCenter(attack), attack.HitboxHalfExtents,
                 _attackHitbox.GetHitboxRotation(), _directionReference.forward.normalized, 0f);

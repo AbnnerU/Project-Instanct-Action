@@ -19,6 +19,7 @@ namespace Scripts.Editor.CombatWorkshop
     {
         public CombatMarkerType Type;
         public float Time;
+        public int HitIndex;
     }
 
     [Serializable]
@@ -73,9 +74,10 @@ namespace Scripts.Editor.CombatWorkshop
             {
                 var fields = new SerializedObject(document.Loadout);
                 var attack = fields.FindProperty("PostDashAttack");
+                attack.FindPropertyRelative("_list_Hits").arraySize = 1;
                 attack.FindPropertyRelative("_animationStateName").stringValue = PostDashStateName;
-                attack.FindPropertyRelative("_hitboxCenterOffset").vector3Value = Vector3.forward;
-                attack.FindPropertyRelative("_targetLayerMask").intValue = LayerMask.GetMask("Enemy");
+                attack.FindPropertyRelative("_list_Hits").GetArrayElementAtIndex(0).FindPropertyRelative("_hitboxCenterOffset").vector3Value = Vector3.forward;
+                attack.FindPropertyRelative("_list_Hits").GetArrayElementAtIndex(0).FindPropertyRelative("_targetLayerMask").intValue = LayerMask.GetMask("Enemy");
                 fields.ApplyModifiedPropertiesWithoutUndo();
             }
             SetPostDashClip(document.PostDashAttack, document.GetEffectiveClip(document.Loadout.PostDashAttack.AnimationStateName));
@@ -98,7 +100,7 @@ namespace Scripts.Editor.CombatWorkshop
             {
                 int index = Array.IndexOf(EventNames, animationEvent.functionName);
                 if (index >= 0 && index != 1)
-                    attack.List_Markers.Add(new CombatMarker { Type = (CombatMarkerType)index, Time = animationEvent.time });
+                    attack.List_Markers.Add(new CombatMarker { Type = (CombatMarkerType)index, Time = animationEvent.time, HitIndex = animationEvent.intParameter });
             }
         }
 
@@ -115,12 +117,13 @@ namespace Scripts.Editor.CombatWorkshop
             var list = serialized.FindProperty("_list_ComboAttackData");
             int index = list.arraySize++;
             var attack = list.GetArrayElementAtIndex(index);
+            attack.FindPropertyRelative("_list_Hits").arraySize = 1;
             attack.FindPropertyRelative("_animationStateName").stringValue = "Attack " + (index + 1);
             attack.FindPropertyRelative("_transitionDuration").floatValue = 0.05f;
-            attack.FindPropertyRelative("_hitboxCenterOffset").vector3Value = Vector3.forward;
-            attack.FindPropertyRelative("_hitboxHalfExtents").vector3Value = Vector3.one * 0.5f;
-            attack.FindPropertyRelative("_maxTargets").intValue = 8;
-            attack.FindPropertyRelative("_targetLayerMask").intValue = LayerMask.GetMask("Enemy");
+            attack.FindPropertyRelative("_list_Hits").GetArrayElementAtIndex(0).FindPropertyRelative("_hitboxCenterOffset").vector3Value = Vector3.forward;
+            attack.FindPropertyRelative("_list_Hits").GetArrayElementAtIndex(0).FindPropertyRelative("_hitboxHalfExtents").vector3Value = Vector3.one * 0.5f;
+            attack.FindPropertyRelative("_list_Hits").GetArrayElementAtIndex(0).FindPropertyRelative("_maxTargets").intValue = 8;
+            attack.FindPropertyRelative("_list_Hits").GetArrayElementAtIndex(0).FindPropertyRelative("_targetLayerMask").intValue = LayerMask.GetMask("Enemy");
             serialized.ApplyModifiedProperties();
             List_Attacks.Add(new WorkshopAttack());
         }
@@ -233,7 +236,7 @@ namespace Scripts.Editor.CombatWorkshop
                 float finish = draft.List_Markers.Where(x => x.Type == CombatMarkerType.FINISH).Select(x => x.Time).DefaultIfEmpty(draft.Clip.length).First();
                 if (draft.List_Markers.Any(x => x.Time < 0 || x.Time > draft.Clip.length || x.Time > finish)) errors.Add($"Attack {i + 1}: markers must be inside the clip and not after Finish.");
                 if (draft.List_Markers.Count(x => x.Type == CombatMarkerType.CLOSE_COMBO) > 1) errors.Add($"Attack {i + 1}: only one Close Combo marker is allowed.");
-                if (data.HitboxHalfExtents.x <= 0 || data.HitboxHalfExtents.y <= 0 || data.HitboxHalfExtents.z <= 0) errors.Add($"Attack {i + 1}: hitbox dimensions must be positive.");
+                ValidateHits(data, draft, $"Attack {i + 1}", errors);
             }
             if (Loadout.HasPostDashAttack)
             {
@@ -242,8 +245,7 @@ namespace Scripts.Editor.CombatWorkshop
                 else
                 {
                     ValidateSlot(states, data.AnimationStateName, used, errors);
-                    if (data.HitboxHalfExtents.x <= 0 || data.HitboxHalfExtents.y <= 0 || data.HitboxHalfExtents.z <= 0)
-                        errors.Add("Post-dash: hitbox dimensions must be positive.");
+                    ValidateHits(data, PostDashAttack, "Post-dash", errors);
                 }
                 if (PostDashAttack == null || PostDashAttack.Clip == null) errors.Add("Post-dash: missing clip.");
                 else
@@ -266,6 +268,22 @@ namespace Scripts.Editor.CombatWorkshop
                 if (model != null && string.IsNullOrWhiteSpace(model.SocketID)) errors.Add("Weapon socket ID is required.");
             }
             return errors;
+        }
+
+        private static void ValidateHits(ComboAttackData data, WorkshopAttack draft, string label, List<string> errors)
+        {
+            if (data.Hits == null || data.Hits.Count == 0) errors.Add($"{label}: add at least one hit.");
+            else for (int i = 0; i < data.Hits.Count; i++)
+            {
+                var hit = data.Hits[i];
+                if (hit == null || hit.HitboxHalfExtents.x <= 0 || hit.HitboxHalfExtents.y <= 0 || hit.HitboxHalfExtents.z <= 0)
+                    errors.Add($"{label}: hit {i} needs positive hitbox dimensions.");
+            }
+            if (draft == null) return;
+            if (!draft.List_Markers.Any(x => x.Type == CombatMarkerType.HIT)) errors.Add($"{label}: missing Hit marker.");
+            foreach (var marker in draft.List_Markers)
+                if (marker.Type == CombatMarkerType.HIT && data.GetHit(marker.HitIndex) == null)
+                    errors.Add($"{label}: invalid hit index {marker.HitIndex}.");
         }
 
         private static void ValidateSlot(Dictionary<string, AnimationClip> states, string state, HashSet<AnimationClip> used, List<string> errors)
@@ -372,7 +390,7 @@ namespace Scripts.Editor.CombatWorkshop
             target.hideFlags = HideFlags.None;
             var events = AnimationUtility.GetAnimationEvents(attack.Clip).Where(x => !EventNames.Contains(x.functionName)).ToList();
             events.AddRange(attack.List_Markers.Where(x => Enum.IsDefined(typeof(CombatMarkerType), x.Type))
-                .Select(x => new AnimationEvent { functionName = EventNames[(int)x.Type], time = x.Time }));
+                .Select(x => new AnimationEvent { functionName = EventNames[(int)x.Type], time = x.Time, intParameter = x.HitIndex }));
             AnimationUtility.SetAnimationEvents(target, events.OrderBy(x => x.time).ToArray());
             var settings = AnimationUtility.GetAnimationClipSettings(target);
             settings.loopTime = false;

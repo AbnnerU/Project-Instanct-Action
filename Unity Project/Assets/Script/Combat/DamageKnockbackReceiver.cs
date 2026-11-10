@@ -57,7 +57,7 @@ namespace Scripts.Combat
             if (!damageResult.WasApplied) return;
             if (_ignoreIfKilled && damageResult.Killed) return;
 
-            ComboAttackData attackData = damageResult.DamageRequest.ComboAttackData;
+            AttackHitData attackData = damageResult.DamageRequest.AttackHitData;
 
             if (attackData == null) return;
             if (Mathf.Approximately(attackData.KnockbackDistance, 0f)) return;

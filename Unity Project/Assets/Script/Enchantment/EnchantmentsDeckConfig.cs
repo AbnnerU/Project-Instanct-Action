@@ -16,6 +16,13 @@ namespace Scripts.Enchantment
         [SerializeField] private bool _allowSkip = true;
         public bool AllowSkip => _allowSkip;
 
+        public EnchantmentsDeckConfig() { }
+
+        public EnchantmentsDeckConfig(bool allowSkip)
+        {
+            _allowSkip = allowSkip;
+        }
+
         public bool Allows(EnchantmentType type) => EnchantmentsTypesAvailable != null && EnchantmentsTypesAvailable.Contains(type);
 
         public void AddRoll(int amount) => AdditionalRolls += Mathf.Max(0, amount);

@@ -68,6 +68,15 @@
                     "processors": "",
                     "interactions": "Press(behavior=0)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Purchase",
+                    "type": "Button",
+                    "id": "6bd8f6c2-8864-4c6f-acbe-7fd78303e68f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -156,6 +165,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "66f43c43-d29e-4fbc-8976-a6fe468e87f3",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Purchase",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

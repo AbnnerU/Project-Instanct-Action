@@ -78,20 +78,19 @@ namespace Scripts.Enchantment
 
         public static string ResolveWeaponDescription(WeaponEnchantmentSO enchantment, string description)
         {
-            return ReplaceIndexedTags(description, (tag, index) =>
-            {
-                if (!IsTag(tag, "attackdamage"))
-                    return null;
-
-                ComboAttackSetSO attackSet = enchantment != null && enchantment.WeaponLoadout != null
-                    ? enchantment.WeaponLoadout.ComboAttackSet
-                    : null;
-
-                if (attackSet == null || !TryGet(attackSet.List_ComboAttackData, index, out ComboAttackData attackData) || attackData == null)
-                    return GetInvalidTagText(tag, index);
-
-                return FormatDamage(attackData.DamageData);
-            });
+            if (string.IsNullOrEmpty(description)) return description;
+            return Regex.Replace(description,
+                @"<\s*(?:attackdamage|attackSet)\s+index\s*=\s*""?(?<index>\d+)""?(?:\s+hit\s*=\s*""?(?<hit>\d+)""?)?\s*>",
+                match =>
+                {
+                    if (!int.TryParse(match.Groups["index"].Value, out int index)) return match.Value;
+                    int hitIndex = 0;
+                    if (match.Groups["hit"].Success && !int.TryParse(match.Groups["hit"].Value, out hitIndex)) return match.Value;
+                    var set = enchantment != null && enchantment.WeaponLoadout != null ? enchantment.WeaponLoadout.ComboAttackSet : null;
+                    var hit = set != null && TryGet(set.List_ComboAttackData, index, out ComboAttackData attack)
+                        ? attack?.GetHit(hitIndex) : null;
+                    return hit != null ? FormatDamage(hit.DamageData) : $"[attackdamage {index} hit {hitIndex}]";
+                }, RegexOptions.IgnoreCase);
         }
 
         public static string FormatDamage(DamageData damageData)

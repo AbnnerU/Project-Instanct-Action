@@ -19,45 +19,85 @@ MonoBehaviour:
   PostDashAttack:
     _animationStateName: Base Layer.Attack.Post Dash Attack
     _transitionDuration: 0.05
-    _damageData:
-      _damageType: 0
-      _baseDamage: 75
-      _physicForceScaling: 150
-      _magicForceScaling: 0
-    _attackKnockback:
-      KnockbackDistance: 0.5
-      KnockbackDuration: 0.1
-      KnockbackCurve:
+    _list_Hits:
+    - _damageData:
+        _damageType: 0
+        _baseDamage: 50
+        _physicForceScaling: 100
+        _magicForceScaling: 0
+      _attackKnockback:
+        KnockbackDistance: 0.1
+        KnockbackDuration: 0.1
+        KnockbackCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      _hitboxCenterOffset: {x: 0, y: -0.050996542, z: -0.4844696}
+      _hitboxHalfExtents: {x: 0.5000012, y: 0.50364304, z: 0.56921166}
+      _targetLayerMask:
         serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    _hitboxCenterOffset: {x: 0.000000037896307, y: -0.043349862, z: 0.68210304}
-    _hitboxHalfExtents: {x: 0.5000002, y: 0.4277507, z: 0.9768455}
-    _targetLayerMask:
-      serializedVersion: 2
-      m_Bits: 128
-    _queryTriggerInteraction: 2
-    _maxTargets: 8
+        m_Bits: 128
+      _queryTriggerInteraction: 2
+      _maxTargets: 8
+    - _damageData:
+        _damageType: 0
+        _baseDamage: 100
+        _physicForceScaling: 100
+        _magicForceScaling: 0
+      _attackKnockback:
+        KnockbackDistance: 0.5
+        KnockbackDuration: 0.1
+        KnockbackCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      _hitboxCenterOffset: {x: 0, y: -0.08378005, z: 0.42618632}
+      _hitboxHalfExtents: {x: 0.5000016, y: 0.47450185, z: 0.7549856}
+      _targetLayerMask:
+        serializedVersion: 2
+        m_Bits: 128
+      _queryTriggerInteraction: 2
+      _maxTargets: 8
   AnimatorController: {fileID: 22100000, guid: aa0e8e1adb5cf2743ba45087c9acd529, type: 2}
   List_WeaponModels:
   - WeaponPrefabReference:

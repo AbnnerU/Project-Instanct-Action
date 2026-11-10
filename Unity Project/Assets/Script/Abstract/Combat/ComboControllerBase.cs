@@ -262,13 +262,19 @@ namespace Scripts.Combat
             return state.IsName(attack.AnimationStateName);
         }
 
-        public virtual void AnimationEvent_ExecuteHitbox()
+        public virtual void AnimationEvent_ExecuteHitbox(int hitIndex = 0)
         {
             if (!CanProcessAttackEvents) return;
             if (!CanUseCurrentAttack()) return;
 
             ComboAttackData attackData = CurrentAttack;
-            AttackExecutionData executionData = new AttackExecutionData(Guid.NewGuid(), _currentComboIndex, attackData, gameObject);
+            AttackHitData hit = attackData.GetHit(hitIndex);
+            if (hit == null)
+            {
+                Debug.LogWarning($"Invalid hit index {hitIndex} for {attackData.AnimationStateName}.", this);
+                return;
+            }
+            AttackExecutionData executionData = new AttackExecutionData(Guid.NewGuid(), _currentComboIndex, attackData, gameObject, hitIndex);
 
             int version = _executionVersion;
             OnAttackHitboxExecutionStarted?.Invoke(executionData);
@@ -277,7 +283,7 @@ namespace Scripts.Combat
 
             _phase = AttackPhase.HITBOX_EXECUTED;
 
-            _attackHitbox.ExecuteHitbox(attackData, executionData);
+            _attackHitbox.ExecuteHitbox(hit, executionData);
             OnAttackHitboxExecutionFinished?.Invoke(executionData);
         }
 
@@ -430,7 +436,7 @@ namespace Scripts.Combat
                 return;
 
             int attackIndex = GetDebugAttackIndex(list_ComboAttackData.Count);
-            ComboAttackData attackData = list_ComboAttackData[attackIndex];
+            AttackHitData attackData = list_ComboAttackData[attackIndex]?.GetHit(0);
 
             if (attackData == null)
                 return;

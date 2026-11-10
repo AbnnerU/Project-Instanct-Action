@@ -26,6 +26,8 @@ namespace Scripts.Editor.CombatWorkshop
         private bool _playCombo;
         private bool _previewIdle;
         private bool _editHitbox = true;
+        private int _hitIndex;
+        private AttackHitData SelectedHit => AttackData?.GetHit(_hitIndex);
         private bool _rotateWeapon;
         [SerializeField] private float _time;
         private float _playbackSpeed = 100;
@@ -171,10 +173,10 @@ namespace Scripts.Editor.CombatWorkshop
                         DrawViewToolbar();
                         Rect view = GUILayoutUtility.GetRect(100, 10000, 240, 10000, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
                         _preview.Sample(CurrentClip, _time, _previewIdle ? null : AttackData);
-                        bool impact = !_previewIdle && Attack != null && Attack.List_Markers.Any(x => x.Type == CombatMarkerType.HIT && Mathf.Abs(x.Time - _time) <= 0.055f);
+                        bool impact = !_previewIdle && Attack != null && Attack.List_Markers.Any(x => x.Type == CombatMarkerType.HIT && x.HitIndex == _hitIndex && Mathf.Abs(x.Time - _time) <= 0.055f);
                         var models = _document.Loadout.List_WeaponModels;
                         var model = _tab == 1 && _modelIndex >= 0 && _modelIndex < models.Count ? models[_modelIndex] : null;
-                        _preview.Draw(view, _previewIdle ? null : AttackData, impact, _tab == 2 && _editHitbox, model, _modelIndex, ChangeHitbox, ChangeWeapon, _rotateWeapon, ChangeWeaponRotation);
+                        _preview.Draw(view, _previewIdle ? null : SelectedHit, impact, _tab == 2 && _editHitbox, model, _modelIndex, ChangeHitbox, ChangeWeapon, _rotateWeapon, ChangeWeaponRotation);
                         DrawTimeline();
                     }
                 }
@@ -401,14 +403,45 @@ namespace Scripts.Editor.CombatWorkshop
             EditorGUILayout.Space();
             DrawMarkers();
             EditorGUILayout.Space();
+            var hits = attack.FindPropertyRelative("_list_Hits");
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                _hitIndex = hits.arraySize > 0 ? Mathf.Clamp(_hitIndex, 0, hits.arraySize - 1) : 0;
+                if (hits.arraySize > 0)
+                    _hitIndex = EditorGUILayout.Popup("Hit", _hitIndex, Enumerable.Range(0, hits.arraySize).Select(i => $"Hit {i}").ToArray());
+                if (GUILayout.Button(Icon("Toolbar Plus", "Add hit"), GUILayout.Width(28)))
+                {
+                    _hitIndex = hits.arraySize++;
+                }
+                using (new EditorGUI.DisabledScope(_hitIndex <= 0))
+                if (GUILayout.Button(Icon("d_Animation.PrevKey", "Move hit up"), GUILayout.Width(28)))
+                    MoveHit(hits, _hitIndex - 1);
+                using (new EditorGUI.DisabledScope(_hitIndex >= hits.arraySize - 1))
+                if (GUILayout.Button(Icon("d_Animation.NextKey", "Move hit down"), GUILayout.Width(28)))
+                    MoveHit(hits, _hitIndex + 1);
+                using (new EditorGUI.DisabledScope(hits.arraySize == 0))
+                if (GUILayout.Button(Icon("Toolbar Minus", "Remove hit and its markers"), GUILayout.Width(28)))
+                {
+                    Undo.RecordObject(_document, "Remove hit markers");
+                    Attack.List_Markers.RemoveAll(x => x.Type == CombatMarkerType.HIT && x.HitIndex == _hitIndex);
+                    foreach (var marker in Attack.List_Markers)
+                        if (marker.Type == CombatMarkerType.HIT && marker.HitIndex > _hitIndex) marker.HitIndex--;
+                    hits.DeleteArrayElementAtIndex(_hitIndex);
+                    _hitIndex = Mathf.Max(0, _hitIndex - 1);
+                }
+            }
+            if (hits.arraySize > 0)
+            {
+            var hit = hits.GetArrayElementAtIndex(_hitIndex);
             EditorGUILayout.LabelField("Hitbox", EditorStyles.boldLabel);
             _editHitbox = EditorGUILayout.Toggle("Edit in preview", _editHitbox);
             foreach (string property in new[] { "_hitboxCenterOffset", "_hitboxHalfExtents", "_targetLayerMask", "_queryTriggerInteraction", "_maxTargets" })
-                EditorGUILayout.PropertyField(attack.FindPropertyRelative(property));
+                EditorGUILayout.PropertyField(hit.FindPropertyRelative(property));
             EditorGUILayout.Space();
-            EditorGUILayout.PropertyField(attack.FindPropertyRelative("_damageData"), true);
+            EditorGUILayout.PropertyField(hit.FindPropertyRelative("_damageData"), true);
             //EditorGUILayout.PropertyField(attack.FindPropertyRelative("_attackAdvance"), true);
-            EditorGUILayout.PropertyField(attack.FindPropertyRelative("_attackKnockback"), true);
+            EditorGUILayout.PropertyField(hit.FindPropertyRelative("_attackKnockback"), true);
+            }
             fields.ApplyModifiedProperties();
             if (!_editPostDash && GUILayout.Button("Remove attack"))
             {
@@ -449,6 +482,16 @@ namespace Scripts.Editor.CombatWorkshop
                         ? (EditorGUILayout.Popup(marker.Type == CombatMarkerType.FINISH ? 1 : 0, new[] { "HIT", "FINISH" }, GUILayout.Width(113)) == 1
                             ? CombatMarkerType.FINISH : CombatMarkerType.HIT)
                         : (CombatMarkerType)EditorGUILayout.EnumPopup(marker.Type, GUILayout.Width(113));
+                    if (type == CombatMarkerType.HIT)
+                    {
+                        GUILayout.Label(new GUIContent("Hit", "Zero-based hit index"), GUILayout.Width(24));
+                        int hitIndex = EditorGUILayout.IntField(marker.HitIndex, GUILayout.Width(36));
+                        if (hitIndex != marker.HitIndex)
+                        {
+                            Undo.RecordObject(_document, "Change marker hit");
+                            marker.HitIndex = hitIndex;
+                        }
+                    }
                     float time = EditorGUILayout.FloatField(marker.Time);
                     if (type != marker.Type || time != marker.Time)
                     {
@@ -465,7 +508,7 @@ namespace Scripts.Editor.CombatWorkshop
             using (new EditorGUILayout.HorizontalScope())
             {
                 if (GUILayout.Button("Add marker"))
-                { Undo.RecordObject(_document, "Add marker"); markers.Add(new CombatMarker { Type = CombatMarkerType.HIT, Time = _time }); Dirty(); }
+                { Undo.RecordObject(_document, "Add marker"); markers.Add(new CombatMarker { Type = CombatMarkerType.HIT, Time = _time, HitIndex = _hitIndex }); Dirty(); }
                 if (markers.Count == 0 && GUILayout.Button("Default markers"))
                 {
                     Undo.RecordObject(_document, "Add default markers");
@@ -478,11 +521,25 @@ namespace Scripts.Editor.CombatWorkshop
             }
         }
 
+        private void MoveHit(SerializedProperty hits, int destination)
+        {
+            Undo.RecordObject(_document, "Reorder hit markers");
+            int previous = _hitIndex;
+            hits.MoveArrayElement(previous, destination);
+            foreach (var marker in Attack.List_Markers)
+            {
+                if (marker.Type != CombatMarkerType.HIT) continue;
+                if (marker.HitIndex == previous) marker.HitIndex = destination;
+                else if (marker.HitIndex == destination) marker.HitIndex = previous;
+            }
+            _hitIndex = destination;
+        }
+
         private void ChangeHitbox(Vector3 offset, Vector3 extents)
         {
-            if (AttackData == null) return;
+            if (SelectedHit == null) return;
             var fields = GetAttackFields();
-            var attack = GetAttackProperty(fields);
+            var attack = GetAttackProperty(fields).FindPropertyRelative("_list_Hits").GetArrayElementAtIndex(_hitIndex);
             attack.FindPropertyRelative("_hitboxCenterOffset").vector3Value = offset;
             attack.FindPropertyRelative("_hitboxHalfExtents").vector3Value = extents;
             fields.ApplyModifiedProperties();
@@ -558,7 +615,7 @@ namespace Scripts.Editor.CombatWorkshop
                     float x = timeline.x + markers[i].Time / length * timeline.width;
                     var color = MarkerColor(markers[i].Type);
                     EditorGUI.DrawRect(new Rect(x - 2, timeline.y + 20, 4, 46), color);
-                    GUI.Label(new Rect(Mathf.Min(x + 3, timeline.xMax - 75), timeline.y + 22 + (i % 2) * 18, 75, 18), markers[i].Type.ToString(), EditorStyles.miniLabel);
+                    GUI.Label(new Rect(Mathf.Min(x + 3, timeline.xMax - 75), timeline.y + 22 + (i % 2) * 18, 75, 18), (markers[i].Type == CombatMarkerType.HIT ? $"HIT {markers[i].HitIndex}" : markers[i].Type.ToString()), EditorStyles.miniLabel);
                 }
             }
             float playhead = timeline.x + _time / length * timeline.width;

@@ -129,12 +129,13 @@
     <Compile Include="Assets\Script\Scriptable Base\Ability\AbilityEnchantmentSO.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BehaviorTree.cs" />
     <Compile Include="Assets\Script\Tier\Scriptable Base\Visual\TextureVariantSO.cs" />
+    <Compile Include="Assets\Script\Enchantment\EnchantmentPurchase.cs" />
     <Compile Include="Assets\Script\Combat\DamageResolver.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveStateOfCanvas.cs" />
     <Compile Include="Assets\Script\Health\OnDeath_UnityEvent.cs" />
     <Compile Include="Assets\Script\Abilities\Extras\AbilityCooldown.cs" />
-    <Compile Include="Assets\Script\Combat\HitReaction_DisableCollider.cs" />
     <Compile Include="Assets\Script\Abstract\Enchantment\EnchantmentOfferBuilderSOBase.cs" />
+    <Compile Include="Assets\Script\Combat\HitReaction_DisableCollider.cs" />
     <Compile Include="Assets\Script\Animation\OnDeath_TriggerParameter.cs" />
     <Compile Include="Assets\Script\Abstract\Status\StatusInfoSourceBase.cs" />
     <Compile Include="Assets\Script\Spawner\SpawnAreaFilter.cs" />
@@ -277,12 +278,15 @@
     <Compile Include="Assets\Script\Loading Scene\LoadScene_TryLoad.cs" />
     <Compile Include="Assets\Script\Combat\Pop Up\DamagePopupSpawner.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_AnimSetBool.cs" />
+    <Compile Include="Assets\Script\Coins\CoinsTextView.cs" />
     <Compile Include="Assets\Script\Animation\AnimationDirectionalVelocityModule.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveState.cs" />
     <Compile Include="Assets\Script\Interface\General\ISaveableTimer.cs" />
     <Compile Include="Assets\Script\Abstract\Dash Handle\DashBase.cs" />
     <Compile Include="Assets\Script\Interface\General\IPanelHandler.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTGoToRandomPosition.cs" />
+    <Compile Include="Assets\Script\Combat\Data\AttackHitData.cs" />
+    <Compile Include="Assets\Script\Coins\OnDeath_AddCoin.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasBounds.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTLookAtTarget.cs" />
   </ItemGroup>

@@ -16,7 +16,7 @@ namespace Scripts.Combat
 
         public void Attack_ExecuteHitbox(AnimationEvent animationEvent)
         {
-            if (CanAccept(animationEvent)) _comboController.AnimationEvent_ExecuteHitbox();
+            if (CanAccept(animationEvent)) _comboController.AnimationEvent_ExecuteHitbox(animationEvent.intParameter);
         }
 
         public void Attack_OpenComboWindow()

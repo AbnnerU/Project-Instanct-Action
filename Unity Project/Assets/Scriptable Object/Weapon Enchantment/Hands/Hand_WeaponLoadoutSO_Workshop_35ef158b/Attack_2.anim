@@ -28991,7 +28991,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 1
   m_Events:
-  - time: 0.3
+  - time: 0.33538464
     functionName: Attack_ExecuteHitbox
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -46814,14 +46814,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.82500005
+  - time: 0.67269236
     functionName: Attack_CloseComboWindow
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.89363253
+  - time: 0.725342
     functionName: Attack_Finish
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -38,7 +38,8 @@ namespace Scripts.Enchantment
                 _buttonComponent.onClick.AddListener(Select);
 
             _thisObject = gameObject;
-            if (_rerollButton != null) _rerollButton.onClick.AddListener(RequestReroll);
+            if (_rerollButton != null) 
+                _rerollButton.onClick.AddListener(RequestReroll);
         }
 
         private void OnDestroy()
@@ -47,7 +48,8 @@ namespace Scripts.Enchantment
                 _buttonComponent.onClick.RemoveListener(Select);
 
             ReleaseIconHandle();
-            if (_rerollButton != null) _rerollButton.onClick.RemoveListener(RequestReroll);
+            if (_rerollButton != null) 
+                _rerollButton.onClick.RemoveListener(RequestReroll);
         }
 
         public void Setup(EnchantmentSOBase enchantment, Action<EnchantmentSOBase> onSelected)
