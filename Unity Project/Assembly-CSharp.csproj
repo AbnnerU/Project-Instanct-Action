@@ -201,6 +201,7 @@
     <Compile Include="Assets\Script\Interface\Effects\IHasEffectsPlayer.cs" />
     <Compile Include="Assets\Script\Combat\Combo_DirectionHandler.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IPreDestroyHandler.cs" />
+    <Compile Include="Assets\Script\Abilities\Passive\ReduceAbilityCooldownOnAttackHit.cs" />
     <Compile Include="Assets\Script\Abstract\Health\HealthBasics.cs" />
     <Compile Include="Assets\Script\Status\StatusInfoSource.cs" />
     <Compile Include="Assets\Script\Progression\XpBar.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Assets\Script\AI\Interface\IHasAIState.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\AttackBonusDamageAutoSetup.cs" />
     <Compile Include="Assets\Script\Interface\Interactable\IInteractable.cs" />
+    <Compile Include="Assets\Script\Abilities\Auto Setup\ReduceAbilityCooldownOnAttackHitAutoSetup.cs" />
     <Compile Include="Assets\Script\Interface\General\IIsGameObjectPanel.cs" />
     <Compile Include="Assets\Script\Loading Scene\SIS_LoadingSceneChannel.cs" />
     <Compile Include="Assets\Script\Abstract\Projectile\Projectile3DBase.cs" />

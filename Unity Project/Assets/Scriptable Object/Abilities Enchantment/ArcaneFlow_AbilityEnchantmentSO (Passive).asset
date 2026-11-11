@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b3d32bcaa8ba048bfbc202bfd0b3f9, type: 3}
+  m_Name: ArcaneFlow_AbilityEnchantmentSO (Passive)
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
+  ID: 5fb6b03d-ba98-48de-998c-4b39cfb47156
+  DisplayName: Arcane Flow
+  Tier: 3
+  EnchantmentType: 1
+  Description: Diminui o tempo de recarga das habilidades em 1s por ataque.
+  IconReference:
+    m_AssetGUID: c63135fc920e9cd4ab49fb0b3e4ae0a8
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _canRepeat: 0
+  AbilityKind: 0
+  AbilityPrefabReference:
+    m_AssetGUID: ffe3277bb211a604fa3cd14b34810a4f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  List_DamageDatas: []
+  List_BuffDatas: []

@@ -10,5 +10,7 @@ namespace Scripts.Timer
         public float Cooldown { get; set; }
 
         public float CooldownProgression { get; }
+
+        void ReduceRemainingCooldown(float seconds);
     }
 }

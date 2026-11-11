@@ -4834,6 +4834,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!4 &1524697793 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+  m_PrefabInstance: {fileID: 3387703469255761263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1537905895
 GameObject:
   m_ObjectHideFlags: 0
@@ -5878,6 +5883,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8c28612dbab714d448372e91e8be774a, type: 2}
   - {fileID: 11400000, guid: e5f3a4ab31ea7044da3e7d594fc850fd, type: 2}
   - {fileID: 11400000, guid: 0ad73c8304115654db6d0718672bcaba, type: 2}
+  - {fileID: 11400000, guid: caf1ea4e20b9d814180e79e7f12c249c, type: 2}
   _list_AppliedEnchantments: []
 --- !u!114 &1879613187
 MonoBehaviour:
@@ -6378,6 +6384,63 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1001 &3387703469255761263
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 876544946}
+    m_Modifications:
+    - target: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776092206256250686, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706580236907552065, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
+      propertyPath: m_Name
+      value: Arcane Flow (Passivo)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ffe3277bb211a604fa3cd14b34810a4f, type: 3}
 --- !u!1001 &4206290719789535704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6506,7 +6569,10 @@ PrefabInstance:
     - {fileID: 8563990564831857866, guid: 42a308debae41784e867944925962cab, type: 3}
     - {fileID: 2511505656132928410, guid: 42a308debae41784e867944925962cab, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5796092172197296322, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1524697793}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a308debae41784e867944925962cab, type: 3}
 --- !u!114 &4206290719789535741 stripped

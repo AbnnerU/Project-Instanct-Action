@@ -96,7 +96,7 @@ namespace Scripts.Abilities
 
         private void Slot_OnAbilityCooldownStarted(float cooldown)
         {
-            StartCooldownRoutine(cooldown, 0f);
+            StartCooldownRoutine();
         }
 
         private void Slot_OnAbilityCooldownCompleted(float cooldown)
@@ -142,37 +142,35 @@ namespace Scripts.Abilities
                 return;
             }
 
-            float cooldown = cooldownHandler.Cooldown;
-            float elapsedTime = cooldownHandler.CooldownProgression;
-
-            StartCooldownRoutine(cooldown, elapsedTime);
+            StartCooldownRoutine();
         }
 
         #endregion
 
         #region Cooldown
 
-        private void StartCooldownRoutine(float cooldown, float elapsedTime)
+        private void StartCooldownRoutine()
         {
             StopCooldownRoutine();
 
-            if (cooldown <= 0f)
+            IHasCooldown cooldownHandler = _slot?.CooldownHandler;
+            if (cooldownHandler == null || cooldownHandler.Cooldown <= 0f)
             {
                 SetCooldownFillAmount(0f);
                 return;
             }
 
-            _cooldownRoutine = StartCoroutine(CooldownRoutine(cooldown, elapsedTime));
+            _cooldownRoutine = StartCoroutine(CooldownRoutine(cooldownHandler));
         }
 
-        private IEnumerator CooldownRoutine(float cooldown, float elapsedTime)
+        private IEnumerator CooldownRoutine(IHasCooldown cooldownHandler)
         {
-            while (elapsedTime < cooldown)
+            while (cooldownHandler.Cooldown > 0f &&
+                cooldownHandler.CooldownProgression < cooldownHandler.Cooldown)
             {
-                float fillAmount = 1f - Mathf.Clamp01(elapsedTime / cooldown);
+                float fillAmount = 1f - Mathf.Clamp01(cooldownHandler.CooldownProgression / cooldownHandler.Cooldown);
                 SetCooldownFillAmount(fillAmount);
 
-                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 

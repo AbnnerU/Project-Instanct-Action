@@ -15,6 +15,7 @@ namespace Scripts.Abilities.Extras
         [SerializeField] private CooldownType _cooldownType;
 
         private float _currentTime;
+        private bool _isCoolingDown;
 
         public float Cooldown { get => _cooldown; set => _cooldown = value; }
         public float CooldownProgression => _currentTime;
@@ -40,6 +41,7 @@ namespace Scripts.Abilities.Extras
         private void Ability_Deactivating(AbilityBase ability)
         {
             StopAllCoroutines();
+            _isCoolingDown = false;
             _abilityComponent.OnAbilityStarted -= StartCooldown;
             _abilityComponent.OnAbilityFinished -= StartCooldown;
             _abilityComponent.OnAbilityDeactivating -= Ability_Deactivating;
@@ -55,15 +57,15 @@ namespace Scripts.Abilities.Extras
             if (!abilityBase.Initialized) return;
             StopAllCoroutines();
             _currentTime = 0f;
+            _isCoolingDown = true;
 
             StartCoroutine(CooldownRoutine());
         }
 
         IEnumerator CooldownRoutine()
         {
-            OnCooldownStarted?.Invoke(_cooldown);
-
             _abilityComponent.Disable();
+            OnCooldownStarted?.Invoke(_cooldown);
 
             do
             {
@@ -72,8 +74,27 @@ namespace Scripts.Abilities.Extras
 
             } while (_currentTime < _cooldown);
 
-            _abilityComponent.Enable();
+            CompleteCooldown();
+        }
 
+        public void ReduceRemainingCooldown(float seconds)
+        {
+            if (!_isCoolingDown || seconds <= 0f) return;
+
+            _currentTime = Mathf.Min(_currentTime + seconds, _cooldown);
+            if (_currentTime < _cooldown) return;
+
+            StopAllCoroutines();
+            CompleteCooldown();
+        }
+
+        private void CompleteCooldown()
+        {
+            if (!_isCoolingDown) return;
+
+            _isCoolingDown = false;
+            _currentTime = _cooldown;
+            _abilityComponent.Enable();
             OnCooldownCompleted?.Invoke(_cooldown);
         }
     }

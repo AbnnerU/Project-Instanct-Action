@@ -56,6 +56,17 @@ namespace Scripts.Abilities
 
         #endregion
 
+        public void ReduceActiveAbilityCooldowns(float seconds)
+        {
+            if (seconds <= 0f) return;
+
+            foreach (ActiveAbilitySlot slot in _list_ActiveAbilitySlots)
+            {
+                if (slot == null || slot.IsEmpty) continue;
+                slot.CooldownHandler?.ReduceRemainingCooldown(seconds);
+            }
+        }
+
         #region Unity
 
         protected override void Awake()
