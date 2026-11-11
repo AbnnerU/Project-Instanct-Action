@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5598271746345286650}
   - component: {fileID: 7304436129046181000}
   m_Layer: 6
-  m_Name: Arcane Rupture Ability Prefab
+  m_Name: Arcane Rupture Ability Area Damage Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
