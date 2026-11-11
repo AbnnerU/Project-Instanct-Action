@@ -72,6 +72,7 @@
     <Compile Include="Assets\Script\Abilities\Enum\AbilityKind.cs" />
     <Compile Include="Assets\Script\Abilities\Passive\AttackBonusDamageAbility.cs" />
     <Compile Include="Assets\Script\AI\OnDeath_StopBrainAndReleaseObject.cs" />
+    <Compile Include="Assets\Script\Movement\OrbitMotion.cs" />
     <Compile Include="Assets\Script\Abstract\Combat\AreaDamageRequestBase.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTStopAgent.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Combat\ComboAttackSetSO.cs" />
@@ -168,12 +169,14 @@
     <Compile Include="Assets\Script\Interface\General\IUniqueId.cs" />
     <Compile Include="Assets\Script\Combat\AttackApproachAssist.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ReleaseAfterTime.cs" />
+    <Compile Include="Assets\Script\Abilities\Active\OrbitingObjectsAbility.cs" />
     <Compile Include="Assets\Script\Combat\Damage Effects\HealOnDamageDealt.cs" />
     <Compile Include="Assets\Script\Health\OnRespawn_UnityEvent.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\PiercingThrustAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Progression\MN_EnemyProgression.cs" />
     <Compile Include="Assets\Script\Dash Handler\Dash_ComboControllerHandler.cs" />
     <Compile Include="Assets\Script\Combat\ComboController.cs" />
+    <Compile Include="Assets\Script\Combat\ContactDamageRequest.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Weapon\WeaponLoadoutSO.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\SpawnAreaDamageAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Job System\Look At Camera\MN_ParallelLookAtCamera.cs" />
@@ -233,6 +236,7 @@
     <Compile Include="Assets\Script\Dash Handler\DashAnimation.cs" />
     <Compile Include="Assets\Script\Interface\Selectable\ISelectableObject.cs" />
     <Compile Include="Assets\Script\Abilities\Active\LauchProjectileAbility.cs" />
+    <Compile Include="Assets\Script\Abilities\Auto Setup\OrbitingObjectsAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTWaitForSeconds.cs" />
     <Compile Include="Assets\Script\Enchantment\EnchantmentsDeckConfig.cs" />
     <Compile Include="Assets\Script\Waves\MN_Waves.cs" />

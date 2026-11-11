@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b3d32bcaa8ba048bfbc202bfd0b3f9, type: 3}
+  m_Name: ArcaneOrbs_AbilityEnchantmentSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
+  ID: 915d2385-a7cb-4cbe-9d2c-132426061a98
+  DisplayName: Arcane Orbs
+  Tier: 1
+  EnchantmentType: 1
+  Description: 'Conjura orbs que causam no <damage index = 0> a quem atingir. '
+  IconReference:
+    m_AssetGUID: d2362638ca4255b49b77d1e0fe21ff73
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _canRepeat: 0
+  AbilityKind: 1
+  AbilityPrefabReference:
+    m_AssetGUID: aca336f52e3ae8a41ad529e6a0201614
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  List_DamageDatas:
+  - _damageType: 1
+    _baseDamage: 15
+    _physicForceScaling: 0
+    _magicForceScaling: 10
+  List_BuffDatas: []

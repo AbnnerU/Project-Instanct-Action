@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3125932855723051805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119979655022868522}
+  - component: {fileID: 5931564681868271442}
+  - component: {fileID: 1831978176650070365}
+  - component: {fileID: 6647800144579135383}
+  m_Layer: 6
+  m_Name: Arcane Orbs Ability
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1119979655022868522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3125932855723051805}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5838457918742047107}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5931564681868271442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3125932855723051805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739823064ba446947906b0b9e1a5b053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.OrbitingObjectsAbilityAutoSetup
+  _ability: {fileID: 1831978176650070365}
+--- !u!114 &1831978176650070365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3125932855723051805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa979bfc8e3b3a647937f8ebb855e1b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.OrbitingObjectsAbility
+  _active: 1
+  _orbPrefab: {fileID: 1289973500548336196, guid: e35092147d0e3a849a3d08feb9c6d831, type: 3}
+  _orbitTarget: {fileID: 5838457918742047107}
+  _orbContainer: {fileID: 5838457918742047107}
+  _containerByTag: 1
+  _tag: ProjectilesContainer
+  _orbCount: 3
+  _centerOffset: {x: 0, y: 0, z: 0}
+  _orbitAxis: {x: 0, y: 0, z: 1}
+  _orbitRadius: 1.5
+  _orbitSpeed: 180
+  _duration: 8
+  _damageData:
+    _damageType: 1
+    _baseDamage: 30
+    _physicForceScaling: 0
+    _magicForceScaling: 100
+--- !u!114 &6647800144579135383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3125932855723051805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285d7597ad0be804598ad735bfd3bcd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.Extras.AbilityCooldown
+  _abilityComponent: {fileID: 1831978176650070365}
+  _cooldown: 10
+  _cooldownType: 0
+--- !u!1 &8145718040975014971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5838457918742047107}
+  m_Layer: 6
+  m_Name: Orbit Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5838457918742047107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8145718040975014971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.23, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1119979655022868522}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
