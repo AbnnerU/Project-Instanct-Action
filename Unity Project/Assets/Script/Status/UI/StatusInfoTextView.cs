@@ -145,7 +145,7 @@ namespace Scripts.Status
 
             public void UpdateText( float value)
             {
-                Debug.Log($"Text updated {StatusType.ToString()}");
+               // Debug.Log($"Text updated {StatusType.ToString()}");
 
                 if (TextComponent == null)
                     return;

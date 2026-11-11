@@ -72,6 +72,7 @@
     <Compile Include="Assets\Script\Abilities\Enum\AbilityKind.cs" />
     <Compile Include="Assets\Script\Abilities\Passive\AttackBonusDamageAbility.cs" />
     <Compile Include="Assets\Script\AI\OnDeath_StopBrainAndReleaseObject.cs" />
+    <Compile Include="Assets\Script\Abstract\Combat\AreaDamageRequestBase.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTStopAgent.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Combat\ComboAttackSetSO.cs" />
     <Compile Include="Assets\Script\Interface\Abilities\IDamageDataAbility.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Assets\Script\Loading Scene\LoadingSceneHandler_CleanSession.cs" />
     <Compile Include="Assets\Script\Tier\Scriptable Base\Visual\CreatureEvolutionDataSO.cs" />
     <Compile Include="Assets\Script\AI\Agents\EnemyBrain.cs" />
+    <Compile Include="Assets\Script\Combat\SphereAreaDamageRequest.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTConditionalSequence.cs" />
     <Compile Include="Assets\Script\Interface\Abilities\IHasCastTime.cs" />
     <Compile Include="Assets\Script\Status\StatusInfoByReference.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Assets\Script\Dash Handler\Dash_ComboControllerHandler.cs" />
     <Compile Include="Assets\Script\Combat\ComboController.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Weapon\WeaponLoadoutSO.cs" />
+    <Compile Include="Assets\Script\Abilities\Auto Setup\SpawnAreaDamageAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Job System\Look At Camera\MN_ParallelLookAtCamera.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasActionValidation.cs" />
     <Compile Include="Assets\Script\Enchantment\Enum\EnchantmentType.cs" />
@@ -211,6 +214,7 @@
     <Compile Include="Assets\Script\Combat\AttackHitbox.cs" />
     <Compile Include="Assets\Script\Projectile\DamageRequestProjectile.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageData.cs" />
+    <Compile Include="Assets\Script\Abilities\Active\SpawnAreaDamageAbility.cs" />
     <Compile Include="Assets\Script\Combat\Enum\DamageType.cs" />
     <Compile Include="Assets\Script\Abilities\MN_Abilities.cs" />
     <Compile Include="Assets\Script\Status\StatusInfo.cs" />
@@ -294,7 +298,9 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
+    <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_SETTINGS.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -306,10 +312,13 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Prefabs\Texts\_Make your own text effect.txt" />
+    <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_PASSES.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_URP.cginc" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
@@ -1737,9 +1746,25 @@
       <Project>{C65DF7E6-5082-3454-2A7F-EDDBED1731B5}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
+    <ProjectReference Include="ToonyColorsPro.Demo.Editor.csproj">
+      <Project>{916FA10F-D91D-18D9-9037-29D711DC244D}</Project>
+      <Name>ToonyColorsPro.Demo.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="KinoBloom.Runtime.csproj">
+      <Project>{A3E1DDC0-3CCD-9BEC-013D-959294A32602}</Project>
+      <Name>KinoBloom.Runtime</Name>
+    </ProjectReference>
     <ProjectReference Include="UMotionSourceApplication.csproj">
       <Project>{418396D7-6757-0D78-D7A3-2165E2604033}</Project>
       <Name>UMotionSourceApplication</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXRRuntime.csproj">
+      <Project>{C31985D0-954E-1248-DDCF-4E3D681E5E5F}</Project>
+      <Name>CFXRRuntime</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXRDemo.csproj">
+      <Project>{607BF134-DB4D-6BA6-8699-75CE1BDF63F5}</Project>
+      <Name>CFXRDemo</Name>
     </ProjectReference>
     <ProjectReference Include="KitWright.Editor.InputSystem.csproj">
       <Project>{F2C18BB3-2A5A-AEEB-5E1E-C843AF75C95A}</Project>
@@ -1756,6 +1781,10 @@
     <ProjectReference Include="UMotionSourceEditor.csproj">
       <Project>{00580B3E-0312-96EB-EB65-97B141DAB002}</Project>
       <Name>UMotionSourceEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXREditor.csproj">
+      <Project>{1A4C5EDD-8B38-4B64-AFD8-A63114DC1A41}</Project>
+      <Name>CFXREditor</Name>
     </ProjectReference>
     <ProjectReference Include="KitWright.Editor.Bootstrap.csproj">
       <Project>{9B15CAF1-144C-D5F8-DFCD-2E1F3FEB8F2E}</Project>

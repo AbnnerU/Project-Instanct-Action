@@ -5876,6 +5876,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b88dd91ae26e42fca2909ec8f71f21ff, type: 2}
   - {fileID: 11400000, guid: 52e4a711599146789f72acfdd9db84e6, type: 2}
   - {fileID: 11400000, guid: 8c28612dbab714d448372e91e8be774a, type: 2}
+  - {fileID: 11400000, guid: e5f3a4ab31ea7044da3e7d594fc850fd, type: 2}
   _list_AppliedEnchantments: []
 --- !u!114 &1879613187
 MonoBehaviour:
