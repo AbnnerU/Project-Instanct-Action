@@ -14,6 +14,7 @@ namespace Scripts.Weapon
         public bool HasPostDashAttack;
         public ComboAttackData PostDashAttack = new ComboAttackData();
         public RuntimeAnimatorController AnimatorController;
+        public GameObject HitEffectPrefab;
         public List<WeaponModelSpawnData> List_WeaponModels = new List<WeaponModelSpawnData>();
     }
 

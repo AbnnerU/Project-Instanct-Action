@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: df1ac517b8d52ef47bced734de381c44
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 395528
+  packageName: Free - HDRP Flipbook VFX Bundle Lite
+  packageVersion: 1.0
+  assetPath: Assets/Vefects/Flipbook VFX Bundle Lite HDRP/Pixel Craft VFX HDRP/_
+    Lite/Shaders/Lite_SH_Vefects_HDRP_Unlit_Flipbook_Pixel_01.shader
+  uploadId: 974732

@@ -29,7 +29,8 @@ namespace Scripts.Combat
                 if (receiver == null || !receivers.Add(receiver)) continue;
                 var component = receiver as Component;
                 if (component == null) continue;
-                receiver.ReceiveDamage(Request.WithHit(component.gameObject, collider, collider.ClosestPoint(center)));
+                DamageResult result = receiver.ReceiveDamage(Request.WithHit(component.gameObject, collider, collider.ClosestPoint(center)));
+                ReportDamageDealt(result);
                 if (!isActiveAndEnabled) break;
             }
         }

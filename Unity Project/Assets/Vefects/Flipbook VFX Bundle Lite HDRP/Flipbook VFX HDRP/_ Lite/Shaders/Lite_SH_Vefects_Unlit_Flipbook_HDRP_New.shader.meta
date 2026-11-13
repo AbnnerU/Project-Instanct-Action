@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 076bde8b4b044334b8ea4403454ea50a
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _MainTexture: {instanceID: 0}
+  - _DistortionTexture: {instanceID: 0}
+  - _DistortionSecond: {instanceID: 0}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 395528
+  packageName: Free - HDRP Flipbook VFX Bundle Lite
+  packageVersion: 1.0
+  assetPath: Assets/Vefects/Flipbook VFX Bundle Lite HDRP/Flipbook VFX HDRP/_ Lite/Shaders/Lite_SH_Vefects_Unlit_Flipbook_HDRP_New.shader
+  uploadId: 974732

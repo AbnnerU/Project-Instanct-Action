@@ -6574,7 +6574,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5796092172197296322, guid: 42a308debae41784e867944925962cab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1524697793}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4206290719789535779}
+    - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4206290719789535778}
   m_SourcePrefab: {fileID: 100100000, guid: 42a308debae41784e867944925962cab, type: 3}
 --- !u!114 &4206290719789535741 stripped
 MonoBehaviour:
@@ -6609,6 +6615,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5265ac8090c86849af4eb79dc314c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.DashHandler.Dash
+--- !u!114 &4206290719789535778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01539fb93ffb6df4cba15cd98c172976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Weapon.WeaponHitEffectBinder
+  _weaponManager: {fileID: 1955501768}
+  _hitEffectSpawner: {fileID: 4206290719789535779}
+--- !u!114 &4206290719789535779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a16c07e38c277d4f8178d150702562f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.SpawnHitEffectOnDamageDealt
+  _damageDealerObject: {fileID: 711513674}
+  _effectPrefab: {fileID: 8836407550465818219, guid: 838da9c5e89288c4c8005ffa2ff9fb9c, type: 3}
+  _positionOffset: {x: 0, y: 0, z: -1.5}
+  _rotation: {x: 0, y: 0, z: 0}
 --- !u!1001 &8199929961677144170
 PrefabInstance:
   m_ObjectHideFlags: 0

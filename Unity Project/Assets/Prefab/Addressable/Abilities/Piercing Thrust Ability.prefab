@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7491621645219883528}
   - component: {fileID: 3336445094548261528}
   - component: {fileID: 4231570087894386406}
+  - component: {fileID: 6421701308196811586}
   m_Layer: 6
   m_Name: Piercing Thrust Ability
   m_TagString: Untagged
@@ -110,6 +111,7 @@ MonoBehaviour:
   _colliderComponent: {fileID: 0}
   _disableColliderDuringExecution: 1
   _comboController: {fileID: 0}
+  _maintainComboIndex: 1
   _cancelAttackOnExecute: 1
   _disableComboDuringExecution: 1
   _dashComponent: {fileID: 0}
@@ -131,3 +133,19 @@ MonoBehaviour:
   _abilityComponent: {fileID: 3336445094548261528}
   _cooldown: 2
   _cooldownType: 0
+--- !u!114 &6421701308196811586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9151168264849653752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a16c07e38c277d4f8178d150702562f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.SpawnHitEffectOnDamageDealt
+  _damageDealerObject: {fileID: 9151168264849653752}
+  _effectPrefab: {fileID: 2708598583397607911, guid: 40d9ef1f29619bf4eb2330bf0d39d43d, type: 3}
+  _positionOffset: {x: 0, y: 0, z: -1.5}
+  _rotation: {x: 0, y: 0, z: 0}

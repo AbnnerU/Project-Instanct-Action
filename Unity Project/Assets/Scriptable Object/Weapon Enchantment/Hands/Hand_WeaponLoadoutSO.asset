@@ -177,4 +177,5 @@ MonoBehaviour:
       _queryTriggerInteraction: 2
       _maxTargets: 8
   AnimatorController: {fileID: 22100000, guid: 176b08979747f1e48b3ae4650509c18e, type: 2}
+  HitEffectPrefab: {fileID: 3315317344927933127, guid: 249fc79d151aaca45ab9f0394fcaa6d9, type: 3}
   List_WeaponModels: []

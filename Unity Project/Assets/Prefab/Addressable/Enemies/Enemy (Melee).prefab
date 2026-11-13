@@ -25,14 +25,14 @@ GameObject:
   - component: {fileID: 4564397152144541060}
   - component: {fileID: 7651743264658319734}
   - component: {fileID: 7773916649188686455}
-  - component: {fileID: 2651949697427157578}
   - component: {fileID: 8733042703824664223}
+  - component: {fileID: 5610207809395145720}
   - component: {fileID: 301626572502348817}
   - component: {fileID: 8864495692353785839}
   - component: {fileID: 5752072415533641781}
   - component: {fileID: 719550394201319586}
   - component: {fileID: 4098462770203856925}
-  - component: {fileID: 1266269832215162228}
+  - component: {fileID: 1215233846289651813}
   m_Layer: 7
   m_Name: Enemy (Melee)
   m_TagString: Enemy
@@ -136,7 +136,7 @@ MonoBehaviour:
   _healthManagerComponent: {fileID: 7231527614648297650}
   _behaviorTree: {fileID: 6983699681527380791}
   _navMeshAgent: {fileID: 2857506347262930443}
-  _comboController: {fileID: 2651949697427157578}
+  _comboController: {fileID: 5610207809395145720}
   _targetTag: Player
   _currentTarget: {fileID: 0}
   _currentTargetPosition: {x: 0, y: 0, z: 0}
@@ -376,71 +376,6 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
   _drawGizmos: 1
---- !u!114 &2651949697427157578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54779437082285969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ef24f00f26f05448be7b57241c4c72e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.EnemyComboController
-  _active: 1
-  _attackHitbox: {fileID: 8733042703824664223}
-  _animator: {fileID: 1651896244028188169}
-  _characterAnimationController: {fileID: 301626572502348817}
-  _comboAttackSet: {fileID: 0}
-  _list_ComboAttackData:
-  - _animationStateName: Attack
-    _transitionDuration: 0.1
-    _damageData:
-      _damageType: 0
-      _baseDamage: 10
-      _physicForceScaling: 10
-      _magicForceScaling: 0
-    _attackKnockback:
-      KnockbackDistance: 0
-      KnockbackDuration: 0
-      KnockbackCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    _hitboxCenterOffset: {x: 0, y: 0, z: 1}
-    _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 1}
-    _targetLayerMask:
-      serializedVersion: 2
-      m_Bits: 64
-    _queryTriggerInteraction: 0
-    _maxTargets: 5
-  _triggerIdle: 1
-  _backToIdleTriggerParameter: Idle
-  _comboRetentionDuration: 0.87
-  _drawGizmos: 1
-  _debugAttackIndex: 0
-  _debugHitboxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &8733042703824664223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,6 +395,54 @@ MonoBehaviour:
   _drawExecutedHitboxGizmos: 1
   _executedHitboxColor: {r: 1, g: 0, b: 0, a: 1}
   _executedHitboxGizmosDuration: 0.15
+--- !u!114 &5610207809395145720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2249cc0c4188c45a2bda1880043b42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.BasicComboController
+  _active: 1
+  _attackHitbox: {fileID: 8733042703824664223}
+  _animator: {fileID: 1651896244028188169}
+  _characterAnimationController: {fileID: 301626572502348817}
+  _comboAttackSet: {fileID: 0}
+  _list_ComboAttackData:
+  - _animationStateName: Attack
+    _transitionDuration: 0.01
+    _list_Hits:
+    - _damageData:
+        _damageType: 0
+        _baseDamage: 50
+        _physicForceScaling: 50
+        _magicForceScaling: 0
+      _attackKnockback:
+        KnockbackDistance: 0
+        KnockbackDuration: 0
+        KnockbackCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      _hitboxCenterOffset: {x: 0, y: 0, z: 0.75}
+      _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.75}
+      _targetLayerMask:
+        serializedVersion: 2
+        m_Bits: 64
+      _queryTriggerInteraction: 2
+      _maxTargets: 1
+  _triggerIdle: 1
+  _backToIdleTriggerParameter: Idle
+  _comboRetentionDuration: 0.87
+  _drawGizmos: 1
+  _debugAttackIndex: 0
+  _debugHitboxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &301626572502348817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,7 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HitReaction_CancelAndBlockComboController
   _hittableReference: {fileID: 54779437082285969}
-  _comboControllerComponent: {fileID: 2651949697427157578}
+  _comboControllerComponent: {fileID: 5610207809395145720}
   _hittedParameter: Hitted
   _blockAttacks: 1
   _blockTime: 1
@@ -546,7 +529,7 @@ MonoBehaviour:
   _enemyBrainComponent: {fileID: 8609405625918951327}
   _blockTime: 1
   _resetPath: 0
---- !u!114 &1266269832215162228
+--- !u!114 &1215233846289651813
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -555,20 +538,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 54779437082285969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e59083eb13f57419071830e1147178, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a16c07e38c277d4f8178d150702562f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.HitParticleSpawner
-  _damageReceiverReference: {fileID: 54779437082285969}
-  _particlePrefabReference:
-    m_AssetGUID: 838da9c5e89288c4c8005ffa2ff9fb9c
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _positionOffset: {x: 0, y: 0, z: 0}
-  _container: {fileID: 0}
-  _findContainerByTag: 1
-  _containerTag: VFXContainer
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.SpawnHitEffectOnDamageDealt
+  _damageDealerObject: {fileID: 54779437082285969}
+  _effectPrefab: {fileID: 5238538877814813142, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
+  _positionOffset: {x: 0, y: 0, z: -1.5}
+  _rotation: {x: 0, y: 0, z: 0}
 --- !u!1 &1378778652017181660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,7 +1502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae059baff3ade747a80af76f5c3bc05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerAnimationEventReceiver
-  _comboController: {fileID: 2651949697427157578}
+  _comboController: {fileID: 5610207809395145720}
 --- !u!4 &8458051517957376115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3667946887678727147, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}

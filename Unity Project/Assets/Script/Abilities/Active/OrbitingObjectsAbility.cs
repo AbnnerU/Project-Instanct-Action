@@ -54,10 +54,10 @@ namespace Scripts.Abilities
         public override void Execute()
         {
             if (!CanExecute() || !isActiveAndEnabled || _isSpawning || _orbitTarget == null) return;
-            if (_orbPrefab == null || !_orbPrefab.TryGetComponent<ContactDamageRequest>(out _) ||
+            if (_orbPrefab == null || !_orbPrefab.TryGetComponent<TriggerContactDamageRequest>(out _) ||
                 !_orbPrefab.TryGetComponent<Collider>(out var collider) || !collider.isTrigger)
             {
-                Debug.LogWarning("[OrbitingObjectsAbility] Orb prefab needs OrbitMotion, ContactDamageRequest and a trigger Collider on its root.", this);
+                Debug.LogWarning("[OrbitingObjectsAbility] Orb prefab needs OrbitMotion, TriggerContactDamageRequest and a trigger Collider on its root.", this);
                 return;
             }
 
@@ -77,7 +77,7 @@ namespace Scripts.Abilities
                     _list_Orbs.Add(orb);
                     orb.transform.SetParent(_orbContainer, true);
                     orb.GetComponent<OrbitMotion>().Setup(_orbitTarget, _centerOffset, _orbitAxis, _orbitRadius, _orbitSpeed, 360f * i / count);
-                    orb.GetComponent<ContactDamageRequest>().Setup(request);
+                    orb.GetComponent<TriggerContactDamageRequest>().Setup(request);
                 }
                 OnAbilityStarted?.Invoke(this);
                 if (generation == _generation && Initialized && isActiveAndEnabled)

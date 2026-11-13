@@ -3,8 +3,12 @@ using UnityEngine;
 
 namespace Scripts.Combat
 {
-    public abstract class AreaDamageRequestBase : MonoBehaviour
+    public abstract class AreaDamageRequestBase : MonoBehaviour, IDamageDealer
     {
+        public event Action<DamageResult> OnDamageDealt;
+
+        protected void ReportDamageDealt(DamageResult result) => OnDamageDealt?.Invoke(result);
+
         public event Action OnPrepared;
         public event Action OnExecuted;
         [SerializeField] private GameObject _markVisual;

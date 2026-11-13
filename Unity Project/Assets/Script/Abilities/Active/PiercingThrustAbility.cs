@@ -8,8 +8,9 @@ using UnityEngine;
 
 namespace Scripts.Abilities
 {
-    public class PiercingThrustAbility : AbilityBase, IHasCastTime, IDamageDataAbility
+    public class PiercingThrustAbility : AbilityBase, IHasCastTime, IDamageDataAbility, IDamageDealer
     {
+        public event Action<DamageResult> OnDamageDealt;
         public event Action<float> OnCastTimeStarted;
         public event Action<float> OnCastTimeFinished;
 
@@ -244,7 +245,8 @@ namespace Scripts.Abilities
                     allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
                     attackerDamageResultReporter: _damageResultReporter);
 
-                damageReceiver.ReceiveDamage(damageRequest);
+                DamageResult result = damageReceiver.ReceiveDamage(damageRequest);
+                OnDamageDealt?.Invoke(result);
             }
         }
 

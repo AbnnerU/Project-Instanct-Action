@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Scripts.Projectile
 {
-    public class DamageRequestProjectile : Projectile3DBase
+    public class DamageRequestProjectile : Projectile3DBase, IDamageDealer
     {
+        public event System.Action<DamageResult> OnDamageDealt;
         private DamageRequest _damageRequest;
         protected readonly HashSet<IDamageReceiver> _hashSet_DamageReceivers = new HashSet<IDamageReceiver>();
         public void SetDamageRequest(DamageRequest damageRequest)
@@ -28,7 +29,8 @@ namespace Scripts.Projectile
             DamageRequest hitDamageRequest = _damageRequest.WithHit(receiverObject, hitCollider, hit.point);
 
             _hashSet_DamageReceivers.Add(damageReceiver);
-            damageReceiver.ReceiveDamage(hitDamageRequest);
+            DamageResult result = damageReceiver.ReceiveDamage(hitDamageRequest);
+            OnDamageDealt?.Invoke(result);
         }
 
         private bool TryGetDamageReceiver(Collider hitCollider, out IDamageReceiver damageReceiver)

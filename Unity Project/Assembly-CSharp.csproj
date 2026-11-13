@@ -89,7 +89,6 @@
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTGoToTarget.cs" />
     <Compile Include="Assets\Script\Enchantment\EnchantmentCardUI.cs" />
     <Compile Include="Assets\Script\Abilities\Passive\TemporaryStatusBuffOnDashAbility.cs" />
-    <Compile Include="Assets\Script\Combat\EnemyComboController.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasNavMeshAgentSpeedUpdate.cs" />
     <Compile Include="Assets\Script\Singleton\SceneSingleton.cs" />
     <Compile Include="Assets\Script\Health\LifeCycle_HandleCollider.cs" />
@@ -159,6 +158,7 @@
     <Compile Include="Assets\Script\Animation\AnimationRootMotionDriver.cs" />
     <Compile Include="Assets\Script\Abilities\UI\AbilitySlotView.cs" />
     <Compile Include="Assets\Script\Panel\PanelAnimation.cs" />
+    <Compile Include="Assets\Script\Combat\TriggerContactDamageRequest.cs" />
     <Compile Include="Assets\Script\Abstract\Do Action\DoActionBase.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingTaskSOBase.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ObjectPoolContainer.cs" />
@@ -176,7 +176,6 @@
     <Compile Include="Assets\Script\Progression\MN_EnemyProgression.cs" />
     <Compile Include="Assets\Script\Dash Handler\Dash_ComboControllerHandler.cs" />
     <Compile Include="Assets\Script\Combat\ComboController.cs" />
-    <Compile Include="Assets\Script\Combat\ContactDamageRequest.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Weapon\WeaponLoadoutSO.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\SpawnAreaDamageAbilityAutoSetup.cs" />
     <Compile Include="Assets\Script\Job System\Look At Camera\MN_ParallelLookAtCamera.cs" />
@@ -197,6 +196,7 @@
     <Compile Include="Assets\Script\Singleton\Singleton.cs" />
     <Compile Include="Assets\Script\Interface\Tier\Visual\IHasEvolutionVisualInitialization.cs" />
     <Compile Include="Assets\Script\Weapon\MN_Weapon.cs" />
+    <Compile Include="Assets\Script\Weapon\WeaponHitEffectBinder.cs" />
     <Compile Include="Assets\Script\Interface\Animation\IHasCurrentVelocity.cs" />
     <Compile Include="Assets\Script\Interface\Effects\IHasEffectsPlayer.cs" />
     <Compile Include="Assets\Script\Combat\Combo_DirectionHandler.cs" />
@@ -218,6 +218,7 @@
     <Compile Include="Assets\Script\Combat\AttackHitbox.cs" />
     <Compile Include="Assets\Script\Projectile\DamageRequestProjectile.cs" />
     <Compile Include="Assets\Script\Combat\Data\DamageData.cs" />
+    <Compile Include="Assets\Script\Combat\BasicComboController.cs" />
     <Compile Include="Assets\Script\Abilities\Active\SpawnAreaDamageAbility.cs" />
     <Compile Include="Assets\Script\Combat\Enum\DamageType.cs" />
     <Compile Include="Assets\Script\Abilities\MN_Abilities.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Assets\Script\Tier\Enum\Tier.cs" />
     <Compile Include="Assets\Script\Interface\Combat\IDamageReceiver.cs" />
     <Compile Include="Assets\Script\Animation\AnimationVelocityModule.cs" />
+    <Compile Include="Assets\Script\Combat\SpawnHitEffectOnDamageDealt.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\Boolean\BTBoolFunc.cs" />
     <Compile Include="Assets\Script\Abstract\Enchantment\EnchantmentSOBase.cs" />
     <Compile Include="Assets\Script\Dash Handler\Dash_DirectionHandler.cs" />
@@ -312,7 +314,9 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
+    <None Include="Assets\Vefects\Flipbook VFX Bundle Lite HDRP\Flipbook VFX HDRP\_ Lite\Shaders\Lite_SH_Vefects_Unlit_Flipbook_HDRP_New.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\Vefects\Flipbook VFX Bundle Lite HDRP\_ Extra\Shaders\SH_Vefects_Extra_Billboard_01.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
@@ -328,7 +332,9 @@
     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_URP.cginc" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\Vefects\Flipbook VFX Bundle Lite HDRP\Combat Flipbook VFX HDRP\_ Lite\Shaders\Lite_SH_Vefects_HDRP_Unlit_Combat_Flipbook_Advanced_01.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\Vefects\Flipbook VFX Bundle Lite HDRP\Pixel Craft VFX HDRP\_ Lite\Shaders\Lite_SH_Vefects_HDRP_Unlit_Flipbook_Pixel_01.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

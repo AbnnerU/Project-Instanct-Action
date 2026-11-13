@@ -247,7 +247,7 @@ namespace Scripts.Editor.Combat
 
         private sealed class Fixture : IDisposable
         {
-            public EnemyComboController Combo;
+            public BasicComboController Combo;
             public Animator Animator;
             public ComboAttackSetSO Attacks;
             public AnimationClip AttackClip;
@@ -299,7 +299,7 @@ namespace Scripts.Editor.Combat
                     Animator.speed = 0;
                     Animator.Update(0);
                     _root.AddComponent<AttackHitbox>();
-                    Combo = _root.AddComponent<EnemyComboController>();
+                    Combo = _root.AddComponent<BasicComboController>();
                     _root.AddComponent<ComboAnimationEventReceiver>();
                     Attacks = ScriptableObject.CreateInstance<ComboAttackSetSO>();
                     _list_Objects.Add(Attacks);
