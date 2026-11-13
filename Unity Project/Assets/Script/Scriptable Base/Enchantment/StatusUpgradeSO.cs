@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Scripts.Managers;
 using Scripts.Status;
 using UnityEngine;
 
@@ -15,11 +14,11 @@ namespace Scripts.Enchantment
 
         public override void Apply(EnchantmentContext context)
         {
-            if (context == null || context.PlayerStatus == null)
+            if (context == null || context.StatusProvider == null)
                 return;
 
             for (int i = 0; i < _list_StatusModifiers.Count; i++)
-                _list_StatusModifiers[i].Apply(context.PlayerStatus);
+                _list_StatusModifiers[i].Apply(context.StatusProvider);
         }
 
         public override string GetResolvedDescription()
@@ -36,15 +35,16 @@ namespace Scripts.Enchantment
         [Tooltip("FLAT adds status units (percentage points for percentage stats). PERCENT_OF_CURRENT: 10 adds 10% of the current value.")]
         public float Value;
 
-        public void Apply(MN_PlayerStatus playerStatus)
+        public void Apply(IHasStatusInfoReference statusProvider)
         {
-            if (playerStatus == null)
+            StatusData statusData = statusProvider?.GetStatusInfo()?.GetStatusData(StatusType);
+            if (statusData == null)
                 return;
 
-            float currentValue = playerStatus.GetCurrentValue(StatusType);
+            float currentValue = statusData.CurrentValue;
             float valueToAdd = GetValueToAdd(currentValue);
 
-            playerStatus.AddCurrentValue(StatusType, valueToAdd);
+            statusData.AddCurrentValue(valueToAdd);
         }
 
         private float GetValueToAdd(float currentValue)

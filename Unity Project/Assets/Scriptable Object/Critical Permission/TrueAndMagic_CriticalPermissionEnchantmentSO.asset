@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b1a794be0b1c24b8d4b2284be046b4, type: 3}
+  m_Name: TrueAndMagic_CriticalPermissionEnchantmentSO
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.CriticalPermissionEnchantmentSO
+  ID: 3854aa24-373f-4b61-8820-6c80a899d84c
+  DisplayName: Critical Bless
+  Tier: 3
+  EnchantmentType: 1
+  Description: "Dano m\xE1gico e real podem causar dano cr\xEDtico. "
+  IconReference:
+    m_AssetGUID: 066a1d8aeade1824694b664d88d8ad36
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _canRepeat: 0
+  _allowedTypes: -1

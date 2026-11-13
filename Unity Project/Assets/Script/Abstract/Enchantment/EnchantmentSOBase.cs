@@ -1,5 +1,5 @@
 using CustomInspector;
-using Scripts.Managers;
+using Scripts.Status;
 using Scripts.TierManipulation;
 using System;
 using UnityEngine;
@@ -41,15 +41,15 @@ namespace Scripts.Enchantment
 
     public class EnchantmentContext
     {
-        public MN_PlayerStatus PlayerStatus { get; }
-        public GameObject PlayerObject { get; }
-        public Transform PlayerTransform { get; }
+        public IHasStatusInfoReference StatusProvider { get; }
+        public GameObject TargetObject { get; }
+        public Transform TargetTransform { get; }
 
-        public EnchantmentContext(MN_PlayerStatus playerStatus, GameObject playerObject)
+        public EnchantmentContext(IHasStatusInfoReference statusProvider, GameObject targetObject)
         {
-            PlayerStatus = playerStatus;
-            PlayerObject = playerObject;
-            PlayerTransform = playerObject != null ? playerObject.transform : null;
+            StatusProvider = statusProvider;
+            TargetObject = targetObject;
+            TargetTransform = targetObject != null ? targetObject.transform : null;
         }
     }
 }
