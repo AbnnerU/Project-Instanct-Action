@@ -13,7 +13,7 @@ public class OnHit_Particles : MonoBehaviour
         _hittableObject.GetComponent<IHittable>().OnHitted += OnHit_Particles_OnHitted;
     }
 
-    private void OnHit_Particles_OnHitted(int damage)
+    private void OnHit_Particles_OnHitted(int damage, bool isAlive)
     {
         _particleSystemComponent.Play();
     }

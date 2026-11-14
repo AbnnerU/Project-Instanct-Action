@@ -6904,6 +6904,22 @@ PrefabInstance:
       propertyPath: _reference
       value: 
       objectReference: {fileID: 1151873706}
+    - target: {fileID: 8061600415890869738, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _doNotRepeat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061600415890869738, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _randomRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061600415890869738, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _xRandomRange.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061600415890869738, guid: 42a308debae41784e867944925962cab, type: 3}
+      propertyPath: _randomParamenter
+      value: HittedIndex
+      objectReference: {fileID: 0}
     - target: {fileID: 8499587158038290663, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

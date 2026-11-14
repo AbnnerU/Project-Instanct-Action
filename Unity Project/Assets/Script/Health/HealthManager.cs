@@ -4,7 +4,7 @@ using Scripts.ObjectPooling;
 
 public class HealthManager : HealthBasicsEvents, IHittable, IHealable
 {
-    public event Action<int> OnHitted;
+    public event Action<int, bool> OnHitted;
     public event Action OnHeal;
 
     [SerializeField] private bool releaseOnDeath;
@@ -26,8 +26,6 @@ public class HealthManager : HealthBasicsEvents, IHittable, IHealable
         {
             currentHealth -= damage;
 
-            OnHitted?.Invoke((int)damage);
-
             OnHealthUpdate?.Invoke(currentHealth);
 
             if (currentHealth <= 0 && isAlive)
@@ -41,6 +39,8 @@ public class HealthManager : HealthBasicsEvents, IHittable, IHealable
                 if (isKillable)
                     Kill();
             }
+
+            OnHitted?.Invoke((int)damage, isAlive);
         }
     }
 
@@ -51,9 +51,7 @@ public class HealthManager : HealthBasicsEvents, IHittable, IHealable
         if (isHittable && isAlive)
         {
             currentHealth -= damage;
-
-            OnHitted?.Invoke((int)damage);
-
+        
             OnHealthUpdate?.Invoke(currentHealth);
 
             if (currentHealth <= 0 && isAlive)
@@ -65,6 +63,8 @@ public class HealthManager : HealthBasicsEvents, IHittable, IHealable
                 if (isKillable)
                     Kill();
             }
+
+            OnHitted?.Invoke((int)damage, isAlive);
         }
     }
 
@@ -79,9 +79,6 @@ public class HealthManager : HealthBasicsEvents, IHittable, IHealable
 
             currentHealth -= damage;
 
-            if (triggerDamageEvent)
-                OnHitted?.Invoke((int)damage);
-
             OnHealthUpdate?.Invoke(currentHealth);
 
             if (currentHealth <= 0 && isAlive)
@@ -93,6 +90,9 @@ public class HealthManager : HealthBasicsEvents, IHittable, IHealable
                 if (isKillable)
                     Kill();
             }
+
+            if (triggerDamageEvent)
+                OnHitted?.Invoke((int)damage, isAlive);
         }
     }
 

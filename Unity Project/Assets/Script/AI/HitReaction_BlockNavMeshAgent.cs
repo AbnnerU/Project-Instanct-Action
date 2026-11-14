@@ -46,7 +46,7 @@ namespace Scripts.AI
                 _hittableHandler.OnHitted -= OnHitted;
         }
 
-        private void OnHitted(int damage)
+        private void OnHitted(int damage, bool isAlive)
         {
             if (_blockAgentRoutine != null)
                 StopCoroutine(_blockAgentRoutine);

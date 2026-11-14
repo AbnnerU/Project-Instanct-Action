@@ -21,7 +21,7 @@ namespace Scripts.Combat
                 _hittableHandler.OnHitted += OnHitted;
         }
 
-        private void OnHitted(int obj)
+        private void OnHitted(int obj, bool isAlive)
         {
             if (_disableColliderRoutine != null)
                 StopCoroutine(_disableColliderRoutine);

@@ -14,7 +14,7 @@ public class OnHit_VisualEffect : MonoBehaviour
         _hittableObject.GetComponent<IHittable>().OnHitted += OnHit_Particles_OnHitted;
     }
 
-    private void OnHit_Particles_OnHitted(int damage)
+    private void OnHit_Particles_OnHitted(int damage, bool isAlive)
     {
         _visualEffectComponent.Play();
     }

@@ -21,7 +21,7 @@ namespace Scripts.DashHandler
                 _hittableHandler.OnHitted += OnHitted;
         }
 
-        private void OnHitted(int obj)
+        private void OnHitted(int obj, bool isAlive)
         {
             if (_blockDashRoutine != null)
                 StopCoroutine(_blockDashRoutine);

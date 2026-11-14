@@ -493,8 +493,12 @@ MonoBehaviour:
   _animationControllerComponent: {fileID: 301626572502348817}
   _hittableReference: {fileID: 54779437082285969}
   _hittedParameter: Hitted
-  _hittedStateName: 
+  _cancelParameterIfIsDeath: 1
   _transitionDuration: 0.05
+  _randomize: 1
+  _doNotRepeat: 1
+  _randomParamenter: HittedIndex
+  _randomRange: 4
 --- !u!114 &719550394201319586
 MonoBehaviour:
   m_ObjectHideFlags: 0

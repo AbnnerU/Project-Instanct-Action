@@ -163,7 +163,7 @@ namespace Scripts.Combat
             if (IsAttacking) AnimationEvent_CloseComboWindow();
         }
 
-        private void Hittable_OnHitted(int damage) => CancelAttack(playIdle: false);
+        private void Hittable_OnHitted(int damage, bool isAlive) => CancelAttack(playIdle: false);
 
         #endregion
 

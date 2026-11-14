@@ -160,7 +160,7 @@ public abstract class LifeCycleActionsBase : OnDeathActionBase
 #region Interface
 public interface IHittable
 {
-    public event Action<int> OnHitted;
+    public event Action<int,bool> OnHitted;
 
     void ResetHealth();
 
