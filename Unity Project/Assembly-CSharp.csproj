@@ -207,6 +207,7 @@
     <Compile Include="Assets\Script\Progression\XpBar.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ObjectPool.cs" />
     <Compile Include="Assets\Script\Combat\PostDashAttackController.cs" />
+    <Compile Include="Assets\Script\Game Loop\MN_GameLoop.cs" />
     <Compile Include="Assets\Script\Health\DynamicHealthRepairUI.cs" />
     <Compile Include="Assets\Script\Status\Appliers\HealthByStatus.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTTryFindObjectInArea.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Assets\Script\Abilities\Enum\AbilityValueType.cs" />
     <Compile Include="Assets\Script\Health\HealthBar.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Script\Health\OnDeath_DisableComboController.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\IPlacementItemData.cs" />
     <Compile Include="Assets\Script\Combat\AttackHitbox.cs" />
     <Compile Include="Assets\Script\Projectile\DamageRequestProjectile.cs" />
@@ -269,6 +271,7 @@
     <Compile Include="Assets\Script\Abstract\Saver\SaverBase.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\BTSequence.cs" />
     <Compile Include="Assets\Script\Interface\General\INavMeshAgentStateUpdate.cs" />
+    <Compile Include="Assets\Script\Health\OnDeath_DisableDash.cs" />
     <Compile Include="Assets\Script\Interface\General\IIdentifiableItem.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTDoAction.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasViewport.cs" />
@@ -292,6 +295,7 @@
     <Compile Include="Assets\Script\Combat\Pop Up\DamagePopupSpawner.cs" />
     <Compile Include="Assets\Script\Do Action\Animation\DoAction_AnimSetBool.cs" />
     <Compile Include="Assets\Script\Coins\CoinsTextView.cs" />
+    <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTIsTargetAlive.cs" />
     <Compile Include="Assets\Script\Animation\AnimationDirectionalVelocityModule.cs" />
     <Compile Include="Assets\Script\Do Action\General\DoAction_DefineActiveState.cs" />
     <Compile Include="Assets\Script\Interface\General\ISaveableTimer.cs" />

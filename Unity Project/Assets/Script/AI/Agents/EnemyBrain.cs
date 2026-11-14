@@ -293,6 +293,7 @@ namespace Scripts.BehaviourTree.Agents
         {
             BTBoolFunc btIsGoToTargetOrder = new BTBoolFunc(() => _eCurrentOrder == AgentMovementOrder.GO_TO_TARGET);
             BTBoolFunc btHasTarget = new BTBoolFunc(() => GetMovementTarget() != null);
+            BTIsTargetAlive btIsTargetAlive = new BTIsTargetAlive(GetConfiguredTarget, StopTargetActions);
             BTBoolFunc btIsAlive = new BTBoolFunc(() => _healthManagerComponent.IsAlive());
             BTInverter btIsDead = new BTInverter(btIsAlive);
 
@@ -307,7 +308,7 @@ namespace Scripts.BehaviourTree.Agents
             BTLookAtTarget btLookAtTarget = new BTLookAtTarget(GetConfiguredTarget, transform, true);
             BTIsTargetInRange btIsTargetInAttackRange = new BTIsTargetInRange(GetConfiguredTarget, transform, _attackDistance, _useXZDistanceForAttack);
             BTComboAttack btComboAttack = new BTComboAttack(_comboController, _maxAttackDuration);
-            BTConditionalSequence btComboAttackConditional = new BTConditionalSequence(new List<BTnode> { btIsAlive }, btComboAttack);
+            BTConditionalSequence btComboAttackConditional = new BTConditionalSequence(new List<BTnode> { btIsAlive, btIsTargetAlive }, btComboAttack);
 
             BTGoToTarget btGoToTarget = new BTGoToTarget(
                 GetMovementTarget,
@@ -317,13 +318,14 @@ namespace Scripts.BehaviourTree.Agents
                 _targetUpdateInterval,
                 _movementSpeed);
 
-            BTConditionalSequence btGoToTargetCondicional = new BTConditionalSequence(new List<BTnode> { btIsAlive}, btGoToTarget);
+            BTConditionalSequence btGoToTargetCondicional = new BTConditionalSequence(new List<BTnode> { btIsAlive, btIsTargetAlive }, btGoToTarget);
 
             BTSequence btGoToTargetSequence = new BTSequence(new List<BTnode>
             {
                 btIsAlive,
                 btIsGoToTargetOrder,
                 btHasTarget,
+                btIsTargetAlive,
                 btSetMoveToTargetState,
                 btGoToTargetCondicional,
                 btHandleTargetReached
@@ -334,6 +336,7 @@ namespace Scripts.BehaviourTree.Agents
                 btIsAlive,
                 btIsGoToTargetOrder,
                 btHasTarget,
+                btIsTargetAlive,
                 btIsTargetInAttackRange,
                 btSetAttackState,
                 btStopAgent,
@@ -394,6 +397,13 @@ namespace Scripts.BehaviourTree.Agents
             _currentVelocity = Vector3.zero;
             _navMeshAgent.isStopped = true;
             _navMeshAgent.ResetPath();
+        }
+
+        private void StopTargetActions()
+        {
+            StopAgent();
+            if (_comboController != null && _comboController.IsAttacking)
+                _comboController.CancelAttack();
         }
     }
 }

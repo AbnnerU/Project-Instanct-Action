@@ -3,7 +3,14 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 public class LoadScene_TryLoad : MonoBehaviour
 {
+    [SerializeField] private bool _tryLoadOnStart;
     [SerializeField] private AssetReference _initialScene;
+
+    private void Start()
+    {
+        if (_tryLoadOnStart)
+            Load();
+    }
 
     public void Load()
     {
