@@ -5973,7 +5973,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[B] Buy Status
 
-    150'
+    700'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6353,7 +6353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.EnchantmentPurchase
   _purchaseInput: {fileID: -1119816970580609425, guid: a6c85231e9084f242931e75e86d0edbc, type: 3}
-  _price: 150
+  _price: 700
   _deckConfig:
     EnchantmentsTypesAvailable: 00000000
     Rolls: 0
@@ -6368,6 +6368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1891571130}
   - component: {fileID: 1891571131}
+  - component: {fileID: 1891571132}
   m_Layer: 0
   m_Name: MN Waves
   m_TagString: Untagged
@@ -6438,6 +6439,51 @@ MonoBehaviour:
     _triggerInteraction: 2
   _drawGizmos: 1
   _gizmoRadius: 0.3
+--- !u!114 &1891571132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891571129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae295c541a4c8f49abea833744a9879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Waves.WaveProgressionByPlayerLevel
+  _xp: {fileID: 415616842}
+  _waves: {fileID: 1891571131}
+  _list_Progression:
+  - Level: 10
+    SpawnInterval: 2.9
+    MaxAliveEnemies: 10
+  - Level: 20
+    SpawnInterval: 2.7
+    MaxAliveEnemies: 11
+  - Level: 25
+    SpawnInterval: 2.6
+    MaxAliveEnemies: 11
+  - Level: 30
+    SpawnInterval: 2.5
+    MaxAliveEnemies: 12
+  - Level: 35
+    SpawnInterval: 2.15
+    MaxAliveEnemies: 12
+  - Level: 40
+    SpawnInterval: 2
+    MaxAliveEnemies: 12
+  - Level: 50
+    SpawnInterval: 1.75
+    MaxAliveEnemies: 13
+  - Level: 65
+    SpawnInterval: 1.5
+    MaxAliveEnemies: 15
+  - Level: 80
+    SpawnInterval: 1.35
+    MaxAliveEnemies: 16
+  - Level: 100
+    SpawnInterval: 1
+    MaxAliveEnemies: 16
 --- !u!1 &1955501765
 GameObject:
   m_ObjectHideFlags: 0
@@ -6858,14 +6904,6 @@ PrefabInstance:
       propertyPath: _reference
       value: 
       objectReference: {fileID: 1151873706}
-    - target: {fileID: 6767258241694591359, guid: 42a308debae41784e867944925962cab, type: 3}
-      propertyPath: disableGameObjectSliderOnDeath
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6767258241694591359, guid: 42a308debae41784e867944925962cab, type: 3}
-      propertyPath: enableGameObjectSliderOnRespawn
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8499587158038290663, guid: 42a308debae41784e867944925962cab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -6877,13 +6915,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4206290719789535804}
-    - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4206290719789535803}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a308debae41784e867944925962cab, type: 3}
 --- !u!114 &4206290719789535741 stripped
 MonoBehaviour:
@@ -6929,36 +6961,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9d2a62090323d4fb428a788a9f149b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
---- !u!114 &4206290719789535803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711513674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 479c48a03de1fe0479721aa4e42ffefc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Health.OnDeath_DisableComboController
-  _healthEventsComponent: {fileID: 4206290719789535795}
-  _verifyStateOnStart: 1
-  _comboController: {fileID: 4206290719789535742}
---- !u!114 &4206290719789535804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711513674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e36c9a3bec3ac72499d28f5edf080422, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Health.OnDeath_DisableDash
-  _healthEventsComponent: {fileID: 4206290719789535795}
-  _verifyStateOnStart: 1
-  _dash: {fileID: 4206290719789535755}
 --- !u!1001 &8199929961677144170
 PrefabInstance:
   m_ObjectHideFlags: 0

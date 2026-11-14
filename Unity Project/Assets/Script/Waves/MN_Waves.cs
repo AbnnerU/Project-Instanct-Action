@@ -91,6 +91,12 @@ namespace Scripts.Waves
 
         #region Public API
 
+        public void SetSpawnSettings(float interval, int maxAliveEnemies)
+        {
+            _spawnInterval = Mathf.Max(0.01f, interval);
+            _maxAliveEnemies = Mathf.Max(0, maxAliveEnemies);
+        }
+
         public void Enable()
         {
             _active = true;

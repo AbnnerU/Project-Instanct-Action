@@ -545,6 +545,9 @@ MonoBehaviour:
   _effectPrefab: {fileID: 5238538877814813142, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
   _positionOffset: {x: 0, y: 0, z: -1.5}
   _rotation: {x: 0, y: 0, z: 0}
+  _findContainerByTag: 1
+  _containerTag: VFXContainer
+  _container: {fileID: 0}
 --- !u!1 &1378778652017181660
 GameObject:
   m_ObjectHideFlags: 0

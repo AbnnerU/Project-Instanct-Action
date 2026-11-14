@@ -122,6 +122,7 @@
     <Compile Include="Assets\Script\Combat\Events\AttackExecutionData.cs" />
     <Compile Include="Assets\Script\Abilities\Auto Setup\DashStatusBuffAutoSetup.cs" />
     <Compile Include="Assets\Script\Tier\Scriptable Base\Visual\EvolutionPathSO.cs" />
+    <Compile Include="Assets\Script\Waves\WaveProgressionByPlayerLevel.cs" />
     <Compile Include="Assets\Script\AI\HitReaction_BlockNavMeshAgent.cs" />
     <Compile Include="Assets\Script\Animation\CharacterAnimationController.cs" />
     <Compile Include="Assets\Script\Interface\Nameable\INameable.cs" />

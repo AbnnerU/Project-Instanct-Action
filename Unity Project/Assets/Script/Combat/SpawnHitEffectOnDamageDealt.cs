@@ -10,6 +10,10 @@ namespace Scripts.Combat
         [SerializeField] private GameObject _effectPrefab;
         [SerializeField] private Vector3 _positionOffset;
         [SerializeField] private Vector3 _rotation;
+        [Header("Container")]
+        [SerializeField] private bool _findContainerByTag;
+        [SerializeField] private string _containerTag;
+        [SerializeField] private Transform _container;
 
         private IDamageDealer _damageDealer;
 
@@ -18,7 +22,9 @@ namespace Scripts.Combat
         private void OnEnable()
         {
             _damageDealer = _damageDealerObject.GetComponent<IDamageDealer>();
-              
+
+            if (_findContainerByTag && _container == null)
+                _container = GameObject.FindGameObjectWithTag(_containerTag).transform;
 
             if (_damageDealer == null)
             {
@@ -40,7 +46,10 @@ namespace Scripts.Combat
         {
             if (!result.WasApplied || _effectPrefab == null) return;
 
-            PoolManager.SpawnObject(_effectPrefab, result.HitPoint + _positionOffset, Quaternion.Euler(_rotation));
+            GameObject obj = PoolManager.SpawnObject(_effectPrefab, result.HitPoint + _positionOffset, Quaternion.Euler(_rotation));
+
+            if (_container)
+                obj.transform.SetParent(_container);
         }
     }
 }

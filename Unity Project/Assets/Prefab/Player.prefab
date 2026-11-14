@@ -234,6 +234,8 @@ GameObject:
   - component: {fileID: 3592099952162877558}
   - component: {fileID: 4148286784762355386}
   - component: {fileID: 8642303779160809450}
+  - component: {fileID: 2282013685486589252}
+  - component: {fileID: 8428185340821402442}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -382,8 +384,8 @@ MonoBehaviour:
   healthObject: {fileID: 99004075763758795}
   slider: {fileID: 207974896677581380}
   disableGameObjectSliderOnBlock: 0
-  disableGameObjectSliderOnDeath: 0
-  enableGameObjectSliderOnRespawn: 0
+  disableGameObjectSliderOnDeath: 1
+  enableGameObjectSliderOnRespawn: 1
 --- !u!114 &99004075763758795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,6 +879,9 @@ MonoBehaviour:
   _effectPrefab: {fileID: 8836407550465818219, guid: 838da9c5e89288c4c8005ffa2ff9fb9c, type: 3}
   _positionOffset: {x: 0, y: 0, z: -1.5}
   _rotation: {x: 0, y: 0, z: 0}
+  _findContainerByTag: 1
+  _containerTag: VFXContainer
+  _container: {fileID: 0}
 --- !u!114 &4148286784762355386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,6 +912,36 @@ MonoBehaviour:
   _verifyStateOnStart: 1
   _animationControllerComponent: {fileID: 8709150000114935703}
   _deathParameter: Death
+--- !u!114 &2282013685486589252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437302767631231260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36c9a3bec3ac72499d28f5edf080422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Health.OnDeath_DisableDash
+  _healthEventsComponent: {fileID: 99004075763758795}
+  _verifyStateOnStart: 1
+  _dash: {fileID: 8889931655858333428}
+--- !u!114 &8428185340821402442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437302767631231260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479c48a03de1fe0479721aa4e42ffefc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Health.OnDeath_DisableComboController
+  _healthEventsComponent: {fileID: 99004075763758795}
+  _verifyStateOnStart: 1
+  _comboController: {fileID: 8183698727932517817}
 --- !u!1 &1557568472590508371
 GameObject:
   m_ObjectHideFlags: 0
