@@ -16,8 +16,8 @@ MonoBehaviour:
   DisplayName: Piercing Thrust
   Tier: 3
   EnchantmentType: 1
-  Description: "Avan\xE7a em uma dire\xE7\xE3o, dando <damage index=0> a todos os
-    inimigos no caminho."
+  Description: 'Lunges forward, dealing <damage index=0> damage to all enemies in
+    the path. '
   IconReference:
     m_AssetGUID: bb286fbbb93a8b74e8d35ca31b23b7e6
     m_SubObjectName: 

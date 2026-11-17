@@ -16,7 +16,8 @@ MonoBehaviour:
   DisplayName: Arcane Orbs
   Tier: 1
   EnchantmentType: 1
-  Description: 'Conjura orbs que causam no <damage index = 0> a quem atingir. '
+  Description: 'Conjures 3 orbs that deal <damage index = 0> damage to enemies they
+    touch. '
   IconReference:
     m_AssetGUID: d2362638ca4255b49b77d1e0fe21ff73
     m_SubObjectName: 

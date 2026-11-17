@@ -79,6 +79,17 @@ namespace Scripts.Enchantment
         public static string ResolveWeaponDescription(WeaponEnchantmentSO enchantment, string description)
         {
             if (string.IsNullOrEmpty(description)) return description;
+            description = Regex.Replace(description,
+                @"<\s*postdashdamage(?:\s+hit\s*=\s*""?(?<hit>\d+)""?)?\s*>",
+                match =>
+                {
+                    int hitIndex = 0;
+                    if (match.Groups["hit"].Success && !int.TryParse(match.Groups["hit"].Value, out hitIndex)) return match.Value;
+                    var loadout = enchantment != null ? enchantment.WeaponLoadout : null;
+                    var hit = loadout != null && loadout.HasPostDashAttack
+                        ? loadout.PostDashAttack?.GetHit(hitIndex) : null;
+                    return hit != null ? FormatDamage(hit.DamageData) : $"[postdashdamage hit {hitIndex}]";
+                }, RegexOptions.IgnoreCase);
             return Regex.Replace(description,
                 @"<\s*(?:attackdamage|attackSet)\s+index\s*=\s*""?(?<index>\d+)""?(?:\s+hit\s*=\s*""?(?<hit>\d+)""?)?\s*>",
                 match =>

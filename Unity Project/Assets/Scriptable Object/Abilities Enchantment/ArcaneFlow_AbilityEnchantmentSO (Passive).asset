@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Arcane Flow
   Tier: 3
   EnchantmentType: 1
-  Description: Diminui o tempo de recarga das habilidades em 1s por ataque.
+  Description: Reduces ability cooldowns by 1s per attack.
   IconReference:
     m_AssetGUID: c63135fc920e9cd4ab49fb0b3e4ae0a8
     m_SubObjectName: 
@@ -31,5 +31,6 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  RechargeTime: 0
   List_DamageDatas: []
   List_BuffDatas: []

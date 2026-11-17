@@ -16,9 +16,24 @@ MonoBehaviour:
   DisplayName: HeavyHammer
   Tier: 3
   EnchantmentType: 2
-  Description: 'Ganha o martelo pessado.
+  Description: 'Gain a heavy hammer.
 
-    - <attackdamage index=0>'
+    Combo:
+
+    <attackSet index=0 hit=0>
+
+    <attackSet
+    index=1 hit=0>
+
+    <attackSet index=2 hit=0>
+
+    Post-dash:
+
+    <postdashdamage
+    hit=0>
+
+
+'
   IconReference:
     m_AssetGUID: cb9e700fd405ed1409bdc040a3e35254
     m_SubObjectName: 

@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Axe_WeaponEnchantmentSO
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.WeaponEnchantmentSO
   ID: f4c5ef91-9538-4860-8dcf-668213483a90
-  DisplayName: Machadinho
+  DisplayName: Axe
   Tier: 1
   EnchantmentType: 2
-  Description: 'Machadinho '
+  Description: "Wield an axe to strike enemies.\nCombo:\n<attackSet index=0 hit=0>\n<attackSet
+    index=1 hit=0>\n<attackSet index=2 hit=0>\n<attackSet index=3 hit=0>\nPost-dash:\n<postdashdamage
+    hit=0> / <postdashdamage hit=1>\n "
   IconReference:
     m_AssetGUID: 9582013dfaac7784e80f4cadcaf6bd98
     m_SubObjectName: 

@@ -16,8 +16,8 @@ MonoBehaviour:
   DisplayName: Arcane Rupture
   Tier: 3
   EnchantmentType: 1
-  Description: "Invoca uma ruptura m\xE1gica que causa <damage index = 0> a todos
-    os inimigos na \xE1rea."
+  Description: Summons an arcane rupture that deals <damage index = 0> damage to
+    all enemies in the area.
   IconReference:
     m_AssetGUID: 9cf3ac0b624168545975e8923bfe94e3
     m_SubObjectName: 

@@ -16,12 +16,24 @@ MonoBehaviour:
   DisplayName: Two Swords
   Tier: 1
   EnchantmentType: 2
-  Description: 'Ganha dois machados.
+  Description: 'Gain two axes.
 
-    -<attackdamage index=0>
+    Combo:
 
-    -<attackdamage
-    index=1>'
+    <attackSet index=0 hit=0>
+
+    <attackSet
+    index=1 hit=0> / <attackSet index=1 hit=1>
+
+    <attackSet index=2 hit=0> / <attackSet
+    index=2 hit=1>
+
+    Post-dash:
+
+    <postdashdamage hit=0>
+
+
+'
   IconReference:
     m_AssetGUID: 55012f4fbdc969342b89c380463140f7
     m_SubObjectName: 

@@ -16,7 +16,26 @@ MonoBehaviour:
   DisplayName: Punhos
   Tier: 0
   EnchantmentType: 2
-  Description: Socos
+  Description: 'Unleash a series of punches to deal damage.
+
+    Combo:
+
+    <attackdamage
+    index=0 hit=0>
+
+    <attackdamage index=1 hit=0>
+
+    <attackSet index=2 hit=0>
+
+    Post-dash:
+
+    4
+    x <postdashdamage hit=0>
+
+
+
+
+'
   IconReference:
     m_AssetGUID: 3488b33dd528c2c44953de75a09d3ee4
     m_SubObjectName: 

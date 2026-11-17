@@ -16,8 +16,8 @@ MonoBehaviour:
   DisplayName: Heavy Attack (Passive)
   Tier: 2
   EnchantmentType: 1
-  Description: "Depois de usar o dash, ganha <buff index=0> por <buffduration index=0>.
-    Usar o dash novamente reseta a dura\xE7\xE3o."
+  Description: 'After dashing, gain <buff index=0> for <buffduration index=0>. Dashing
+    again refreshes the duration. '
   IconReference:
     m_AssetGUID: 2b908f5f20beff14fa10bdef4506d4d1
     m_SubObjectName: 

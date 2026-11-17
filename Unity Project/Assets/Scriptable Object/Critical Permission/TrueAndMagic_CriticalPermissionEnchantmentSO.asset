@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Critical Bless
   Tier: 3
   EnchantmentType: 1
-  Description: "Dano m\xE1gico e real podem causar dano cr\xEDtico. "
+  Description: 'Magic and true damage can critically strike. '
   IconReference:
     m_AssetGUID: 066a1d8aeade1824694b664d88d8ad36
     m_SubObjectName: 

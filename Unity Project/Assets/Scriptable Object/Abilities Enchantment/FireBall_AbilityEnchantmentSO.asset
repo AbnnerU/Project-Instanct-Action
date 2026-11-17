@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Fire Ball
   Tier: 1
   EnchantmentType: 1
-  Description: 'Atira uma bola de fogo que da <damage index = 0>. '
+  Description: 'Launches a fireball that deals <damage index = 0> damage. '
   IconReference:
     m_AssetGUID: 162e298589930b74898da9e368bc46b3
     m_SubObjectName: 

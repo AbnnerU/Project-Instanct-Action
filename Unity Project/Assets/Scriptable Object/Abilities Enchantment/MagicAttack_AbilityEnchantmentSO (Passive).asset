@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Magic Attack (Passive)
   Tier: 1
   EnchantmentType: 1
-  Description: A cada 3 ataques, causa <damage index=0> de dano adicional.
+  Description: Every third attack deals <damage index=0> bonus damage.
   IconReference:
     m_AssetGUID: 8e5a3df2309599d42a812baca6503547
     m_SubObjectName: 
