@@ -48,8 +48,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: -0.120206416, z: 0.4881119}
-      _hitboxHalfExtents: {x: 0.5000004, y: 0.4927153, z: 1.0354673}
+      _hitboxCenterOffset: {x: 0, y: -0.120206416, z: 0.9}
+      _hitboxHalfExtents: {x: 0.5000004, y: 0.4927153, z: 0.9}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128
@@ -90,8 +90,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: 0.061924815, z: 0.50996727}
-      _hitboxHalfExtents: {x: 0.5000002, y: 0.5764948, z: 0.9371154}
+      _hitboxCenterOffset: {x: 0, y: 0.061924815, z: 0.9}
+      _hitboxHalfExtents: {x: 0.5000002, y: 0.5764948, z: 0.9}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128
@@ -132,8 +132,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: 0.07285249, z: 0.590105}
-      _hitboxHalfExtents: {x: 0.5000002, y: 0.53278375, z: 0.8569776}
+      _hitboxCenterOffset: {x: 0, y: 0.07285249, z: 0.9}
+      _hitboxHalfExtents: {x: 0.5000002, y: 0.53278375, z: 0.9}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128

@@ -526,6 +526,7 @@ GameObject:
   - component: {fileID: 8658328471153798441}
   - component: {fileID: 2153284052778431660}
   - component: {fileID: 8295450727726487473}
+  - component: {fileID: 8906181815431350677}
   - component: {fileID: 5058952256331780876}
   - component: {fileID: 3017615716217013624}
   - component: {fileID: 411065067123737881}
@@ -672,14 +673,31 @@ MonoBehaviour:
   _statusInfo:
     List_StatusData:
     - StatusType: 0
-      BaseValue: 100
-      CurrentValue: 100
+      BaseValue: 310
+      CurrentValue: 310
     - StatusType: 9
-      BaseValue: 25
-      CurrentValue: 25
+      BaseValue: 30
+      CurrentValue: 30
     - StatusType: 4
-      BaseValue: 5
-      CurrentValue: 0
+      BaseValue: 15
+      CurrentValue: 15
+--- !u!114 &8906181815431350677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668894675120357355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c0434f1d554f44fb7b654575d7aaa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Status.HealthByStatus
+  _statusSource: {fileID: 8295450727726487473}
+  _healthManager: {fileID: 5058952256331780876}
+  _healDifferenceWhenMaxHealthIncreases: 0
+  _clampCurrentHealthWhenMaxHealthDecreases: 1
+  _resetHealthOnEnable: 1
 --- !u!114 &5058952256331780876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +763,7 @@ MonoBehaviour:
   _healthEventsComponent: {fileID: 5058952256331780876}
   _verifyStateOnStart: 1
   _animationControllerComponent: {fileID: 8320340935477062313}
+  _boolParameter: 0
   _deathParameter: Death
 --- !u!114 &8547232156055357868
 MonoBehaviour:

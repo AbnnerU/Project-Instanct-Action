@@ -168,8 +168,8 @@ MonoBehaviour:
       BaseValue: 25
       CurrentValue: 25
     - StatusType: 3
-      BaseValue: 10
-      CurrentValue: 0
+      BaseValue: 15
+      CurrentValue: 15
 --- !u!114 &8279000431274479677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +252,7 @@ MonoBehaviour:
   _healthEventsComponent: {fileID: 7231527614648297650}
   _verifyStateOnStart: 1
   _animationControllerComponent: {fileID: 301626572502348817}
+  _boolParameter: 0
   _deathParameter: Death
 --- !u!114 &1764168608193628138
 MonoBehaviour:
@@ -418,8 +419,8 @@ MonoBehaviour:
     _list_Hits:
     - _damageData:
         _damageType: 0
-        _baseDamage: 50
-        _physicForceScaling: 50
+        _baseDamage: 60
+        _physicForceScaling: 60
         _magicForceScaling: 0
       _attackKnockback:
         KnockbackDistance: 0

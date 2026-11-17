@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
     <Compile Include="Assets\Editor\Tests\PercentageConventionChecks.cs" />
+    <Compile Include="Assets\Editor\BalanceStatusAssetImport.cs" />
     <Compile Include="Assets\Editor\Combat\Tests\PostDashAttackChecks.cs" />
     <Compile Include="Assets\Editor\CombatWorkshop\CombatWorkshopWindow.cs" />
     <Compile Include="Assets\Editor\CombatWorkshop\CombatWorkshopPreview.cs" />

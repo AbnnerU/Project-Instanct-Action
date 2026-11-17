@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.DefaultEnchantmentOfferBuilderSO
   _list_TierChances:
   - Tier: 0
-    Chance: 50
+    Chance: 68
   - Tier: 1
-    Chance: 30
+    Chance: 20
   - Tier: 2
-    Chance: 15
+    Chance: 10
   - Tier: 3
-    Chance: 5
+    Chance: 2

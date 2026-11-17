@@ -96,5 +96,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.Extras.AbilityCooldown
   _abilityComponent: {fileID: 1773199644175634025}
-  _cooldown: 2
+  _cooldown: 12
   _cooldownType: 0

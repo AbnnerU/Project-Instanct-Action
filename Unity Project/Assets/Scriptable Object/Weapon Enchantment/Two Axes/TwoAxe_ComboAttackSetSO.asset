@@ -48,8 +48,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: 0, z: 0}
-      _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
+      _hitboxCenterOffset: {x: 0, y: 0, z: 0.6}
+      _hitboxHalfExtents: {x: 0.5, y: 0.5, z: 0.6}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128
@@ -90,8 +90,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: -0.003642559, z: 0.26591167}
-      _hitboxHalfExtents: {x: 0.50000024, y: 0.49635744, z: 0.60563606}
+      _hitboxCenterOffset: {x: 0, y: -0.003642559, z: 0.5}
+      _hitboxHalfExtents: {x: 0.50000024, y: 0.49635744, z: 0.5}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128
@@ -129,8 +129,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: 0.10199356, z: 0.37883282}
-      _hitboxHalfExtents: {x: 0.5000001, y: 0.50728536, z: 0.598351}
+      _hitboxCenterOffset: {x: 0, y: 0.10199356, z: 0.5}
+      _hitboxHalfExtents: {x: 0.5000001, y: 0.50728536, z: 0.5}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128
@@ -171,8 +171,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: 0.0072853565, z: 0.28048232}
-      _hitboxHalfExtents: {x: 0.50000024, y: 0.5072851, z: 0.59106636}
+      _hitboxCenterOffset: {x: 0, y: 0.0072853565, z: 0.5}
+      _hitboxHalfExtents: {x: 0.50000024, y: 0.5072851, z: 0.5}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128
@@ -210,8 +210,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: 0.0072853565, z: 0.28048232}
-      _hitboxHalfExtents: {x: 0.50000024, y: 0.5072851, z: 0.59106636}
+      _hitboxCenterOffset: {x: 0, y: 0.0072853565, z: 0.5}
+      _hitboxHalfExtents: {x: 0.50000024, y: 0.5072851, z: 0.5}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128

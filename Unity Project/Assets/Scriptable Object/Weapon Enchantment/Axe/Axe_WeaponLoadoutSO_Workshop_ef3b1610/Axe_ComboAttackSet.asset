@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8752c0cdc5e0b984dbd591abb37d7505, type: 3}
-  m_Name: Axe_ComboAttackSet(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: Axe_ComboAttackSet
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Combat.ComboAttackSetSO
   _list_ComboAttackData:
   - _animationStateName: Base Layer.Attack.Attack 1
@@ -48,8 +48,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: 0.040068865, z: 0.6046755}
-      _hitboxHalfExtents: {x: 0.5000002, y: 0.50364256, z: 1.057322}
+      _hitboxCenterOffset: {x: 0, y: 0.040068865, z: 0.85}
+      _hitboxHalfExtents: {x: 0.5000002, y: 0.50364256, z: 0.85}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128
@@ -90,8 +90,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: 0.040068865, z: 0.6046755}
-      _hitboxHalfExtents: {x: 0.5000002, y: 0.50364256, z: 1.057322}
+      _hitboxCenterOffset: {x: 0, y: 0.040068865, z: 0.85}
+      _hitboxHalfExtents: {x: 0.5000002, y: 0.50364256, z: 0.85}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128
@@ -132,8 +132,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: 0.040068865, z: 0.6046755}
-      _hitboxHalfExtents: {x: 0.5000002, y: 0.50364256, z: 1.057322}
+      _hitboxCenterOffset: {x: 0, y: 0.040068865, z: 0.9}
+      _hitboxHalfExtents: {x: 0.5000002, y: 0.50364256, z: 0.9}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128
@@ -174,8 +174,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: -0.07285249, z: 0.6884559}
-      _hitboxHalfExtents: {x: 0.5000002, y: 0.44171774, z: 1.1775289}
+      _hitboxCenterOffset: {x: 0, y: -0.07285249, z: 1}
+      _hitboxHalfExtents: {x: 0.5000002, y: 0.44171774, z: 1}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128

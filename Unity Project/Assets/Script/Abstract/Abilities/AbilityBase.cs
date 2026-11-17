@@ -33,14 +33,29 @@ namespace Scripts.Abilities
             _deactivated = true;
             _initialized = false;
             _active = false;
-            try { Cancel(); }
-            catch (Exception exception) { Debug.LogException(exception, this); }
+            try { 
+                Cancel(); 
+            }
+            catch (Exception exception) 
+            { 
+                Debug.LogException(exception, this); 
+            }
+
             if (OnAbilityDeactivating != null)
                 foreach (Action<AbilityBase> listener in OnAbilityDeactivating.GetInvocationList())
-                    try { listener(this); }
-                    catch (Exception exception) { Debug.LogException(exception, this); }
-            try { OnDeactivate(); }
-            catch (Exception exception) { Debug.LogException(exception, this); }
+                    try { 
+                        listener(this); 
+                    }
+                    catch (Exception exception) { 
+                        Debug.LogException(exception, this); 
+                    }
+
+            try { 
+                OnDeactivate(); 
+            }
+            catch (Exception exception) { 
+                Debug.LogException(exception, this); 
+            }
             finally { StopAllCoroutines(); }
         }
 

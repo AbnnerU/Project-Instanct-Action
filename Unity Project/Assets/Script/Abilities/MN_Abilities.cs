@@ -14,7 +14,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace Scripts.Abilities
 {
     public class MN_Abilities : SceneSingleton<MN_Abilities>
-    {     
+    {
 
         #region Fields
 
@@ -98,16 +98,16 @@ namespace Scripts.Abilities
 
         #region Public
 
-        public void AddAbility(AssetReferenceGameObject abilityPrefabReference, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas)
+        public void AddAbility(AssetReferenceGameObject abilityPrefabReference, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas, float rechargeTime)
         {
-            AddAbility(abilityPrefabReference, abilityKind, list_DamageDatas, list_BuffDatas, null);
+            AddAbility(abilityPrefabReference, abilityKind, list_DamageDatas, list_BuffDatas, null, rechargeTime);
         }
 
-        public void AddAbility(AssetReferenceGameObject abilityPrefabReference, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas, AssetReferenceSprite iconReference)
+        public void AddAbility(AssetReferenceGameObject abilityPrefabReference, AbilityKind abilityKind, IReadOnlyList<DamageData> list_DamageDatas, IReadOnlyList<BuffData> list_BuffDatas, AssetReferenceSprite iconReference, float rechargeTime)
         {
             int slotIndex = GetSlotIndex(GetFirstEmptySlot());
             BeginAddAbility(abilityPrefabReference, abilityKind, list_DamageDatas, list_BuffDatas, iconReference,
-                slotIndex >= 0 ? slotIndex : 0, null);
+                slotIndex >= 0 ? slotIndex : 0, rechargeTime, null);
         }
 
         public bool HasAbility(AssetReferenceGameObject prefab)
@@ -123,12 +123,12 @@ namespace Scripts.Abilities
         {
             if (enchantment == null) return false;
             return BeginAddAbility(enchantment.AbilityPrefabReference, enchantment.AbilityKind,
-                enchantment.List_DamageDatas, enchantment.List_BuffDatas, enchantment.IconReference, slotIndex, onCompleted);
+                enchantment.List_DamageDatas, enchantment.List_BuffDatas, enchantment.IconReference, slotIndex, enchantment.RechargeTime, onCompleted);
         }
 
         private bool BeginAddAbility(AssetReferenceGameObject prefab, AbilityKind kind,
             IReadOnlyList<DamageData> damage, IReadOnlyList<BuffData> buffs, AssetReferenceSprite icon,
-            int slotIndex, Action<bool> onCompleted)
+            int slotIndex, float rechargeTime, Action<bool> onCompleted)
         {
             if (_isDestroying || _isLoadingAbility || prefab == null || !prefab.RuntimeKeyIsValid() || HasAbility(prefab)) return false;
             if (kind == AbilityKind.ACTIVE && (slotIndex < 0 || slotIndex >= _list_ActiveAbilitySlots.Count || _list_ActiveAbilitySlots[slotIndex] == null)) return false;
@@ -137,7 +137,7 @@ namespace Scripts.Abilities
             {
                 var handle = Addressables.InstantiateAsync(prefab.RuntimeKey, GetAbilityContainer(kind));
                 _list_AbilityHandles.Add(handle);
-                handle.Completed += result => CompleteAbilityLoad(result, prefab.RuntimeKey.ToString(), kind, damage, buffs, icon, slotIndex, onCompleted);
+                handle.Completed += result => CompleteAbilityLoad(result, prefab.RuntimeKey.ToString(), kind, damage, buffs, icon, slotIndex,rechargeTime, onCompleted);
                 return true;
             }
             catch (Exception exception)
@@ -150,26 +150,38 @@ namespace Scripts.Abilities
 
         private void CompleteAbilityLoad(AsyncOperationHandle<GameObject> handle, string key, AbilityKind kind,
             IReadOnlyList<DamageData> damage, IReadOnlyList<BuffData> buffs, AssetReferenceSprite icon,
-            int slotIndex, Action<bool> onCompleted)
+            int slotIndex, float rechargeTime, Action<bool> onCompleted)
         {
             if (this == null || _isDestroying) return;
+
             AbilityBase[] abilities = null;
+
             bool succeeded = false;
+
             try
             {
                 if (handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
                     throw new InvalidOperationException("Ability prefab could not be loaded.");
+
                 abilities = handle.Result.GetComponentsInChildren<AbilityBase>(true);
+
                 if (abilities.Length == 0 || (kind == AbilityKind.ACTIVE && abilities.Length != 1))
                     throw new InvalidOperationException("An active ability prefab must contain exactly one AbilityBase.");
+
                 AbilityContext context = CreateContext(damage, buffs);
+
                 foreach (AbilityAutoSetupBase setup in handle.Result.GetComponentsInChildren<AbilityAutoSetupBase>(true))
                     setup.Setup(context);
-                foreach (AbilityBase ability in abilities) ability.Initialize();
+
+                foreach (AbilityBase ability in abilities)
+                    ability.Initialize();
 
                 // Commit only after loading and setup have succeeded.
-                if (kind == AbilityKind.ACTIVE) RemoveAbility(_list_ActiveAbilitySlots[slotIndex].Ability);
+                if (kind == AbilityKind.ACTIVE)
+                    RemoveAbility(_list_ActiveAbilitySlots[slotIndex].Ability);
+
                 var instance = new AbilityInstance { Key = key, Handle = handle, Abilities = abilities };
+
                 foreach (AbilityBase ability in abilities)
                 {
                     _dcInstances.Add(ability, instance);
@@ -180,11 +192,12 @@ namespace Scripts.Abilities
                     }
                     else _list_PassiveAbilities.Add(ability);
                 }
+
                 if (kind == AbilityKind.ACTIVE)
                 {
                     ActiveAbilitySlot slot = _list_ActiveAbilitySlots[slotIndex];
 
-                    slot.SetAbility(abilities[0], icon);
+                    slot.SetAbility(abilities[0], icon, rechargeTime);
 
                     if (_isDashBlockingAbilitySlots) slot.SetBlocked(true);
 
@@ -195,19 +208,26 @@ namespace Scripts.Abilities
                 }
                 succeeded = true;
             }
+
             catch (Exception exception)
             {
                 Debug.LogException(exception, this);
                 if (abilities != null)
                     foreach (AbilityBase ability in abilities)
-                        if (ability != null) ability.Deactivate();
+                        if (ability != null)
+                            ability.Deactivate();
+
                 _list_AbilityHandles.Remove(handle);
+
                 if (handle.IsValid())
                 {
-                    if (handle.Status == AsyncOperationStatus.Succeeded) Addressables.ReleaseInstance(handle);
-                    else Addressables.Release(handle);
+                    if (handle.Status == AsyncOperationStatus.Succeeded)
+                        Addressables.ReleaseInstance(handle);
+                    else
+                        Addressables.Release(handle);
                 }
             }
+
             _isLoadingAbility = false;
             onCompleted?.Invoke(succeeded);
         }
@@ -215,24 +235,33 @@ namespace Scripts.Abilities
         public void RemoveAbility(AbilityBase ability)
         {
             if (ability == null || !_dcInstances.TryGetValue(ability, out AbilityInstance instance)) return;
-            foreach (AbilityBase component in instance.Abilities) _dcInstances.Remove(component);
+
+            foreach (AbilityBase component in instance.Abilities) 
+                _dcInstances.Remove(component);
+
             foreach (AbilityBase component in instance.Abilities)
             {
                 if (component == null) continue;
+
                 component.Deactivate();
                 UnsubscribeAbilityEvents(component);
                 ActiveAbilitySlot slot = GetSlotByAbility(component);
+
                 if (slot != null)
                 {
-                    slot.SetAbility(null);
+                    slot.SetAbility(null,0);
                     slot.AbilitySlotUpdated();
                 }
+
                 _list_ActiveAbilities.Remove(component);
                 _list_PassiveAbilities.Remove(component);
                 _dcInstances.Remove(component);
             }
+
             _list_AbilityHandles.Remove(instance.Handle);
-            if (instance.Handle.IsValid()) Addressables.ReleaseInstance(instance.Handle);
+
+            if (instance.Handle.IsValid()) 
+                Addressables.ReleaseInstance(instance.Handle);
         }
 
         public bool TryExecuteActiveAbility(int activeAbilityIndex)
@@ -513,6 +542,7 @@ namespace Scripts.Abilities
             [SerializeField] private AbilityBase _ability;
 
             private Action<InputAction.CallbackContext> _onPerformedCallback;
+            private float _rechargeTime;
             private int _blockCount;
             private bool _isInCooldown;
 
@@ -532,14 +562,14 @@ namespace Scripts.Abilities
                 BLOCKED
             }
 
-            public void SetAbility(AbilityBase ability)
+            public void SetAbility(AbilityBase ability, float rechargeTime)
             {
-                SetAbility(ability, null);
+                SetAbility(ability, null, rechargeTime);
             }
 
-            public void SetAbility(AbilityBase ability, AssetReferenceSprite iconReference)
+            public void SetAbility(AbilityBase ability, AssetReferenceSprite iconReference, float rechargeTime)
             {
-                if (_cooldownHandler!=null)
+                if (_cooldownHandler != null)
                 {
                     _cooldownHandler.OnCooldownStarted -= StartedCooldown;
                     _cooldownHandler.OnCooldownCompleted -= CompletedCooldown;
@@ -550,6 +580,7 @@ namespace Scripts.Abilities
                 _cooldownHandler = null;
                 _blockCount = 0;
                 _isInCooldown = false;
+
                 UpdateSlotState();
 
                 if (_ability == null)
@@ -558,7 +589,7 @@ namespace Scripts.Abilities
                     return;
                 }
 
-                if(_ability.gameObject.TryGetComponent<IHasCooldown>(out _cooldownHandler))
+                if (_ability.gameObject.TryGetComponent<IHasCooldown>(out _cooldownHandler))
                 {
                     _cooldownHandler.OnCooldownStarted += StartedCooldown;
                     _cooldownHandler.OnCooldownCompleted += CompletedCooldown;

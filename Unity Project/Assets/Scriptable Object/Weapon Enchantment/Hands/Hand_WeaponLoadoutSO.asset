@@ -52,8 +52,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      _hitboxCenterOffset: {x: 0, y: 0.011632085, z: 0.24427435}
-      _hitboxHalfExtents: {x: 0.50000024, y: 0.5000001, z: 0.5232646}
+      _hitboxCenterOffset: {x: 0, y: 0.011632085, z: 0.55}
+      _hitboxHalfExtents: {x: 0.50000024, y: 0.5000001, z: 0.55}
       _targetLayerMask:
         serializedVersion: 2
         m_Bits: 128

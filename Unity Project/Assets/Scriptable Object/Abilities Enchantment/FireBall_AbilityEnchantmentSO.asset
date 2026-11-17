@@ -31,9 +31,10 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  RechargeTime: 5
   List_DamageDatas:
   - _damageType: 1
-    _baseDamage: 100
+    _baseDamage: 250
     _physicForceScaling: 0
-    _magicForceScaling: 100
+    _magicForceScaling: 120
   List_BuffDatas: []

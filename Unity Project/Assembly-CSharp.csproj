@@ -256,6 +256,7 @@
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\Boolean\BTIsValueGreater.cs" />
     <Compile Include="Assets\Script\Scriptable Base\Enchantment\WeaponEnchantmentSO.cs" />
     <Compile Include="Assets\Script\Abstract\Combat\ComboControllerBase.cs" />
+    <Compile Include="Assets\Script\Health\HealthText.cs" />
     <Compile Include="Assets\Script\Interface\Tier\Visual\IReadOnlyEvolutionData.cs" />
     <Compile Include="Assets\Script\Tier\Enum\Tier.cs" />
     <Compile Include="Assets\Script\Interface\Combat\IDamageReceiver.cs" />

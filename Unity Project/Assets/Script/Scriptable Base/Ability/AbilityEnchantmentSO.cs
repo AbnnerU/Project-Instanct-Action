@@ -11,6 +11,7 @@ namespace Scripts.Enchantment
     {
         public AbilityKind AbilityKind = AbilityKind.PASSIVE;
         public AssetReferenceGameObject AbilityPrefabReference;
+        public float RechargeTime;
         public List<DamageData> List_DamageDatas;
         public List<BuffData> List_BuffDatas;
 
@@ -25,7 +26,7 @@ namespace Scripts.Enchantment
             if (MN_Abilities.Instance == null)
                 return;
 
-            MN_Abilities.Instance.AddAbility(AbilityPrefabReference, AbilityKind, List_DamageDatas, List_BuffDatas, IconReference);
+            MN_Abilities.Instance.AddAbility(AbilityPrefabReference, AbilityKind, List_DamageDatas, List_BuffDatas,IconReference, RechargeTime);
         }
 
         public override string GetResolvedDescription()
