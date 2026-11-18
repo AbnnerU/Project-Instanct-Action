@@ -1,5 +1,6 @@
 using System.Collections;
 using Scripts.Timer;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -13,6 +14,8 @@ namespace Scripts.Abilities
         [SerializeField] private Image _iconImage;
         [SerializeField] private Image _rechargeImage;
         [SerializeField] private GameObject _blockedObject;
+        [SerializeField] private GameObject _rechargeTextObj;
+        [SerializeField] private TMP_Text _rechargeText;
 
         private MN_Abilities.ActiveAbilitySlot _slot;
         private AsyncOperationHandle<Sprite> _iconLoadHandle;
@@ -165,14 +168,21 @@ namespace Scripts.Abilities
 
         private IEnumerator CooldownRoutine(IHasCooldown cooldownHandler)
         {
+            _rechargeTextObj?.SetActive(true);
+
             while (cooldownHandler.Cooldown > 0f &&
                 cooldownHandler.CooldownProgression < cooldownHandler.Cooldown)
             {
                 float fillAmount = 1f - Mathf.Clamp01(cooldownHandler.CooldownProgression / cooldownHandler.Cooldown);
                 SetCooldownFillAmount(fillAmount);
 
+                if (_rechargeText)
+                    _rechargeText.text = cooldownHandler.CooldownProgression.ToString();
+
                 yield return null;
             }
+
+            _rechargeTextObj?.SetActive(false);
 
             SetCooldownFillAmount(0f);
             _cooldownRoutine = null;
@@ -182,6 +192,8 @@ namespace Scripts.Abilities
         {
             if (_cooldownRoutine == null)
                 return;
+
+            _rechargeTextObj?.SetActive(false);
 
             StopCoroutine(_cooldownRoutine);
             _cooldownRoutine = null;
