@@ -16,12 +16,15 @@ namespace Scripts.Abilities
         [SerializeField] private GameObject _blockedObject;
         [SerializeField] private GameObject _rechargeTextObj;
         [SerializeField] private TMP_Text _rechargeText;
+        [SerializeField] private string _rechargeFormmat = "0.#";
+        [SerializeField] private Sprite _defaultSprite;
 
         private MN_Abilities.ActiveAbilitySlot _slot;
         private AsyncOperationHandle<Sprite> _iconLoadHandle;
         private Coroutine _cooldownRoutine;
 
         public Sprite IconSprite => _iconImage != null ? _iconImage.sprite : null;
+        public event System.Action OnIconChanged;
 
         #endregion
 
@@ -119,6 +122,13 @@ namespace Scripts.Abilities
 
         private void Refresh()
         {
+            StopCooldownRoutine();
+            SetCooldownFillAmount(0f);
+            _rechargeTextObj?.SetActive(false);
+
+            if (_rechargeText != null)
+                _rechargeText.text = string.Empty;
+
             SetIcon(null);
             ReleaseIconHandle();
 
@@ -177,7 +187,7 @@ namespace Scripts.Abilities
                 SetCooldownFillAmount(fillAmount);
 
                 if (_rechargeText)
-                    _rechargeText.text = cooldownHandler.CooldownProgression.ToString();
+                    _rechargeText.text = (cooldownHandler.Cooldown - cooldownHandler.CooldownProgression).ToString(_rechargeFormmat);
 
                 yield return null;
             }
@@ -210,7 +220,6 @@ namespace Scripts.Abilities
         #endregion
 
         #region Icon
-
         private void LoadIcon(AssetReferenceSprite iconReference)
         {
             if (iconReference == null || !iconReference.RuntimeKeyIsValid())
@@ -234,10 +243,16 @@ namespace Scripts.Abilities
         private void SetIcon(Sprite icon)
         {
             if (_iconImage == null)
-                return;
+            {
+                if (_defaultSprite != null)
+                    _iconImage.sprite = _defaultSprite;
 
+                return;
+            }
+               
             _iconImage.sprite = icon;
             _iconImage.enabled = icon != null;
+            OnIconChanged?.Invoke();
         }
 
         private void ReleaseIconHandle()

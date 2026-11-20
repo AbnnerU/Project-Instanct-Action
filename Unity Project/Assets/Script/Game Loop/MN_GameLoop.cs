@@ -1,3 +1,4 @@
+using Scripts.Abilities;
 using Scripts.LoadScene;
 using System;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace Scripts.GameLoop
 
         [SerializeField] private HealthManager _playerHealth;
         [SerializeField] private AssetReference _gameplayScene;
+        [SerializeField] private MN_Abilities _abilities;
         [Header("UI")]
         [SerializeField] private GameObject _gameOverPanel;
         [SerializeField] private Button _restartButton;
@@ -46,6 +48,8 @@ namespace Scripts.GameLoop
         private void GameOver()
         {
             if (State != GameState.PLAYING) return;
+
+            _abilities.Disable();
 
             State = GameState.GAME_OVER;
 

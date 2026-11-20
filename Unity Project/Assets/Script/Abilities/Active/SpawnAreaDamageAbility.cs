@@ -16,6 +16,7 @@ namespace Scripts.Abilities
         [SerializeField] private Transform _positionReference;
         [SerializeField] private Animator _animator;
         [SerializeField] private DamageData _damageData = new DamageData();
+        [SerializeField] private bool _triggerHitEvents = true;
         [Header("Placement")]
         [SerializeField, Min(0)] private float _distance = 3f;
         [SerializeField] private Vector3 _offset;
@@ -127,7 +128,7 @@ namespace Scripts.Abilities
             instance.transform.SetParent(null, true);
             execution.Area = instance.GetComponent<AreaDamageRequestBase>();
             execution.Area.Setup(new DamageRequest(_damageData, _statusSource != null ? _statusSource.GetStatusInfo() : null,
-                _owner != null ? _owner : gameObject, null, null, position,
+                _owner != null ? _owner : gameObject, null, null, position, _triggerHitEvents,
                 allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
                 attackerDamageResultReporter: _reporter));
 

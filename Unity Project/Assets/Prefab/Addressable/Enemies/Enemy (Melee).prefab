@@ -420,7 +420,7 @@ MonoBehaviour:
     - _damageData:
         _damageType: 0
         _baseDamage: 60
-        _physicForceScaling: 60
+        _physicForceScaling: 100
         _magicForceScaling: 0
       _attackKnockback:
         KnockbackDistance: 0

@@ -44,6 +44,35 @@ public class HealthManager : HealthBasicsEvents, IHittable, IHealable
         }
     }
 
+    public void Hit(float damage, bool triggerDamageEvent, out bool killed)
+    {
+        killed = false;
+
+        if (_isBlocked) return;
+
+        if (isHittable)
+        {
+            currentHealth -= damage;
+
+            OnHealthUpdate?.Invoke(currentHealth);
+
+            if (currentHealth <= 0 && isAlive)
+            {
+                killed = true;
+
+                currentHealth = 0;
+
+                OnHealthUpdate?.Invoke(currentHealth);
+
+                if (isKillable)
+                    Kill();
+            }
+
+            if(triggerDamageEvent)
+                OnHitted?.Invoke((int)damage, isAlive);
+        }
+    }
+
     public void Hit(float damage)
     {
         if (_isBlocked) return;

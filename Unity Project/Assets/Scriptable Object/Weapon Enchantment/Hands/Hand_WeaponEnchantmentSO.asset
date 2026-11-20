@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hand_WeaponEnchantmentSO
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.WeaponEnchantmentSO
   ID: 46bb4487-f49e-46b8-bc56-37663bae7d57
-  DisplayName: Punhos
+  DisplayName: Back to basics
   Tier: 0
   EnchantmentType: 2
   Description: 'Unleash a series of punches to deal damage.
@@ -31,9 +31,6 @@ MonoBehaviour:
 
     4
     x <postdashdamage hit=0>
-
-
-
 
 '
   IconReference:

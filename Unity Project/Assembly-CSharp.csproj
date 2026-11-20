@@ -87,6 +87,7 @@
     <Compile Include="Assets\Script\Interface\Spawner\IAddressableButtonSpawner.cs" />
     <Compile Include="Assets\Script\Coins\MN_Coins.cs" />
     <Compile Include="Assets\Script\AI\Main nodes\Nodes\BTGoToTarget.cs" />
+    <Compile Include="Assets\Script\Panel\MN_Panels.cs" />
     <Compile Include="Assets\Script\Enchantment\EnchantmentCardUI.cs" />
     <Compile Include="Assets\Script\Abilities\Passive\TemporaryStatusBuffOnDashAbility.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasNavMeshAgentSpeedUpdate.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Assets\Script\Interface\Abilities\IHasCastTime.cs" />
     <Compile Include="Assets\Script\Status\StatusInfoByReference.cs" />
     <Compile Include="Assets\Script\Interface\General\IHasTargetProvider.cs" />
+    <Compile Include="Assets\Script\Parallax\ParallaxLayer.cs" />
     <Compile Include="Assets\Script\Status\Appliers\AttackSpeedByStatus.cs" />
     <Compile Include="Assets\Script\Combat\HitReaction_CancelAndBlockComboController.cs" />
     <Compile Include="Assets\Script\Interface\Spawner\ISpawner.cs" />
@@ -161,6 +163,7 @@
     <Compile Include="Assets\Script\Panel\PanelAnimation.cs" />
     <Compile Include="Assets\Script\Combat\TriggerContactDamageRequest.cs" />
     <Compile Include="Assets\Script\Abstract\Do Action\DoActionBase.cs" />
+    <Compile Include="Assets\Script\Abilities\Extras\AbilityParticleEffects.cs" />
     <Compile Include="Assets\Script\Loading Scene\LoadingTaskSOBase.cs" />
     <Compile Include="Assets\Script\Scripts Pool\ObjectPoolContainer.cs" />
     <Compile Include="Assets\Script\Loading Scene\AssetReferenceLoadingTaskSOBase.cs" />

@@ -16,9 +16,24 @@ MonoBehaviour:
   DisplayName: Axe
   Tier: 1
   EnchantmentType: 2
-  Description: "Wield an axe to strike enemies.\nCombo:\n<attackSet index=0 hit=0>\n<attackSet
-    index=1 hit=0>\n<attackSet index=2 hit=0>\n<attackSet index=3 hit=0>\nPost-dash:\n<postdashdamage
-    hit=0> / <postdashdamage hit=1>\n "
+  Description: 'Wield an axe to strike enemies.
+
+    Combo:
+
+    <attackSet index=0
+    hit=0>
+
+    <attackSet index=1 hit=0>
+
+    <attackSet index=2 hit=0>
+
+    <attackSet
+    index=3 hit=0>
+
+    Post-dash:
+
+    <postdashdamage hit=0> / <postdashdamage
+    hit=1> '
   IconReference:
     m_AssetGUID: 9582013dfaac7784e80f4cadcaf6bd98
     m_SubObjectName: 

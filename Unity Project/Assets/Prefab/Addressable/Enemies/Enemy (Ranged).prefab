@@ -1548,7 +1548,7 @@ MonoBehaviour:
     _damageType: 1
     _baseDamage: 60
     _physicForceScaling: 0
-    _magicForceScaling: 50
+    _magicForceScaling: 90
   _projectileSpeed: 5
   _gravityValue: {x: 0, y: 0, z: 0}
   _projectileRadius: 0.25

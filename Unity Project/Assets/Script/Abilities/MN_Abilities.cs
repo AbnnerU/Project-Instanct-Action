@@ -13,11 +13,11 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Scripts.Abilities
 {
-    public class MN_Abilities : SceneSingleton<MN_Abilities>
+    public class MN_Abilities : SceneSingleton<MN_Abilities>, IHasActiveState
     {
 
         #region Fields
-
+        [SerializeField] private bool _active = true;
         [SerializeField] private GameObject _ownerObject;
         [SerializeField] private Transform _passiveAbilitiesContainer;
         [SerializeField] private Transform _activeAbilitiesContainer;
@@ -137,7 +137,7 @@ namespace Scripts.Abilities
             {
                 var handle = Addressables.InstantiateAsync(prefab.RuntimeKey, GetAbilityContainer(kind));
                 _list_AbilityHandles.Add(handle);
-                handle.Completed += result => CompleteAbilityLoad(result, prefab.RuntimeKey.ToString(), kind, damage, buffs, icon, slotIndex,rechargeTime, onCompleted);
+                handle.Completed += result => CompleteAbilityLoad(result, prefab.RuntimeKey.ToString(), kind, damage, buffs, icon, slotIndex, rechargeTime, onCompleted);
                 return true;
             }
             catch (Exception exception)
@@ -236,7 +236,7 @@ namespace Scripts.Abilities
         {
             if (ability == null || !_dcInstances.TryGetValue(ability, out AbilityInstance instance)) return;
 
-            foreach (AbilityBase component in instance.Abilities) 
+            foreach (AbilityBase component in instance.Abilities)
                 _dcInstances.Remove(component);
 
             foreach (AbilityBase component in instance.Abilities)
@@ -249,7 +249,7 @@ namespace Scripts.Abilities
 
                 if (slot != null)
                 {
-                    slot.SetAbility(null,0);
+                    slot.SetAbility(null, 0);
                     slot.AbilitySlotUpdated();
                 }
 
@@ -260,7 +260,7 @@ namespace Scripts.Abilities
 
             _list_AbilityHandles.Remove(instance.Handle);
 
-            if (instance.Handle.IsValid()) 
+            if (instance.Handle.IsValid())
                 Addressables.ReleaseInstance(instance.Handle);
         }
 
@@ -523,8 +523,23 @@ namespace Scripts.Abilities
             for (int i = 0; i < _list_ActiveAbilitySlots.Count; i++)
                 _list_ActiveAbilitySlots[i]?.SetBlocked(blocked);
         }
-
         #endregion
+
+        public void Disable()
+        {
+            foreach (var slot in _list_ActiveAbilitySlots)
+                slot.DisableInput();
+
+            _active = false;
+        }
+
+        public void Enable()
+        {
+            foreach (var slot in _list_ActiveAbilitySlots)
+                slot.EnableInput(SlotInput_Performed);
+
+            _active = true;
+        }
 
         #region Classes
 
@@ -549,6 +564,7 @@ namespace Scripts.Abilities
             public AbilityBase Ability => _ability;
             public AssetReferenceSprite IconReference { get; private set; }
             public Sprite IconSprite => !IsEmpty && _slotView != null ? _slotView.IconSprite : null;
+            public AbilitySlotView SlotView => _slotView;
             public bool IsEmpty => _ability == null;
             public AbilitySlotState SlotState => _slotState;
             public IHasCooldown CooldownHandler => _cooldownHandler;

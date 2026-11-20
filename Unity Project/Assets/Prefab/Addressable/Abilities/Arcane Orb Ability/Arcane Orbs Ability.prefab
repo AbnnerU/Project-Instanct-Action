@@ -72,6 +72,7 @@ MonoBehaviour:
   _orbitRadius: 1.5
   _orbitSpeed: 180
   _duration: 8
+  _triggerHitEvents: 0
   _damageData:
     _damageType: 1
     _baseDamage: 30
@@ -91,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Abilities.Extras.AbilityCooldown
   _abilityComponent: {fileID: 1831978176650070365}
   _cooldown: 10
-  _cooldownType: 0
+  _cooldownType: 1
 --- !u!1 &8145718040975014971
 GameObject:
   m_ObjectHideFlags: 0

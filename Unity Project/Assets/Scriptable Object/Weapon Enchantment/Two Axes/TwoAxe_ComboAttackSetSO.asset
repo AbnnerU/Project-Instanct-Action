@@ -100,8 +100,8 @@ MonoBehaviour:
     - _damageData:
         _damageType: 1
         _baseDamage: 75
-        _physicForceScaling: 150
-        _magicForceScaling: 0
+        _physicForceScaling: 0
+        _magicForceScaling: 150
       _attackKnockback:
         KnockbackDistance: 0.5
         KnockbackDuration: 0.05
@@ -181,8 +181,8 @@ MonoBehaviour:
     - _damageData:
         _damageType: 1
         _baseDamage: 75
-        _physicForceScaling: 150
-        _magicForceScaling: 0
+        _physicForceScaling: 0
+        _magicForceScaling: 150
       _attackKnockback:
         KnockbackDistance: 0.5
         KnockbackDuration: 0.05

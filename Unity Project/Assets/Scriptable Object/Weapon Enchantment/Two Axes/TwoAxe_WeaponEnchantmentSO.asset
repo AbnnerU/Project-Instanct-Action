@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TwoAxe_WeaponEnchantmentSO
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.WeaponEnchantmentSO
   ID: 5690ea52-7996-4e77-954f-2c0a60c6176f
-  DisplayName: Two Swords
-  Tier: 1
+  DisplayName: Physical and Spiritual Axes
+  Tier: 2
   EnchantmentType: 2
   Description: 'Gain two axes.
 
@@ -30,10 +30,7 @@ MonoBehaviour:
 
     Post-dash:
 
-    <postdashdamage hit=0>
-
-
-'
+    <postdashdamage hit=0>'
   IconReference:
     m_AssetGUID: 55012f4fbdc969342b89c380463140f7
     m_SubObjectName: 

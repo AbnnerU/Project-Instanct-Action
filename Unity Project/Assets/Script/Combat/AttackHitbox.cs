@@ -10,6 +10,7 @@ namespace Scripts.Combat
         public event Action<DamageResult> OnDamageDealt;
         public event Action<AttackExecutionData, DamageResult> OnDamageDealtWithExecution;
 
+        [SerializeField] private bool _triggerHitEvents = true;
         [SerializeField] private Transform _hitboxOrigin;
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private bool _useHitboxOriginRotation;
@@ -177,6 +178,7 @@ namespace Scripts.Combat
                 receiver,
                 hitCollider,
                 hitCollider.ClosestPoint(_hitboxOrigin.position),
+                _triggerHitEvents,
                 attackData,
                 _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
                 _damageResultReporter);

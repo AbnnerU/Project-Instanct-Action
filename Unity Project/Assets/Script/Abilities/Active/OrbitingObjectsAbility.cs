@@ -21,6 +21,7 @@ namespace Scripts.Abilities
         [SerializeField, Min(0)] private float _orbitRadius = 1.5f;
         [SerializeField] private float _orbitSpeed = 180f;
         [SerializeField, Min(0.01f)] private float _duration = 8f;
+        [SerializeField] private bool _triggerHitEvents = true;
         [SerializeField] private DamageData _damageData = new DamageData();
 
         private StatusInfoSourceBase _statusSource;
@@ -67,7 +68,7 @@ namespace Scripts.Abilities
             try
             {
                 var request = new DamageRequest(_damageData, _statusSource != null ? _statusSource.GetStatusInfo() : null,
-                    _owner != null ? _owner : gameObject, null, null, _orbitTarget.position,
+                    _owner != null ? _owner : gameObject, null, null, _orbitTarget.position, _triggerHitEvents,
                     allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
                     attackerDamageResultReporter: _reporter);
                 int count = Mathf.Max(1, _orbCount);

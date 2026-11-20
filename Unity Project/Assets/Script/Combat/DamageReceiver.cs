@@ -31,7 +31,7 @@ namespace Scripts.Combat
                 _statusSource?.GetStatusInfo(),
                 damageRequest.AllowedCriticalTypes);
 
-            _hittableHandler.Hit(resolvedDamage.FinalDamage, out bool killed);
+            _hittableHandler.Hit(resolvedDamage.FinalDamage, damageRequest.TriggerDamageEvents, out bool killed);
 
             DamageResult damageResult = new DamageResult(
                 resolvedDamage.DamageType,

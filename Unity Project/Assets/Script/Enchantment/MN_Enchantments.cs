@@ -29,6 +29,7 @@ namespace Scripts.Enchantment
         private readonly Queue<EnchantmentsDeckConfig> _queueOffers = new Queue<EnchantmentsDeckConfig>();
         private EnchantmentsDeckConfig _currentDeckConfig;
         private AbilityEnchantmentSO _pendingAbility;
+        public AbilityEnchantmentSO PendingAbility => _pendingAbility;
 
         public IReadOnlyList<EnchantmentSOBase> List_AvailableEnchantments => _list_AvailableEnchantments;
         public IReadOnlyList<EnchantmentSOBase> List_AppliedEnchantments => _list_AppliedEnchantments;

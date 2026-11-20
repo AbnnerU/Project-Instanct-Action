@@ -21,6 +21,7 @@ namespace Scripts.Abilities
         [SerializeField] private GameObject _attackerObject;
         [SerializeField] private Animator _animator;
         [Header("Damage")]
+        [SerializeField] private bool _triggerHitEvents = true;
         [SerializeField] private DamageData _damageData = new DamageData();
         [Header("Animation")]
         [SerializeField] private string _animationStateName;
@@ -245,6 +246,7 @@ namespace Scripts.Abilities
                 null,
                 null,
                 spawnPosition,
+                _triggerHitEvents,
                 allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
                 attackerDamageResultReporter: _damageResultReporter);
 

@@ -21,6 +21,7 @@ namespace Scripts.Abilities
         [SerializeField] private Animator _animator;
         [SerializeField] private float _castTime;
         [Header("Damage")]
+        [SerializeField] private bool _triggerHitEvents = true;
         [SerializeField] private DamageData _damageData = new DamageData();
         [Header("Animation")]
         [SerializeField] private string _animationStateName;
@@ -242,6 +243,7 @@ namespace Scripts.Abilities
                     receiverObject,
                     hitCollider,
                     hitCollider.ClosestPoint(center),
+                    _triggerHitEvents,
                     allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
                     attackerDamageResultReporter: _damageResultReporter);
 

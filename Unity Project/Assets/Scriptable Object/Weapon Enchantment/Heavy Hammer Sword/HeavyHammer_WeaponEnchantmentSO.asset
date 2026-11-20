@@ -30,10 +30,7 @@ MonoBehaviour:
     Post-dash:
 
     <postdashdamage
-    hit=0>
-
-
-'
+    hit=0>'
   IconReference:
     m_AssetGUID: cb9e700fd405ed1409bdc040a3e35254
     m_SubObjectName: 

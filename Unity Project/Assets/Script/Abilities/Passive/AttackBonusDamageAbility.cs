@@ -11,6 +11,7 @@ namespace Scripts.Abilities
         [SerializeField] private StatusInfoSourceBase _statusSource;
         [SerializeField] private ComboControllerBase _comboController;
         [SerializeField] private AttackHitbox _attackHitbox;
+        [SerializeField] private bool _triggerHitEvents = true;
         [Header("Trigger")]
         [SerializeField] private AttackBonusDamageTriggerMode _triggerMode = AttackBonusDamageTriggerMode.EVERY_N_ATTACKS;
         [SerializeField] private int _attackInterval = 3;
@@ -159,6 +160,7 @@ namespace Scripts.Abilities
                 sourceDamageResult.Receiver,
                 sourceDamageResult.HitCollider,
                 sourceDamageResult.HitPoint,
+                _triggerHitEvents,
                 allowedCriticalTypes: _criticalPermissions != null ? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
                 attackerDamageResultReporter: _damageResultReporter);
 

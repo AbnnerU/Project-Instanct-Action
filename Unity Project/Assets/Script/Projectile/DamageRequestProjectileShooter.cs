@@ -17,10 +17,9 @@ namespace Scripts.Projectile
         [Header("Container")]
         [SerializeField] private Transform _projectileContainer;
         [SerializeField] private string _containerTag;
-
         [Header("Damage")]
-        [SerializeField] private DamageData _damageData = new DamageData();
-     
+        [SerializeField] private bool _triggerHitEvents = true;
+        [SerializeField] private DamageData _damageData = new DamageData();     
         [Header("Projectile")]
         [SerializeField] private float _projectileSpeed = 8f;
         [SerializeField] private Vector3 _gravityValue = Vector3.zero;
@@ -76,6 +75,7 @@ namespace Scripts.Projectile
                 null,
                 null,
                 spawnPosition,
+                _triggerHitEvents,
                 allowedCriticalTypes: _criticalPermissions != null? _criticalPermissions.GetAllowedCriticalDamageTypes() : DamageRequest.DefaultCriticalTypes,
                 attackerDamageResultReporter: _damageResultReporter);
 

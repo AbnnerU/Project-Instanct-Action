@@ -167,8 +167,10 @@ public interface IHittable
     void Hit(float damage);
 
     void Hit(float damage, bool triggerDamageEvent);
-
+    
     void Hit(float damage, out bool killed);
+
+    void Hit(float damage, bool triggerDamageEvent, out bool killed);
 
     bool IsAlive();
 
