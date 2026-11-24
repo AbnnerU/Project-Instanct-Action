@@ -61,6 +61,7 @@ MonoBehaviour:
       _maxTargets: 8
   AnimatorController: {fileID: 22100000, guid: c1964069ba9db2a459bbb6d4147c3b9c, type: 2}
   HitEffectPrefab: {fileID: 8836407550465818219, guid: 29b800baf3b62fc44bad7d15843c3f62, type: 3}
+  HitAudioConfig: {fileID: 11400000, guid: 4e7c24aa1e7764d42887f0abdc250c68, type: 2}
   List_WeaponModels:
   - WeaponPrefabReference:
       m_AssetGUID: a9de5a98f016a334c9a1113e07b1a12f

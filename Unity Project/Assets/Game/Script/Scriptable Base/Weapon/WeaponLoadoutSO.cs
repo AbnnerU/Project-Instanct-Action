@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Scripts.Combat;
+using Scripts.Sound;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -15,6 +16,7 @@ namespace Scripts.Weapon
         public ComboAttackData PostDashAttack = new ComboAttackData();
         public RuntimeAnimatorController AnimatorController;
         public GameObject HitEffectPrefab;
+        public AudioConfig HitAudioConfig;
         public List<WeaponModelSpawnData> List_WeaponModels = new List<WeaponModelSpawnData>();
     }
 

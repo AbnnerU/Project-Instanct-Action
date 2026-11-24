@@ -4917,6 +4917,7 @@ GameObject:
   - component: {fileID: 2504214343621411459}
   - component: {fileID: 2504214343621411456}
   - component: {fileID: 2504214343621411457}
+  - component: {fileID: 6729776639163448322}
   m_Layer: 0
   m_Name: CFXR3 Hit Fire B (Air) 1
   m_TagString: Untagged
@@ -9813,3 +9814,20 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!114 &6729776639163448322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2504214343621411470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8617991d490ecdf468a2868a937c0c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.OnEnableRequestSound
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _audioConfig: {fileID: 11400000, guid: fa8dd4b28942a9b4a92329a4b8d32021, type: 2}
+  _positionReference: {fileID: 0}
+  _useDelay: 0
+  _delay: 0

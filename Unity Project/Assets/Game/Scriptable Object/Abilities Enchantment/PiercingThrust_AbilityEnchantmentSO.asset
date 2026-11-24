@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
   ID: 6419a4a2-faa7-4f00-aa1c-36f17553ba74
   DisplayName: Piercing Thrust
-  Tier: 2
+  Tier: 0
   EnchantmentType: 1
   Description: 'Lunges forward, dealing <damage index=0> damage to all enemies in
     the path. '
@@ -32,7 +32,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  RechargeTime: 10
+  RechargeTime: 3
   List_DamageDatas:
   - _damageType: 0
     _baseDamage: 200

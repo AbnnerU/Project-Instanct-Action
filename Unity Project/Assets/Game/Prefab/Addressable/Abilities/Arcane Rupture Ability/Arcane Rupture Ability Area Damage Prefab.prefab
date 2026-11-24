@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5598271746345286650}
   - component: {fileID: 7304436129046181000}
+  - component: {fileID: 8502109462909927897}
+  - component: {fileID: 5246456105664420685}
   m_Layer: 6
   m_Name: Arcane Rupture Ability Area Damage Prefab
   m_TagString: Untagged
@@ -55,6 +57,40 @@ MonoBehaviour:
     m_Bits: 128
   _queryTriggers: 2
   _radiusIndicator: {fileID: 0}
+--- !u!114 &8502109462909927897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3565488844188102115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8617991d490ecdf468a2868a937c0c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.OnEnableRequestSound
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _audioConfig: {fileID: 11400000, guid: d9b45a7d11c5dca4f844b258e3b966f4, type: 2}
+  _positionReference: {fileID: 0}
+  _useDelay: 0
+  _delay: 0
+--- !u!114 &5246456105664420685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3565488844188102115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8617991d490ecdf468a2868a937c0c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.OnEnableRequestSound
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _audioConfig: {fileID: 11400000, guid: bbe09b95ce4e3a3418d9372cc5209b59, type: 2}
+  _positionReference: {fileID: 0}
+  _useDelay: 1
+  _delay: 1.24
 --- !u!1001 &2173441863372365718
 PrefabInstance:
   m_ObjectHideFlags: 0

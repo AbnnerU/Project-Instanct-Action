@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf708c09ef38c04ea16d453cd5f392e, type: 3}
+  m_Name: ArcaneRupturePrepartion_AudioConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.AudioConfig
+  audioClip: {fileID: 0}
+  _randomClip: 1
+  _audioClips:
+  - {fileID: 8300000, guid: de0ca9f37a8c4b5408878c1052b5ed4c, type: 3}
+  - {fileID: 8300000, guid: 8e08d47b634168148a25364e91b337d3, type: 3}
+  _pitch: 1
+  _randomPitch: 0
+  _minPitch: 0.9
+  _maxPitch: 1.1
+  priority: 128
+  volume: 1
+  SpatialBlend: 0
+  loop: 0

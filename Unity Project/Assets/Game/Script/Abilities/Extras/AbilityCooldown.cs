@@ -35,6 +35,7 @@ namespace Scripts.Abilities.Extras
                 _abilityComponent.OnAbilityStarted += StartCooldown;
             else
                 _abilityComponent.OnAbilityFinished += StartCooldown;
+
             _abilityComponent.OnAbilityDeactivating += Ability_Deactivating;
         }
 
@@ -49,7 +50,8 @@ namespace Scripts.Abilities.Extras
 
         private void OnDestroy()
         {
-            if (_abilityComponent != null) Ability_Deactivating(_abilityComponent);
+            if (_abilityComponent != null) 
+                Ability_Deactivating(_abilityComponent);
         }
 
         protected void StartCooldown(AbilityBase abilityBase)

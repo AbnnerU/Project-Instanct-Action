@@ -9787,6 +9787,7 @@ GameObject:
   - component: {fileID: 4231570087894386406}
   - component: {fileID: 3901230352552463173}
   - component: {fileID: 6421701308196811586}
+  - component: {fileID: -5242395321723429191}
   m_Layer: 6
   m_Name: Piercing Thrust Ability
   m_TagString: Untagged
@@ -9943,3 +9944,20 @@ MonoBehaviour:
   _findContainerByTag: 1
   _containerTag: VFXContainer
   _container: {fileID: 0}
+--- !u!114 &-5242395321723429191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9151168264849653752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82cd2bdb9ed7347418504aa7456d74e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.OnAbilityUseRequestSound
+  _abilityComponent: {fileID: 3336445094548261528}
+  _executionType: 0
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _audioConfig: {fileID: 11400000, guid: b2ba62c58aacea94398253f2aa8c7110, type: 2}
+  _positionReference: {fileID: 0}

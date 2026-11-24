@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
   ID: 915d2385-a7cb-4cbe-9d2c-132426061a98
   DisplayName: Arcane Orbs
-  Tier: 1
+  Tier: 0
   EnchantmentType: 1
   Description: 'Conjures 3 orbs that deal <damage index = 0> damage to enemies they
     touch. '

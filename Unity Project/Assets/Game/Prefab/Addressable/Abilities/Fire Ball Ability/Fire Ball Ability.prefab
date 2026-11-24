@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5645427343706915014}
   - component: {fileID: 6073132624754701025}
   - component: {fileID: 2909493556951120429}
+  - component: {fileID: -8984072626956337261}
   m_Layer: 6
   m_Name: Fire Ball Ability
   m_TagString: Untagged
@@ -66,6 +67,7 @@ MonoBehaviour:
   _statusSource: {fileID: 0}
   _attackerObject: {fileID: 0}
   _animator: {fileID: 0}
+  _triggerHitEvents: 1
   _damageData:
     _damageType: 0
     _baseDamage: 100
@@ -111,6 +113,23 @@ MonoBehaviour:
   _abilityComponent: {fileID: 6073132624754701025}
   _cooldown: 5
   _cooldownType: 0
+--- !u!114 &-8984072626956337261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068060327992204825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82cd2bdb9ed7347418504aa7456d74e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.OnAbilityUseRequestSound
+  _abilityComponent: {fileID: 6073132624754701025}
+  _executionType: 0
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _audioConfig: {fileID: 11400000, guid: 8a520ece709f8374b8bb83d42e67b0c2, type: 2}
+  _positionReference: {fileID: 0}
 --- !u!1 &8226334797166578394
 GameObject:
   m_ObjectHideFlags: 0
