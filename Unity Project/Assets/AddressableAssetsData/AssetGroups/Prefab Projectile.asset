@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Prefab Projectile
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Prefab Projectile
+  m_GUID: d811ce8582789d1409cde5d8dada2858
+  m_SerializeEntries:
+  - m_GUID: d00d13a5f43fe1e4e91ca09fe9923789
+    m_Address: Assets/Game/Prefab/Addressable/Projectile/Arcane Ball Projectile.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb5cd0bbc070ef345b7adb37708fcdea
+    m_Address: Assets/Game/Prefab/Addressable/Projectile/Fire Ball Projectile.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e04a7510bce042f4db476305ef9f1f91, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: af69d7400c78c8641817e8553ed1b078, type: 2}
+    - {fileID: 11400000, guid: 3b8075d871d287043ba4f539746e4559, type: 2}

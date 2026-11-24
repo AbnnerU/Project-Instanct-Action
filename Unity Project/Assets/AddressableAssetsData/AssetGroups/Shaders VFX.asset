@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Shaders VFX
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Shaders VFX
+  m_GUID: caa1343beacc6af4f8baae5a822e4543
+  m_SerializeEntries:
+  - m_GUID: 1581eccce46ba384596a1dce7936ab19
+    m_Address: Assets/Game/Shaders/Addressables/CFXR Particle Procedural Ring.cfxrshader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a29b4d27eb8b04479ef89c00dea533d
+    m_Address: Assets/Game/Shaders/Addressables/CFXR Particle Ubershader.cfxrshader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67dfcda17071f4a41be79c4049965e67
+    m_Address: Assets/Game/Shaders/Addressables/CFXR Particle Glow.cfxrshader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e04a7510bce042f4db476305ef9f1f91, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 816034fce184a404ba051c85f04081b7, type: 2}
+    - {fileID: 11400000, guid: ac0231124626ddb48a810ed612357ebd, type: 2}

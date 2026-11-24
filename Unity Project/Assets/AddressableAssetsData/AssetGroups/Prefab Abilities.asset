@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Prefab Abilities
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Prefab Abilities
+  m_GUID: d28121be9f0d4e94fb41203dcf6dd1fc
+  m_SerializeEntries:
+  - m_GUID: 002e6837fbb459e48b7ab28b46ce0a96
+    m_Address: Assets/Game/Prefab/Addressable/Abilities/Fire Ball Ability
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2484acc29a06b0b4cb567eb8743b9041
+    m_Address: Assets/Game/Prefab/Addressable/Abilities/Magic Attack Ability (Passive)
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b328e1a1d3c03748a825cfb84786bc4
+    m_Address: Assets/Game/Prefab/Addressable/Abilities/Arcane Orb Ability
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bca7388662179046bd4e87ea94e1a60
+    m_Address: Assets/Game/Prefab/Addressable/Abilities/Heavy Attack Ability (Passive)
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d066b7eadb0c47045aa8cd47ebfd2e4b
+    m_Address: Assets/Game/Prefab/Addressable/Abilities/Arcane Rupture Ability
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f227f476f57fb404f9b121fb0f9c5500
+    m_Address: Assets/Game/Prefab/Addressable/Abilities/Arcane Flow (Passive)
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7d268d67ae278049878859d834d2ba0
+    m_Address: Assets/Game/Prefab/Addressable/Abilities/Piercing Thrust Ability
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e04a7510bce042f4db476305ef9f1f91, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 8a8053a72ba4292468199d606e510b37, type: 2}
+    - {fileID: 11400000, guid: 4e636661080a89c49bc9504f605ea938, type: 2}

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Prefab Hud
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Prefab Hud
+  m_GUID: 24635fbd5e3d5064993ced0a5ac02d1b
+  m_SerializeEntries:
+  - m_GUID: 069b6fbe435f18845b4c996b1f6ea62c
+    m_Address: Assets/Game/Prefab/Addressable/Hud/Status Info View - Panel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 323bf15c200019d4eb87a1a1e656221a
+    m_Address: Assets/Game/Prefab/Addressable/Hud/Enchantments - Panel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed07ddfcb17f3854eb4b51770a772847
+    m_Address: Assets/Game/Prefab/Addressable/Hud/Ability Slot - Button.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e04a7510bce042f4db476305ef9f1f91, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 791c92b217068f14a9be97a5216fbe91, type: 2}
+    - {fileID: 11400000, guid: 6aa42a2a9ed8de14592955311ba63778, type: 2}

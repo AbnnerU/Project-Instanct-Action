@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Animation Controller Enemies
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Animation Controller Enemies
+  m_GUID: 0d1ce466be4c0b64f975c56ec5a9bf25
+  m_SerializeEntries:
+  - m_GUID: 5863a39d43e51ee4db7bce24574e801f
+    m_Address: Assets/Game/Animation/Addressables/Enemy/Melee/Enemy Melee Animator
+      Controller.controller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8151535c4983f04e84ed9074334751f
+    m_Address: Assets/Game/Animation/Addressables/Enemy/Ranged/Enemy Ranged Animator
+      Controller.controller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e04a7510bce042f4db476305ef9f1f91, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: e6ca8ff5a220c8d459f882ae18d32525, type: 2}
+    - {fileID: 11400000, guid: f8cbb1a16ca2a954b8ef34b902e94503, type: 2}
