@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 3811133414682535393}
   - component: {fileID: 7699249338366853881}
   - component: {fileID: 3467906925021472817}
+  - component: {fileID: 2148603540252341249}
   m_Layer: 5
   m_Name: Selection - Button
   m_TagString: Untagged
@@ -195,6 +196,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2148603540252341249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2798935464453493338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3f74a37bb0aa345a3ed4d8eac49b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.ButtonSoundRequest
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _onClickAudioConfig: {fileID: 11400000, guid: fca879f0d4d0dd947822007c36ee4ba6, type: 2}
+  _onPointerEnterAudioConfig: {fileID: 11400000, guid: abf27906a2f7dbe478adfd29153bead6, type: 2}
+  _onPointerExitAudioConfig: {fileID: 0}
 --- !u!1 &3266862160443781073
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +715,7 @@ GameObject:
   - component: {fileID: 1580036875582462589}
   - component: {fileID: 2025078679109491580}
   - component: {fileID: 3513755200329561707}
+  - component: {fileID: 6237929030421562773}
   m_Layer: 5
   m_Name: Roll - Button
   m_TagString: Untagged
@@ -808,6 +826,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6237929030421562773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7024759914413783568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3f74a37bb0aa345a3ed4d8eac49b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.ButtonSoundRequest
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _onClickAudioConfig: {fileID: 0}
+  _onPointerEnterAudioConfig: {fileID: 11400000, guid: cf5ae94f57a991c488e6a438877837e3, type: 2}
+  _onPointerExitAudioConfig: {fileID: 0}
 --- !u!1 &7133386614279892123
 GameObject:
   m_ObjectHideFlags: 0

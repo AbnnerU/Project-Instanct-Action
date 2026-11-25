@@ -9961,6 +9961,8 @@ GameObject:
   - component: {fileID: 1879613187}
   - component: {fileID: 1879613188}
   - component: {fileID: 1879613190}
+  - component: {fileID: 1879613191}
+  - component: {fileID: 1879613192}
   m_Layer: 0
   m_Name: MN Enchantments
   m_TagString: Untagged
@@ -10108,6 +10110,52 @@ MonoBehaviour:
     EnchantmentsTypesAvailable: 00000000
     Rolls: 0
     _allowSkip: 0
+--- !u!114 &1879613191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879613184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7828269775c744a8a602c6d5832c83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.EnchantmentRerollSound
+  _enchantmentsManager: {fileID: 1879613186}
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _tierAudios:
+  - _tier: 0
+    _audioConfig: {fileID: 11400000, guid: 945cbc1091c31074dae5ef9883d70d63, type: 2}
+  - _tier: 1
+    _audioConfig: {fileID: 11400000, guid: e605dcaf71342bc4ba87bbdb21835890, type: 2}
+  - _tier: 2
+    _audioConfig: {fileID: 11400000, guid: ec9cb3d19c76a0940adc8bbc791d0328, type: 2}
+  - _tier: 3
+    _audioConfig: {fileID: 11400000, guid: 1b1d95182ddb20644bae9c3e7c3e7a9e, type: 2}
+--- !u!114 &1879613192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879613184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 884440d041b85b441922adb4c04b8a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.EnchantmentOfferSound
+  _enchantmentsManager: {fileID: 1879613186}
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _tierAudios:
+  - _tier: 0
+    _audioConfig: {fileID: 11400000, guid: 4526ab7a0280fa845836150b7aa3b296, type: 2}
+  - _tier: 1
+    _audioConfig: {fileID: 11400000, guid: 5f632d51bf8eab448b9b0ada4bbf465f, type: 2}
+  - _tier: 2
+    _audioConfig: {fileID: 11400000, guid: a30fe1d88726b724eaefa468daadf667, type: 2}
+  - _tier: 3
+    _audioConfig: {fileID: 11400000, guid: d010f70ebe3006446a194602c6753ae8, type: 2}
 --- !u!1 &1891571129
 GameObject:
   m_ObjectHideFlags: 0

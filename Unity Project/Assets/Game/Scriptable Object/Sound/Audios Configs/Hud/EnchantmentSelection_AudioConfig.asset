@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf708c09ef38c04ea16d453cd5f392e, type: 3}
+  m_Name: EnchantmentSelection_AudioConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.AudioConfig
+  audioClip: {fileID: 0}
+  _randomClip: 1
+  _audioClips:
+  - {fileID: 8300000, guid: 0db577f09386ff84bac05d2dfaed7e86, type: 3}
+  - {fileID: 8300000, guid: 455f85890fc4db0408a0ae10099de53b, type: 3}
+  - {fileID: 8300000, guid: 2a9abf9ceff426442abb5e819aa7ac83, type: 3}
+  - {fileID: 8300000, guid: e10d6dcd67df7fa48bb1fc4c6fe8189a, type: 3}
+  - {fileID: 8300000, guid: a8f0f2708106e5d49a2e4421a29b4ddd, type: 3}
+  _pitch: 1
+  _randomPitch: 1
+  _minPitch: 1
+  _maxPitch: 1.15
+  priority: 128
+  volume: 1
+  SpatialBlend: 0
+  loop: 0

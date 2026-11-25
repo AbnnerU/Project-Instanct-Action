@@ -1579,6 +1579,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
       insertIndex: -1
       addedObject: {fileID: 82759604725918133}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7507320753983850208}
   m_SourcePrefab: {fileID: 100100000, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}
 --- !u!95 &1651896244028188169 stripped
 Animator:
@@ -1608,6 +1611,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Player.PlayerAnimationEventReceiver
   _comboController: {fileID: 5610207809395145720}
+--- !u!114 &7507320753983850208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5424386299879990985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5373cbd782c4bd498e000f48cec5993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.AttackSwingSound
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _audioConfig: {fileID: 11400000, guid: 216c0aa294b756447b9ca2a18052f2d4, type: 2}
 --- !u!4 &8458051517957376115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3667946887678727147, guid: 9e251c0d980cf734babf3515a499ba17, type: 3}

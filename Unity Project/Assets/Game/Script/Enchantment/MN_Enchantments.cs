@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Scripts.Abilities;
 using Scripts.Managers;
 using Scripts.Progression;
+using Scripts.TierManipulation;
 using UnityEngine;
 
 namespace Scripts.Enchantment
@@ -13,6 +14,8 @@ namespace Scripts.Enchantment
         public event Action<IReadOnlyList<EnchantmentSOBase>> OnEnchantmentsOffered;
         public event Action<EnchantmentSelectionState> OnSelectionStateChanged;
         public event Action<int, EnchantmentSOBase> OnEnchantmentRerolled;
+        public event Action<Tier> OnRerolled;
+        public event Action<Tier> OnOfferOpened;
         public event Action<int> OnOfferRollsChanged;
 
         private EnchantmentSelectionState _state = EnchantmentSelectionState.NONE;
@@ -71,11 +74,19 @@ namespace Scripts.Enchantment
             BuildOfferedEnchantments(config);
             if (_list_CurrentOfferedEnchantments.Count == 0) return false;
 
+            Tier highestTier = Tier.TIER_1;
+            foreach (EnchantmentSOBase enchantment in _list_CurrentOfferedEnchantments)
+            {
+                if (enchantment != null && enchantment.Tier > highestTier)
+                    highestTier = enchantment.Tier;
+            }
+
             _currentDeckConfig = config;
             CurrentOfferRolls = config.GetRollsAmount();
             SetState(EnchantmentSelectionState.ENCHANTMENTS_OFFERED);
             OnEnchantmentsOffered?.Invoke(_list_CurrentOfferedEnchantments.AsReadOnly());
             OnOfferRollsChanged?.Invoke(CurrentOfferRolls);
+            OnOfferOpened?.Invoke(highestTier);
             return true;
         }
 
@@ -93,6 +104,7 @@ namespace Scripts.Enchantment
             CurrentOfferRolls--;
             OnEnchantmentRerolled?.Invoke(index, replacement);
             OnOfferRollsChanged?.Invoke(CurrentOfferRolls);
+            OnRerolled?.Invoke(replacement.Tier);
             return true;
         }
 

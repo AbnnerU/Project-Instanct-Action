@@ -213,6 +213,7 @@
     <Compile Include="Assets\Game\Script\Singleton\SceneSingleton.cs" />
     <Compile Include="Assets\Game\Script\Tier\Scriptable Base\Visual\TextureVariantSO.cs" />
     <Compile Include="Assets\Game\Script\Interface\Animation\IHasAnimationReferenceTransform.cs" />
+    <Compile Include="Assets\Game\Script\Sound\EnchantmentOfferSound.cs" />
     <Compile Include="Assets\Game\Script\Abilities\Active\SpawnAreaDamageAbility.cs" />
     <Compile Include="Assets\Game\Script\Dash Handler\UI\PlayerDashCooldownView.cs" />
     <Compile Include="Assets\Game\Script\Do Action\Animation\DoAction_RandomAnimation.cs" />
@@ -271,6 +272,7 @@
     <Compile Include="Assets\Game\Script\Combat\CriticalPermissions.cs" />
     <Compile Include="Assets\Game\Script\Animation\AnimationRootMotionDriver.cs" />
     <Compile Include="Assets\Game\Script\Abstract\Combat\AreaDamageRequestBase.cs" />
+    <Compile Include="Assets\Game\Script\Sound\EnchantmentRerollSound.cs" />
     <Compile Include="Assets\Game\Script\Combat\Data\DamageData.cs" />
     <Compile Include="Assets\Game\Script\Weapon\MN_Weapon.cs" />
     <Compile Include="Assets\Game\Script\Status\Enum\StatusType.cs" />
@@ -305,6 +307,7 @@
     <Compile Include="Assets\Game\Script\Combat\Pop Up\DamagePopupView.cs" />
     <Compile Include="Assets\Game\Script\Interface\General\IPanelHandler.cs" />
     <Compile Include="Assets\Game\Script\AI\HitReaction_BlockNavMeshAgent.cs" />
+    <Compile Include="Assets\Game\Script\Sound\ButtonSoundRequest.cs" />
     <Compile Include="Assets\Game\Script\Animation\HitReaction_TriggerParameter.cs" />
     <Compile Include="Assets\Game\Script\Animation\OnDeath_TriggerParameter.cs" />
     <Compile Include="Assets\Game\Script\Interface\General\ISaveableTimer.cs" />
