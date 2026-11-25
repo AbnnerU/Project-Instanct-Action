@@ -3662,6 +3662,11 @@ Transform:
   - {fileID: 2134787031}
   m_Father: {fileID: 965605310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &611636328 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3699263677126291169, guid: 42a308debae41784e867944925962cab, type: 3}
+  m_PrefabInstance: {fileID: 4206290719789535704}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &621175284
 GameObject:
   m_ObjectHideFlags: 0
@@ -8110,6 +8115,20 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 7997707731514666529, guid: 42a308debae41784e867944925962cab, type: 3}
   m_PrefabInstance: {fileID: 4206290719789535704}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1484080730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611636328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5373cbd782c4bd498e000f48cec5993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.AttackSwingSound
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _audioConfig: {fileID: 0}
 --- !u!1 &1487582023
 GameObject:
   m_ObjectHideFlags: 0
@@ -11793,11 +11812,20 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: 22
+      addedObject: {fileID: 4206290719789535852}
+    - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4206290719789535824}
     - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4206290719789535823}
+    - targetCorrespondingSourceObject: {fileID: 1437302767631231260, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4206290719789535853}
+    - targetCorrespondingSourceObject: {fileID: 3699263677126291169, guid: 42a308debae41784e867944925962cab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1484080730}
   m_SourcePrefab: {fileID: 100100000, guid: 42a308debae41784e867944925962cab, type: 3}
 --- !u!114 &4206290719789535741 stripped
 MonoBehaviour:
@@ -11872,6 +11900,39 @@ MonoBehaviour:
   _damageDealerObject: {fileID: 711513674}
   _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
   _audioConfig: {fileID: 11400000, guid: 05556345031695e47b546fe0cd3852e9, type: 2}
+--- !u!114 &4206290719789535852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2b388a5490a2344b5b7e421c514300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.OnHitRequestSound
+  _healthManager: {fileID: 4206290719789535795}
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _hitAudioConfig: {fileID: 11400000, guid: 36316be7f60e1e54eade0c231a9ccf7a, type: 2}
+  _useDeathSound: 1
+  _deathAudioConfig: {fileID: 11400000, guid: 3090cefbd1054aa41bc08997b19ad917, type: 2}
+  _useDelay: 0
+  _delay: 0.2
+--- !u!114 &4206290719789535853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711513674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764b56d73a7926145926c9f2c737f328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Weapon.WeaponSwingSoundBinder
+  _weaponManager: {fileID: 1955501768}
+  _swingSound: {fileID: 1484080730}
 --- !u!1001 &8199929961677144170
 PrefabInstance:
   m_ObjectHideFlags: 0

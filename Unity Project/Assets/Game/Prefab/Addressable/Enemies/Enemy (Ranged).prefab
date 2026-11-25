@@ -656,6 +656,7 @@ GameObject:
   - component: {fileID: 1143225389941177119}
   - component: {fileID: 2842286385702380382}
   - component: {fileID: 4822639363391701490}
+  - component: {fileID: 500781898431806008}
   m_Layer: 7
   m_Name: Enemy (Ranged)
   m_TagString: Enemy
@@ -1158,6 +1159,25 @@ MonoBehaviour:
   _enemyBrainComponent: {fileID: 2153284052778431660}
   _blockTime: 1
   _resetPath: 0
+--- !u!114 &500781898431806008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668894675120357355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2b388a5490a2344b5b7e421c514300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.OnHitRequestSound
+  _healthManager: {fileID: 5058952256331780876}
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _hitAudioConfig: {fileID: 11400000, guid: de53697d335d2bb4385938181abccb6d, type: 2}
+  _useDeathSound: 1
+  _deathAudioConfig: {fileID: 11400000, guid: c2570ca1233519f46955f4df23d58907, type: 2}
+  _useDelay: 1
+  _delay: 0.1
 --- !u!1001 &912129421282311958
 PrefabInstance:
   m_ObjectHideFlags: 0

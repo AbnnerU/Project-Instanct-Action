@@ -101,6 +101,7 @@ MonoBehaviour:
   AnimatorController: {fileID: 22100000, guid: aa0e8e1adb5cf2743ba45087c9acd529, type: 2}
   HitEffectPrefab: {fileID: 8836407550465818219, guid: 29b800baf3b62fc44bad7d15843c3f62, type: 3}
   HitAudioConfig: {fileID: 11400000, guid: a1631273f27e90b4290ee3c489c6e692, type: 2}
+  SwingAudioConfig: {fileID: 11400000, guid: 216c0aa294b756447b9ca2a18052f2d4, type: 2}
   List_WeaponModels:
   - WeaponPrefabReference:
       m_AssetGUID: bda0e0a54afa7464ab2ce114082b55d6

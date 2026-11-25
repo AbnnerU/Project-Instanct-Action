@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaf708c09ef38c04ea16d453cd5f392e, type: 3}
-  m_Name: PiercingThrustAbility_AudioConfig
+  m_Name: PlayerHitted_AudioConfig
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.AudioConfig
   audioClip: {fileID: 0}
   _randomClip: 1
   _audioClips:
-  - {fileID: 8300000, guid: c0271ad99c6d56740b8ca7d67d7d5218, type: 3}
-  - {fileID: 8300000, guid: 2d356dd9e2ad107408ff12fb15972cd0, type: 3}
+  - {fileID: 8300000, guid: e82e3fbdd32591a4e97c5cba194fdfd5, type: 3}
+  - {fileID: 8300000, guid: 05f92fa0414064b458c1fd92e52eb375, type: 3}
+  - {fileID: 8300000, guid: a304a7a0b25609b49a5ba099bfb344ea, type: 3}
   _pitch: 1
   _randomPitch: 1
   _minPitch: 1
-  _maxPitch: 1.15
+  _maxPitch: 1.1
   priority: 128
-  volume: 0.3
+  volume: 0.2
   SpatialBlend: 0
   loop: 0

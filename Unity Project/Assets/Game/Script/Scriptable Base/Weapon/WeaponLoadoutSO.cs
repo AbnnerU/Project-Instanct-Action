@@ -17,6 +17,7 @@ namespace Scripts.Weapon
         public RuntimeAnimatorController AnimatorController;
         public GameObject HitEffectPrefab;
         public AudioConfig HitAudioConfig;
+        public AudioConfig SwingAudioConfig;
         public List<WeaponModelSpawnData> List_WeaponModels = new List<WeaponModelSpawnData>();
     }
 

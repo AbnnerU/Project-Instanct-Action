@@ -201,8 +201,8 @@
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Helpers\ComponentSerializer.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Builtins\PrefsFunctions.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\MCP\Server\IMCPTransport.cs" />
-    <Compile Include="Packages\com.kitwright.unity.mcp\Editor\State\DomainReloadHandler.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Helpers\ValueConverter.cs" />
+    <Compile Include="Packages\com.kitwright.unity.mcp\Editor\State\DomainReloadHandler.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Helpers\ObjectsHelper.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Interop\HotReload.cs" />
     <Compile Include="Packages\com.kitwright.unity.mcp\Editor\Tools\Helpers\NoThrottleLease.cs" />

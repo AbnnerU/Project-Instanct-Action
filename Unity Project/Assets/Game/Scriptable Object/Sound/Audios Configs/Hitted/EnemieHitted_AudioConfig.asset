@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaf708c09ef38c04ea16d453cd5f392e, type: 3}
-  m_Name: FireBallImpact_AudioConfig
+  m_Name: EnemieHitted_AudioConfig
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.AudioConfig
   audioClip: {fileID: 0}
   _randomClip: 1
   _audioClips:
-  - {fileID: 8300000, guid: 82271725eeef4e447bfdf2c73fd20876, type: 3}
-  - {fileID: 8300000, guid: cbff349612da37743809b195664419d7, type: 3}
-  - {fileID: 8300000, guid: 41d3073eb4b6fac4a91267ab6eb7c774, type: 3}
-  - {fileID: 8300000, guid: 6da4173e1c4e41f46bc480df30745b80, type: 3}
+  - {fileID: 8300000, guid: 179d79a7d49e6c449b0f991ce9b74813, type: 3}
+  - {fileID: 8300000, guid: 1a8d8531ad33fc741a82a89123b2087b, type: 3}
+  - {fileID: 8300000, guid: eded6edb76fd1e84b923a0eb1e6d20ac, type: 3}
+  - {fileID: 8300000, guid: b9a610b10b89eb048b2b6b3bca30360a, type: 3}
+  - {fileID: 8300000, guid: 75a6e98c39b7190478b7041fe407008e, type: 3}
   _pitch: 1
   _randomPitch: 1
   _minPitch: 0.9
-  _maxPitch: 1.1
+  _maxPitch: 1.25
   priority: 128
   volume: 0.2
   SpatialBlend: 0

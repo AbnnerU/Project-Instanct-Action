@@ -32,6 +32,7 @@ GameObject:
   - component: {fileID: 5752072415533641781}
   - component: {fileID: 719550394201319586}
   - component: {fileID: 4098462770203856925}
+  - component: {fileID: 8249206338729669302}
   - component: {fileID: 1215233846289651813}
   m_Layer: 7
   m_Name: Enemy (Melee)
@@ -535,6 +536,25 @@ MonoBehaviour:
   _enemyBrainComponent: {fileID: 8609405625918951327}
   _blockTime: 1
   _resetPath: 0
+--- !u!114 &8249206338729669302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54779437082285969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2b388a5490a2344b5b7e421c514300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.OnHitRequestSound
+  _healthManager: {fileID: 7231527614648297650}
+  _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _hitAudioConfig: {fileID: 11400000, guid: de53697d335d2bb4385938181abccb6d, type: 2}
+  _useDeathSound: 1
+  _deathAudioConfig: {fileID: 11400000, guid: c2570ca1233519f46955f4df23d58907, type: 2}
+  _useDelay: 1
+  _delay: 0.1
 --- !u!114 &1215233846289651813
 MonoBehaviour:
   m_ObjectHideFlags: 0

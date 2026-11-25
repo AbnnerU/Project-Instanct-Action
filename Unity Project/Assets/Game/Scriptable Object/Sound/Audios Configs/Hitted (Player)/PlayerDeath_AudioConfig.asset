@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf708c09ef38c04ea16d453cd5f392e, type: 3}
+  m_Name: PlayerDeath_AudioConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.AudioConfig
+  audioClip: {fileID: 0}
+  _randomClip: 1
+  _audioClips:
+  - {fileID: 8300000, guid: c2893b02d1bfa9c4ea6deb2b7f4c6a5c, type: 3}
+  - {fileID: 8300000, guid: 9fe9337d84ae59445a024e95ca614707, type: 3}
+  _pitch: 1
+  _randomPitch: 1
+  _minPitch: 1
+  _maxPitch: 1.1
+  priority: 128
+  volume: 0.2
+  SpatialBlend: 0
+  loop: 0

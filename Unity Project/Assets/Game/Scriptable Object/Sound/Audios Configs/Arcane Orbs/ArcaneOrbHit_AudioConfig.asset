@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf708c09ef38c04ea16d453cd5f392e, type: 3}
+  m_Name: ArcaneOrbHit_AudioConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.AudioConfig
+  audioClip: {fileID: 0}
+  _randomClip: 1
+  _audioClips:
+  - {fileID: 8300000, guid: 681049ce00baac341a4ea869c41e3d9a, type: 3}
+  - {fileID: 8300000, guid: 764d40c726ec67344b2f213f3faf1704, type: 3}
+  - {fileID: 8300000, guid: e7fdaf74f1179204681cc848db5386f2, type: 3}
+  - {fileID: 8300000, guid: 1e94ea713a862ac49942fd490cfcd7b9, type: 3}
+  _pitch: 1
+  _randomPitch: 1
+  _minPitch: 1
+  _maxPitch: 1.35
+  priority: 128
+  volume: 0.1
+  SpatialBlend: 0
+  loop: 0

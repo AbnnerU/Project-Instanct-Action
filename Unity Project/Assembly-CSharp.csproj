@@ -127,6 +127,7 @@
     <Compile Include="Assets\Game\Script\Interface\General\INavMeshAgentStateUpdate.cs" />
     <Compile Include="Assets\Game\Script\Combat\Data\DamageResult.cs" />
     <Compile Include="Assets\Game\Script\AI\Main nodes\Nodes\BTWaitForSeconds.cs" />
+    <Compile Include="Assets\Game\Script\Weapon\WeaponSwingSoundBinder.cs" />
     <Compile Include="Assets\Game\Script\Loading Scene\SIS_LoadingSceneChannel.cs" />
     <Compile Include="Assets\Game\Script\Interface\General\ICursorVisibilyHandler.cs" />
     <Compile Include="Assets\Game\Script\Combat\HitParticleSpawner.cs" />
@@ -155,8 +156,8 @@
     <Compile Include="Assets\Game\Script\AI\Main nodes\Nodes\BTTryFindObjectInArea.cs" />
     <Compile Include="Assets\Game\Script\Health\HealthStatusReference.cs" />
     <Compile Include="Assets\Game\Script\Health\LifeCycle_HandleCollider.cs" />
-    <Compile Include="Assets\Game\Script\Combat\Data\CriticalDamageTypes.cs" />
     <Compile Include="Assets\Game\Script\Health\OnDeath_DisableComboController.cs" />
+    <Compile Include="Assets\Game\Script\Combat\Data\CriticalDamageTypes.cs" />
     <Compile Include="Assets\Game\Script\Projectile\DamageRequestProjectileShooter.cs" />
     <Compile Include="Assets\Game\Script\Dash Handler\DashAnimation.cs" />
     <Compile Include="Assets\Game\Script\Do Action\Animation\DoAction_AnimSetBool.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Assets\Game\Script\Combat\Damage Effects\HealOnDamageDealt.cs" />
     <Compile Include="Assets\Game\Script\Abstract\Saver\SaverBase.cs" />
     <Compile Include="Assets\Game\Script\Combat\AttackHitbox.cs" />
+    <Compile Include="Assets\Game\Script\Sound\OnHitRequestSound.cs" />
     <Compile Include="Assets\Game\Script\Interface\General\IIgnorable.cs" />
     <Compile Include="Assets\Game\Script\Interface\Abilities\IHasCastTime.cs" />
     <Compile Include="Assets\Game\Script\Abilities\UI\AbilitySlotView.cs" />
@@ -213,10 +215,10 @@
     <Compile Include="Assets\Game\Script\Interface\Animation\IHasAnimationReferenceTransform.cs" />
     <Compile Include="Assets\Game\Script\Abilities\Active\SpawnAreaDamageAbility.cs" />
     <Compile Include="Assets\Game\Script\Dash Handler\UI\PlayerDashCooldownView.cs" />
-    <Compile Include="Assets\Game\Script\AI\Abstract\BTnodeNavMeshAjust.cs" />
     <Compile Include="Assets\Game\Script\Do Action\Animation\DoAction_RandomAnimation.cs" />
-    <Compile Include="Assets\Game\Script\Health\OnHit_Particles.cs" />
+    <Compile Include="Assets\Game\Script\AI\Abstract\BTnodeNavMeshAjust.cs" />
     <Compile Include="Assets\Game\Script\AI\Enum\AIState.cs" />
+    <Compile Include="Assets\Game\Script\Health\OnHit_Particles.cs" />
     <Compile Include="Assets\Game\Script\Health\OnHit_VisualEffect.cs" />
     <Compile Include="Assets\Game\Script\Health\OnRespawn_UnityEvent.cs" />
     <Compile Include="Assets\Game\Script\Dash Handler\Dash2D.cs" />
@@ -271,8 +273,8 @@
     <Compile Include="Assets\Game\Script\Abstract\Combat\AreaDamageRequestBase.cs" />
     <Compile Include="Assets\Game\Script\Combat\Data\DamageData.cs" />
     <Compile Include="Assets\Game\Script\Weapon\MN_Weapon.cs" />
-    <Compile Include="Assets\Game\Script\Weapon\WeaponHitEffectBinder.cs" />
     <Compile Include="Assets\Game\Script\Status\Enum\StatusType.cs" />
+    <Compile Include="Assets\Game\Script\Weapon\WeaponHitEffectBinder.cs" />
     <Compile Include="Assets\Game\Script\Animation\AnimationDirectionalVelocityModule.cs" />
     <Compile Include="Assets\Game\Script\Sound\ScriptableObjects\AudioChannel.cs" />
     <Compile Include="Assets\Game\Script\Scriptable Base\Enchantment\StatusUpgradeSO.cs" />
@@ -296,12 +298,12 @@
     <Compile Include="Assets\Game\Script\Interface\General\IMovementHandler.cs" />
     <Compile Include="Assets\Game\Script\Combat\HitReaction_DisableCollider.cs" />
     <Compile Include="Assets\Game\Script\Health\HealthManager.cs" />
-    <Compile Include="Assets\Game\Script\Enchantment\EnchantmentPurchase.cs" />
     <Compile Include="Assets\Game\Script\AI\Main nodes\Nodes\BTGoToRandomPosition.cs" />
+    <Compile Include="Assets\Game\Script\Enchantment\EnchantmentPurchase.cs" />
     <Compile Include="Assets\Game\Script\Abilities\Enum\AbilityValueType.cs" />
     <Compile Include="Assets\Game\Script\Dash Handler\Dash_ComboControllerHandler.cs" />
-    <Compile Include="Assets\Game\Script\Interface\General\IPanelHandler.cs" />
     <Compile Include="Assets\Game\Script\Combat\Pop Up\DamagePopupView.cs" />
+    <Compile Include="Assets\Game\Script\Interface\General\IPanelHandler.cs" />
     <Compile Include="Assets\Game\Script\AI\HitReaction_BlockNavMeshAgent.cs" />
     <Compile Include="Assets\Game\Script\Animation\HitReaction_TriggerParameter.cs" />
     <Compile Include="Assets\Game\Script\Animation\OnDeath_TriggerParameter.cs" />
@@ -318,6 +320,7 @@
     <Compile Include="Assets\Game\Script\Scriptable Base\Enchantment\DefaultEnchantmentOfferBuilderSO.cs" />
     <Compile Include="Assets\Game\Script\AI\Abstract\BTnode.cs" />
     <Compile Include="Assets\Game\Script\Sound\OnTriggerSound.cs" />
+    <Compile Include="Assets\Game\Script\Sound\AttackSwingSound.cs" />
     <Compile Include="Assets\Game\Script\Health\KillAfterTime_OnEnable.cs" />
     <Compile Include="Assets\Game\Script\Abilities\Auto Setup\DashStatusBuffAutoSetup.cs" />
     <Compile Include="Assets\Game\Script\Sound\General\SIS_SoundsManager.cs" />
