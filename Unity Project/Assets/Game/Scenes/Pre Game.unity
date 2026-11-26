@@ -119,6 +119,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &352755627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 352755629}
+  - component: {fileID: 352755628}
+  m_Layer: 0
+  m_Name: SIS Sounds Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &352755628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352755627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2202402ad90c1eb4dbca6769b5ad9953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.SIS_SoundsManager
+  _emitterPrefab: {fileID: 3728512412188164832, guid: 57cd9167f306d4a49a0a87eb45426228, type: 3}
+  _initialSize: 0
+  _musicAudioChannel: {fileID: 11400000, guid: 4655fd4b73d9aae4f93f25817bfd320d, type: 2}
+  _soundEffectsChannel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
+  _ambientEffectsChannel: {fileID: 11400000, guid: ff6ab844f559c3b458f56504efdf9657, type: 2}
+  stopMainTrackWhenNewScene: 0
+--- !u!4 &352755629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352755627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &392011096
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene_TryLoad
   _tryLoadOnStart: 1
   _initialScene:
-    m_AssetGUID: 99c9720ab356a0642a771bea13969a05
+    m_AssetGUID: 6a10c14771480d943a3f72b5f02d0431
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
@@ -470,3 +520,4 @@ SceneRoots:
   - {fileID: 478828317}
   - {fileID: 392011098}
   - {fileID: 1332858363}
+  - {fileID: 352755629}

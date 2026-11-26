@@ -15,6 +15,7 @@ namespace Scripts.Enchantment
         public event Action<EnchantmentSelectionState> OnSelectionStateChanged;
         public event Action<int, EnchantmentSOBase> OnEnchantmentRerolled;
         public event Action<Tier> OnRerolled;
+        public event Action OnRerollFailed;
         public event Action<Tier> OnOfferOpened;
         public event Action<int> OnOfferRollsChanged;
 
@@ -92,13 +93,23 @@ namespace Scripts.Enchantment
 
         public bool TryRerollEnchantment(int index)
         {
-            if (_state != EnchantmentSelectionState.ENCHANTMENTS_OFFERED || CurrentOfferRolls <= 0 ||
+            if (_state != EnchantmentSelectionState.ENCHANTMENTS_OFFERED ||
                 _deckBuildRules == null || index < 0 || index >= _list_CurrentOfferedEnchantments.Count)
                 return false;
 
+            if (CurrentOfferRolls <= 0)
+            {
+                OnRerollFailed?.Invoke();
+                return false;
+            }
+
             EnchantmentSOBase replacement = _deckBuildRules.BuildReplacement(_currentDeckConfig,
                 _list_AvailableEnchantments, _list_AppliedEnchantments, _list_CurrentOfferedEnchantments, index);
-            if (replacement == null) return false;
+            if (replacement == null)
+            {
+                OnRerollFailed?.Invoke();
+                return false;
+            }
 
             _list_CurrentOfferedEnchantments[index] = replacement;
             CurrentOfferRolls--;

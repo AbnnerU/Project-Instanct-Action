@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 7699249338366853881}
   - component: {fileID: 3467906925021472817}
   - component: {fileID: 2148603540252341249}
+  - component: {fileID: 2245474976491887893}
   m_Layer: 5
   m_Name: Selection - Button
   m_TagString: Untagged
@@ -106,7 +107,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1690504363876212745}
   m_Father: {fileID: 5411467256107830796}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -135,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.14117648, g: 0.16078432, b: 0.1764706, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -171,7 +173,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 0.14117648, g: 0.16078432, b: 0.1764706, a: 1}
     m_HighlightedColor: {r: 0.24712223, g: 0.28104097, b: 0.30817598, a: 1}
@@ -208,10 +210,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3f74a37bb0aa345a3ed4d8eac49b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.ButtonSoundRequest
+  _selectable: {fileID: 0}
+  _muteWhenNotInteractable: 0
   _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
   _onClickAudioConfig: {fileID: 11400000, guid: fca879f0d4d0dd947822007c36ee4ba6, type: 2}
   _onPointerEnterAudioConfig: {fileID: 11400000, guid: abf27906a2f7dbe478adfd29153bead6, type: 2}
   _onPointerExitAudioConfig: {fileID: 0}
+--- !u!95 &2245474976491887893
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2798935464453493338}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c43bc65ed8614b14bb6ca583e2ef439c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3266862160443781073
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +337,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3827267563415167814}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -320,7 +346,7 @@ RectTransform:
   - {fileID: 2286502180759694964}
   - {fileID: 3496539788411065772}
   - {fileID: 7468706134394101783}
-  m_Father: {fileID: 5411467256107830796}
+  m_Father: {fileID: 6758029656154931409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -636,6 +662,7 @@ GameObject:
   - component: {fileID: 5411467256107830796}
   - component: {fileID: 2358175596728944769}
   - component: {fileID: 9149580446011616697}
+  - component: {fileID: 1997850223775849904}
   m_Layer: 5
   m_Name: Enchantments - Panel
   m_TagString: Untagged
@@ -656,7 +683,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6758029656154931409}
-  - {fileID: 1690504363876212745}
   - {fileID: 4293238976950536436}
   - {fileID: 8492162789516986452}
   - {fileID: 7014983149016327565}
@@ -703,6 +729,18 @@ MonoBehaviour:
       TierObj: {fileID: 7424460314208521787}
     - TierReference: 3
       TierObj: {fileID: 4907029332123940110}
+--- !u!225 &1997850223775849904
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6180502583244019270}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7024759914413783568
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +754,7 @@ GameObject:
   - component: {fileID: 2025078679109491580}
   - component: {fileID: 3513755200329561707}
   - component: {fileID: 6237929030421562773}
+  - component: {fileID: 263828521258966734}
   m_Layer: 5
   m_Name: Roll - Button
   m_TagString: Untagged
@@ -765,7 +804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.34509805, g: 0.41960785, b: 0.4745098, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -801,7 +840,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 0.3372549, g: 0.41568628, b: 0.47843137, a: 1}
     m_HighlightedColor: {r: 0.56542456, g: 0.645572, b: 0.7106918, a: 1}
@@ -838,10 +877,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3f74a37bb0aa345a3ed4d8eac49b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.ButtonSoundRequest
+  _selectable: {fileID: 3513755200329561707}
+  _muteWhenNotInteractable: 1
   _channel: {fileID: 11400000, guid: 4f5463ac2cadaa84d9b9d0ddfec323e9, type: 2}
   _onClickAudioConfig: {fileID: 0}
   _onPointerEnterAudioConfig: {fileID: 11400000, guid: cf5ae94f57a991c488e6a438877837e3, type: 2}
   _onPointerExitAudioConfig: {fileID: 0}
+--- !u!95 &263828521258966734
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7024759914413783568}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 232e5a90c6201624c9f06fdf90b393fb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7133386614279892123
 GameObject:
   m_ObjectHideFlags: 0

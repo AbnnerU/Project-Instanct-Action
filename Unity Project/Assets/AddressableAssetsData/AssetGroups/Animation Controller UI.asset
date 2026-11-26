@@ -14,12 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Animation Controller UI
   m_GUID: a6e8e0a68a43e7b44aa208335f03bc05
-  m_SerializeEntries:
-  - m_GUID: 93005acabacda9542831b77a58c933ee
-    m_Address: Assets/Game/Animation/Addressables/Hud/Canvas Group/Canvas Group.controller
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e04a7510bce042f4db476305ef9f1f91, type: 2}
   m_SchemaSet:

@@ -105,6 +105,7 @@
     <Compile Include="Assets\Game\Script\Enchantment\EnchantmentCardUI.cs" />
     <Compile Include="Assets\Game\Script\Enchantment\MN_Enchantments.cs" />
     <Compile Include="Assets\Game\Script\Animation\CharacterAnimationController.cs" />
+    <Compile Include="Assets\Game\Script\Animation\OnEnable_PlayAnimation.cs" />
     <Compile Include="Assets\Game\Script\Interface\General\IHasNavMeshAgentSpeedUpdate.cs" />
     <Compile Include="Assets\Game\Script\Interface\General\IHasActiveState.cs" />
     <Compile Include="Assets\Game\Script\Enchantment\EnchantmentSelectionUI.cs" />
@@ -147,9 +148,11 @@
     <Compile Include="Assets\Game\Script\Abilities\Passive\AttackBonusDamageAbility.cs" />
     <Compile Include="Assets\Game\Script\Panel\MN_Panels.cs" />
     <Compile Include="Assets\Game\Script\Status\Appliers\HealthByStatus.cs" />
+    <Compile Include="Assets\Game\Script\Loading Scene\LoadScene_OnButtonClick.cs" />
     <Compile Include="Assets\Game\Script\Abstract\Abilities\AbilityAutoSetupBase.cs" />
     <Compile Include="Assets\Game\Script\Abilities\MN_Abilities.cs" />
     <Compile Include="Assets\Game\Script\Abilities\Active\OrbitingObjectsAbility.cs" />
+    <Compile Include="Assets\Game\Script\General\ExitButton.cs" />
     <Compile Include="Assets\Game\Script\Loading Scene\LoadingSceneHandler.cs" />
     <Compile Include="Assets\Game\Script\Combat\HitReaction_CancelAndBlockComboController.cs" />
     <Compile Include="Assets\Game\Script\Abstract\Combat\ComboControllerBase.cs" />
@@ -215,6 +218,7 @@
     <Compile Include="Assets\Game\Script\Interface\Animation\IHasAnimationReferenceTransform.cs" />
     <Compile Include="Assets\Game\Script\Sound\EnchantmentOfferSound.cs" />
     <Compile Include="Assets\Game\Script\Abilities\Active\SpawnAreaDamageAbility.cs" />
+    <Compile Include="Assets\Game\Script\Sound\OnDashRequestSound.cs" />
     <Compile Include="Assets\Game\Script\Dash Handler\UI\PlayerDashCooldownView.cs" />
     <Compile Include="Assets\Game\Script\Do Action\Animation\DoAction_RandomAnimation.cs" />
     <Compile Include="Assets\Game\Script\AI\Abstract\BTnodeNavMeshAjust.cs" />
@@ -242,6 +246,7 @@
     <Compile Include="Assets\Game\Script\Waves\WaveProgressionByPlayerLevel.cs" />
     <Compile Include="Assets\Game\Script\Abilities\Extras\AbilityParticleEffects.cs" />
     <Compile Include="Assets\Game\Script\AI\Main nodes\BTSelector.cs" />
+    <Compile Include="Assets\Game\Script\Sound\EnchantmentRerollFailedSound.cs" />
     <Compile Include="Assets\Game\Script\Progression\OnDeath_AddXp.cs" />
     <Compile Include="Assets\Game\Script\Singleton\Singleton.cs" />
     <Compile Include="Assets\Game\Script\Abilities\Active\LauchProjectileAbility.cs" />
@@ -262,6 +267,7 @@
     <Compile Include="Assets\Game\Script\Job System\Look At Camera\ParallelLookAtCamera_Register.cs" />
     <Compile Include="Assets\Game\Script\Interface\Abilities\IBuffDataAbility.cs" />
     <Compile Include="Assets\Game\Script\Requeriments\MN_Requirements.cs" />
+    <Compile Include="Assets\Game\Script\Coins\AnimatedCoinsTextView.cs" />
     <Compile Include="Assets\Game\Script\AI\Main nodes\BTSequence.cs" />
     <Compile Include="Assets\Game\Script\Progression\MN_EnemyProgression.cs" />
     <Compile Include="Assets\Game\Script\Scripts Pool\PoolManager.cs" />

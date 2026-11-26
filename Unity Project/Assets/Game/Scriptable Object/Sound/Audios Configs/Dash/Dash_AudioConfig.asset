@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf708c09ef38c04ea16d453cd5f392e, type: 3}
+  m_Name: Dash_AudioConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Sound.AudioConfig
+  audioClip: {fileID: 0}
+  _randomClip: 1
+  _audioClips:
+  - {fileID: 8300000, guid: 92e8f1a04a222414091c7d1926589dae, type: 3}
+  - {fileID: 8300000, guid: 0409e342a8e86c14c90d7d71b4570a8b, type: 3}
+  _pitch: 1
+  _randomPitch: 1
+  _minPitch: 0.99
+  _maxPitch: 1.11
+  priority: 128
+  volume: 0.314
+  SpatialBlend: 0
+  loop: 0
