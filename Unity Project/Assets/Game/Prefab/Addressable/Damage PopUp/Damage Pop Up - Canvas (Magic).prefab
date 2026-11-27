@@ -10,7 +10,51 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 730746803522714258, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_Name
-      value: Damage Pop Up - Canvas (Magic) Variant
+      value: Damage Pop Up - Canvas (Magic)
+      objectReference: {fileID: 0}
+    - target: {fileID: 785264846029073395, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136677034550164610, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 77febc4a6268886488ee7723ce2fe1cd, type: 3}
+    - target: {fileID: 2136677034550164610, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136677034550164610, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_Color.g
+      value: 0.27358478
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136677034550164610, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6890461
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958258555646857510, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958258555646857510, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958258555646857510, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.67559016
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958258555646857510, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7372774
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958258555646857510, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958258555646857510, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 95
       objectReference: {fileID: 0}
     - target: {fileID: 5408708720220424681, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_fontColor.b
@@ -74,19 +118,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8378628579972796207, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8378628579972796207, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8378628579972796207, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8378628579972796207, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8378628579972796207, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -94,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8378628579972796207, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8378628579972796207, guid: 1eabb483376c9f445a97a9daa4bac6da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -607,6 +607,7 @@ namespace Scripts.Abilities
 
                 if (_ability.gameObject.TryGetComponent<IHasCooldown>(out _cooldownHandler))
                 {
+                    _cooldownHandler.Cooldown = Mathf.Max(0f, rechargeTime);
                     _cooldownHandler.OnCooldownStarted += StartedCooldown;
                     _cooldownHandler.OnCooldownCompleted += CompletedCooldown;
                 }

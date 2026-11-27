@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
   ID: 538b4257-c79e-4e71-b343-1de6cf60aeb5
   DisplayName: Arcane Rupture
-  Tier: 0
+  Tier: 3
   EnchantmentType: 1
   Description: Summons an arcane rupture that deals <damage index = 0> damage to
     all enemies in the area.

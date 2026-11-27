@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Enchantment.AbilityEnchantmentSO
   ID: 04b71738-27d3-4a1f-bdfc-c0e298144373
   DisplayName: Fire Ball
-  Tier: 0
+  Tier: 1
   EnchantmentType: 1
   Description: 'Launches a fireball that deals <damage index = 0> damage. '
   IconReference:

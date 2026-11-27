@@ -314,6 +314,7 @@
     <Compile Include="Assets\Game\Script\Interface\General\IPanelHandler.cs" />
     <Compile Include="Assets\Game\Script\AI\HitReaction_BlockNavMeshAgent.cs" />
     <Compile Include="Assets\Game\Script\Sound\ButtonSoundRequest.cs" />
+    <Compile Include="Assets\Game\Script\Sound\OnCoinsRequestSound.cs" />
     <Compile Include="Assets\Game\Script\Animation\HitReaction_TriggerParameter.cs" />
     <Compile Include="Assets\Game\Script\Animation\OnDeath_TriggerParameter.cs" />
     <Compile Include="Assets\Game\Script\Interface\General\ISaveableTimer.cs" />
@@ -339,7 +340,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\Game\Fonts\Addressables\Barlow_Semi_Condensed\OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Game\Fonts\Addressables\New Folder\OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_SETTINGS.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

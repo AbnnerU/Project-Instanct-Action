@@ -75,7 +75,7 @@ MonoBehaviour:
     LocalEulerAngles: {x: -56.695, y: 4.516, z: 76.005}
     LocalScale: {x: 1, y: 1, z: 1}
   - WeaponPrefabReference:
-      m_AssetGUID: a9de5a98f016a334c9a1113e07b1a12f
+      m_AssetGUID: a5b8a48ab5c24d94e8ba5cc30e397769
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

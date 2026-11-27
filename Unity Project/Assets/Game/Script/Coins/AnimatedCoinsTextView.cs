@@ -8,6 +8,8 @@ namespace Scripts.Economy
         [SerializeField] private MN_Coins _coinsManager;
         [SerializeField] private TMP_Text _coinsText;
         [SerializeField] private TMP_Text _addedCoinsText;
+        [SerializeField] private GameObject _addedCoinsObj;
+        [SerializeField] private string _prefix = "+";
         [SerializeField, Min(0f)] private float _animationDuration = 0.4f;
         [SerializeField, Min(0f)] private float _addedCoinsVisibleDuration = 2f;
 
@@ -24,12 +26,19 @@ namespace Scripts.Economy
         private bool _showingAdded;
 
         private void OnEnable() => Subscribe();
-        private void Start() => Subscribe();
+        private void Start()
+        {
+            Subscribe();
+            _addedCoinsObj.SetActive(false);
+        }
 
         private void Subscribe()
         {
             if (_subscribed) return;
-            if (_coinsManager == null) _coinsManager = MN_Coins.Instance;
+
+            if (_coinsManager == null)
+                _coinsManager = MN_Coins.Instance;
+
             if (_coinsManager == null) return;
 
             _coinsManager.OnCoinsUpdate += UpdateCoins;
@@ -38,7 +47,10 @@ namespace Scripts.Economy
             _coinsTarget = _coinsManager.GetCoins();
             _displayedCoins = _coinsFrom = _coinsTarget;
             _coinsElapsed = _animationDuration;
-            if (_coinsText != null) _coinsText.text = _coinsTarget.ToString();
+
+            if (_coinsText != null)
+                _coinsText.text = _coinsTarget.ToString();
+
             HideAdded();
         }
 
@@ -75,8 +87,8 @@ namespace Scripts.Economy
             _addedElapsed = 0f;
             _hideAddedAt = Time.unscaledTime + Mathf.Max(_addedCoinsVisibleDuration, _animationDuration);
             _showingAdded = true;
-            _addedCoinsText.text = "+" + Mathf.RoundToInt(_displayedAdded);
-            _addedCoinsText.gameObject.SetActive(true);
+            _addedCoinsText.text = _prefix + Mathf.RoundToInt(_displayedAdded);
+            _addedCoinsObj.SetActive(true);
         }
 
         private void Update()
@@ -85,13 +97,20 @@ namespace Scripts.Economy
 
             _coinsElapsed += Time.unscaledDeltaTime;
             _displayedCoins = Mathf.Lerp(_coinsFrom, _coinsTarget, Progress(_coinsElapsed));
-            if (_coinsText != null) _coinsText.text = Mathf.RoundToInt(_displayedCoins).ToString();
+
+            if (_coinsText != null)
+                _coinsText.text = Mathf.RoundToInt(_displayedCoins).ToString();
 
             if (!_showingAdded) return;
+
             _addedElapsed += Time.unscaledDeltaTime;
             _displayedAdded = Mathf.Lerp(_addedFrom, _addedTarget, Progress(_addedElapsed));
-            if (_addedCoinsText != null) _addedCoinsText.text = "+" + Mathf.RoundToInt(_displayedAdded);
-            if (Time.unscaledTime >= _hideAddedAt) HideAdded();
+
+            if (_addedCoinsText != null)
+                _addedCoinsText.text = _prefix + Mathf.RoundToInt(_displayedAdded);
+
+            if (Time.unscaledTime >= _hideAddedAt)
+                HideAdded();
         }
 
         private float Progress(float elapsed)
@@ -104,7 +123,9 @@ namespace Scripts.Economy
             _showingAdded = false;
             _addedTarget = 0;
             _displayedAdded = 0f;
-            if (_addedCoinsText != null) _addedCoinsText.gameObject.SetActive(false);
+
+            if (_addedCoinsObj != null)
+                _addedCoinsObj.SetActive(false);
         }
     }
 }
